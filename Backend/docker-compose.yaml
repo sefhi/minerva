@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  container-minerva:
+    container_name: container-minerva
+    build:
+      context: ..
+      dockerfile: ./Backend/Dockerfile
+    env_file:
+      - .env.local
+    environment:
+      XDEBUG_CONFIG: client_host=host.docker.internal
+    ports:
+      - "9091:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - minerva-network
+volumes:
+  data-minerva:
+
+networks:
+  minerva-network:
+    name: minerva-network
