@@ -13,7 +13,7 @@ final class PostResponseMother
         int $id,
         string $title,
         string $content,
-        int $userId
+        PostAuthorReponse $author
     ): PostResponse {
         return PostResponse::create($id, $title, $content, $userId);
     }
@@ -24,7 +24,7 @@ final class PostResponseMother
             random_int(1, 1000),
             MotherCreator::random()->title(),
             MotherCreator::random()->paragraph(random_int(1, 3)),
-            random_int(1, 1000),
+            PostAuthorResponseMother::random(),
         );
     }
 }

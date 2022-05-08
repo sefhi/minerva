@@ -12,13 +12,17 @@ final class PostResponse implements JsonSerializable
         private int $id,
         private string $title,
         private string $content,
-        private int $userId
+        private PostAuthorResponse $author
     ) {
     }
 
-    public static function create(int $id, string $title, string $content, int $userId): self
-    {
-        return new self($id, $title, $content, $userId);
+    public static function create(
+        int $id,
+        string $title,
+        string $content,
+        PostAuthorResponse $author
+    ): self {
+        return new self($id, $title, $content, $author);
     }
 
     public function getId(): int
@@ -36,9 +40,12 @@ final class PostResponse implements JsonSerializable
         return $this->content;
     }
 
-    public function getUserId(): int
+    /**
+     * @return PostAuthorResponse
+     */
+    public function getAuthor(): PostAuthorResponse
     {
-        return $this->userId;
+        return $this->author;
     }
 
     public function jsonSerialize(): array

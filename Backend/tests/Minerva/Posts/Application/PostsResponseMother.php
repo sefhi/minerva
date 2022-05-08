@@ -8,12 +8,12 @@ use Minerva\Posts\Application\PostsResponse;
 
 final class PostsResponseMother
 {
-    public static function create(array $posts): array
+    public static function create(array $posts): PostsResponse
     {
         return PostsResponse::create($posts);
     }
 
-    public static function random(): array
+    public static function random(): PostsResponse
     {
         $postResponse = [];
         $limit = random_int(1, 10);
@@ -22,6 +22,6 @@ final class PostsResponseMother
             $postResponse[] = PostResponseMother::random();
         }
 
-        return $postResponse;
+        return PostsResponse::create($postResponse);
     }
 }
