@@ -4,27 +4,30 @@ declare(strict_types=1);
 
 namespace App\Tests\Minerva\Posts\Domain;
 
-use App\Tests\Minerva\Shared\Domain\MotherCreator;
 use Minerva\Posts\Domain\Post;
+use Minerva\Posts\Domain\PostAuthor;
+use Minerva\Posts\Domain\PostContent;
+use Minerva\Posts\Domain\PostId;
+use Minerva\Posts\Domain\PostTitle;
 
 final class PostMother
 {
     public static function create(
-        int $id,
-        string $title,
-        string $content,
-        int $userId
+        PostId $id,
+        PostTitle $title,
+        PostContent $content,
+        PostAuthor $author
     ): Post {
-        return Post::create($id, $title, $content, $userId);
+        return Post::create($id, $title, $content, $author);
     }
 
     public static function random(): Post
     {
         return self::create(
-            random_int(1, 1000),
-            MotherCreator::random()->title(),
-            MotherCreator::random()->paragraph(random_int(1, 3)),
-            random_int(1, 1000),
+            PostIdMother::random(),
+            PostTitleMother::random(),
+            PostContentMother::random(),
+            PostAuthorMother::random(),
         );
     }
 

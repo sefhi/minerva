@@ -13,6 +13,6 @@ final class MotherCreator
 
     public static function random(): Generator
     {
-        return self::$faker = self::$faker ?? Factory::create();
+        return self::$faker = self::$faker ?? Factory::create('es_ES');
     }
 }

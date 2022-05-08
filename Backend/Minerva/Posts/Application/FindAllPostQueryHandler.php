@@ -19,13 +19,14 @@ final class FindAllPostQueryHandler
     public function __invoke(): PostsResponse
     {
         $posts = $this->repository->findAll();
+
         return PostsResponse::create(
             array_map(
                 static fn (Post $post) => PostResponse::create(
-                    $post->getId(),
-                    $post->getTitle(),
-                    $post->getContent(),
-                    $post->getUserId()
+                    $post->getId()->value(),
+                    $post->getTitle()->value(),
+                    $post->getContent()->value(),
+                    $post->getAuthor()
                 ),
                 $posts
             )

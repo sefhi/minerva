@@ -7,35 +7,39 @@ namespace Minerva\Posts\Domain;
 final class Post
 {
     private function __construct(
-        private int $id,
-        private string $title,
-        private string $content,
-        private int $userId
+        private PostId $id,
+        private PostTitle $title,
+        private PostContent $content,
+        private PostAuthor $author
     ) {
     }
 
-    public static function create(int $id, string $title, string $content, int $userId): self
-    {
+    public static function create(
+        PostId $id,
+        PostTitle $title,
+        PostContent $content,
+        PostAuthor $userId
+    ): self {
         return new self($id, $title, $content, $userId);
     }
 
-    public function getId(): int
+    public function getId(): PostId
     {
         return $this->id;
     }
 
-    public function getTitle(): string
+    public function getTitle(): PostTitle
     {
         return $this->title;
     }
 
-    public function getContent(): string
+    public function getContent(): PostContent
     {
         return $this->content;
     }
 
-    public function getUserId(): int
+    public function getAuthor(): PostAuthor
     {
-        return $this->userId;
+        return $this->author;
     }
 }
