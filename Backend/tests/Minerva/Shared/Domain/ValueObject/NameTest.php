@@ -28,7 +28,7 @@ class NameTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectErrorMessage(Name::class.' must have a length between 3 and 50 character.');
 
-        $name = new Name($value);
+        new Name($value);
     }
 
     /**
