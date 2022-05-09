@@ -16,6 +16,6 @@ final class WebsiteMother
 
     public static function random(): Website
     {
-        return self::create(MotherCreator::random()->domainName());
+        return self::create(MotherCreator::random()->url());
     }
 }

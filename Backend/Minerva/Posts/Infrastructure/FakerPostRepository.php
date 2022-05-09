@@ -50,7 +50,7 @@ final class FakerPostRepository implements PostRepository
                     new AuthorId(random_int(1, 100)),
                     new Name($this->faker->name()),
                     new Username($this->faker->userName()),
-                    new Website($this->faker->domainName()),
+                    new Website($this->faker->url()),
                     new Email($this->faker->email()),
                 )
             );

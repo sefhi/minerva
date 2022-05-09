@@ -11,7 +11,6 @@ final class PostAuthorResponse implements JsonSerializable
     private function __construct(
         private int $id,
         private string $name,
-        private string $phone,
         private string $username,
         private string $website,
         private string $email,
