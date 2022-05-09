@@ -21,7 +21,6 @@ final class PostAuthorResponse implements JsonSerializable
     public static function create(
         int $id,
         string $name,
-        string $phone,
         string $username,
         string $website,
         string $email,
@@ -29,7 +28,6 @@ final class PostAuthorResponse implements JsonSerializable
         return new self(
             $id,
             $name,
-            $phone,
             $username,
             $website,
             $email,
@@ -44,11 +42,6 @@ final class PostAuthorResponse implements JsonSerializable
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getPhone(): string
-    {
-        return $this->phone;
     }
 
     public function getUsername(): string

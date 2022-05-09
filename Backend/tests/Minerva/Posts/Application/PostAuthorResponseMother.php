@@ -12,7 +12,6 @@ final class PostAuthorResponseMother
     public static function create(
         int $id,
         string $name,
-        string $phone,
         string $username,
         string $website,
         string $email
@@ -20,7 +19,6 @@ final class PostAuthorResponseMother
         return PostAuthorResponse::create(
             $id,
             $name,
-            $phone,
             $username,
             $website,
             $email
@@ -32,7 +30,6 @@ final class PostAuthorResponseMother
         return self::create(
             random_int(1, 1000),
             MotherCreator::random()->name(),
-            MotherCreator::random()->phoneNumber(),
             MotherCreator::random()->userName(),
             MotherCreator::random()->domainName(),
             MotherCreator::random()->email(),

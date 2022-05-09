@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Minerva\Tests\Posts\Application;
 
 use App\Tests\Minerva\Shared\Domain\MotherCreator;
+use Minerva\Posts\Application\PostAuthorResponse;
 use Minerva\Posts\Application\PostResponse;
 
 final class PostResponseMother
@@ -13,9 +14,9 @@ final class PostResponseMother
         int $id,
         string $title,
         string $content,
-        PostAuthorReponse $author
+        PostAuthorResponse $author
     ): PostResponse {
-        return PostResponse::create($id, $title, $content, $userId);
+        return PostResponse::create($id, $title, $content, $author);
     }
 
     public static function random(): PostResponse

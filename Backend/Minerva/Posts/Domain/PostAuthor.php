@@ -7,7 +7,6 @@ namespace Minerva\Posts\Domain;
 use Minerva\Shared\Domain\ValueObject\Author\AuthorId;
 use Minerva\Shared\Domain\ValueObject\Email;
 use Minerva\Shared\Domain\ValueObject\Name;
-use Minerva\Shared\Domain\ValueObject\Phone;
 use Minerva\Shared\Domain\ValueObject\Username;
 use Minerva\Shared\Domain\ValueObject\Website;
 
@@ -16,7 +15,6 @@ final class PostAuthor
     private function __construct(
         private AuthorId $id,
         private Name $name,
-        private Phone $phone,
         private Username $username,
         private Website $web,
         private Email $email
@@ -26,7 +24,6 @@ final class PostAuthor
     public static function create(
         AuthorId $id,
         Name $name,
-        Phone $phone,
         Username $username,
         Website $web,
         Email $email
@@ -34,7 +31,6 @@ final class PostAuthor
         return new self(
             $id,
             $name,
-            $phone,
             $username,
             $web,
             $email
@@ -55,14 +51,6 @@ final class PostAuthor
     public function getName(): Name
     {
         return $this->name;
-    }
-
-    /**
-     * @return Phone
-     */
-    public function getPhone(): Phone
-    {
-        return $this->phone;
     }
 
     /**
