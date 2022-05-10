@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Minerva Backend
+  title: API Minerva
   contact: {}
   version: '1.0'
 servers:
