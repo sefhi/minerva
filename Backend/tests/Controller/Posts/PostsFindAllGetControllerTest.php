@@ -27,6 +27,7 @@ class PostsFindAllGetControllerTest extends WebTestCase
         $response = $this->client->getResponse();
 
         // Then
+        self::assertResponseIsSuccessful();
         self::assertJson($response->getContent());
     }
 }

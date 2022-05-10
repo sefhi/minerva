@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class PostsCreatorPostController extends AbstractController
 {
-    #[Route('/post', methods: ['POST'])]
+    #[Route('/post', name: 'post_creator', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
         return $this->json('', Response::HTTP_OK);
