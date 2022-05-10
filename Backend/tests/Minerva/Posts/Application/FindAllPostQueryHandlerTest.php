@@ -2,7 +2,7 @@
 
 namespace Minerva\Tests\Posts\Application;
 
-use App\Tests\Minerva\Posts\Domain\PostMother;
+use Minerva\Tests\Posts\Domain\PostMother;
 use Minerva\Posts\Application\FindAllPostQueryHandler;
 use Minerva\Posts\Application\PostResponse;
 use Minerva\Posts\Domain\PostRepository;

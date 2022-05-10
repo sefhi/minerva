@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Minerva\Tests\Posts\Domain\Dto;
 
-use App\Tests\Minerva\Posts\Domain\PostContentMother;
-use App\Tests\Minerva\Posts\Domain\PostTitleMother;
-use App\Tests\Minerva\Shared\Domain\ValueObject\Author\AuthorIdMother;
+use Minerva\Tests\Posts\Domain\PostContentMother;
+use Minerva\Tests\Posts\Domain\PostTitleMother;
+use Minerva\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
 use Minerva\Posts\Domain\Dto\PostCreatorDto;
 use Minerva\Posts\Domain\PostContent;
 use Minerva\Posts\Domain\PostTitle;

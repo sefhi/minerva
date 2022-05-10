@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Minerva\Posts\Application;
+namespace Minerva\Tests\Posts\Application;
 
-use App\Tests\Minerva\Shared\Domain\MotherCreator;
+use Minerva\Tests\Shared\Domain\MotherCreator;
 use Minerva\Posts\Application\CreatorPostCommand;
 
 final class CreatorPostCommandMother

@@ -2,7 +2,7 @@
 
 namespace Minerva\Tests\Shared\Domain\ValueObject;
 
-use App\Tests\Minerva\Shared\Domain\MotherCreator;
+use Minerva\Tests\Shared\Domain\MotherCreator;
 use InvalidArgumentException;
 use Minerva\Shared\Domain\ValueObject\Username;
 use PHPUnit\Framework\TestCase;

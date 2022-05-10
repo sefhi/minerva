@@ -2,7 +2,7 @@
 
 namespace Minerva\Tests\Posts\Domain;
 
-use App\Tests\Minerva\Shared\Domain\MotherCreator;
+use Minerva\Tests\Shared\Domain\MotherCreator;
 use InvalidArgumentException;
 use Minerva\Posts\Domain\PostTitle;
 use PHPUnit\Framework\TestCase;

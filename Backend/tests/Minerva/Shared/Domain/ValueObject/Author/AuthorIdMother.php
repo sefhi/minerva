@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Minerva\Shared\Domain\ValueObject\Author;
+namespace Minerva\Tests\Shared\Domain\ValueObject\Author;
 
 use Minerva\Shared\Domain\ValueObject\Author\AuthorId;
 

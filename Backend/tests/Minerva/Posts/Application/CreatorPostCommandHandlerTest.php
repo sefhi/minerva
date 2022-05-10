@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Minerva\Posts\Application;
+namespace Minerva\Tests\Posts\Application;
 
 use Minerva\Posts\Application\CreatorPostCommandHandler;
 use Minerva\Posts\Domain\Dto\PostCreatorDto;

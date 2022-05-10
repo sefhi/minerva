@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Minerva\Shared\Domain;
+namespace Minerva\Tests\Shared\Domain;
 
 use Faker\Factory;
 use Faker\Generator;

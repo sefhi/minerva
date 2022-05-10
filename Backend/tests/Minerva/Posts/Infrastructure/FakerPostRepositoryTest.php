@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Minerva\Posts\Infrastructure;
+namespace Minerva\Tests\Posts\Infrastructure;
 
 use Minerva\Posts\Domain\Post;
 use Minerva\Posts\Infrastructure\FakerPostRepository;

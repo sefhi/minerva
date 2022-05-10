@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Minerva\Tests\Posts\Application;
 
-use App\Tests\Minerva\Shared\Domain\MotherCreator;
+use Minerva\Tests\Shared\Domain\MotherCreator;
 use Minerva\Posts\Application\PostAuthorResponse;
 
 final class PostAuthorResponseMother

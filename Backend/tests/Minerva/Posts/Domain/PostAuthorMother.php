@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Minerva\Posts\Domain;
+namespace Minerva\Tests\Posts\Domain;
 
-use App\Tests\Minerva\Shared\Domain\ValueObject\Author\AuthorIdMother;
-use App\Tests\Minerva\Shared\Domain\ValueObject\NameMother;
-use App\Tests\Minerva\Shared\Domain\ValueObject\UsernameMother;
-use App\Tests\Minerva\Shared\Domain\ValueObject\WebsiteMother;
+use Minerva\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
+use Minerva\Tests\Shared\Domain\ValueObject\NameMother;
+use Minerva\Tests\Shared\Domain\ValueObject\UsernameMother;
+use Minerva\Tests\Shared\Domain\ValueObject\WebsiteMother;
 use Minerva\Posts\Domain\PostAuthor;
 use Minerva\Shared\Domain\ValueObject\Author\AuthorId;
 use Minerva\Shared\Domain\ValueObject\Email;

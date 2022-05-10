@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Minerva\Posts\Domain;
+namespace Minerva\Tests\Posts\Domain;
 
 use Minerva\Posts\Domain\PostId;
 

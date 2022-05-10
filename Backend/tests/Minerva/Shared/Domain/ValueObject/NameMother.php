@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Minerva\Shared\Domain\ValueObject;
+namespace Minerva\Tests\Shared\Domain\ValueObject;
 
-use App\Tests\Minerva\Shared\Domain\MotherCreator;
+use Minerva\Tests\Shared\Domain\MotherCreator;
 use Minerva\Shared\Domain\ValueObject\Name;
 
 final class NameMother
