@@ -61,6 +61,19 @@ final class FakerPostRepository implements PostRepository
 
     public function save(PostCreatorDto $dto): bool
     {
-        return false;
+        Post::create(
+            new PostId(random_int(1, 100)),
+            $dto->getTitle(),
+            $dto->getContent(),
+            PostAuthor::create(
+                $dto->getAuthorId(),
+                new Name($this->faker->name()),
+                new Username($this->faker->userName()),
+                new Website($this->faker->url()),
+                new Email($this->faker->email()),
+            )
+        );
+
+        return true;
     }
 }

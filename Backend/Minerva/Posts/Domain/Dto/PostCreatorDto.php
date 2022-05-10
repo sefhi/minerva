@@ -13,7 +13,7 @@ final class PostCreatorDto
     private function __construct(
         private PostTitle $title,
         private PostContent $content,
-        private AuthorId $id
+        private AuthorId $authorId
     ) {
     }
 
@@ -39,8 +39,8 @@ final class PostCreatorDto
         return $this->content;
     }
 
-    public function getId(): AuthorId
+    public function getAuthorId(): AuthorId
     {
-        return $this->id;
+        return $this->authorId;
     }
 }
