@@ -6,12 +6,13 @@ namespace App\Tests\Minerva\Posts\Infrastructure;
 
 use Minerva\Posts\Domain\Post;
 use Minerva\Posts\Infrastructure\FakerPostRepository;
+use Minerva\Tests\Posts\Domain\Dto\PostCreatorDtoMother;
 use PHPUnit\Framework\TestCase;
 
 final class FakerPostRepositoryTest extends TestCase
 {
     /** @test */
-    public function itShouldReturnPostsDomain(): void
+    public function itShouldReturnPostsDomainWhenCallFunctionFindAll(): void
     {
         $fakerPost = new FakerPostRepository();
 
@@ -21,4 +22,17 @@ final class FakerPostRepositoryTest extends TestCase
             self::assertInstanceOf(Post::class, $post);
         }
     }
+
+    /** @test */
+    public function itShouldSavePostWhenCallFunctionSave(): void
+    {
+        $postCreatorDto = PostCreatorDtoMother::random();
+        $fakerPost = new FakerPostRepository();
+
+        $result = $fakerPost->save($postCreatorDto);
+
+        self::assertTrue($result);
+    }
+
+
 }
