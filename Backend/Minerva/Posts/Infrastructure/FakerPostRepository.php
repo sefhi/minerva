@@ -44,7 +44,7 @@ final class FakerPostRepository implements PostRepository
         for ($i = 0; $i < $limit; ++$i) {
             $posts[] = Post::create(
                 new PostId(random_int(1, 100)),
-                new PostTitle($this->faker->title()),
+                new PostTitle($this->faker->realText(50)),
                 new PostContent($this->faker->paragraph(random_int(1, 3))),
                 PostAuthor::create(
                     new AuthorId(random_int(1, 100)),

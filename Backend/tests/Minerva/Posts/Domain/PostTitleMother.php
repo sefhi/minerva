@@ -16,6 +16,6 @@ final class PostTitleMother
 
     public static function random(): PostTitle
     {
-        return self::create(MotherCreator::random()->title());
+        return self::create(MotherCreator::random()->realText(50));
     }
 }
