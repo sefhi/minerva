@@ -18,7 +18,7 @@ deps: composer-install
 update-deps: composer-update
 
 test:
-	$(EXEC_PHP) ./vendor/bin/phpunit
+	$(EXEC) ./vendor/bin/phpunit
 	@echo "Test Executed ✅"
 
 #Linter

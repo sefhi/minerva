@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Minerva\Posts\Application;
 
-final class PostsResponse
+use JsonSerializable;
+
+final class PostsResponse implements JsonSerializable
 {
     private array $posts;
 
@@ -24,5 +26,10 @@ final class PostsResponse
     public function getPosts(): array
     {
         return $this->posts;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return get_object_vars($this);
     }
 }

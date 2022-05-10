@@ -15,7 +15,6 @@ use Minerva\Posts\Domain\PostTitle;
 use Minerva\Shared\Domain\ValueObject\Author\AuthorId;
 use Minerva\Shared\Domain\ValueObject\Email;
 use Minerva\Shared\Domain\ValueObject\Name;
-use Minerva\Shared\Domain\ValueObject\Phone;
 use Minerva\Shared\Domain\ValueObject\Username;
 use Minerva\Shared\Domain\ValueObject\Website;
 

@@ -14,15 +14,14 @@ class PostsFindAllGetControllerTest extends WebTestCase
         $this->client = self::createClient();
     }
 
-    /**
-     * @test
-     */
-    public function shouldReturnAllPost(): void
+    /** @test */
+    public function whenCallEndpointPostAllShouldReturnAllPost(): void
     {
-        // Given
+
+        $router = $this->client->getContainer()->get('router');
         $this->client->request(
             'GET',
-            '/post/all'
+            $router->generate('posts_find_all')
         );
 
         // When
