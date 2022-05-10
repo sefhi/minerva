@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller\Posts;
 
+use App\Tests\Minerva\Shared\Domain\MotherCreator;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -24,9 +25,9 @@ class PostsCreatorPostControllerTest extends WebTestCase
             'POST',
             'post',
             [
-                'title' => 'This is title',
-                'content' => 'This is content',
-                'userId' => 1,
+                'title' => MotherCreator::random()->text(50),
+                'content' => MotherCreator::random()->paragraph(2),
+                'authorId' => random_int(1, 1000),
             ],
         );
 

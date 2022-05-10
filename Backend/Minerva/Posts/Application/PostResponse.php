@@ -40,9 +40,6 @@ final class PostResponse implements JsonSerializable
         return $this->content;
     }
 
-    /**
-     * @return PostAuthorResponse
-     */
     public function getAuthor(): PostAuthorResponse
     {
         return $this->author;

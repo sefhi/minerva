@@ -3,7 +3,6 @@
 namespace Minerva\Tests\Shared\Domain\ValueObject;
 
 use App\Tests\Minerva\Shared\Domain\MotherCreator;
-use Couchbase\User;
 use InvalidArgumentException;
 use Minerva\Shared\Domain\ValueObject\Username;
 use PHPUnit\Framework\TestCase;
@@ -56,6 +55,4 @@ class UsernameTest extends TestCase
             ['xy'],
         ];
     }
-
-
 }

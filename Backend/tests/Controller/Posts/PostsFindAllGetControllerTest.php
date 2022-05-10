@@ -17,7 +17,6 @@ class PostsFindAllGetControllerTest extends WebTestCase
     /** @test */
     public function whenCallEndpointPostAllShouldReturnAllPost(): void
     {
-
         $router = $this->client->getContainer()->get('router');
         $this->client->request(
             'GET',

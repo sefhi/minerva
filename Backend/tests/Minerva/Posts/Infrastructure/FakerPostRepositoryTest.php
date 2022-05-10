@@ -21,5 +21,4 @@ final class FakerPostRepositoryTest extends TestCase
             self::assertInstanceOf(Post::class, $post);
         }
     }
-
 }

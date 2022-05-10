@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 class PostContentTest extends TestCase
 {
-
     /**
      * @test
      * @dataProvider providersContentValid

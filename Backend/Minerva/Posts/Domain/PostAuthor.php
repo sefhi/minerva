@@ -37,44 +37,28 @@ final class PostAuthor
         );
     }
 
-    /**
-     * @return AuthorId
-     */
     public function getId(): AuthorId
     {
         return $this->id;
     }
 
-    /**
-     * @return Name
-     */
     public function getName(): Name
     {
         return $this->name;
     }
 
-    /**
-     * @return Username
-     */
     public function getUsername(): Username
     {
         return $this->username;
     }
 
-    /**
-     * @return Website
-     */
     public function getWeb(): Website
     {
         return $this->web;
     }
 
-    /**
-     * @return Email
-     */
     public function getEmail(): Email
     {
         return $this->email;
     }
-
 }
