@@ -20,7 +20,6 @@ class PostsCreatorPostControllerTest extends WebTestCase
      */
     public function shouldCreatePostAndReturn201(): void
     {
-
         $router = $this->client->getContainer()->get('router');
         $this->client->request(
             'POST',

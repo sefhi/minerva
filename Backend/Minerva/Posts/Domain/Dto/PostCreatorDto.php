@@ -2,30 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Minerva\Posts\Domain;
+namespace Minerva\Posts\Domain\Dto;
 
-final class Post
+use Minerva\Posts\Domain\PostContent;
+use Minerva\Posts\Domain\PostTitle;
+use Minerva\Shared\Domain\ValueObject\Author\AuthorId;
+
+final class PostCreatorDto
 {
     private function __construct(
-        private PostId $id,
         private PostTitle $title,
         private PostContent $content,
-        private PostAuthor $author
+        private AuthorId $id
     ) {
     }
 
     public static function create(
-        PostId $id,
         PostTitle $title,
         PostContent $content,
-        PostAuthor $author
+        AuthorId $id
     ): self {
-        return new self($id, $title, $content, $author);
-    }
-
-    public function getId(): PostId
-    {
-        return $this->id;
+        return new self(
+            $title,
+            $content,
+            $id
+        );
     }
 
     public function getTitle(): PostTitle
@@ -38,8 +39,8 @@ final class Post
         return $this->content;
     }
 
-    public function getAuthor(): PostAuthor
+    public function getId(): AuthorId
     {
-        return $this->author;
+        return $this->id;
     }
 }

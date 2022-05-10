@@ -6,6 +6,7 @@ namespace Minerva\Posts\Infrastructure;
 
 use Faker\Factory;
 use Faker\Generator;
+use Minerva\Posts\Domain\Dto\PostCreatorDto;
 use Minerva\Posts\Domain\Post;
 use Minerva\Posts\Domain\PostAuthor;
 use Minerva\Posts\Domain\PostContent;
@@ -56,5 +57,10 @@ final class FakerPostRepository implements PostRepository
         }
 
         return $posts;
+    }
+
+    public function save(PostCreatorDto $dto): bool
+    {
+        return false;
     }
 }
