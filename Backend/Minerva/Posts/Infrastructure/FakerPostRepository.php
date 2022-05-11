@@ -39,15 +39,15 @@ final class FakerPostRepository implements PostRepository
     private function toResponse(): array
     {
         $posts = [];
-        $limit = random_int(1, 10);
+        $limit = 10;
 
         for ($i = 0; $i < $limit; ++$i) {
             $posts[] = Post::create(
-                new PostId(random_int(1, 100)),
+                new PostId((int) $this->faker->numerify()),
                 new PostTitle($this->faker->realText(50)),
                 new PostContent($this->faker->paragraph(random_int(1, 3))),
                 PostAuthor::create(
-                    new AuthorId(random_int(1, 100)),
+                    new AuthorId((int) $this->faker->numerify()),
                     new Name($this->faker->name()),
                     new Username($this->faker->userName()),
                     new Website($this->faker->url()),
