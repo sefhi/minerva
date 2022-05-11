@@ -26,8 +26,6 @@ stop:
 recreate:
 	@echo "🔥 Recreate container!!!"
 	$(DOCKER_COMPOSE) up -d --build --remove-orphans --force-recreate
-	make start
-	make deps
 rebuild:
 	@echo "🔥 Rebuild container!!!"
 	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
