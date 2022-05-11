@@ -9,6 +9,8 @@ servers:
 paths:
   /post:
     post:
+      tags:
+        - Post
       requestBody:
         content:
           application/json:
@@ -28,6 +30,41 @@ paths:
           description: Bad Request
   /post/all:
     get:
+      tags:
+        - Post
       responses:
         '200':
           description: Devuelve todos los Posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Post'
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        author:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            username:
+              type: string
+            website:
+              type: string
+            email:
+              type: string
+tags:
+  - name: Post
+    description: 'Minerva'

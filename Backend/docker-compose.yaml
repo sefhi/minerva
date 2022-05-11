@@ -27,17 +27,6 @@ services:
       SWAGGER_JSON: /api_documentation.yaml
     networks:
       - minerva-network
-  swagger-editor:
-    container_name: swagger-editor
-    image: swaggerapi/swagger-editor
-    ports:
-      - "8081:8080"
-    volumes:
-      - ./api_documentation.yaml:/api_documentation.yaml
-    environment:
-      SWAGGER_JSON: /api_documentation.yaml
-    networks:
-      - minerva-network
 volumes:
   data-minerva:
 
