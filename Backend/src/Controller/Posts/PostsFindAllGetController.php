@@ -23,7 +23,7 @@ final class PostsFindAllGetController extends AbstractController
         try {
             $result = ($this->queryHandler)();
 
-            return $this->json(['data' => $result], Response::HTTP_OK);
+            return $this->json(['data' => $result->getPosts()], Response::HTTP_OK);
         } catch (Exception $exception) {
             return $this->json(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
