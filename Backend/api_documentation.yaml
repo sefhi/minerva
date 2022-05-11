@@ -8,4 +8,26 @@ servers:
     variables: {}
 paths:
   /post:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                authorId:
+                  type: integer
+      responses:
+        '201':
+          description: Ok
+        '400':
+          description: Bad Request
   /post/all:
+    get:
+      responses:
+        '200':
+          description: Devuelve todos los Posts

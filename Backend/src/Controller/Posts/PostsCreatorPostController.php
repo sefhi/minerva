@@ -15,6 +15,6 @@ final class PostsCreatorPostController extends AbstractController
     #[Route('/post', name: 'post_creator', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
-        return $this->json('', Response::HTTP_OK);
+        return $this->json('', Response::HTTP_CREATED);
     }
 }

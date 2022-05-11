@@ -25,6 +25,8 @@ services:
       - ./api_documentation.yaml:/api_documentation.yaml
     environment:
       SWAGGER_JSON: /api_documentation.yaml
+    networks:
+      - minerva-network
   swagger-editor:
     container_name: swagger-editor
     image: swaggerapi/swagger-editor
@@ -33,7 +35,9 @@ services:
     volumes:
       - ./api_documentation.yaml:/api_documentation.yaml
     environment:
-      SWAGGER_FILE: /api_documentation.yaml
+      SWAGGER_JSON: /api_documentation.yaml
+    networks:
+      - minerva-network
 volumes:
   data-minerva:
 
