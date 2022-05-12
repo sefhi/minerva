@@ -26,6 +26,7 @@ final class FindAllPostQueryHandler
                     $post->getId()->value(),
                     $post->getTitle()->value(),
                     $post->getContent()->value(),
+                    $post->getCreatedAt(),
                     PostAuthorResponse::create(
                         $post->getAuthor()->getId()->value(),
                         $post->getAuthor()->getName()->value(),

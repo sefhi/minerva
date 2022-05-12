@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace Minerva\Posts\Domain;
 
+use DateTimeImmutable;
+
 final class Post
 {
+    private DateTimeImmutable $createdAt;
+
     private function __construct(
         private PostId $id,
         private PostTitle $title,
         private PostContent $content,
         private PostAuthor $author
     ) {
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public static function create(
@@ -41,5 +46,13 @@ final class Post
     public function getAuthor(): PostAuthor
     {
         return $this->author;
+    }
+
+    /**
+     * @return DateTimeImmutable
+     */
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }
