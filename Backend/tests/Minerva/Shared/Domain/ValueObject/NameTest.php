@@ -43,6 +43,7 @@ class NameTest extends TestCase
         new Name($value);
     }
 
+    /** @phpstan-ignore-next-line */
     private function providerNamesLengthInvalid(): array
     {
         return [
@@ -52,6 +53,7 @@ class NameTest extends TestCase
         ];
     }
 
+    /** @phpstan-ignore-next-line */
     private function providerNamesValid(): array
     {
         return [
@@ -67,6 +69,7 @@ class NameTest extends TestCase
         ];
     }
 
+    /** @phpstan-ignore-next-line */
     private function providerNamesInValid(): array
     {
         return [

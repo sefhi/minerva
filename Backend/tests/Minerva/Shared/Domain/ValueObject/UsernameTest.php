@@ -33,6 +33,7 @@ class UsernameTest extends TestCase
         new Username($value);
     }
 
+    /** @phpstan-ignore-next-line */
     public function providersUsernameValid(): array
     {
         return [
@@ -47,7 +48,8 @@ class UsernameTest extends TestCase
         ];
     }
 
-    public function providersUsernamesLengthInvalid()
+    /** @phpstan-ignore-next-line */
+    public function providersUsernamesLengthInvalid(): array
     {
         return [
             ['xxXxxXxxXxxXxxXxxXxxXxxXxxXxxXToLargo69XxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxx'],

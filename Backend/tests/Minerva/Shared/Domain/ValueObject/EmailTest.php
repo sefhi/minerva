@@ -23,7 +23,7 @@ class EmailTest extends TestCase
      * @test
      * @dataProvider providersEmailInvalid
      */
-    public function itShouldThrowAnExceptionWhenEmailIsNotValid($value): void
+    public function itShouldThrowAnExceptionWhenEmailIsNotValid(string $value): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectErrorMessage(sprintf('Email %s is not valid in %s', $value, Email::class));
@@ -31,6 +31,7 @@ class EmailTest extends TestCase
         new Email($value);
     }
 
+    /** @phpstan-ignore-next-line */
     public function providersEmailValid(): array
     {
         return [
@@ -43,6 +44,7 @@ class EmailTest extends TestCase
         ];
     }
 
+    /** @phpstan-ignore-next-line */
     public function providersEmailInvalid(): array
     {
         return [

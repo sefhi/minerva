@@ -33,6 +33,7 @@ class PostContentTest extends TestCase
         new PostContent($value);
     }
 
+    /** @phpstan-ignore-next-line */
     public function providersContentValid(): array
     {
         return [
@@ -44,6 +45,7 @@ class PostContentTest extends TestCase
         ];
     }
 
+    /** @phpstan-ignore-next-line */
     public function providersContentLengthInvalid(): array
     {
         return [

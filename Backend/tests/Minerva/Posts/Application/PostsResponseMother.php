@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace Minerva\Tests\Posts\Application;
 
+use Minerva\Posts\Application\PostResponse;
 use Minerva\Posts\Application\PostsResponse;
 
 final class PostsResponseMother
 {
+    /**
+     * @param array<PostResponse> $posts
+     * @return PostsResponse
+     */
     public static function create(array $posts): PostsResponse
     {
         return PostsResponse::create($posts);

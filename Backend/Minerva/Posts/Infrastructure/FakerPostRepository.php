@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Minerva\Posts\Infrastructure;
 
+use Exception;
 use Faker\Factory;
 use Faker\Generator;
 use Minerva\Posts\Domain\Dto\PostCreatorDto;
@@ -36,6 +37,10 @@ final class FakerPostRepository implements PostRepository
         return $this->toResponse();
     }
 
+    /**
+     * @return array<Post>
+     * @throws Exception
+     */
     private function toResponse(): array
     {
         $posts = [];

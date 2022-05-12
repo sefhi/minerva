@@ -33,6 +33,7 @@ class PostTitleTest extends TestCase
         new PostTitle($value);
     }
 
+    /** @phpstan-ignore-next-line */
     public function providersTitleValid(): array
     {
         return [
@@ -44,6 +45,7 @@ class PostTitleTest extends TestCase
         ];
     }
 
+    /** @phpstan-ignore-next-line */
     public function providersTitleLengthInvalid(): array
     {
         return [

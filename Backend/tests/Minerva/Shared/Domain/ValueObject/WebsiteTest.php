@@ -18,9 +18,7 @@ class WebsiteTest extends TestCase
         self::assertEquals($value, $website->value());
     }
 
-    /**
-     * @return array<int, array<int, string>>
-     */
+    /** @phpstan-ignore-next-line */
     public function providersWebSiteValid(): array
     {
         return [

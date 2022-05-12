@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class FindAllPostQueryHandlerTest extends TestCase
 {
-    private MockObject|PostRepository $repositoryMock;
+    private MockObject $repositoryMock;
 
     protected function setUp(): void
     {

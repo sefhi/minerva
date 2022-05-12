@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Controller\Posts;
 
 use Exception;
+use InvalidArgumentException;
 use Minerva\Posts\Application\CreatorPostCommand;
 use Minerva\Posts\Application\CreatorPostCommandHandler;
+use Stringable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +30,14 @@ final class PostsCreatorPostController extends AbstractController
     public function __invoke(Request $request): JsonResponse
     {
         try {
+            $json = $request->getContent();
+
+            if (!$json) {
+                throw new InvalidArgumentException('invalid json', Response::HTTP_NOT_ACCEPTABLE);
+            }
+
             $data = json_decode(
-                $request->getContent(),
+                $json,
                 true,
                 512,
                 JSON_THROW_ON_ERROR
@@ -77,6 +85,9 @@ final class PostsCreatorPostController extends AbstractController
         );
     }
 
+    /**
+     * @return array<int, array{message: string|Stringable, field: string}>
+     */
     private function getFormattedErrors(ConstraintViolationListInterface $errors): array
     {
         $formattedErrors = [];

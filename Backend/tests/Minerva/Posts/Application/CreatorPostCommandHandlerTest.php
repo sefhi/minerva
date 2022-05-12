@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 final class CreatorPostCommandHandlerTest extends TestCase
 {
-    private PostRepository|MockObject $repositoryMock;
+    private MockObject $repositoryMock;
 
     protected function setUp(): void
     {
