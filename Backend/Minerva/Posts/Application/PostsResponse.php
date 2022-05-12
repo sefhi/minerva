@@ -22,8 +22,8 @@ final class PostsResponse implements JsonSerializable
     }
 
     /**
-     *
      * @param array<PostResponse> $posts
+     *
      * @return PostsResponse
      */
     public static function create(array $posts): self

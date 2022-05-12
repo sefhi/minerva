@@ -39,6 +39,7 @@ final class FakerPostRepository implements PostRepository
 
     /**
      * @return array<Post>
+     *
      * @throws Exception
      */
     private function toResponse(): array

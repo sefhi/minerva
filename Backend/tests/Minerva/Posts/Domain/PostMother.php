@@ -33,6 +33,7 @@ final class PostMother
 
     /**
      * @return array<Post>
+     *
      * @throws \Exception
      */
     public static function array(): array

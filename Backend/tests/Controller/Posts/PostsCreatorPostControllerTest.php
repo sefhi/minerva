@@ -59,7 +59,6 @@ class PostsCreatorPostControllerTest extends WebTestCase
         self::assertJson($response->getContent());
     }
 
-
     private function requestJson(): string
     {
         return json_encode([

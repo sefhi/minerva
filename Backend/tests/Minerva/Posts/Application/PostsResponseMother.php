@@ -11,6 +11,7 @@ final class PostsResponseMother
 {
     /**
      * @param array<PostResponse> $posts
+     *
      * @return PostsResponse
      */
     public static function create(array $posts): PostsResponse

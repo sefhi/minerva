@@ -34,7 +34,7 @@ final class RequestCreatorPost
     /**
      * @param string $title
      * @param string $content
-     * @param int $authorId
+     * @param int    $authorId
      */
     private function __construct(string $title, string $content, int $authorId)
     {

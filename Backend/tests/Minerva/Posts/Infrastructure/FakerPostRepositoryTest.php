@@ -33,6 +33,4 @@ final class FakerPostRepositoryTest extends TestCase
 
         self::assertTrue($result);
     }
-
-
 }
