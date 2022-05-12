@@ -19,7 +19,7 @@ npm-install:
 # 🐳 Docker Compose
 start:
 	@echo "🚀 Deploy!!!"
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE) up
 stop:
 	@echo "🛑 Stop container!!!"
 	$(DOCKER_COMPOSE) stop

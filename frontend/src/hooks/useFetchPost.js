@@ -18,7 +18,7 @@ const useFetchPost = () => {
                 });
 
             })
-    });
+    },[]);
 
     return state;
 };
