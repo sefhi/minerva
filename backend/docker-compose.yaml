@@ -5,7 +5,7 @@ services:
     container_name: container-minerva
     build:
       context: ..
-      dockerfile: ./Backend/Dockerfile
+      dockerfile: /Dockerfile
     env_file:
       - .env.local
     environment:
