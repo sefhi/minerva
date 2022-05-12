@@ -15,20 +15,18 @@ class PostsCreatorPostControllerTest extends WebTestCase
         $this->client = self::createClient();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function shouldCreatePostAndReturn201(): void
     {
         $router = $this->client->getContainer()->get('router');
+        $server = ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
         $this->client->request(
             'POST',
             $router->generate('post_creator'),
-            [
-                'title' => MotherCreator::random()->text(50),
-                'content' => MotherCreator::random()->paragraph(2),
-                'authorId' => random_int(1, 1000),
-            ],
+            [],
+            [],
+            $server,
+            $this->requestJson()
         );
 
         // When
@@ -37,5 +35,14 @@ class PostsCreatorPostControllerTest extends WebTestCase
         // Then
         self::assertResponseIsSuccessful();
         self::assertEmpty(json_decode($response->getContent(), false, 512, JSON_THROW_ON_ERROR));
+    }
+
+    private function requestJson(): string
+    {
+        return json_encode([
+            'title' => MotherCreator::random()->text(50),
+            'content' => MotherCreator::random()->paragraph(2),
+            'authorId' => random_int(1, 1000),
+        ], JSON_THROW_ON_ERROR);
     }
 }
