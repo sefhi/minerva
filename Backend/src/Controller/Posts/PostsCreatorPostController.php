@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts;
 
+use Exception;
 use Minerva\Posts\Application\CreatorPostCommand;
 use Minerva\Posts\Application\CreatorPostCommandHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,12 @@ final class PostsCreatorPostController extends AbstractController
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode(
+                $request->getContent(),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
+            );
 
             $requestCreatorPost = RequestCreatorPost::fromPrimitive(
                 $data['title'],
@@ -50,7 +56,7 @@ final class PostsCreatorPostController extends AbstractController
             }
 
             return $this->json('', Response::HTTP_CREATED);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->json(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -59,7 +65,7 @@ final class PostsCreatorPostController extends AbstractController
     {
         $formattedErrors = $this->getFormattedErrors($errors);
 
-        return new JsonResponse(
+        return $this->json(
             [
                 'errors' => $formattedErrors,
             ],
