@@ -4,12 +4,13 @@ const getPosts = async () => {
 
     const resp = await fetch(url);
     const {data} = await resp.json();
-    return data.map(({id: postId, title, content, author}) => {
+    return data.map(({id: postId, title, content, createdAt, author}) => {
         const {id: authorId, name, username, website, email} = author;
         return {
             id: postId,
             title: title,
             content: content,
+            createdAt: createdAt,
             author : {
                 id: authorId,
                 name,
