@@ -25,8 +25,7 @@ final class PostsCreatorPostController extends AbstractController
     ) {
     }
 
-    #[
-        Route('/post', name: 'post_creator', methods: ['POST'])]
+    #[Route('/post', name: 'post_creator', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
         try {
@@ -63,14 +62,22 @@ final class PostsCreatorPostController extends AbstractController
 
             $hasCreated = ($this->commandHandler)($command);
 
-            if (!$hasCreated) {
-                return $this->json('', Response::HTTP_CONFLICT);
+            if ($hasCreated) {
+                return $this->json('', Response::HTTP_CREATED);
             }
 
-            return $this->json('', Response::HTTP_CREATED);
+            $response = ['error' => 'resource has not been created'];
+            $statusCode = Response::HTTP_CONFLICT;
+
+        } catch (InvalidArgumentException $exception) {
+            $response = ['error' => $exception->getMessage()];
+            $statusCode = $exception->getCode();
         } catch (Exception $exception) {
-            return $this->json(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+            $response = ['error' => $exception->getMessage()];
+            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
         }
+
+        return $this->json($response, $statusCode);
     }
 
     private function handleErrors(ConstraintViolationListInterface $errors): JsonResponse

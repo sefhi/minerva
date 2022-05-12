@@ -15,66 +15,37 @@ final class RequestCreatorPost
         minMessage: 'title must be at least {{ limit }} characters long',
         maxMessage: 'title cannot be longer than {{ limit }} characters',
     )]
-    private string $title;
+    /** @phpstan-ignore-next-line */
+    private $title;
     #[Assert\NotBlank]
     #[Assert\Length(
         min: 5,
         max: 10000,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+        minMessage: 'content must be at least {{ limit }} characters long',
+        maxMessage: 'content cannot be longer than {{ limit }} characters',
     )]
-    private string $content;
+    /** @phpstan-ignore-next-line */
+    private $content;
     #[Assert\NotBlank]
     #[Assert\Type(
         type: 'integer',
         message: 'The value {{ value }} is not a valid {{ type }}.'
     )]
-    private int $authorId;
+    /** @phpstan-ignore-next-line */
+    private $authorId;
 
-    /**
-     * @param string $title
-     * @param string $content
-     * @param int    $authorId
-     */
-    private function __construct(string $title, string $content, int $authorId)
+    /** @phpstan-ignore-next-line */
+    private function __construct($title, $content, $authorId)
     {
         $this->title = $title;
         $this->content = $content;
         $this->authorId = $authorId;
     }
 
-    public static function fromPrimitive(string $title, string $content, int $authorId): self
+    /** @phpstan-ignore-next-line */
+    public static function fromPrimitive($title, $content, $authorId): self
     {
         return new self($title, $content, $authorId);
     }
 
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
-    }
-
-    public function setAuthorId(int $authorId): void
-    {
-        $this->authorId = $authorId;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    public function getAuthorId(): int
-    {
-        return $this->authorId;
-    }
 }

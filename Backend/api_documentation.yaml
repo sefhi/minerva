@@ -34,6 +34,15 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/ValidateCreatorPost'
+        '406':
+          description: Content is not acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
         '500':
           description: Internal Server Error
           content:
