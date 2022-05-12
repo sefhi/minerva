@@ -40,7 +40,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
     private function requestJson(): string
     {
         return json_encode([
-            'title' => MotherCreator::random()->text(50),
+            'title' => MotherCreator::random()->text(300),
             'content' => MotherCreator::random()->paragraph(2),
             'authorId' => random_int(1, 1000),
         ], JSON_THROW_ON_ERROR);
