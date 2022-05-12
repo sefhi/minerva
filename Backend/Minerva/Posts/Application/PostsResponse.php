@@ -28,7 +28,7 @@ final class PostsResponse implements JsonSerializable
         return $this->posts;
     }
 
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return get_object_vars($this);
     }

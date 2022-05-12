@@ -45,7 +45,7 @@ final class PostResponse implements JsonSerializable
         return $this->author;
     }
 
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return get_object_vars($this);
     }

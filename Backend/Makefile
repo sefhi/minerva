@@ -32,7 +32,7 @@ cs-prev:
 
 #Static Analysis
 stand:
-	$(EXEC_PHP) ./vendor/bin/phpstan analyse --level 1 src tests
+	$(EXEC_PHP) ./vendor/bin/phpstan analyse --level 7 src tests Minerva
 
 create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi
