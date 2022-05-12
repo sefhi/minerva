@@ -25,9 +25,24 @@ paths:
                   type: integer
       responses:
         '201':
-          description: Ok
+          description: Post Created
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/ValidateCreatorPost'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
   /post/all:
     get:
       tags:
@@ -43,6 +58,16 @@ paths:
                   $ref: '#components/schemas/Post'
 components:
   schemas:
+    ValidateCreatorPost:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            message:
+              type: string
+            field:
+              type: string
     Post:
       type: object
       properties:
