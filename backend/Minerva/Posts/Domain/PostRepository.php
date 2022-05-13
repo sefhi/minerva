@@ -9,7 +9,7 @@ use Minerva\Posts\Domain\Dto\PostCreatorDto;
 interface PostRepository
 {
     /**
-     * @return Post[]
+     * @return array<Post>
      */
     public function findAll(): array;
 

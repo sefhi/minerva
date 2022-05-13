@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    api.post.stub.url: '%env(API_POST_STUB_URL)%'
 
 services:
     # default configuration for services in *this* file
@@ -27,3 +28,8 @@ services:
         resource: '../Minerva/'
         autowire: true
         autoconfigure: true
+
+    ##Type-Hinted Abstraction
+    GuzzleHttp\Client: ~
+    Minerva\Posts\Infrastructure\GuzzleApiPostStubRepository: ['@GuzzleHttp\Client', "%api.post.stub.url%"]
+    Minerva\Posts\Domain\PostRepository: '@Minerva\Posts\Infrastructure\GuzzleApiPostStubRepository'

@@ -27,7 +27,7 @@ class UsernameTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectErrorMessage(
-            sprintf('%s must have a length between %s and %s character.', Username::class, 5, 50)
+            sprintf('%s must have a length between %s and %s character.', Username::class, 2, 70)
         );
 
         new Username($value);
@@ -54,7 +54,6 @@ class UsernameTest extends TestCase
         return [
             ['xxXxxXxxXxxXxxXxxXxxXxxXxxXxxXToLargo69XxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxxXxx'],
             ['x'],
-            ['xy'],
         ];
     }
 }

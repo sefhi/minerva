@@ -11,6 +11,6 @@ final class Username extends StringValueObject
     public function __construct(string $value)
     {
         parent::__construct($value);
-        $this->checkLength(5, 50);
+        $this->checkLength(2, 70);
     }
 }

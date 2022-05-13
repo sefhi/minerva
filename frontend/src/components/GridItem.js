@@ -12,7 +12,7 @@ const GridItem = ({id, title, content, createdAt, author}) => {
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <p className="card-text">{content}</p>
-                <a href="#" className="btn btn-primary">Ver Author</a>
+                <a href="#" className="btn btn-primary">Ir al Post</a>
             </div>
         </div>
     </>);
