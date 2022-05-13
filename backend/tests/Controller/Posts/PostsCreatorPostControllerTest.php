@@ -64,7 +64,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
         return json_encode([
             'title' => MotherCreator::random()->text(50),
             'content' => MotherCreator::random()->paragraph(2),
-            'authorId' => random_int(1, 1000),
+            'authorId' => random_int(1, 10),
         ], JSON_THROW_ON_ERROR);
     }
 
@@ -73,7 +73,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
         return json_encode([
             'title' => MotherCreator::random()->text(500),
             'content' => MotherCreator::random()->text(20000),
-            'authorId' => random_int(1, 1000),
+            'authorId' => random_int(1, 10),
         ], JSON_THROW_ON_ERROR);
     }
 }

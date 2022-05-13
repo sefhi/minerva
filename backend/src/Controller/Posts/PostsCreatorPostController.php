@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use JsonException;
 use Minerva\Posts\Application\CreatorPostCommand;
 use Minerva\Posts\Application\CreatorPostCommandHandler;
+use Minerva\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Stringable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -69,7 +70,7 @@ final class PostsCreatorPostController extends AbstractController
 
             $response = ['error' => 'resource has not been created'];
             $statusCode = Response::HTTP_CONFLICT;
-        } catch (InvalidArgumentException $exception) {
+        } catch (InvalidArgumentException|AuthorNotFoundException $exception) {
             $response = ['error' => $exception->getMessage()];
             $statusCode = $exception->getCode();
         } catch (Exception|JsonException $exception) {

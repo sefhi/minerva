@@ -15,6 +15,6 @@ final class AuthorIdMother
 
     public static function random(): AuthorId
     {
-        return self::create(random_int(1, 1000));
+        return self::create(random_int(1, 10));
     }
 }
