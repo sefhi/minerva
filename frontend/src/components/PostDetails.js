@@ -1,6 +1,7 @@
 // Home.js
 import React from 'react'
 import {useParams} from "react-router";
+import {Link} from "react-router-dom";
 
 const PostDetails = () => {
 
@@ -16,7 +17,7 @@ const PostDetails = () => {
             <div className={"card-body"}>
                 <h4 className={"card-title"}>{title}</h4>
                 <p className={"card-text"}>{content}</p>
-                <a href="#" className="btn btn-primary">Volver al Blog</a>
+                <Link to={"/"} className="btn btn-primary">Volver al Blog</Link>
                 <p className="card-text mt-3"><small className="text-muted">Creado el {createdAt}</small></p>
             </div>
         </div>
