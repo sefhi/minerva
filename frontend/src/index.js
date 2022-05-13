@@ -4,14 +4,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import GridPost from "./components/GridPost";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import BlogApp from "./BlogApp";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <div className={"container"}>
-          <h1>Blog Minerva</h1>
-        <GridPost />
-      </div>
+      <BlogApp/>
   </React.StrictMode>
 );
 
