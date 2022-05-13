@@ -6,6 +6,7 @@ namespace App\Controller\Posts;
 
 use Exception;
 use InvalidArgumentException;
+use JsonException;
 use Minerva\Posts\Application\CreatorPostCommand;
 use Minerva\Posts\Application\CreatorPostCommandHandler;
 use Stringable;
@@ -68,11 +69,10 @@ final class PostsCreatorPostController extends AbstractController
 
             $response = ['error' => 'resource has not been created'];
             $statusCode = Response::HTTP_CONFLICT;
-
         } catch (InvalidArgumentException $exception) {
             $response = ['error' => $exception->getMessage()];
             $statusCode = $exception->getCode();
-        } catch (Exception $exception) {
+        } catch (Exception|JsonException $exception) {
             $response = ['error' => $exception->getMessage()];
             $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
         }
