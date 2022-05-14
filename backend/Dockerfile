@@ -21,9 +21,9 @@ RUN echo "memory_limit=512M"  >> /usr/local/etc/php/php.ini
 RUN echo "max_execution_time=900" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 WORKDIR /var/www/html
-COPY ./Backend /var/www/html
+COPY . /var/www/html
 
-COPY Backend/docker/vhost/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/vhost/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy composer and vendor
 COPY --from=composer /usr/bin/composer /usr/bin/composer

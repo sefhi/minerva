@@ -1,3 +1,5 @@
+CURRENT-DIR    	:= $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+
 .DEFAULT_GOAL := deploy
 
 deploy: build
@@ -6,9 +8,12 @@ deploy: build
 build: install-services
 
 install-services:
-	make install-apps -j
+	make install-apps
 install-apps: install-api install-blog
 install-api:
-	@cd $(BASE_DIR)/backend && make
+	@cd $(CURRENT-DIR)/backend && make
 install-blog:
-	@cd $(BASE_DIR)/pcu && make
+	@cd $(CURRENT-DIR)/frontend && make
+
+current:
+	@echo $(CURRENT-DIR)

@@ -4,8 +4,8 @@ services:
   container-minerva:
     container_name: container-minerva
     build:
-      context: ..
-      dockerfile: /Dockerfile
+      context: .
+      dockerfile: Dockerfile
     env_file:
       - .env.local
     environment:
@@ -16,8 +16,8 @@ services:
       - .:/var/www/html
     networks:
       - minerva-network
-  swagger-ui:
-    container_name: swagger-ui
+  api-swagger-minerva:
+    container_name: api-swagger-minerva
     image: swaggerapi/swagger-ui
     ports:
       - "8080:8080"
