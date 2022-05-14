@@ -47,5 +47,4 @@ final class RequestCreatorPost
     {
         return new self($title, $content, $authorId);
     }
-
 }

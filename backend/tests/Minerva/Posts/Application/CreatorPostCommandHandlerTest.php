@@ -64,7 +64,6 @@ final class CreatorPostCommandHandlerTest extends TestCase
     /** @test */
     public function itShouldNotCreatePostAndReturnFalse(): void
     {
-
         // GIVEN
         $command = CreatorPostCommandMother::random();
         $authorId = new AuthorId($command->getAuthorId());
@@ -91,6 +90,5 @@ final class CreatorPostCommandHandlerTest extends TestCase
 
         // WHEN
         $commandHandler($command);
-
     }
 }

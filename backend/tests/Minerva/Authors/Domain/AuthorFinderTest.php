@@ -63,6 +63,4 @@ final class AuthorFinderTest extends TestCase
         // When
         ($authorFinder)($authorId);
     }
-
-
 }

@@ -33,5 +33,4 @@ final class AuthorMother
             $email ?? EmailMother::random(),
         );
     }
-
 }

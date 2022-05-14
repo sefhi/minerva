@@ -37,6 +37,4 @@ final class StubAuthorsRepositoryTest extends TestCase
         // Then
         self::assertNull($result);
     }
-
-
 }

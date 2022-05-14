@@ -9,7 +9,6 @@ use Minerva\Authors\Domain\AuthorFinder;
 use Minerva\Posts\Domain\Dto\PostCreatorDto;
 use Minerva\Posts\Domain\Post;
 use Minerva\Posts\Domain\PostAuthor;
-use Minerva\Posts\Domain\PostAuthorNotFoundException;
 use Minerva\Posts\Domain\PostContent;
 use Minerva\Posts\Domain\PostId;
 use Minerva\Posts\Domain\PostRepository;
@@ -67,8 +66,6 @@ final class StubPostRepository implements PostRepository
     }
 
     /**
-     * @param AuthorId $id
-     * @return PostAuthor
      * @throws AuthorNotFoundException
      */
     private function getAuthor(AuthorId $id): PostAuthor

@@ -48,9 +48,6 @@ final class Post
         return $this->author;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;

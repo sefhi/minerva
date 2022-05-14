@@ -48,7 +48,6 @@ final class PostResponse implements JsonSerializable
         return $this->author;
     }
 
-
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;

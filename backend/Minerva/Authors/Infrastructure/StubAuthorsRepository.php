@@ -7,15 +7,10 @@ namespace Minerva\Authors\Infrastructure;
 use Minerva\Authors\Domain\Author;
 use Minerva\Authors\Domain\AuthorRepository;
 use Minerva\Shared\Domain\ValueObject\Author\AuthorId;
-
 use Minerva\Shared\Domain\ValueObject\Email;
 use Minerva\Shared\Domain\ValueObject\Name;
-
 use Minerva\Shared\Domain\ValueObject\Username;
-
 use Minerva\Shared\Domain\ValueObject\Website;
-
-use function Lambdish\Phunctional\map;
 use function Lambdish\Phunctional\search;
 
 final class StubAuthorsRepository implements AuthorRepository
