@@ -163,6 +163,12 @@ Por lo que el resquest lo he deserializado manualmente.
 │       ├── PostsCreatorPostControllerTest.php
 │       └── PostsFindAllGetControllerTest.php
 ├── Minerva
+│   ├── Authors
+│   │   ├── Domain
+│   │   │   ├── AuthorFinderTest.php
+│   │   │   └── AuthorMother.php
+│   │   └── Infrastructure
+│   │       └── StubAuthorsRepositoryTest.php
 │   ├── Posts
 │   │   ├── Application
 │   │   │   ├── CreatorPostCommandHandlerTest.php
@@ -182,7 +188,8 @@ Por lo que el resquest lo he deserializado manualmente.
 │   │   │   ├── PostTitleMother.php
 │   │   │   └── PostTitleTest.php
 │   │   └── Infrastructure
-│   │       └── FakerPostRepositoryTest.php
+│   │       ├── FakerPostRepositoryTest.php
+│   │       └── StubPostRepositoryTest.php
 │   └── Shared
 │       └── Domain
 │           ├── MotherCreator.php
@@ -200,3 +207,15 @@ Por lo que el resquest lo he deserializado manualmente.
 └── bootstrap.php
 
 ```
+
+#### Explicación
+
+Está estructurado de la siguiente manera:
+
+- Controller
+- Minerva
+
+En la carpeta controller he decidido hacer tests e2e, para que pasen por todo el flujo de la aplicación. 
+
+En la carpeta Minerva, están todos los tests unitarios de la aplicación con el sufijo Test. 
+Los que tiene el sufijo Mother, son ObjectMother, que voy usando a lo largo de los tests, para mayor comodidad.
