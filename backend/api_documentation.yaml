@@ -15,14 +15,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                content:
-                  type: string
-                authorId:
-                  type: integer
+              $ref: '#components/schemas/RequestCreatorPost'
       responses:
         '201':
           description: Post Created
@@ -33,34 +26,25 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/ValidateCreatorPost'
+                  $ref: '#components/schemas/ErrorValidate'
         '404':
           description: Resource Not Found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#components/schemas/Error'
         '406':
           description: Content is not acceptable
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: '#components/schemas/Error'
   /post/all:
     get:
       tags:
@@ -74,9 +58,26 @@ paths:
                 type: array
                 items:
                   $ref: '#components/schemas/Post'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Error'
 components:
   schemas:
-    ValidateCreatorPost:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    ErrorValidate:
       type: object
       properties:
         errors:
@@ -86,6 +87,15 @@ components:
               type: string
             field:
               type: string
+    RequestCreatorPost:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        authorId:
+          type: integer
     Post:
       type: object
       properties:
