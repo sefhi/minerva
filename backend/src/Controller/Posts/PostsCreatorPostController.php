@@ -7,7 +7,6 @@ namespace App\Controller\Posts;
 use Exception;
 use InvalidArgumentException;
 use JsonException;
-use Minerva\Posts\Application\CreatorPostCommand;
 use Minerva\Posts\Application\CreatorPostCommandHandler;
 use Minerva\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Stringable;
