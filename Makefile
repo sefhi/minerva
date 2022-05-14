@@ -17,3 +17,7 @@ install-blog:
 
 current:
 	@echo $(CURRENT-DIR)
+
+stop:
+	@cd $(CURRENT-DIR)/backend && make stop
+	@cd $(CURRENT-DIR)/frontend && make stop
