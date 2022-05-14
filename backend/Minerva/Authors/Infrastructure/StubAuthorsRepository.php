@@ -16,23 +16,24 @@ use function Lambdish\Phunctional\search;
 final class StubAuthorsRepository implements AuthorRepository
 {
     private const FILE = '/var/www/html/Minerva/Posts/Infrastructure/Stub/users.json';
-    private array $stubAuthors;
+    private string|bool $stubAuthors;
 
     public function __construct()
     {
-        $this->stubAuthors = json_decode(
-            file_get_contents(self::FILE),
-            true,
-            512,
-            JSON_THROW_ON_ERROR
-        );
+        $this->stubAuthors = file_get_contents(self::FILE);
     }
 
     public function find(AuthorId $id): ?Author
     {
+        $arrAuthors = json_decode(
+            $this->stubAuthors,
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
         $authorSearched = search(function (array $author) use ($id) {
             return $author['id'] === $id->value();
-        }, $this->stubAuthors);
+        }, $arrAuthors);
 
         if (null === $authorSearched) {
             return null;

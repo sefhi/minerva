@@ -17,17 +17,18 @@ class PostsFindAllGetControllerTest extends WebTestCase
     /** @test */
     public function whenCallEndpointPostAllShouldReturnAllPost(): void
     {
-        $router = $this->client->getContainer()->get('router');
+
         $this->client->request(
             'GET',
-            $router->generate('posts_find_all')
+            '/post/all'
         );
 
         // When
         $response = $this->client->getResponse();
-
+        $result = json_decode($response->getContent(), true);
         // Then
         self::assertResponseIsSuccessful();
         self::assertJson($response->getContent());
+        self::assertNotEmpty($result['data']);
     }
 }
