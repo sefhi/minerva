@@ -28,7 +28,7 @@ final class CreatorPostCommandHandler
     {
         $authorId = new AuthorId($command->getAuthorId());
 
-        ($this->authorFinder)($authorId);
+        $this->assertExistAuthor($authorId);
 
         $postCreatorDto = PostCreatorDto::create(
             new PostTitle($command->getTitle()),
@@ -37,5 +37,13 @@ final class CreatorPostCommandHandler
         );
 
         return $this->repository->save($postCreatorDto);
+    }
+
+    /**
+     * @throws AuthorNotFoundException
+     */
+    private function assertExistAuthor(AuthorId $authorId): void
+    {
+        ($this->authorFinder)($authorId);
     }
 }
