@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Minerva\Authors\Domain;
 
+use Minerva\Authors\Domain\AuthorFinder;
 use Minerva\Authors\Domain\AuthorRepository;
 use Minerva\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Minerva\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
