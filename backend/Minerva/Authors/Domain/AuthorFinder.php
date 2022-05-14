@@ -7,7 +7,7 @@ namespace Minerva\Authors\Domain;
 use Minerva\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Minerva\Shared\Domain\ValueObject\Author\AuthorId;
 
-final class AuthorFinder
+class AuthorFinder
 {
     public function __construct(private AuthorRepository $repository)
     {
