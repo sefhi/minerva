@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Minerva\Posts\Infrastructure;
 
 use JsonException;
+use Minerva\Authors\Domain\AuthorFinder;
 use Minerva\Posts\Domain\Dto\PostCreatorDto;
 use Minerva\Posts\Domain\Post;
 use Minerva\Posts\Domain\PostAuthor;
@@ -13,23 +14,25 @@ use Minerva\Posts\Domain\PostContent;
 use Minerva\Posts\Domain\PostId;
 use Minerva\Posts\Domain\PostRepository;
 use Minerva\Posts\Domain\PostTitle;
+use Minerva\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Minerva\Shared\Domain\ValueObject\Author\AuthorId;
-use Minerva\Shared\Domain\ValueObject\Email;
-use Minerva\Shared\Domain\ValueObject\Name;
-use Minerva\Shared\Domain\ValueObject\Username;
-use Minerva\Shared\Domain\ValueObject\Website;
 use Minerva\Tests\Shared\Domain\MotherCreator;
 use function Lambdish\Phunctional\map;
-use function Lambdish\Phunctional\search;
 
 final class StubPostRepository implements PostRepository
 {
+    private const FILE = '/var/www/html/Minerva/Posts/Infrastructure/Stub/posts.json';
+
+    public function __construct(private AuthorFinder $authorFinder)
+    {
+    }
+
     /**
      * @throws JsonException
      */
     public function findAll(): array
     {
-        $jsonFile = file_get_contents('/var/www/html/Minerva/Posts/Infrastructure/Stub/posts.json');
+        $jsonFile = file_get_contents(self::FILE);
 
         $resultPost = json_decode(
             $jsonFile,
@@ -64,29 +67,20 @@ final class StubPostRepository implements PostRepository
     }
 
     /**
-     * @throws PostAuthorNotFoundException
-     * @throws JsonException
+     * @param AuthorId $id
+     * @return PostAuthor
+     * @throws AuthorNotFoundException
      */
-    private function getAuthor(AuthorId $userId): PostAuthor
+    private function getAuthor(AuthorId $id): PostAuthor
     {
-        $jsonFile = file_get_contents('/var/www/html/Minerva/Posts/Infrastructure/Stub/users.json');
-
-        $resultUsers = json_decode($jsonFile, true, 512, JSON_THROW_ON_ERROR);
-
-        $userSearched = search(function (array $user) use ($userId) {
-            return $user['id'] === $userId->value();
-        }, $resultUsers);
-
-        if (null === $userSearched) {
-            throw new PostAuthorNotFoundException($userId->value());
-        }
+        $author = ($this->authorFinder)($id);
 
         return PostAuthor::create(
-            new AuthorId($userSearched['id']),
-            new Name($userSearched['name']),
-            new Username($userSearched['username']),
-            new Website('https://'.$userSearched['website']),
-            new Email($userSearched['email']),
+            $author->getId(),
+            $author->getName(),
+            $author->getUsername(),
+            $author->getWeb(),
+            $author->getEmail(),
         );
     }
 }

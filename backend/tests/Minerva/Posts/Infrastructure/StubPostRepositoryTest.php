@@ -29,7 +29,6 @@ final class StubPostRepositoryTest extends TestCase
     public function itShouldReturnPostDomainWhenCallFunctionFindAll(): void
     {
         $this->authorFinderMock
-            ->expects(self::once())
             ->method('__invoke')
             ->willReturn(AuthorMother::create());
 
@@ -46,8 +45,9 @@ final class StubPostRepositoryTest extends TestCase
     public function itShouldSavePostWhenCallFunctionSave(): void
     {
         $this->authorFinderMock
-            ->expects(self::never())
-            ->method('__invoke');
+            ->expects(self::once())
+            ->method('__invoke')
+            ->willReturn(AuthorMother::create());
 
         $postCreatorDto = PostCreatorDtoMother::random();
         $stubRepository = new StubPostRepository($this->authorFinderMock);

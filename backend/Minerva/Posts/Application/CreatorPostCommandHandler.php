@@ -28,7 +28,7 @@ final class CreatorPostCommandHandler
     {
         $authorId = new AuthorId($command->getAuthorId());
 
-        $result = ($this->authorFinder)($authorId);
+        ($this->authorFinder)($authorId);
 
         $postCreatorDto = PostCreatorDto::create(
             new PostTitle($command->getTitle()),
