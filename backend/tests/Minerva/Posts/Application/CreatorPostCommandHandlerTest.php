@@ -75,10 +75,8 @@ final class CreatorPostCommandHandlerTest extends TestCase
         );
 
         $this->repositoryMock
-            ->expects(self::once())
-            ->method('save')
-            ->with($postCreatorDto)
-            ->willReturn(false);
+            ->expects(self::never())
+            ->method('save');
 
         $this->authorFinderMock
             ->expects(self::once())
@@ -87,7 +85,6 @@ final class CreatorPostCommandHandlerTest extends TestCase
             ->willThrowException(new AuthorNotFoundException($authorId->value()));
 
         $commandHandler = new CreatorPostCommandHandler($this->repositoryMock, $this->authorFinderMock);
-
 
         // THEN
         $this->expectException(AuthorNotFoundException::class);
