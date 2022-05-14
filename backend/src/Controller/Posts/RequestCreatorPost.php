@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts;
 
+use Minerva\Posts\Application\CreatorPostCommand;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class RequestCreatorPost
@@ -46,5 +47,14 @@ final class RequestCreatorPost
     public static function fromPrimitive($title, $content, $authorId): self
     {
         return new self($title, $content, $authorId);
+    }
+
+    public function mapToCommand(): CreatorPostCommand
+    {
+        return CreatorPostCommand::fromPrimitive(
+            $this->title,
+            $this->content,
+            $this->authorId
+        );
     }
 }

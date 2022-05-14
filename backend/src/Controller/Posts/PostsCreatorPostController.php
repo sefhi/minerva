@@ -56,13 +56,7 @@ final class PostsCreatorPostController extends AbstractController
                 return $this->handleErrors($errors);
             }
 
-            $command = CreatorPostCommand::fromPrimitive(
-                $data['title'],
-                $data['content'],
-                $data['authorId']
-            );
-
-            $hasCreated = ($this->commandHandler)($command);
+            $hasCreated = ($this->commandHandler)($requestCreatorPost->mapToCommand());
 
             if ($hasCreated) {
                 return $this->json('', Response::HTTP_CREATED);
