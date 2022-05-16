@@ -1,6 +1,6 @@
 const getPosts = async () => {
 
-    const url = `http://localhost:9091/post/all`;
+    const url = `http://localhost:9091/posts/all`;
 
     const resp = await fetch(url);
     const {data} = await resp.json();
