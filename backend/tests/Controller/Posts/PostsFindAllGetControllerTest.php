@@ -20,7 +20,7 @@ class PostsFindAllGetControllerTest extends WebTestCase
 
         $this->client->request(
             'GET',
-            '/post/all'
+            '/posts/all'
         );
 
         // When

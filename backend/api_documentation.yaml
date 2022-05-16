@@ -7,7 +7,7 @@ servers:
   - url: http://localhost:9091
     variables: {}
 paths:
-  /post:
+  /posts:
     post:
       tags:
         - Post
@@ -45,7 +45,7 @@ paths:
             application/json:
               schema:
                 $ref: '#components/schemas/Error'
-  /post/all:
+  /posts/all:
     get:
       tags:
         - Post

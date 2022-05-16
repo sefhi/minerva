@@ -17,7 +17,7 @@ final class PostsFindAllGetController extends AbstractController
     {
     }
 
-    #[Route('/post/all', name: 'posts_find_all', methods: ['GET'])]
+    #[Route('/posts/all', name: 'posts_find_all', methods: ['GET'])]
     public function __invoke(): JsonResponse
     {
         try {

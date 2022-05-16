@@ -26,7 +26,7 @@ final class PostsCreatorPostController extends AbstractController
     ) {
     }
 
-    #[Route('/post', name: 'post_creator', methods: ['POST'])]
+    #[Route('/posts', name: 'post_creator', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
         try {
