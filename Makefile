@@ -18,6 +18,15 @@ install-blog:
 current:
 	@echo $(CURRENT-DIR)
 
+### Ejecución de las Apps
+start:
+	@docker-compose up -d
+	@cd $(CURRENT-DIR)/backend && make start
+	@cd $(CURRENT-DIR)/frontend && make start
+	reset
+start-mysql:
+	docker-compose up -d mysql
+
 stop:
 	@cd $(CURRENT-DIR)/backend && make stop
 	@cd $(CURRENT-DIR)/frontend && make stop

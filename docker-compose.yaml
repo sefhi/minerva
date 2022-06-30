@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  shared_mysql:
+    container_name: minerva_mysql
+    platform: linux/x86_64
+    image: library/mysql:8.0.29
+    restart: 'unless-stopped'
+    ports:
+      - "3306:3306"
+    command: --max_allowed_packet=32505856
+    volumes:
+      - ${PWD}/.docker/mysql/storage/data/docker/mysql:/var/lib/mysql
+      - ${PWD}/.docker/mysql/storage/logs/docker/mysql:/var/log/mysql
+      - ${PWD}/.docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
