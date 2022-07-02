@@ -1,6 +1,6 @@
 # VARIABLES
 DOCKER_COMPOSE = docker-compose
-CONTAINER      = micro-auth
+CONTAINER      = auth
 EXEC           = docker exec -ti --user=root $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
@@ -60,4 +60,4 @@ clear:
 	$(SYMFONY) cache:clear
 
 bash:
-	$(DOCKER_COMPOSE) exec --user=$(CURRENT_UID) -it $(CONTAINER) /bin/bash
+	$(DOCKER_COMPOSE) exec -it $(CONTAINER) /bin/bash
