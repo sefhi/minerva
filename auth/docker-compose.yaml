@@ -17,3 +17,9 @@ services:
       - ${PWD}/.docker/config/webserver/vhosts:/etc/apache2/sites-enabled
     environment:
       XDEBUG_CONFIG: "client_host=host.docker.internal"
+    networks:
+      - net-minerva-mysql
+
+networks:
+  net-minerva-mysql:
+    name : net-minerva-mysql

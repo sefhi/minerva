@@ -15,3 +15,6 @@ services:
     environment:
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: secret
+networks:
+  net-minerva-mysql:
+    name: net-minerva-mysql
