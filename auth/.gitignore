@@ -11,3 +11,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+### DOCKER ###
+.docker/config/private.key
+.docker/config/public.key

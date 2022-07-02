@@ -21,7 +21,10 @@ update-deps: composer-update
 
 create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi
-
+generate-private-key:
+	@if [ ! -f .docker/config/private.key ]; then openssl genrsa -out .docker/config/private.key 2048; fi
+generate-public-key:
+	@if [ ! -f .docker/config/public.key ]; then openssl rsa -in .docker/config/private.key -pubout -out .docker/config/public.key; fi
 # 🐘 Composer
 composer-install ci: ACTION=install
 
@@ -34,7 +37,7 @@ composer composer-install ci composer-update composer-require cr: create_env_fil
 			--ignore-platform-reqs \
 			--no-ansi
 # 🐳 Docker Compose
-start:
+start: generate-private-key generate-public-key
 	@echo "🚀 Deploy!!!"
 	@$(DOCKER_COMPOSE) up -d
 	make deps
