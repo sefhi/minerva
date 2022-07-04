@@ -11,12 +11,14 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+        api_token:
+            pattern: ^/api/token$
             security: false
-        main:
-            lazy: true
-            provider: app_user_provider
+        api:
+            pattern: ^/api
+            security: true
+            stateless: true
+            oauth2: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

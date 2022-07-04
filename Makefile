@@ -26,7 +26,7 @@ start:
 	@cd $(CURRENT-DIR)/frontend && make start
 	reset
 start-mysql:
-	docker-compose up -d mysql
+	docker-compose up -d minerva-mysql
 start-auth:
 	@cd $(CURRENT-DIR)/auth && make start
 stop:

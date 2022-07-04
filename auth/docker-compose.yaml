@@ -10,7 +10,7 @@ services:
     container_name: 'minerva-auth'
     restart: 'unless-stopped'
     ports:
-      - "81:80"
+      - "40000:80"
     volumes:
       - ./:/var/www/html
       - ${PWD}/.docker/config/webserver/php.ini:/usr/local/etc/php/php.ini
