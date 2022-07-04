@@ -1,6 +1,6 @@
 # VARIABLES
-DOCKER_COMPOSE = docker-compose
-CONTAINER      = auth
+DOCKER_COMPOSE = docker compose
+CONTAINER      = minerva-auth
 EXEC           = docker exec -ti --user=root $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
@@ -37,7 +37,7 @@ composer composer-install ci composer-update composer-require cr: create_env_fil
 			--ignore-platform-reqs \
 			--no-ansi
 # 🐳 Docker Compose
-start: generate-private-key generate-public-key
+start: create_env_file generate-private-key generate-public-key
 	@echo "🚀 Deploy!!!"
 	@$(DOCKER_COMPOSE) up -d
 	make deps

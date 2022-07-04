@@ -1,13 +1,13 @@
 version: "3.9"
 services:
-  auth:
+  minerva-auth:
     build:
       context: ${PWD}/.docker
       args:
         PHP_VERSION: 8.1
     env_file:
       - .env.local
-    container_name: 'micro-auth'
+    container_name: 'minerva-auth'
     restart: 'unless-stopped'
     ports:
       - "81:80"
