@@ -12,7 +12,7 @@ security:
                 property: email
     firewalls:
         api_token:
-            pattern: ^/api/token$
+            pattern: ^/token$
             security: false
         api:
             pattern: ^/api
@@ -29,7 +29,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/auth/healthcheck, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
