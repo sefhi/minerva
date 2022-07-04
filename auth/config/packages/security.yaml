@@ -15,7 +15,7 @@ security:
             pattern: ^/token$
             security: false
         api:
-            pattern: ^/api
+            pattern: ^/auth
             security: true
             stateless: true
             oauth2: true
@@ -29,7 +29,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/auth/healthcheck, roles: ROLE_ADMIN }
+         - { path: ^/auth/healthcheck, roles: ROLE_OAUTH2_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
