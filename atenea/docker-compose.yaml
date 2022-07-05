@@ -16,6 +16,7 @@ services:
       - .:/var/www/html
     networks:
       - minerva-network
+      - net-minerva-mysql
 #  api-swagger-minerva:
 #    container_name: api-swagger-minerva
 #    image: swaggerapi/swagger-ui
@@ -33,3 +34,5 @@ services:
 networks:
   minerva-network:
     name: minerva-network
+  net-minerva-mysql:
+    name: net-minerva-mysql
