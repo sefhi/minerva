@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Posts;
 
 use Exception;
-use Minerva\Posts\Application\FindAllPostQueryHandler;
+use Atenea\Posts\Application\FindAllPostQueryHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;

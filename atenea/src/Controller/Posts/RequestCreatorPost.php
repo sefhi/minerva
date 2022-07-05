@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts;
 
-use Minerva\Posts\Application\CreatorPostCommand;
+use Atenea\Posts\Application\CreatorPostCommand;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class RequestCreatorPost

@@ -23,10 +23,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    Minerva\:
-        resource: '../Minerva/'
+    Atenea\:
+        resource: '../Atenea/'
         autowire: true
         autoconfigure: true
 
     ##Type-Hinted Abstraction
-    Minerva\Posts\Domain\PostRepository: '@Minerva\Posts\Infrastructure\StubPostRepository'
+    Atenea\Posts\Domain\PostRepository: '@Atenea\Posts\Infrastructure\StubPostRepository'

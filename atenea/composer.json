@@ -47,13 +47,13 @@
   "autoload": {
     "psr-4": {
       "App\\": "src/",
-      "Minerva\\": "Minerva/"
+      "Atenea\\": "Atenea/"
     }
   },
   "autoload-dev": {
     "psr-4": {
       "App\\Tests\\": "tests/",
-      "Minerva\\Tests\\": "tests/Minerva"
+      "Atenea\\Tests\\": "tests/Atenea"
     }
   },
   "replace": {

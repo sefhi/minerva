@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Minerva
+  title: API Atenea
   contact: {}
   version: '1.0'
 servers:
@@ -120,4 +120,4 @@ components:
               type: string
 tags:
   - name: Post
-    description: 'Minerva'
+    description: 'Atenea'

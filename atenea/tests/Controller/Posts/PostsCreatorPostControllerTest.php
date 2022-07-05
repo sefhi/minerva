@@ -2,7 +2,7 @@
 
 namespace App\Tests\Controller\Posts;
 
-use Minerva\Tests\Shared\Domain\MotherCreator;
+use Atenea\Tests\Shared\Domain\MotherCreator;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

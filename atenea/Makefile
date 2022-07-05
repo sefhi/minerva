@@ -44,9 +44,9 @@ composer-update: ACTION=update $(module)
 
 composer-require cr: ACTION=require $(module)
 
-composer-dump: ACTION=dump-autoload
+composer-dump cd: ACTION=dump-autoload
 
-composer composer-install ci composer-update composer-require cr composer-dump: create_env_file
+composer composer-install ci composer-update composer-require cr composer-dump cd: create_env_file
 	$(COMPOSER) $(ACTION) \
 			--ignore-platform-reqs \
 			--no-ansi
