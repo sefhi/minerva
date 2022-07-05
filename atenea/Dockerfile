@@ -14,6 +14,10 @@ RUN apt-get update -qq \
     && docker-php-ext-install zip \
     && docker-php-ext-install soap
 
+RUN docker-php-ext-install pdo && \
+    docker-php-ext-install pdo_mysql && \
+    docker-php-ext-install mysqli
+
 RUN a2enmod rewrite
 RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/php.ini
 RUN echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/php.ini

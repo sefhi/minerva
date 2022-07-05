@@ -11,8 +11,9 @@ doctrine:
         auto_mapping: true
         mappings:
             App:
+                type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
+                dir: '%kernel.project_dir%/Atenea/Posts/Infrastructure/Persistence/Config'
                 prefix: 'App\Entity'
                 alias: App
 
