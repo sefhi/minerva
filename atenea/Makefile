@@ -1,6 +1,6 @@
 # VARIABLES
 DOCKER_COMPOSE = docker-compose
-CONTAINER      = container-minerva
+CONTAINER      = minerva-atenea
 EXEC           = docker exec -ti $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
@@ -38,15 +38,15 @@ create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi
 
 # 🐘 Composer
-composer-install: ACTION=install
+composer-install ci: ACTION=install
 
 composer-update: ACTION=update $(module)
 
-composer-require: ACTION=require $(module)
+composer-require cr: ACTION=require $(module)
 
 composer-dump: ACTION=dump-autoload
 
-composer composer-install composer-update composer-require composer-dump: create_env_file
+composer composer-install ci composer-update composer-require cr composer-dump: create_env_file
 	$(COMPOSER) $(ACTION) \
 			--ignore-platform-reqs \
 			--no-ansi
