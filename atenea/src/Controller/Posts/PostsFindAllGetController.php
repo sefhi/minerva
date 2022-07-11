@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Posts;
 
 use Atenea\Posts\Domain\Post;
+use Atenea\Posts\Domain\PostId;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Atenea\Posts\Application\FindAllPostQueryHandler;
@@ -23,9 +24,10 @@ final class PostsFindAllGetController extends AbstractController
     public function __invoke(): JsonResponse
     {
         try {
-
-            //TODO BREAKING CHANGE!
-            $post = $this->entityManager->find(Post::class,1);
+            // TODO BREAKING CHANGE!
+            $post = $this->entityManager
+                ->getRepository(Post::class)
+                ->find(new PostId(1));
 
             $result = ($this->queryHandler)();
 
