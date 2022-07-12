@@ -5,7 +5,15 @@ declare(strict_types=1);
 namespace App\Controller\Posts;
 
 use Atenea\Posts\Domain\Post;
+use Atenea\Posts\Domain\PostAuthor;
+use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
+use Atenea\Posts\Domain\PostTitle;
+use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\Email;
+use Atenea\Shared\Domain\ValueObject\Name;
+use Atenea\Shared\Domain\ValueObject\Username;
+use Atenea\Shared\Domain\ValueObject\Website;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Atenea\Posts\Application\FindAllPostQueryHandler;
@@ -16,8 +24,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class PostsFindAllGetController extends AbstractController
 {
-    public function __construct(private FindAllPostQueryHandler $queryHandler, private EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private FindAllPostQueryHandler $queryHandler,
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     #[Route('/posts/all', name: 'posts_find_all', methods: ['GET'])]
@@ -25,9 +35,25 @@ final class PostsFindAllGetController extends AbstractController
     {
         try {
             // TODO BREAKING CHANGE!
-            $post = $this->entityManager
-                ->getRepository(Post::class)
-                ->find(new PostId(1));
+//            $post = $this->entityManager
+//                ->getRepository(Post::class)
+//                ->find(new PostId(1));
+
+            $post = Post::create(
+                new PostId(2),
+                new PostTitle('hola Mundo'),
+                new PostContent('Hoala mundu hola munde'),
+                PostAuthor::create(
+                    new AuthorId(2),
+                    new Name('Tests asaas'),
+                    new Username('Testsss'),
+                    new Website('http://google.es'),
+                    new Email('test@test.es'),
+                )
+            );
+
+            $this->entityManager->persist($post);
+            $this->entityManager->flush();
 
             $result = ($this->queryHandler)();
 

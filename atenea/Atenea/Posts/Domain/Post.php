@@ -43,7 +43,7 @@ final class Post
         return $this->content;
     }
 
-    public function getAuthor(): PostAuthor
+    public function getAuthor(): ?PostAuthor
     {
         return $this->author;
     }

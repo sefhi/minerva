@@ -9,10 +9,10 @@
     </id>
     <embedded name="title" class="Atenea\Posts\Domain\PostTitle" use-column-prefix="false"/>
     <embedded name="content" class="Atenea\Posts\Domain\PostContent" use-column-prefix="false"/>
-<!--    <many-to-one field="author" target-entity="Author" fetch="LAZY">-->
-<!--      <join-columns>-->
-<!--        <join-column name="author_id" referenced-column-name="id"/>-->
-<!--      </join-columns>-->
-<!--    </many-to-one>-->
+    <many-to-one field="author" target-entity="Atenea\Posts\Domain\PostAuthor" fetch="LAZY">
+      <join-columns>
+        <join-column name="author_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
   </entity>
 </doctrine-mapping>
