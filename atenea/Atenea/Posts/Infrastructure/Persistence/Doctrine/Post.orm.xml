@@ -11,7 +11,7 @@
     <embedded name="content" class="Atenea\Posts\Domain\PostContent" use-column-prefix="false"/>
     <many-to-one field="author" target-entity="Atenea\Posts\Domain\PostAuthor" fetch="LAZY">
       <join-columns>
-        <join-column name="author_id" referenced-column-name="id"/>
+        <join-column name="author_id"/>
       </join-columns>
     </many-to-one>
   </entity>

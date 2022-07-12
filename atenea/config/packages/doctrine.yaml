@@ -12,18 +12,18 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            Posts:
                 type: xml
                 is_bundle: false
                 dir: '%kernel.project_dir%/Atenea/Posts/Infrastructure/Persistence/Doctrine'
                 prefix: 'Atenea\Posts\Domain'
-                alias: Atenea
+                alias:  Atenea\Posts\Domain
             Shared:
                 type: xml
                 is_bundle: false
                 dir: '%kernel.project_dir%/Atenea/Shared/Infrastructure/Persistence/Doctrine'
                 prefix: 'Atenea\Shared\Domain'
-                alias: Atenea
+                alias: Atenea\Shared\Domain
 
 when@test:
     doctrine:
