@@ -7,7 +7,7 @@ namespace Atenea\Tests\Shared\Domain\ValueObject;
 use Atenea\Tests\Shared\Domain\MotherCreator;
 use Atenea\Shared\Domain\ValueObject\Username;
 
-final class UsernameMother
+class UsernameMother
 {
     public static function create(string $value): Username
     {

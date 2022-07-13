@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Infrastructure;
 
+use Atenea\Posts\Domain\PostAuthorEmail;
+use Atenea\Posts\Domain\PostAuthorName;
+use Atenea\Posts\Domain\PostAuthorUsername;
+use Atenea\Posts\Domain\PostAuthorWebsite;
 use Exception;
 use Faker\Factory;
 use Faker\Generator;
@@ -49,16 +53,16 @@ final class FakerPostRepository implements PostRepository
 
         for ($i = 0; $i < $limit; ++$i) {
             $posts[] = Post::create(
-                new PostId((int) $this->faker->numerify()),
                 new PostTitle($this->faker->realText(50)),
                 new PostContent($this->faker->paragraph(random_int(1, 3))),
                 PostAuthor::create(
                     new AuthorId((int) $this->faker->numerify()),
-                    new Name($this->faker->name()),
-                    new Username($this->faker->userName()),
-                    new Website($this->faker->url()),
-                    new Email($this->faker->email()),
-                )
+                    new PostAuthorName($this->faker->name()),
+                    new PostAuthorUsername($this->faker->userName()),
+                    new PostAuthorWebsite($this->faker->url()),
+                    new PostAuthorEmail($this->faker->email()),
+                ),
+                new PostId((int) $this->faker->numerify())
             );
         }
 
@@ -68,16 +72,16 @@ final class FakerPostRepository implements PostRepository
     public function save(PostCreatorDto $dto): bool
     {
         Post::create(
-            new PostId(random_int(1, 100)),
             $dto->getTitle(),
             $dto->getContent(),
             PostAuthor::create(
                 $dto->getAuthorId(),
-                new Name($this->faker->name()),
-                new Username($this->faker->userName()),
-                new Website($this->faker->url()),
-                new Email($this->faker->email()),
-            )
+                new PostAuthorName($this->faker->name()),
+                new PostAuthorUsername($this->faker->userName()),
+                new PostAuthorWebsite($this->faker->url()),
+                new PostAuthorEmail($this->faker->email())
+            ),
+            new PostId(random_int(1, 100)),
         );
 
         return true;

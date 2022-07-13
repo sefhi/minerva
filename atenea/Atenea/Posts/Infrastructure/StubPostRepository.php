@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Infrastructure;
 
+use Atenea\Posts\Domain\PostAuthorEmail;
+use Atenea\Posts\Domain\PostAuthorName;
+use Atenea\Posts\Domain\PostAuthorUsername;
+use Atenea\Posts\Domain\PostAuthorWebsite;
 use JsonException;
 use Atenea\Authors\Domain\AuthorFinder;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
@@ -42,10 +46,10 @@ final class StubPostRepository implements PostRepository
 
         return map(function (array $post) {
             return Post::create(
-                new PostId($post['id']),
                 new PostTitle($post['title']),
                 new PostContent($post['body']),
-                $this->getAuthor(new AuthorId($post['userId']))
+                $this->getAuthor(new AuthorId($post['userId'])),
+                new PostId($post['id'])
             );
         }, $resultPost);
     }
@@ -56,10 +60,10 @@ final class StubPostRepository implements PostRepository
     public function save(PostCreatorDto $dto): bool
     {
         Post::create(
-            new PostId(MotherCreator::random()->numberBetween()),
             $dto->getTitle(),
             $dto->getContent(),
-            $this->getAuthor($dto->getAuthorId())
+            $this->getAuthor($dto->getAuthorId()),
+            new PostId(MotherCreator::random()->numberBetween()),
         );
 
         return true;
@@ -74,10 +78,10 @@ final class StubPostRepository implements PostRepository
 
         return PostAuthor::create(
             $author->getId(),
-            $author->getName(),
-            $author->getUsername(),
-            $author->getWeb(),
-            $author->getEmail(),
+            new PostAuthorName($author->getName()->value()),
+            new PostAuthorUsername($author->getUsername()->value()),
+            new PostAuthorWebsite($author->getWeb()->value()),
+            new PostAuthorEmail($author->getEmail()->value()),
         );
     }
 }

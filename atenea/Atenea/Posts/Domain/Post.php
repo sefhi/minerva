@@ -11,21 +11,21 @@ final class Post
     private DateTimeImmutable $createdAt;
 
     private function __construct(
-        private PostId $id,
         private PostTitle $title,
         private PostContent $content,
-        private PostAuthor $author
+        private PostAuthor $author,
+        private ?PostId $id = null,
     ) {
         $this->createdAt = new DateTimeImmutable();
     }
 
     public static function create(
-        PostId $id,
         PostTitle $title,
         PostContent $content,
-        PostAuthor $author
+        PostAuthor $author,
+        ?PostId $id = null,
     ): self {
-        return new self($id, $title, $content, $author);
+        return new self($title, $content, $author, $id);
     }
 
     public function getId(): PostId

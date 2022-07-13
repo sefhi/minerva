@@ -13,21 +13,21 @@ use Atenea\Posts\Domain\PostTitle;
 final class PostMother
 {
     public static function create(
-        PostId $id,
         PostTitle $title,
         PostContent $content,
-        PostAuthor $author
+        PostAuthor $author,
+        PostId $id
     ): Post {
-        return Post::create($id, $title, $content, $author);
+        return Post::create($title, $content, $author, $id);
     }
 
     public static function random(): Post
     {
         return self::create(
-            PostIdMother::random(),
             PostTitleMother::random(),
             PostContentMother::random(),
             PostAuthorMother::random(),
+            PostIdMother::random(),
         );
     }
 

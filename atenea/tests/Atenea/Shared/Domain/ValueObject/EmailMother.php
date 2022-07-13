@@ -7,7 +7,7 @@ namespace Atenea\Tests\Shared\Domain\ValueObject;
 use Atenea\Tests\Shared\Domain\MotherCreator;
 use Atenea\Shared\Domain\ValueObject\Email;
 
-final class EmailMother
+class EmailMother
 {
     public static function create(string $value): Email
     {
