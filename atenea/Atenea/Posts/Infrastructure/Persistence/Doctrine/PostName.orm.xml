@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <embeddable name="Atenea\Shared\Domain\ValueObject\Name">
+    <embeddable name="Atenea\Posts\Domain\PostName">
         <field name="value" column="name" length="50" />
     </embeddable>
 

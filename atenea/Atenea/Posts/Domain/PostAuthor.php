@@ -14,7 +14,7 @@ final class PostAuthor
 {
     private function __construct(
         private AuthorId $id,
-        private Name $name,
+        private PostName $name,
         private Username $username,
         private Website $web,
         private Email $email
@@ -23,7 +23,7 @@ final class PostAuthor
 
     public static function create(
         AuthorId $id,
-        Name $name,
+        PostName $name,
         Username $username,
         Website $web,
         Email $email

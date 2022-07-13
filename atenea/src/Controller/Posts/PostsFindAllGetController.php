@@ -35,25 +35,25 @@ final class PostsFindAllGetController extends AbstractController
     {
         try {
             // TODO BREAKING CHANGE!
-//            $post = $this->entityManager
-//                ->getRepository(Post::class)
-//                ->find(new PostId(1));
+            $post = $this->entityManager
+                ->getRepository(Post::class)
+                ->find(1);
 
-            $post = Post::create(
-                new PostId(2),
-                new PostTitle('hola Mundo'),
-                new PostContent('Hoala mundu hola munde'),
-                PostAuthor::create(
-                    new AuthorId(2),
-                    new Name('Tests asaas'),
-                    new Username('Testsss'),
-                    new Website('http://google.es'),
-                    new Email('test@test.es'),
-                )
-            );
-
-            $this->entityManager->persist($post);
-            $this->entityManager->flush();
+//            $post = Post::create(
+//                new PostId(2),
+//                new PostTitle('Hello world!'),
+//                new PostContent('Hi people'),
+//                PostAuthor::create(
+//                    new AuthorId(2),
+//                    new Name('Tests'),
+//                    new Username('Test6'),
+//                    new Website('https://google.es'),
+//                    new Email('test@test.es'),
+//                )
+//            );
+//
+//            $this->entityManager->persist($post);
+//            $this->entityManager->flush();
 
             $result = ($this->queryHandler)();
 
