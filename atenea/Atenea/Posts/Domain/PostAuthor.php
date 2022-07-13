@@ -9,27 +9,27 @@ use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 class PostAuthor
 {
     private function __construct(
-        private ?AuthorId $id = null,
         private PostAuthorName $name,
         private PostAuthorUsername $username,
         private PostAuthorWebsite $website,
-        private PostAuthorEmail $email
+        private PostAuthorEmail $email,
+        private ?AuthorId $id = null,
     ) {
     }
 
     public static function create(
-        ?AuthorId $id = null,
         PostAuthorName $name,
         PostAuthorUsername $username,
         PostAuthorWebsite $website,
-        PostAuthorEmail $email
+        PostAuthorEmail $email,
+        ?AuthorId $id = null,
     ): self {
         return new self(
-            $id,
             $name,
             $username,
             $website,
-            $email
+            $email,
+            $id
         );
     }
 

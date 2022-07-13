@@ -77,11 +77,11 @@ final class StubPostRepository implements PostRepository
         $author = ($this->authorFinder)($id);
 
         return PostAuthor::create(
-            $author->getId(),
             new PostAuthorName($author->getName()->value()),
             new PostAuthorUsername($author->getUsername()->value()),
             new PostAuthorWebsite($author->getWeb()->value()),
             new PostAuthorEmail($author->getEmail()->value()),
+            $author->getId(),
         );
     }
 }

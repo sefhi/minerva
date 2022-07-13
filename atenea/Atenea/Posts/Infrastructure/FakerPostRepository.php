@@ -56,11 +56,11 @@ final class FakerPostRepository implements PostRepository
                 new PostTitle($this->faker->realText(50)),
                 new PostContent($this->faker->paragraph(random_int(1, 3))),
                 PostAuthor::create(
-                    new AuthorId((int) $this->faker->numerify()),
                     new PostAuthorName($this->faker->name()),
                     new PostAuthorUsername($this->faker->userName()),
                     new PostAuthorWebsite($this->faker->url()),
                     new PostAuthorEmail($this->faker->email()),
+                    new AuthorId((int) $this->faker->numerify()),
                 ),
                 new PostId((int) $this->faker->numerify())
             );
@@ -75,11 +75,11 @@ final class FakerPostRepository implements PostRepository
             $dto->getTitle(),
             $dto->getContent(),
             PostAuthor::create(
-                $dto->getAuthorId(),
                 new PostAuthorName($this->faker->name()),
                 new PostAuthorUsername($this->faker->userName()),
                 new PostAuthorWebsite($this->faker->url()),
-                new PostAuthorEmail($this->faker->email())
+                new PostAuthorEmail($this->faker->email()),
+                $dto->getAuthorId(),
             ),
             new PostId(random_int(1, 100)),
         );
