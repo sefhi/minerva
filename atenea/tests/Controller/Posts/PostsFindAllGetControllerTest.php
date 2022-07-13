@@ -17,7 +17,6 @@ class PostsFindAllGetControllerTest extends WebTestCase
     /** @test */
     public function whenCallEndpointPostAllShouldReturnAllPost(): void
     {
-
         $this->client->request(
             'GET',
             '/posts/all'

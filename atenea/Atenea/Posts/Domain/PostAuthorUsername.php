@@ -8,5 +8,4 @@ use Atenea\Shared\Domain\ValueObject\Username;
 
 final class PostAuthorUsername extends Username
 {
-
 }

@@ -19,5 +19,4 @@ final class PostAuthorEmailMother extends EmailMother
     {
         return self::create(MotherCreator::random()->email());
     }
-
 }

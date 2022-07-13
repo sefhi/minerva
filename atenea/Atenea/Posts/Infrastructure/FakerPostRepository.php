@@ -19,10 +19,6 @@ use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
-use Atenea\Shared\Domain\ValueObject\Email;
-use Atenea\Shared\Domain\ValueObject\Name;
-use Atenea\Shared\Domain\ValueObject\Username;
-use Atenea\Shared\Domain\ValueObject\Website;
 
 final class FakerPostRepository implements PostRepository
 {

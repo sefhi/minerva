@@ -8,5 +8,4 @@ use Atenea\Shared\Domain\ValueObject\Email;
 
 final class PostAuthorEmail extends Email
 {
-
 }

@@ -8,5 +8,4 @@ use Atenea\Shared\Domain\ValueObject\Website;
 
 final class PostAuthorWebsite extends Website
 {
-
 }
