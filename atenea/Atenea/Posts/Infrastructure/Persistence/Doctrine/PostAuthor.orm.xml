@@ -5,10 +5,10 @@
       <generator strategy="IDENTITY"/>
     </id>
 
-    <embedded name="name" class="Atenea\Posts\Domain\PostName" use-column-prefix="false" />
-    <embedded name="username" class="Atenea\Shared\Domain\ValueObject\Username" use-column-prefix="false" />
-    <embedded name="website" class="Atenea\Shared\Domain\ValueObject\Website" use-column-prefix="false" />
-    <embedded name="email" class="Atenea\Shared\Domain\ValueObject\Email" use-column-prefix="false" />
+    <embedded name="name" class="Atenea\Posts\Domain\PostAuthorName" use-column-prefix="false" />
+    <embedded name="username" class="Atenea\Posts\Domain\PostAuthorUsername" use-column-prefix="false" />
+    <embedded name="website" class="Atenea\Posts\Domain\PostAuthorWebsite" use-column-prefix="false" />
+    <embedded name="email" class="Atenea\Posts\Domain\PostAuthorEmail" use-column-prefix="false" />
 
   </entity>
 </doctrine-mapping>

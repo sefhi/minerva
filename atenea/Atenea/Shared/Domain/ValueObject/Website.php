@@ -7,7 +7,7 @@ namespace Atenea\Shared\Domain\ValueObject;
 use InvalidArgumentException;
 use Atenea\Shared\Domain\ValueObject\Primitive\StringValueObject;
 
-final class Website extends StringValueObject
+class Website extends StringValueObject
 {
     public function __construct(string $value)
     {

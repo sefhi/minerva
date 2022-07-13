@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <embeddable name="Atenea\Shared\Domain\ValueObject\Website">
+    <embeddable name="Atenea\Posts\Domain\PostAuthorWebsite">
         <field name="value" column="website" length="255">
             <options>
                 <option name="fixed"/>

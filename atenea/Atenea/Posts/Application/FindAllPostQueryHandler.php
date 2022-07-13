@@ -31,7 +31,7 @@ final class FindAllPostQueryHandler
                         $post->getAuthor()->getId()->value(),
                         $post->getAuthor()->getName()->value(),
                         $post->getAuthor()->getUsername()->value(),
-                        $post->getAuthor()->getWeb()->value(),
+                        $post->getAuthor()->getWebsite()->value(),
                         $post->getAuthor()->getEmail()->value(),
                     )
                 ),

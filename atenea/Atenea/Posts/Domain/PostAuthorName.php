@@ -6,7 +6,7 @@ namespace Atenea\Posts\Domain;
 
 use Atenea\Shared\Domain\ValueObject\Name;
 
-final class PostName extends Name
+final class PostAuthorName extends Name
 {
 
 }

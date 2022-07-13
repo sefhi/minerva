@@ -18,12 +18,6 @@ doctrine:
                 dir: '%kernel.project_dir%/Atenea/Posts/Infrastructure/Persistence/Doctrine'
                 prefix: 'Atenea\Posts\Domain'
                 alias:  Atenea\Posts\Domain
-            Shared:
-                type: xml
-                is_bundle: false
-                dir: '%kernel.project_dir%/Atenea/Shared/Infrastructure/Persistence/Doctrine'
-                prefix: 'Atenea\Shared\Domain'
-                alias: Atenea\Shared\Domain
 
 when@test:
     doctrine:

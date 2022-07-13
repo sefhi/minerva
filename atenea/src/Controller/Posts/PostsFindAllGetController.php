@@ -37,7 +37,7 @@ final class PostsFindAllGetController extends AbstractController
             // TODO BREAKING CHANGE!
             $post = $this->entityManager
                 ->getRepository(Post::class)
-                ->find(1);
+                ->find(new PostId(1));
 
 //            $post = Post::create(
 //                new PostId(2),

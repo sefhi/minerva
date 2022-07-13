@@ -6,7 +6,7 @@ namespace Atenea\Shared\Domain\ValueObject;
 
 use Atenea\Shared\Domain\ValueObject\Primitive\StringValueObject;
 
-final class Username extends StringValueObject
+class Username extends StringValueObject
 {
     public function __construct(string $value)
     {
