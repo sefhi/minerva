@@ -16,7 +16,7 @@ final class PostMother
         PostTitle $title,
         PostContent $content,
         PostAuthor $author,
-        PostId $id
+        ?PostId $id = null
     ): Post {
         return Post::create($title, $content, $author, $id);
     }

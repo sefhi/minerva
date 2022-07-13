@@ -13,11 +13,11 @@ use Atenea\Shared\Domain\ValueObject\Website;
 final class Author
 {
     private function __construct(
-        private AuthorId $id,
-        private Name $name,
-        private Username $username,
-        private Website $web,
-        private Email $email
+        private readonly AuthorId $id,
+        private readonly Name $name,
+        private readonly Username $username,
+        private readonly Website $web,
+        private readonly Email $email
     ) {
     }
 
