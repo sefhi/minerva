@@ -29,4 +29,4 @@ services:
         autoconfigure: true
 
     ##Type-Hinted Abstraction
-    Atenea\Posts\Domain\PostRepository: '@Atenea\Posts\Infrastructure\StubPostRepository'
+    Atenea\Posts\Domain\PostRepository: '@Atenea\Posts\Infrastructure\Persistence\DoctrinePostRepository'

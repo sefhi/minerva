@@ -57,7 +57,7 @@ final class CreatorPostCommandHandler
             new PostAuthorUsername($author->getUsername()->value()),
             new PostAuthorWebsite($author->getWeb()->value()),
             new PostAuthorEmail($author->getEmail()->value()),
-            $author->getId()
+            new AuthorId(1) //TODO ojo!! esto esta hardcodeado
         );
     }
 

@@ -5,19 +5,16 @@ declare(strict_types=1);
 namespace Atenea\Posts\Domain;
 
 use Atenea\Shared\Domain\AggregateRoot;
-use DateTimeImmutable;
 
 final class Post extends AggregateRoot
 {
-    private DateTimeImmutable $createdAt;
 
     private function __construct(
-        private PostTitle $title,
-        private PostContent $content,
-        private PostAuthor $author,
+        private readonly PostTitle $title,
+        private readonly PostContent $content,
+        private readonly PostAuthor $author,
         private ?PostId $id = null,
     ) {
-        $this->createdAt = new DateTimeImmutable();
     }
 
     public static function create(
@@ -44,13 +41,9 @@ final class Post extends AggregateRoot
         return $this->content;
     }
 
-    public function getAuthor(): ?PostAuthor
+    public function getAuthor(): PostAuthor
     {
         return $this->author;
     }
 
-    public function getCreatedAt(): DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
 }

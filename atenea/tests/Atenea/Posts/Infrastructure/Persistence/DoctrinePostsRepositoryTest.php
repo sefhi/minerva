@@ -3,7 +3,7 @@
 namespace Atenea\Tests\Posts\Infrastructure\Persistence;
 
 use Atenea\Posts\Domain\Post;
-use Atenea\Posts\Infrastructure\Persistence\DoctrinePostsRepository;
+use Atenea\Posts\Infrastructure\Persistence\DoctrinePostRepository;
 use Atenea\Tests\Posts\Domain\Dto\PostCreatorDtoMother;
 use Atenea\Tests\Posts\Domain\PostMother;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,7 +42,7 @@ final class DoctrinePostsRepositoryTest extends TestCase
             ->with(Post::class)
             ->willReturn($this->repositoryMock);
 
-        $doctrinePostsRepository = new DoctrinePostsRepository($this->entityManagerMock);
+        $doctrinePostsRepository = new DoctrinePostRepository($this->entityManagerMock);
 
         $result = $doctrinePostsRepository->findAll();
 
@@ -70,7 +70,7 @@ final class DoctrinePostsRepositoryTest extends TestCase
             ->method('flush');
 
         // THEN
-        $doctrinePostsRepository = new DoctrinePostsRepository($this->entityManagerMock);
+        $doctrinePostsRepository = new DoctrinePostRepository($this->entityManagerMock);
         $result = $doctrinePostsRepository->save($postCreatorDtoMother);
 
         self::assertTrue($result);

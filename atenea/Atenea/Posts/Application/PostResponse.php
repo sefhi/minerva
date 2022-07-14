@@ -6,15 +6,15 @@ namespace Atenea\Posts\Application;
 
 use DateTimeImmutable;
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 final class PostResponse implements JsonSerializable
 {
     private function __construct(
-        private int $id,
-        private string $title,
-        private string $content,
-        private DateTimeImmutable $createdAt,
-        private PostAuthorResponse $author
+        private readonly int $id,
+        private readonly string $title,
+        private readonly string $content,
+        private readonly PostAuthorResponse $author
     ) {
     }
 
@@ -22,10 +22,9 @@ final class PostResponse implements JsonSerializable
         int $id,
         string $title,
         string $content,
-        DateTimeImmutable $createdAt,
         PostAuthorResponse $author
     ): self {
-        return new self($id, $title, $content, $createdAt, $author);
+        return new self($id, $title, $content, $author);
     }
 
     public function getId(): int
@@ -48,11 +47,7 @@ final class PostResponse implements JsonSerializable
         return $this->author;
     }
 
-    public function getCreatedAt(): DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return get_object_vars($this);

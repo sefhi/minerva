@@ -9,11 +9,11 @@ use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 class PostAuthor
 {
     private function __construct(
-        private PostAuthorName $name,
-        private PostAuthorUsername $username,
-        private PostAuthorWebsite $website,
-        private PostAuthorEmail $email,
-        private ?AuthorId $id = null,
+        private readonly PostAuthorName $name,
+        private readonly PostAuthorUsername $username,
+        private readonly PostAuthorWebsite $website,
+        private readonly PostAuthorEmail $email,
+        private AuthorId $id,
     ) {
     }
 
@@ -22,7 +22,7 @@ class PostAuthor
         PostAuthorUsername $username,
         PostAuthorWebsite $website,
         PostAuthorEmail $email,
-        ?AuthorId $id = null,
+        AuthorId $id,
     ): self {
         return new self(
             $name,

@@ -9,7 +9,10 @@
     </id>
     <embedded name="title" class="Atenea\Posts\Domain\PostTitle" use-column-prefix="false"/>
     <embedded name="content" class="Atenea\Posts\Domain\PostContent" use-column-prefix="false"/>
-    <many-to-one field="author" target-entity="Atenea\Posts\Domain\PostAuthor" fetch="EAGER">
+    <many-to-one field="author" target-entity="Atenea\Posts\Domain\PostAuthor" fetch="EAGER" >
+      <cascade>
+        <cascade-persist/>
+      </cascade>
       <join-columns>
         <join-column name="author_id"/>
       </join-columns>

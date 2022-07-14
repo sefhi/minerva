@@ -9,7 +9,7 @@ use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
-final class DoctrinePostsRepository extends DoctrineRepository implements PostRepository
+final class DoctrinePostRepository extends DoctrineRepository implements PostRepository
 {
     public function findAll(): array
     {

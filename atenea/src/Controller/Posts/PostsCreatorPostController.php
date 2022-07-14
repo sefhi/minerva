@@ -21,8 +21,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 final class PostsCreatorPostController extends AbstractController
 {
     public function __construct(
-        private CreatorPostCommandHandler $commandHandler,
-        private ValidatorInterface $validator,
+        private readonly CreatorPostCommandHandler $commandHandler,
+        private readonly ValidatorInterface $validator,
     ) {
     }
 
