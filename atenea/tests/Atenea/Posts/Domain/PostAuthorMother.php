@@ -15,17 +15,28 @@ use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 final class PostAuthorMother
 {
     public static function create(
-        PostAuthorName $name,
-        PostAuthorUsername $username,
-        PostAuthorWebsite $website,
-        PostAuthorEmail $email,
-        AuthorId $id,
+        ?PostAuthorName $name = null,
+        ?PostAuthorUsername $username = null,
+        ?PostAuthorWebsite $website = null,
+        ?PostAuthorEmail $email = null,
+        ?AuthorId $id = null,
     ): PostAuthor {
         return PostAuthor::create(
-            $name,
-            $username,
-            $website,
-            $email,
+            $name ?? PostAuthorNameMother::random(),
+            $username ?? PostAuthorUsernameMother::random(),
+            $website ?? PostAuthorWebsiteMother::random(),
+            $email ?? PostAuthorEmailMother::random(),
+            $id ?? AuthorIdMother::random(),
+        );
+    }
+
+    public static function fromId(AuthorId $id): PostAuthor
+    {
+        return self::create(
+            PostAuthorNameMother::random(),
+            PostAuthorUsernameMother::random(),
+            PostAuthorWebsiteMother::random(),
+            PostAuthorEmailMother::random(),
             $id,
         );
     }

@@ -33,4 +33,16 @@ final class AuthorMother
             $email ?? EmailMother::random(),
         );
     }
+
+    public static function fromId(
+        AuthorId $id = null,
+    ): Author {
+        return Author::create(
+            $id,
+            NameMother::random(),
+            UsernameMother::random(),
+            WebsiteMother::random(),
+            EmailMother::random(),
+        );
+    }
 }

@@ -70,13 +70,7 @@ final class FakerPostRepository implements PostRepository
         Post::create(
             $dto->getTitle(),
             $dto->getContent(),
-            PostAuthor::create(
-                new PostAuthorName($this->faker->name()),
-                new PostAuthorUsername($this->faker->userName()),
-                new PostAuthorWebsite($this->faker->url()),
-                new PostAuthorEmail($this->faker->email()),
-                $dto->getAuthorId(),
-            ),
+            $dto->getPostAuthor(),
             new PostId(random_int(1, 100)),
         );
 

@@ -26,7 +26,7 @@ final class StubPostRepository implements PostRepository
 {
     private const FILE = '/var/www/html/Atenea/Posts/Infrastructure/Stub/posts.json';
 
-    public function __construct(private AuthorFinder $authorFinder)
+    public function __construct(private readonly AuthorFinder $authorFinder)
     {
     }
 
@@ -62,7 +62,7 @@ final class StubPostRepository implements PostRepository
         Post::create(
             $dto->getTitle(),
             $dto->getContent(),
-            $this->getAuthor($dto->getAuthorId()),
+            $dto->getPostAuthor(),
             new PostId(MotherCreator::random()->numberBetween()),
         );
 

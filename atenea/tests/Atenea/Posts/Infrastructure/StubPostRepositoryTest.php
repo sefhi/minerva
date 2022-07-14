@@ -11,6 +11,7 @@ use Atenea\Posts\Infrastructure\StubPostRepository;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 use Atenea\Tests\Posts\Domain\Dto\PostCreatorDtoMother;
+use Atenea\Tests\Posts\Domain\PostAuthorMother;
 use Atenea\Tests\Posts\Domain\PostContentMother;
 use Atenea\Tests\Posts\Domain\PostTitleMother;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -44,10 +45,6 @@ final class StubPostRepositoryTest extends TestCase
     /** @test */
     public function itShouldSavePostWhenCallFunctionSave(): void
     {
-        $this->authorFinderMock
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willReturn(AuthorMother::create());
 
         $postCreatorDto = PostCreatorDtoMother::random();
         $stubRepository = new StubPostRepository($this->authorFinderMock);
@@ -57,29 +54,4 @@ final class StubPostRepositoryTest extends TestCase
         self::assertTrue($result);
     }
 
-    /** @test */
-    public function itShouldThrowAAuthorNotFoundExceptionWhenSearchByAuthorIdThatNotExists(): void
-    {
-        // Given
-        $authorId = new AuthorId(60);
-        $postCreatorDto = PostCreatorDtoMother::create(
-            PostTitleMother::random(),
-            PostContentMother::random(),
-            $authorId
-        );
-
-        $this->authorFinderMock
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willThrowException(new AuthorNotFoundException($authorId->value()));
-
-        $stubRepository = new StubPostRepository($this->authorFinderMock);
-
-        // Then
-        $this->expectException(AuthorNotFoundException::class);
-        $this->expectExceptionCode(404);
-
-        // When
-        $stubRepository->save($postCreatorDto);
-    }
 }

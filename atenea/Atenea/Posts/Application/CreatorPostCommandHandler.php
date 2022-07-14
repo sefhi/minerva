@@ -6,6 +6,11 @@ namespace Atenea\Posts\Application;
 
 use Atenea\Authors\Domain\AuthorFinder;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
+use Atenea\Posts\Domain\PostAuthor;
+use Atenea\Posts\Domain\PostAuthorEmail;
+use Atenea\Posts\Domain\PostAuthorName;
+use Atenea\Posts\Domain\PostAuthorUsername;
+use Atenea\Posts\Domain\PostAuthorWebsite;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
@@ -16,8 +21,9 @@ final class CreatorPostCommandHandler
 {
     /**
      * @param PostRepository $repository
+     * @param AuthorFinder   $authorFinder
      */
-    public function __construct(private PostRepository $repository, private AuthorFinder $authorFinder)
+    public function __construct(private readonly PostRepository $repository, private readonly AuthorFinder $authorFinder)
     {
     }
 
@@ -28,12 +34,12 @@ final class CreatorPostCommandHandler
     {
         $authorId = new AuthorId($command->getAuthorId());
 
-        $this->assertExistAuthor($authorId);
+        $postAuthor = $this->finderAuthor($authorId);
 
         $postCreatorDto = PostCreatorDto::create(
             new PostTitle($command->getTitle()),
             new PostContent($command->getContent()),
-            $authorId
+            $postAuthor
         );
 
         return $this->repository->save($postCreatorDto);
@@ -42,8 +48,17 @@ final class CreatorPostCommandHandler
     /**
      * @throws AuthorNotFoundException
      */
-    private function assertExistAuthor(AuthorId $authorId): void
+    private function finderAuthor(AuthorId $authorId): PostAuthor
     {
-        ($this->authorFinder)($authorId);
+        $author = ($this->authorFinder)($authorId);
+
+        return PostAuthor::create(
+            new PostAuthorName($author->getName()->value()),
+            new PostAuthorUsername($author->getUsername()->value()),
+            new PostAuthorWebsite($author->getWeb()->value()),
+            new PostAuthorEmail($author->getEmail()->value()),
+            $author->getId()
+        );
     }
+
 }

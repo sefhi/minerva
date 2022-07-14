@@ -13,6 +13,7 @@ use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Tests\Posts\Domain\PostAuthorMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -33,17 +34,11 @@ final class CreatorPostCommandHandlerTest extends TestCase
         // GIVEN
         $command = CreatorPostCommandMother::random();
         $authorId = new AuthorId($command->getAuthorId());
-        $author = AuthorMother::create($authorId);
-        $postCreatorDto = PostCreatorDto::create(
-            new PostTitle($command->getTitle()),
-            new PostContent($command->getContent()),
-            $authorId
-        );
+        $author = AuthorMother::fromId($authorId);
 
         $this->repositoryMock
             ->expects(self::once())
             ->method('save')
-            ->with($postCreatorDto)
             ->willReturn(true);
 
         $this->authorFinderMock
@@ -67,11 +62,6 @@ final class CreatorPostCommandHandlerTest extends TestCase
         // GIVEN
         $command = CreatorPostCommandMother::random();
         $authorId = new AuthorId($command->getAuthorId());
-        $postCreatorDto = PostCreatorDto::create(
-            new PostTitle($command->getTitle()),
-            new PostContent($command->getContent()),
-            $authorId
-        );
 
         $this->repositoryMock
             ->expects(self::never())
