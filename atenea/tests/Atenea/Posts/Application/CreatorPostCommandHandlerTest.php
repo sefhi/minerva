@@ -7,13 +7,9 @@ namespace Atenea\Tests\Posts\Application;
 use App\Tests\Atenea\Authors\Domain\AuthorMother;
 use Atenea\Authors\Domain\AuthorFinder;
 use Atenea\Posts\Application\CreatorPostCommandHandler;
-use Atenea\Posts\Domain\Dto\PostCreatorDto;
-use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostRepository;
-use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
-use Atenea\Tests\Posts\Domain\PostAuthorMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

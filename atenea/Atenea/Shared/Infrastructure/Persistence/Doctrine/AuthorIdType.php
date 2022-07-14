@@ -20,7 +20,7 @@ final class AuthorIdType extends IntegerType
         return new AuthorId($value);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): int
     {
         /* @var AuthorId $value */
         return $value->value();

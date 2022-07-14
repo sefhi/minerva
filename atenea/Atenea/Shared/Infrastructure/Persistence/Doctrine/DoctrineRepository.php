@@ -29,5 +29,4 @@ class DoctrineRepository
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
     }
-
 }

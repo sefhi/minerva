@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Application;
 
-use DateTimeImmutable;
 use JsonSerializable;
 use ReturnTypeWillChange;
 
@@ -48,7 +47,7 @@ final class PostResponse implements JsonSerializable
     }
 
     #[ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return get_object_vars($this);
     }

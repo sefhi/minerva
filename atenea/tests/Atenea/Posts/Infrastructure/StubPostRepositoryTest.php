@@ -8,12 +8,7 @@ use App\Tests\Atenea\Authors\Domain\AuthorMother;
 use Atenea\Authors\Domain\AuthorFinder;
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Infrastructure\StubPostRepository;
-use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 use Atenea\Tests\Posts\Domain\Dto\PostCreatorDtoMother;
-use Atenea\Tests\Posts\Domain\PostAuthorMother;
-use Atenea\Tests\Posts\Domain\PostContentMother;
-use Atenea\Tests\Posts\Domain\PostTitleMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -45,7 +40,6 @@ final class StubPostRepositoryTest extends TestCase
     /** @test */
     public function itShouldSavePostWhenCallFunctionSave(): void
     {
-
         $postCreatorDto = PostCreatorDtoMother::random();
         $stubRepository = new StubPostRepository($this->authorFinderMock);
 
@@ -53,5 +47,4 @@ final class StubPostRepositoryTest extends TestCase
 
         self::assertTrue($result);
     }
-
 }

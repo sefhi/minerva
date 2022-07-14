@@ -22,7 +22,6 @@ final class PostsFindAllGetController extends AbstractController
     public function __invoke(): JsonResponse
     {
         try {
-
             $result = ($this->queryHandler)();
 
             return $this->json(['data' => $result->getPosts()], Response::HTTP_OK);

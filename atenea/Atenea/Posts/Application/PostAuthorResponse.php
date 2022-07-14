@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Atenea\Posts\Application;
 
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 final class PostAuthorResponse implements JsonSerializable
 {
@@ -58,7 +59,8 @@ final class PostAuthorResponse implements JsonSerializable
         return $this->email;
     }
 
-    public function jsonSerialize()
+    #[ReturnTypeWillChange]
+    public function jsonSerialize(): array
     {
         return get_object_vars($this);
     }

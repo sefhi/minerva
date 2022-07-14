@@ -20,7 +20,7 @@ final class PostIdType extends IntegerType
         return new PostId($value);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): int
     {
         /* @var PostId $value */
         return $value->value();

@@ -8,7 +8,6 @@ use Atenea\Shared\Domain\AggregateRoot;
 
 final class Post extends AggregateRoot
 {
-
     private function __construct(
         private readonly PostTitle $title,
         private readonly PostContent $content,
@@ -45,5 +44,4 @@ final class Post extends AggregateRoot
     {
         return $this->author;
     }
-
 }
