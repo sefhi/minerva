@@ -53,10 +53,10 @@ final class CreatorPostCommandHandler
         $author = ($this->authorFinder)($authorId);
 
         return PostAuthor::create(
-            new PostAuthorName($author->getName()->value()),
-            new PostAuthorUsername($author->getUsername()->value()),
-            new PostAuthorWebsite($author->getWebsite()->value()),
-            new PostAuthorEmail($author->getEmail()->value()),
+            $author->getName(),
+            $author->getUsername(),
+            $author->getWebsite(),
+            $author->getEmail(),
             new AuthorId(1) // TODO ojo!! esto esta hardcodeado
         );
     }

@@ -7,7 +7,7 @@ namespace Atenea\Authors\Infrastructure\Persistence;
 use Atenea\Authors\Domain\Author;
 use Atenea\Authors\Domain\AuthorRepository;
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
-use Atenea\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
+use Atenea\Shared\Infrastructure\Persistence\DoctrineRepository;
 
 final class DoctrineAuthorRepository extends DoctrineRepository implements AuthorRepository
 {

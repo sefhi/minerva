@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atenea\Shared\Infrastructure\Persistence\Doctrine;
+namespace Atenea\Shared\Infrastructure\Persistence;
 
 use Atenea\Shared\Domain\AggregateRoot;
 use Doctrine\ORM\EntityManagerInterface;

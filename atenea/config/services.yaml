@@ -30,4 +30,4 @@ services:
 
     ##Type-Hinted Abstraction
     Atenea\Posts\Domain\PostRepository: '@Atenea\Posts\Infrastructure\Persistence\DoctrinePostRepository'
-    Atenea\Authors\Domain\AuthorRepository: '@Atenea\Authors\Infrastructure\StubAuthorsRepository'
+    Atenea\Authors\Domain\AuthorRepository: '@Atenea\Authors\Infrastructure\Persistence\DoctrineAuthorRepository'

@@ -7,7 +7,7 @@ namespace Atenea\Posts\Infrastructure\Persistence;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostRepository;
-use Atenea\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
+use Atenea\Shared\Infrastructure\Persistence\DoctrineRepository;
 
 final class DoctrinePostRepository extends DoctrineRepository implements PostRepository
 {
