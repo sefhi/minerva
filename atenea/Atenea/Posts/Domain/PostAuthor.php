@@ -5,23 +5,27 @@ declare(strict_types=1);
 namespace Atenea\Posts\Domain;
 
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\Email;
+use Atenea\Shared\Domain\ValueObject\Name;
+use Atenea\Shared\Domain\ValueObject\Username;
+use Atenea\Shared\Domain\ValueObject\Website;
 
 class PostAuthor
 {
     private function __construct(
-        private readonly PostAuthorName $name,
-        private readonly PostAuthorUsername $username,
-        private readonly PostAuthorWebsite $website,
-        private readonly PostAuthorEmail $email,
+        private readonly Name $name,
+        private readonly Username $username,
+        private readonly Website $website,
+        private readonly Email $email,
         private AuthorId $id,
     ) {
     }
 
     public static function create(
-        PostAuthorName $name,
-        PostAuthorUsername $username,
-        PostAuthorWebsite $website,
-        PostAuthorEmail $email,
+        Name $name,
+        Username $username,
+        Website $website,
+        Email $email,
         AuthorId $id,
     ): self {
         return new self(
@@ -38,22 +42,22 @@ class PostAuthor
         return $this->id;
     }
 
-    public function getName(): PostAuthorName
+    public function getName(): Name
     {
         return $this->name;
     }
 
-    public function getUsername(): PostAuthorUsername
+    public function getUsername(): Username
     {
         return $this->username;
     }
 
-    public function getWebsite(): PostAuthorWebsite
+    public function getWebsite(): Website
     {
         return $this->website;
     }
 
-    public function getEmail(): PostAuthorEmail
+    public function getEmail(): Email
     {
         return $this->email;
     }

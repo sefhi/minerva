@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Posts;
 
 use Atenea\Authors\Domain\Author;
+use Atenea\Posts\Domain\Post;
+use Atenea\Posts\Domain\PostId;
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -29,6 +31,7 @@ final class PostsFindAllGetController extends AbstractController
 
             //TODO refactor
             $author = $this->entityManager->find(Author::class,new AuthorId(1));
+            $post = $this->entityManager->find(Post::class,new PostId(1));
 
             $result = ($this->queryHandler)();
 
