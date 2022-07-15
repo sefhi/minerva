@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Infrastructure;
 
+use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\PostAuthorEmail;
 use Atenea\Posts\Domain\PostAuthorName;
 use Atenea\Posts\Domain\PostAuthorUsername;
 use Atenea\Posts\Domain\PostAuthorWebsite;
+use Atenea\Shared\Domain\ValueObject\Email;
+use Atenea\Shared\Domain\ValueObject\Username;
+use Atenea\Shared\Domain\ValueObject\Website;
 use JsonException;
 use Atenea\Authors\Domain\AuthorFinder;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
@@ -62,7 +66,7 @@ final class StubPostRepository implements PostRepository
         Post::create(
             $dto->getTitle(),
             $dto->getContent(),
-            $dto->getPostAuthor(),
+            $dto->getAuthor(),
             new PostId(MotherCreator::random()->numberBetween()),
         );
 
@@ -72,16 +76,8 @@ final class StubPostRepository implements PostRepository
     /**
      * @throws AuthorNotFoundException
      */
-    private function getAuthor(AuthorId $id): PostAuthor
+    private function getAuthor(AuthorId $id): Author
     {
-        $author = ($this->authorFinder)($id);
-
-        return PostAuthor::create(
-            new PostAuthorName($author->getName()->value()),
-            new PostAuthorUsername($author->getUsername()->value()),
-            new PostAuthorWebsite($author->getWebsite()->value()),
-            new PostAuthorEmail($author->getEmail()->value()),
-            $author->getId(),
-        );
+        return ($this->authorFinder)($id);
     }
 }

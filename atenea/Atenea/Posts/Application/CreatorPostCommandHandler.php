@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Application;
 
+use Atenea\Authors\Domain\Author;
 use Atenea\Authors\Domain\AuthorFinder;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\PostAuthor;
@@ -34,12 +35,12 @@ final class CreatorPostCommandHandler
     {
         $authorId = new AuthorId($command->getAuthorId());
 
-        $postAuthor = $this->finderAuthor($authorId);
+        $author = $this->finderAuthor($authorId);
 
         $postCreatorDto = PostCreatorDto::create(
             new PostTitle($command->getTitle()),
             new PostContent($command->getContent()),
-            $postAuthor
+            $author
         );
 
         return $this->repository->save($postCreatorDto);
@@ -48,16 +49,16 @@ final class CreatorPostCommandHandler
     /**
      * @throws AuthorNotFoundException
      */
-    private function finderAuthor(AuthorId $authorId): PostAuthor
+    private function finderAuthor(AuthorId $authorId): Author
     {
         $author = ($this->authorFinder)($authorId);
 
-        return PostAuthor::create(
+        return Author::create(
+            $author->getId(),
             $author->getName(),
             $author->getUsername(),
             $author->getWebsite(),
             $author->getEmail(),
-            new AuthorId(1) // TODO ojo!! esto esta hardcodeado
         );
     }
 }

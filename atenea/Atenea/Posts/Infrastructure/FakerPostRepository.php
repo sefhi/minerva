@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Infrastructure;
 
-use Atenea\Posts\Domain\PostAuthorEmail;
-use Atenea\Posts\Domain\PostAuthorName;
-use Atenea\Posts\Domain\PostAuthorUsername;
-use Atenea\Posts\Domain\PostAuthorWebsite;
+use Atenea\Authors\Domain\Author;
+use Atenea\Shared\Domain\ValueObject\Email;
+use Atenea\Shared\Domain\ValueObject\Name;
+use Atenea\Shared\Domain\ValueObject\Username;
+use Atenea\Shared\Domain\ValueObject\Website;
 use Exception;
 use Faker\Factory;
 use Faker\Generator;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\Post;
-use Atenea\Posts\Domain\PostAuthor;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
@@ -51,12 +51,12 @@ final class FakerPostRepository implements PostRepository
             $posts[] = Post::create(
                 new PostTitle($this->faker->realText(50)),
                 new PostContent($this->faker->paragraph(random_int(1, 3))),
-                PostAuthor::create(
-                    new PostAuthorName($this->faker->name()),
-                    new PostAuthorUsername($this->faker->userName()),
-                    new PostAuthorWebsite($this->faker->url()),
-                    new PostAuthorEmail($this->faker->email()),
+                Author::create(
                     new AuthorId((int) $this->faker->numerify()),
+                    new Name($this->faker->name()),
+                    new Username($this->faker->userName()),
+                    new Website($this->faker->url()),
+                    new Email($this->faker->email()),
                 ),
                 new PostId((int) $this->faker->numerify())
             );
@@ -70,7 +70,7 @@ final class FakerPostRepository implements PostRepository
         Post::create(
             $dto->getTitle(),
             $dto->getContent(),
-            $dto->getPostAuthor(),
+            $dto->getAuthor(),
             new PostId(random_int(1, 100)),
         );
 

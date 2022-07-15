@@ -15,7 +15,9 @@ class PostsCreatorPostControllerTest extends WebTestCase
         $this->client = self::createClient();
     }
 
-    /** @test */
+    /** @test
+     * @throws \JsonException
+     */
     public function shouldCreatePostWithEmptyContentAndReturnStatusCode201(): void
     {
         $router = $this->client->getContainer()->get('router');
@@ -37,7 +39,9 @@ class PostsCreatorPostControllerTest extends WebTestCase
         self::assertEmpty(json_decode($response->getContent(), false, 512, JSON_THROW_ON_ERROR));
     }
 
-    /** @test */
+    /** @test
+     * @throws \JsonException
+     */
     public function itShouldReturnErrorValidateFieldsAndReturnStatusCode400(): void
     {
         $router = $this->client->getContainer()->get('router');
@@ -64,7 +68,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
         return json_encode([
             'title' => MotherCreator::random()->text(50),
             'content' => MotherCreator::random()->paragraph(2),
-            'authorId' => random_int(1, 10),
+            'authorId' => 1,
         ], JSON_THROW_ON_ERROR);
     }
 

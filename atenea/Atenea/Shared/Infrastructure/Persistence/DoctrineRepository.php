@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Atenea\Shared\Infrastructure\Persistence;
 
-use Atenea\Shared\Domain\AggregateRoot;
+use Atenea\Shared\Domain\Aggregate\AggregateRoot;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 

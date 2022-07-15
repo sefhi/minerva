@@ -9,6 +9,5 @@
     <embedded name="username" class="Atenea\Shared\Domain\ValueObject\Username" use-column-prefix="false" />
     <embedded name="website" class="Atenea\Shared\Domain\ValueObject\Website" use-column-prefix="false" />
     <embedded name="email" class="Atenea\Shared\Domain\ValueObject\Email" use-column-prefix="false" />
-
   </entity>
 </doctrine-mapping>

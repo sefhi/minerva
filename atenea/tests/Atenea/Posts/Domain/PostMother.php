@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Atenea\Tests\Posts\Domain;
 
+use App\Tests\Atenea\Authors\Domain\AuthorMother;
+use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\Post;
-use Atenea\Posts\Domain\PostAuthor;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostTitle;
@@ -15,7 +16,7 @@ final class PostMother
     public static function create(
         PostTitle $title,
         PostContent $content,
-        PostAuthor $author,
+        Author $author,
         ?PostId $id = null
     ): Post {
         return Post::create($title, $content, $author, $id);
@@ -26,7 +27,7 @@ final class PostMother
         return self::create(
             PostTitleMother::random(),
             PostContentMother::random(),
-            PostAuthorMother::random(),
+            AuthorMother::random(),
             PostIdMother::random(),
         );
     }

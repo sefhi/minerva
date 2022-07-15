@@ -45,4 +45,15 @@ final class AuthorMother
             EmailMother::random(),
         );
     }
+
+    public static function random(): Author
+    {
+        return self::create(
+            AuthorIdMother::random(),
+            NameMother::random(),
+            UsernameMother::random(),
+            WebsiteMother::random(),
+            EmailMother::random(),
+        );
+    }
 }
