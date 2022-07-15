@@ -79,7 +79,7 @@ final class StubPostRepository implements PostRepository
         return PostAuthor::create(
             new PostAuthorName($author->getName()->value()),
             new PostAuthorUsername($author->getUsername()->value()),
-            new PostAuthorWebsite($author->getWeb()->value()),
+            new PostAuthorWebsite($author->getWebsite()->value()),
             new PostAuthorEmail($author->getEmail()->value()),
             $author->getId(),
         );

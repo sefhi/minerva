@@ -16,7 +16,7 @@ final class Author
         private readonly AuthorId $id,
         private readonly Name $name,
         private readonly Username $username,
-        private readonly Website $web,
+        private readonly Website $website,
         private readonly Email $email
     ) {
     }
@@ -52,9 +52,9 @@ final class Author
         return $this->username;
     }
 
-    public function getWeb(): Website
+    public function getWebsite(): Website
     {
-        return $this->web;
+        return $this->website;
     }
 
     public function getEmail(): Email

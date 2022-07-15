@@ -18,6 +18,18 @@ doctrine:
                 dir: '%kernel.project_dir%/Atenea/Posts/Infrastructure/Persistence/Doctrine'
                 prefix: 'Atenea\Posts\Domain'
                 alias:  Atenea\Posts\Domain
+            Author:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Atenea/Authors/Infrastructure/Persistence/Doctrine'
+                prefix: Atenea\Authors\Domain
+                alias: Atenea\Authors\Domain
+            Shared:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Atenea/Shared/Infrastructure/Persistence/Doctrine'
+                prefix: Atenea\Shared\Domain\ValueObject
+                alias: Atenea\Shared\Domain\ValueObject
 
 when@test:
     doctrine:

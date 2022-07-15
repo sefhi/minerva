@@ -55,7 +55,7 @@ final class CreatorPostCommandHandler
         return PostAuthor::create(
             new PostAuthorName($author->getName()->value()),
             new PostAuthorUsername($author->getUsername()->value()),
-            new PostAuthorWebsite($author->getWeb()->value()),
+            new PostAuthorWebsite($author->getWebsite()->value()),
             new PostAuthorEmail($author->getEmail()->value()),
             new AuthorId(1) // TODO ojo!! esto esta hardcodeado
         );
