@@ -31,8 +31,8 @@ cs-prev:
 	@echo "Coding Standar Fixer Executed ✅"
 
 #Static Analysis
-stand:
-	$(EXEC_PHP) ./vendor/bin/phpstan analyse --level 7 src tests Minerva
+static:
+	$(EXEC_PHP) ./vendor/bin/phpstan analyse --level 7 src tests Atenea
 
 create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi

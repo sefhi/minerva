@@ -11,11 +11,6 @@
         </id>
         <embedded name="title" class="Atenea\Posts\Domain\PostTitle" use-column-prefix="false"/>
         <embedded name="content" class="Atenea\Posts\Domain\PostContent" use-column-prefix="false"/>
-        <many-to-one field="author" target-entity="Atenea\Authors\Domain\Author" fetch="EAGER">
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-            <join-column name="author_id"/>
-        </many-to-one>
+        <field name="authorId"  column="author_id" type="author_id" />
     </entity>
 </doctrine-mapping>

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Domain;
 
-use Atenea\Authors\Domain\Author;
 use Atenea\Shared\Domain\Aggregate\AggregateRoot;
+use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 
 final class Post extends AggregateRoot
 {
     private function __construct(
         private readonly PostTitle $title,
         private readonly PostContent $content,
-        private readonly Author $author,
+        private readonly AuthorId $authorId,
         private ?PostId $id = null,
     ) {
     }
@@ -20,10 +20,10 @@ final class Post extends AggregateRoot
     public static function create(
         PostTitle $title,
         PostContent $content,
-        Author $author,
+        AuthorId $authorId,
         ?PostId $id = null,
     ): self {
-        return new self($title, $content, $author, $id);
+        return new self($title, $content, $authorId, $id);
     }
 
     public function getId(): PostId
@@ -41,9 +41,8 @@ final class Post extends AggregateRoot
         return $this->content;
     }
 
-    public function getAuthor(): Author
+    public function getAuthorId(): AuthorId
     {
-        return $this->author;
+        return $this->authorId;
     }
-
 }

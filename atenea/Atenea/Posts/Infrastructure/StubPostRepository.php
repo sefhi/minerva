@@ -5,18 +5,10 @@ declare(strict_types=1);
 namespace Atenea\Posts\Infrastructure;
 
 use Atenea\Authors\Domain\Author;
-use Atenea\Posts\Domain\PostAuthorEmail;
-use Atenea\Posts\Domain\PostAuthorName;
-use Atenea\Posts\Domain\PostAuthorUsername;
-use Atenea\Posts\Domain\PostAuthorWebsite;
-use Atenea\Shared\Domain\ValueObject\Email;
-use Atenea\Shared\Domain\ValueObject\Username;
-use Atenea\Shared\Domain\ValueObject\Website;
 use JsonException;
 use Atenea\Authors\Domain\AuthorFinder;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\Post;
-use Atenea\Posts\Domain\PostAuthor;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
@@ -52,7 +44,7 @@ final class StubPostRepository implements PostRepository
             return Post::create(
                 new PostTitle($post['title']),
                 new PostContent($post['body']),
-                $this->getAuthor(new AuthorId($post['userId'])),
+                new AuthorId($post['userId']),
                 new PostId($post['id'])
             );
         }, $resultPost);
@@ -66,7 +58,7 @@ final class StubPostRepository implements PostRepository
         Post::create(
             $dto->getTitle(),
             $dto->getContent(),
-            $dto->getAuthor(),
+            $dto->getAuthor()->getId(),
             new PostId(MotherCreator::random()->numberBetween()),
         );
 

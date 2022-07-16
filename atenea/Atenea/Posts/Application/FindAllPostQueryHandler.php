@@ -12,7 +12,7 @@ final class FindAllPostQueryHandler
     /**
      * @param PostRepository $repository
      */
-    public function __construct(private PostRepository $repository)
+    public function __construct(private readonly PostRepository $repository)
     {
     }
 
@@ -26,13 +26,7 @@ final class FindAllPostQueryHandler
                     $post->getId()->value(),
                     $post->getTitle()->value(),
                     $post->getContent()->value(),
-                    PostAuthorResponse::create(
-                        $post->getAuthor()->getId()->value(),
-                        $post->getAuthor()->getName()->value(),
-                        $post->getAuthor()->getUsername()->value(),
-                        $post->getAuthor()->getWebsite()->value(),
-                        $post->getAuthor()->getEmail()->value(),
-                    )
+                    $post->getAuthorId()->value()
                 ),
                 $posts
             )

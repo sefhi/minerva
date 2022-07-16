@@ -4,11 +4,6 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Infrastructure;
 
-use Atenea\Authors\Domain\Author;
-use Atenea\Shared\Domain\ValueObject\Email;
-use Atenea\Shared\Domain\ValueObject\Name;
-use Atenea\Shared\Domain\ValueObject\Username;
-use Atenea\Shared\Domain\ValueObject\Website;
 use Exception;
 use Faker\Factory;
 use Faker\Generator;
@@ -51,13 +46,7 @@ final class FakerPostRepository implements PostRepository
             $posts[] = Post::create(
                 new PostTitle($this->faker->realText(50)),
                 new PostContent($this->faker->paragraph(random_int(1, 3))),
-                Author::create(
-                    new AuthorId((int) $this->faker->numerify()),
-                    new Name($this->faker->name()),
-                    new Username($this->faker->userName()),
-                    new Website($this->faker->url()),
-                    new Email($this->faker->email()),
-                ),
+                new AuthorId((int) $this->faker->numerify()),
                 new PostId((int) $this->faker->numerify())
             );
         }
@@ -70,7 +59,7 @@ final class FakerPostRepository implements PostRepository
         Post::create(
             $dto->getTitle(),
             $dto->getContent(),
-            $dto->getAuthor(),
+            $dto->getAuthor()->getId(),
             new PostId(random_int(1, 100)),
         );
 

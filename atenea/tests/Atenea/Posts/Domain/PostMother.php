@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Atenea\Tests\Posts\Domain;
 
-use App\Tests\Atenea\Authors\Domain\AuthorMother;
-use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostTitle;
+use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
 
 final class PostMother
 {
     public static function create(
         PostTitle $title,
         PostContent $content,
-        Author $author,
+        AuthorId $authorId,
         ?PostId $id = null
     ): Post {
-        return Post::create($title, $content, $author, $id);
+        return Post::create($title, $content, $authorId, $id);
     }
 
     public static function random(): Post
@@ -27,7 +27,7 @@ final class PostMother
         return self::create(
             PostTitleMother::random(),
             PostContentMother::random(),
-            AuthorMother::random(),
+            AuthorIdMother::random(),
             PostIdMother::random(),
         );
     }
