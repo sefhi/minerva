@@ -4,9 +4,11 @@ on:
   push:
     paths:
       - "atenea/**"
+      - ".github/workflows/atenea/php.yml"
     branches: [ master ]
   pull_request:
       - "atenea/**"
+      - ".github/workflows/atenea/php.yml"
     branches: [ master ]
 
 jobs:
