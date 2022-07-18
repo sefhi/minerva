@@ -11,7 +11,7 @@ use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 
 class AuthorFinder
 {
-    public function __construct(private AuthorRepository $repository)
+    public function __construct(private readonly AuthorRepository $repository)
     {
     }
 
