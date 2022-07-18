@@ -6,4 +6,5 @@ namespace Atenea\Shared\Domain\Aggregate;
 
 class AggregateRoot
 {
+
 }
