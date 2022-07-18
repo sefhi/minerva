@@ -1,0 +1,57 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        types:
+            post_id: Atenea\Posts\Infrastructure\Persistence\Doctrine\PostIdType
+            author_id: Atenea\Shared\Infrastructure\Persistence\Doctrine\AuthorIdType
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #server_version: '13'
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            Posts:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Atenea/Posts/Infrastructure/Persistence/Doctrine'
+                prefix: 'Atenea\Posts\Domain'
+                alias:  Atenea\Posts\Domain
+            Author:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Atenea/Authors/Infrastructure/Persistence/Doctrine'
+                prefix: Atenea\Authors\Domain
+                alias: Atenea\Authors\Domain
+            Shared:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Atenea/Shared/Infrastructure/Persistence/Doctrine'
+                prefix: Atenea\Shared\Domain\ValueObject
+                alias: Atenea\Shared\Domain\ValueObject
+
+when@test:
+    doctrine:
+        dbal:
+            # "TEST_TOKEN" is typically set by ParaTest
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system

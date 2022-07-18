@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: API Atenea
+  contact: {}
+  version: '1.0'
+servers:
+  - url: http://localhost:9091
+    variables: {}
+paths:
+  /posts:
+    post:
+      tags:
+        - Post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/RequestCreatorPost'
+      responses:
+        '201':
+          description: Post Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/ErrorValidate'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Error'
+        '406':
+          description: Content is not acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Error'
+  /posts/all:
+    get:
+      tags:
+        - Post
+      responses:
+        '200':
+          description: Devuelve todos los Posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Post'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    ErrorValidate:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            message:
+              type: string
+            field:
+              type: string
+    RequestCreatorPost:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        authorId:
+          type: integer
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        author:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            username:
+              type: string
+            website:
+              type: string
+            email:
+              type: string
+tags:
+  - name: Post
+    description: 'Atenea'

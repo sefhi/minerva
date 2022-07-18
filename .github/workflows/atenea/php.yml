@@ -1,0 +1,39 @@
+name: Composer Atenea
+
+on:
+  push:
+    paths:
+      - "atenea/**"
+      - ".github/workflows/atenea/php.yml"
+    branches: [ master ]
+  pull_request:
+      - "atenea/**"
+      - ".github/workflows/atenea/php.yml"
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Validate composer.json and composer.lock
+        run: |-
+          cd atenea
+          composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: |-
+          cd atenea
+          composer install --prefer-dist --no-progress

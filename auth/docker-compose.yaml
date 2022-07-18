@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  minerva-auth:
+    build:
+      context: ${PWD}/.docker
+      args:
+        PHP_VERSION: 8.1
+    env_file:
+      - .env.local
+    container_name: 'minerva-auth'
+    restart: 'unless-stopped'
+    ports:
+      - "40000:80"
+    volumes:
+      - ./:/var/www/html
+      - ${PWD}/.docker/config/webserver/php.ini:/usr/local/etc/php/php.ini
+      - ${PWD}/.docker/config/webserver/vhosts:/etc/apache2/sites-enabled
+      - ${PWD}/.docker/config/private.key:/var/www/html/.docker/config/private.key
+      - ${PWD}/.docker/config/public.key:/var/www/html/.docker/config/public.key
+    environment:
+      XDEBUG_CONFIG: "client_host=host.docker.internal"
+    networks:
+      - net-minerva-mysql
+
+networks:
+  net-minerva-mysql:
+    name : net-minerva-mysql

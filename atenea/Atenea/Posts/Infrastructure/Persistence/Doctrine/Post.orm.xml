@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Atenea\Posts\Domain\Post" table="post">
+        <indexes>
+            <index name="post_author_id_fk" columns="author_id"/>
+        </indexes>
+        <id name="id" type="post_id" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <embedded name="title" class="Atenea\Posts\Domain\PostTitle" use-column-prefix="false"/>
+        <embedded name="content" class="Atenea\Posts\Domain\PostContent" use-column-prefix="false"/>
+        <field name="authorId"  column="author_id" type="author_id" />
+    </entity>
+</doctrine-mapping>
