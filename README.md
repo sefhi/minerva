@@ -1,3 +1,7 @@
+[![Composer](https://github.com/sefhirot69/minerva/actions/workflows/php.yml/badge.svg?branch=feature%2Fci)](https://github.com/sefhirot69/minerva/actions/workflows/php.yml)
+
+--------------------------------------
+
 ## 🚀 Instalación
 
 ### 🐳 Herramientas necesarias
