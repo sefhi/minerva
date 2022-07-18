@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Atenea\Authors\Domain;
+namespace Atenea\Authors\Application;
 
+use Atenea\Authors\Domain\Author;
+use Atenea\Authors\Domain\AuthorRepository;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 

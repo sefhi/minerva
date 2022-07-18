@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Atenea\Posts\Infrastructure;
 
 use App\Tests\Atenea\Authors\Domain\AuthorMother;
-use Atenea\Authors\Domain\AuthorFinder;
+use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Infrastructure\StubPostRepository;
 use Atenea\Tests\Posts\Domain\Dto\PostCreatorDtoMother;

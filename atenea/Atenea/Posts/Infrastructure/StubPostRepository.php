@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Infrastructure;
 
+use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\Author;
-use JsonException;
-use Atenea\Authors\Domain\AuthorFinder;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostContent;
@@ -16,6 +15,7 @@ use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
 use Atenea\Tests\Shared\Domain\MotherCreator;
+use JsonException;
 use function Lambdish\Phunctional\map;
 
 final class StubPostRepository implements PostRepository

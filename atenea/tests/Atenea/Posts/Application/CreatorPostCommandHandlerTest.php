@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Atenea\Tests\Posts\Application;
 
 use App\Tests\Atenea\Authors\Domain\AuthorMother;
-use Atenea\Authors\Domain\AuthorFinder;
+use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Posts\Application\CreatorPostCommandHandler;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Atenea\Authors\Domain;
 
-use Atenea\Authors\Domain\AuthorFinder;
+use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\AuthorRepository;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
