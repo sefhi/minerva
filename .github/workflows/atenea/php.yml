@@ -1,9 +1,10 @@
-name: Composer
+name: Composer Atenea
 
 on:
   push:
     paths:
-      - 'atenea/**'
+      - "atenea/**"
+      - ".github/workflows/atenea/php.yml"
     branches: [ master ]
   pull_request:
     branches: [ master ]
@@ -29,4 +30,6 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+        run: |-
+          cd atenea
+          composer install --prefer-dist --no-progress
