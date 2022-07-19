@@ -21,7 +21,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Validate composer.json and composer.lock
-        run: composer validate --strict
+        run: |-
+          cd atenea
+          composer validate --strict
 
       - name: Cache Composer packages
         id: composer-cache
