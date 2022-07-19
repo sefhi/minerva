@@ -21,9 +21,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Validate composer.json and composer.lock
-      run: |-
-        cd atenea
-        composer validate --strict
+      run: composer validate --strict
 
       - name: Cache Composer packages
         id: composer-cache
@@ -35,14 +33,10 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        run: |-
-          cd atenea
-          composer install --prefer-dist --no-progress
+        run: composer install --prefer-dist --no-progress
 
       # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
       # Docs: https://getcomposer.org/doc/articles/scripts.md
 
       - name: Run php-cs-fixer
-        run: |-
-          cd atenea
-          vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
+        run: vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
