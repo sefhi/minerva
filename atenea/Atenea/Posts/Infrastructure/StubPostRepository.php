@@ -20,7 +20,7 @@ use function Lambdish\Phunctional\map;
 
 final class StubPostRepository implements PostRepository
 {
-    private const FILE = '/var/www/html/Atenea/Posts/Infrastructure/Stub/posts.json';
+    private const FILE = __DIR__.'/Stub/posts.json';
 
     public function __construct(private readonly AuthorFinder $authorFinder)
     {
