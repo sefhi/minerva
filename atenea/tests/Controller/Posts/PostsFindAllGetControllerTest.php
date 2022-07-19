@@ -26,7 +26,6 @@ class PostsFindAllGetControllerTest extends WebTestCase
     {
         $this->postRepositoryMock->expects(self::once())->method('findAll')->willReturn(PostMother::array());
 
-
         self::getContainer()->set(PostRepository::class, $this->postRepositoryMock);
 
         $this->client->request(
