@@ -33,8 +33,11 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+        run: |-
+          cd atenea
+          composer install --prefer-dist --no-progress
 
       - name: Run test suite
-        run: |
-          vendor/bin/phpunit
+      run: |-
+        cd atenea
+        vendor/bin/phpunit
