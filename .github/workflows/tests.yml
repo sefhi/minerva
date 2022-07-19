@@ -39,6 +39,11 @@ jobs:
           cd atenea
           composer install --prefer-dist --no-progress
 
+      - name: Run php-cs-fixer
+        run: |-
+          cd atenea
+          vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
+
       - name: Run test suite
       run: |-
         cd atenea
