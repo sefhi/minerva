@@ -12,9 +12,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Install docker-compose
         run: |-
           sudo apt-get install docker-compose
+    
+      - name: Version docker-compose
+        run: |-
           docker-compose --version
-    
-    
+
+      - name: Install Apps
+        run: make
