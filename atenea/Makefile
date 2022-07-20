@@ -18,7 +18,8 @@ deps: composer-install create-database migrate-force
 update-deps: composer-update
 
 test:
-	@$(EXEC_PHP) bin/phpunit
+	docker exec $(CONTAINER) bin/phpunit --testsuite Unit
+	docker exec $(CONTAINER) bin/phpunit --testsuite Functional
 
 #Linter
 cs:
