@@ -1,7 +1,7 @@
 # VARIABLES
 DOCKER_COMPOSE = docker-compose
 CONTAINER      = minerva-atenea
-EXEC           = docker exec --user=root -t $(CONTAINER)
+EXEC           = docker exec --user=root -ti $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
 COMPOSER       = $(EXEC) composer
@@ -18,7 +18,7 @@ deps: composer-install create-database migrate-force
 update-deps: composer-update
 
 test:
-	$(EXEC) APP_ENV=test ./vendor/bin/phpunit
+	$(EXEC) ./vendor/bin/phpunit
 	@echo "Test Executed ✅"
 
 #Linter
