@@ -18,8 +18,7 @@ deps: composer-install create-database migrate-force
 update-deps: composer-update
 
 test:
-	$(EXEC) ./vendor/bin/phpunit
-	@echo "Test Executed ✅"
+	@$(EXEC_PHP) bin/phpunit
 
 #Linter
 cs:
