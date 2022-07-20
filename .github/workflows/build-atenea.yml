@@ -1,4 +1,4 @@
-name: Build-Atenea
+name: CI-Atenea
 
 on:
   workflow_dispatch:
@@ -18,7 +18,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/workflows/build.yml
+      - uses: actions/checkout@v2
+
+      - name: Install Services Docker Compose
+        run: docker-compose up
 
       - name: Install Atenea
         run: |- 
@@ -29,4 +32,8 @@ jobs:
         run: |-
           cd atenea
           make deps
+
+      - name: Linter
+        run: make cs
+      
 
