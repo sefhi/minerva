@@ -23,7 +23,7 @@ jobs:
       - name: Install Services Docker Compose
         run: docker-compose up
 
-      - name: Install Atenea
+      - name: 🐳 Start all the environment
         run: |- 
           cd atenea
           make start-atenea
@@ -33,7 +33,14 @@ jobs:
           cd atenea
           make deps
 
-      - name: Linter
-        run: make cs
+      - name: 🔦 Lint
+        run: |-
+          cd atenea
+          make cs
+
+      - name: ✅ Run the tests
+        run: |-
+          cd atenea
+          make test
       
 
