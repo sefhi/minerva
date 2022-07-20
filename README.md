@@ -1,4 +1,4 @@
-[![Composer](https://github.com/sefhirot69/minerva/actions/workflows/php.yml/badge.svg?branch=feature%2Fci)](https://github.com/sefhirot69/minerva/actions/workflows/php.yml)
+[![CI-Atenea](https://github.com/sefhirot69/minerva/actions/workflows/atenea.yml/badge.svg)](https://github.com/sefhirot69/minerva/actions/workflows/atenea.yml)
 
 --------------------------------------
 
