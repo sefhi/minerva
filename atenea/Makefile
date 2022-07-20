@@ -13,7 +13,7 @@ deploy: build
 
 build: create_env_file rebuild
 
-deps: composer-install
+deps: composer-install create-database migrate-force
 
 update-deps: composer-update
 
@@ -79,3 +79,12 @@ clear:
 
 terminal:
 	$(EXEC) /bin/bash
+
+# 📦 Database
+create-database:
+	$(SYMFONY) doctrine:database:create --if-not-exists
+	@echo "🎊 Database created!"
+
+#migrations
+migrate-force:
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction
