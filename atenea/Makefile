@@ -54,6 +54,9 @@ composer composer-install ci composer-update composer-require cr composer-dump c
 # 🐳 Docker Compose
 start:
 	@echo "🚀 Deploy!!!"
+	$(DOCKER_COMPOSE) up -d
+start-atenea: create_env_file
+	@echo "🚀 Deploy!!!"
 	$(DOCKER_COMPOSE) up -d atenea
 stop:
 	@echo "🛑 Stop container!!!"

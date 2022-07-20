@@ -22,8 +22,8 @@ current:
 start:
 	@docker-compose up -d
 	@cd $(CURRENT-DIR)/atenea && make start
-	@cd $(CURRENT-DIR)/auth && make start
-	@cd $(CURRENT-DIR)/frontend && make start
+#	@cd $(CURRENT-DIR)/auth && make start
+#	@cd $(CURRENT-DIR)/frontend && make start
 	reset
 start-mysql:
 	@docker-compose up -d minerva-mysql

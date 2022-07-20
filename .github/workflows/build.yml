@@ -1,4 +1,4 @@
-name: Build-Atenea
+name: Build
 
 on:
   push:
@@ -20,6 +20,3 @@ jobs:
       - name: Version docker-compose
         run: |-
           docker-compose --version
-
-      - name: Install Apps
-        run: make start
