@@ -1,7 +1,7 @@
 # VARIABLES
 DOCKER_COMPOSE = docker-compose
 CONTAINER      = minerva-atenea
-EXEC           = docker exec --user=root -ti $(CONTAINER)
+EXEC           = docker exec --user=root -t $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
 COMPOSER       = $(EXEC) composer
