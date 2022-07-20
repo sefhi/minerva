@@ -15,7 +15,7 @@ use function Lambdish\Phunctional\search;
 
 final class StubAuthorsRepository implements AuthorRepository
 {
-    private const FILE = '/var/www/html/Atenea/Posts/Infrastructure/Stub/users.json';
+    private const FILE = __DIR__.'/Stub/users.json';
     private string|bool $stubAuthors;
 
     public function __construct()

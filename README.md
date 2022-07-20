@@ -1,3 +1,7 @@
+[![CI-Atenea](https://github.com/sefhirot69/minerva/actions/workflows/atenea.yml/badge.svg)](https://github.com/sefhirot69/minerva/actions/workflows/atenea.yml)
+
+--------------------------------------
+
 ## 🚀 Instalación
 
 ### 🐳 Herramientas necesarias

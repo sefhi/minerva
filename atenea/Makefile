@@ -1,7 +1,7 @@
 # VARIABLES
 DOCKER_COMPOSE = docker-compose
 CONTAINER      = minerva-atenea
-EXEC           = docker exec -ti $(CONTAINER)
+EXEC           = docker exec --user=root -t $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
 COMPOSER       = $(EXEC) composer
@@ -13,13 +13,13 @@ deploy: build
 
 build: create_env_file rebuild
 
-deps: composer-install
+deps: composer-install create-database migrate-force
 
 update-deps: composer-update
 
 test:
-	$(EXEC) ./vendor/bin/phpunit
-	@echo "Test Executed ✅"
+	docker exec $(CONTAINER) bin/phpunit --testsuite Unit
+	docker exec $(CONTAINER) bin/phpunit --testsuite Functional
 
 #Linter
 cs:
@@ -55,6 +55,9 @@ composer composer-install ci composer-update composer-require cr composer-dump c
 start:
 	@echo "🚀 Deploy!!!"
 	$(DOCKER_COMPOSE) up -d
+start-atenea: create_env_file
+	@echo "🚀 Deploy!!!"
+	$(DOCKER_COMPOSE) up -d atenea
 stop:
 	@echo "🛑 Stop container!!!"
 	$(DOCKER_COMPOSE) stop
@@ -79,3 +82,12 @@ clear:
 
 terminal:
 	$(EXEC) /bin/bash
+
+# 📦 Database
+create-database:
+	$(SYMFONY) doctrine:database:create --if-not-exists
+	@echo "🎊 Database created!"
+
+#migrations
+migrate-force:
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction

@@ -23,5 +23,12 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-#    Atenea\Posts\Domain\PostRepository:
-#        public: true
+    Atenea\:
+        resource: '../Atenea/'
+        autowire: true
+        autoconfigure: true
+
+    Atenea\Posts\Domain\PostRepository:
+        public: true
+    Atenea\Authors\Domain\AuthorRepository:
+        public: true

@@ -1,0 +1,46 @@
+name: CI-Atenea
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - "atenea/**"
+      - ".github/workflows/build-atenea.yml"
+  pull_request:
+    branches: [ master ]
+    paths:
+      - "atenea/**"
+      - ".github/workflows/build-atenea.yml"
+
+jobs:
+  build-atenea:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Services Docker Compose
+        run: docker-compose up
+
+      - name: 🐳 Start all the environment
+        run: |- 
+          cd atenea
+          make start-atenea
+
+      - name: Install Deps
+        run: |-
+          cd atenea
+          make deps
+
+      - name: 🔦 Lint
+        run: |-
+          cd atenea
+          make cs
+
+      - name: ✅ Run the tests
+        run: |-
+          cd atenea
+          make test
+      
+
