@@ -20,8 +20,12 @@ jobs:
       - uses: ./.github/workflows/build.yml
 
       - name: Install Atenea
-        run: make start-atenea
+        run: |- 
+          cd atenea
+          make start-atenea
 
       - name: Install Deps
-        run: make deps
+        run: |-
+          cd atenea
+          make deps
 
