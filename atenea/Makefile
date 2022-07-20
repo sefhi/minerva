@@ -1,7 +1,7 @@
 # VARIABLES
 DOCKER_COMPOSE = docker-compose
 CONTAINER      = minerva-atenea
-EXEC           = docker exec --user=root -ti $(CONTAINER)
+EXEC           = docker exec --user=root -t $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
 COMPOSER       = $(EXEC) composer
@@ -54,7 +54,7 @@ composer composer-install ci composer-update composer-require cr composer-dump c
 # 🐳 Docker Compose
 start:
 	@echo "🚀 Deploy!!!"
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE) up -d atenea
 stop:
 	@echo "🛑 Stop container!!!"
 	$(DOCKER_COMPOSE) stop
