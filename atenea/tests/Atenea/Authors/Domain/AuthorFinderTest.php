@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Atenea\Authors\Domain;
 
-use App\Tests\Factory\AuthorFactory;
-use App\Tests\Factory\PostFactory;
 use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\AuthorRepository;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
@@ -27,8 +25,6 @@ final class AuthorFinderTest extends TestCase
     /** @test */
     public function itShouldReturnAndAuthor(): void
     {
-
-//        $author = PostFactory::createOne();
         // Given
         $authorId = AuthorIdMother::random();
         $author = AuthorMother::create($authorId);
