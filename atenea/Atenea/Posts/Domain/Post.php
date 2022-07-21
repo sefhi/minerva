@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Atenea\Posts\Domain;
 
 use Atenea\Shared\Domain\Aggregate\AggregateRoot;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 
 final class Post extends AggregateRoot
 {

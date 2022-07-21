@@ -6,11 +6,12 @@ namespace Atenea\Authors\Infrastructure;
 
 use Atenea\Authors\Domain\Author;
 use Atenea\Authors\Domain\AuthorRepository;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 use Atenea\Shared\Domain\ValueObject\Email;
 use Atenea\Shared\Domain\ValueObject\Name;
 use Atenea\Shared\Domain\ValueObject\Username;
 use Atenea\Shared\Domain\ValueObject\Website;
+
 use function Lambdish\Phunctional\search;
 
 final class StubAuthorsRepository implements AuthorRepository

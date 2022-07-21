@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace App\Tests\Atenea\Authors\Domain;
 
+use App\Tests\Factory\AuthorFactory;
+use App\Tests\Factory\PostFactory;
 use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\AuthorRepository;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Zenstruck\Foundry\Test\Factories;
 
 final class AuthorFinderTest extends TestCase
 {
+    use Factories;
     private MockObject $repository;
 
     protected function setUp(): void
@@ -23,6 +27,8 @@ final class AuthorFinderTest extends TestCase
     /** @test */
     public function itShouldReturnAndAuthor(): void
     {
+
+//        $author = PostFactory::createOne();
         // Given
         $authorId = AuthorIdMother::random();
         $author = AuthorMother::create($authorId);

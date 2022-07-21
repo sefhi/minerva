@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atenea\Shared\Domain\ValueObject\Author;
+namespace Atenea\Shared\Domain\ValueObject;
 
 use Atenea\Shared\Domain\ValueObject\Primitive\IntValueObject;
 

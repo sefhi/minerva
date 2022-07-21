@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Infrastructure;
 
-use Exception;
-use Faker\Factory;
-use Faker\Generator;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
+use Exception;
+use Faker\Factory;
+use Faker\Generator;
 
 final class FakerPostRepository implements PostRepository
 {

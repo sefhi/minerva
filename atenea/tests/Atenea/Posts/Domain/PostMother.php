@@ -8,7 +8,7 @@ use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostTitle;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
 
 final class PostMother

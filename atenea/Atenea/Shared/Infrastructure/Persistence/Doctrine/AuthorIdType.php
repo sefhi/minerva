@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Atenea\Shared\Infrastructure\Persistence\Doctrine;
 
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\IntegerType;
 

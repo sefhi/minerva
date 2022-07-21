@@ -13,9 +13,10 @@ use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 use Atenea\Tests\Shared\Domain\MotherCreator;
 use JsonException;
+
 use function Lambdish\Phunctional\map;
 
 final class StubPostRepository implements PostRepository

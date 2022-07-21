@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Atenea\Tests\Shared\Domain\ValueObject\Author;
 
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 
 final class AuthorIdMother
 {

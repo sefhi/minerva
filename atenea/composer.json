@@ -34,7 +34,9 @@
     "phpunit/phpunit": "^9.5",
     "symfony/browser-kit": "6.0.*",
     "symfony/css-selector": "6.0.*",
-    "symfony/phpunit-bridge": "^6.0"
+    "symfony/maker-bundle": "^1.44",
+    "symfony/phpunit-bridge": "^6.0",
+    "zenstruck/foundry": "^1.21"
   },
   "config": {
     "allow-plugins": {

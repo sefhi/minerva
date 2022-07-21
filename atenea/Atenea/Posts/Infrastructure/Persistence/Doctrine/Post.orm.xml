@@ -11,6 +11,6 @@
         </id>
         <embedded name="title" class="Atenea\Posts\Domain\PostTitle" use-column-prefix="false"/>
         <embedded name="content" class="Atenea\Posts\Domain\PostContent" use-column-prefix="false"/>
-        <field name="authorId"  column="author_id" type="author_id" />
+        <embedded name="authorId" class="Atenea\Shared\Domain\ValueObject\AuthorId" use-column-prefix="false" />
     </entity>
 </doctrine-mapping>

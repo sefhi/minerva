@@ -365,6 +365,15 @@
     "symfony/http-kernel": {
         "version": "v6.0.8"
     },
+    "symfony/maker-bundle": {
+        "version": "1.44",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
+    },
     "symfony/options-resolver": {
         "version": "v6.0.3"
     },
@@ -397,6 +406,12 @@
     },
     "symfony/process": {
         "version": "v6.0.8"
+    },
+    "symfony/property-access": {
+        "version": "v6.0.8"
+    },
+    "symfony/property-info": {
+        "version": "v6.0.10"
     },
     "symfony/proxy-manager-bridge": {
         "version": "v6.0.6"
@@ -458,5 +473,23 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "zenstruck/assert": {
+        "version": "v1.2.0"
+    },
+    "zenstruck/callback": {
+        "version": "v1.4.2"
+    },
+    "zenstruck/foundry": {
+        "version": "1.21",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.10",
+            "ref": "37c2f894cc098ab4c08874b80cccc8e2f8de7976"
+        },
+        "files": [
+            "config/packages/zenstruck_foundry.yaml"
+        ]
     }
 }

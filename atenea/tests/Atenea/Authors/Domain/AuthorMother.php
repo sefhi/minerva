@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Atenea\Authors\Domain;
 
 use Atenea\Authors\Domain\Author;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 use Atenea\Shared\Domain\ValueObject\Email;
 use Atenea\Shared\Domain\ValueObject\Name;
 use Atenea\Shared\Domain\ValueObject\Username;

@@ -11,7 +11,7 @@ use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 
 final class CreatorPostCommandHandler
 {
