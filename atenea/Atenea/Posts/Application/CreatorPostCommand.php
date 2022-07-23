@@ -9,14 +9,14 @@ final class CreatorPostCommand
     private function __construct(
         private string $title,
         private string $content,
-        private int $authorId
+        private string $authorId
     ) {
     }
 
     public static function fromPrimitive(
         string $title,
         string $content,
-        int $authorId
+        string $authorId
     ): self {
         return new self(
             $title,
@@ -35,7 +35,7 @@ final class CreatorPostCommand
         return $this->content;
     }
 
-    public function getAuthorId(): int
+    public function getAuthorId(): string
     {
         return $this->authorId;
     }

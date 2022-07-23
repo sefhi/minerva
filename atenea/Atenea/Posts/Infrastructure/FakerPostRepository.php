@@ -46,7 +46,7 @@ final class FakerPostRepository implements PostRepository
             $posts[] = Post::create(
                 new PostTitle($this->faker->realText(50)),
                 new PostContent($this->faker->paragraph(random_int(1, 3))),
-                new AuthorId((int) $this->faker->numerify()),
+                new AuthorId($this->faker->uuid()),
                 new PostId((int) $this->faker->numerify())
             );
         }

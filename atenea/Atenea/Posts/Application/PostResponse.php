@@ -13,7 +13,7 @@ final class PostResponse implements JsonSerializable
         private readonly int $id,
         private readonly string $title,
         private readonly string $content,
-        private readonly int $authorId
+        private readonly string $authorId
     ) {
     }
 
@@ -21,7 +21,7 @@ final class PostResponse implements JsonSerializable
         int $id,
         string $title,
         string $content,
-        int $authorId
+        string $authorId
     ): self {
         return new self($id, $title, $content, $authorId);
     }
@@ -41,7 +41,7 @@ final class PostResponse implements JsonSerializable
         return $this->content;
     }
 
-    public function getAuthorId(): int
+    public function getAuthorId(): string
     {
         return $this->authorId;
     }

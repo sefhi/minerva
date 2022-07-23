@@ -13,7 +13,7 @@ use Atenea\Shared\Domain\ValueObject\Website;
 final class Author
 {
     private function __construct(
-        private ?AuthorId $id = null,
+        private AuthorId $id,
         private readonly Name $name,
         private readonly Username $username,
         private readonly Website $website,
@@ -22,7 +22,7 @@ final class Author
     }
 
     public static function create(
-        ?AuthorId $id = null,
+        AuthorId $id,
         Name $name,
         Username $username,
         Website $web,

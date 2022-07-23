@@ -9,7 +9,7 @@ use Atenea\Posts\Application\CreatorPostCommand;
 
 final class CreatorPostCommandMother
 {
-    public static function create(string $title, string $content, int $authorId): CreatorPostCommand
+    public static function create(string $title, string $content, string $authorId): CreatorPostCommand
     {
         return CreatorPostCommand::fromPrimitive($title, $content, $authorId);
     }
@@ -19,7 +19,7 @@ final class CreatorPostCommandMother
         return self::create(
             MotherCreator::random()->text(50),
             MotherCreator::random()->text(500),
-            random_int(1, 100),
+            MotherCreator::random()->uuid(),
         );
     }
 }

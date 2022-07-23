@@ -14,7 +14,7 @@ final class StubAuthorsRepositoryTest extends TestCase
     public function itShouldReturnAuthorWhenCallFindByAuthorId(): void
     {
         // Given
-        $authorId = AuthorIdMother::create(1);
+        $authorId = AuthorIdMother::create('098782d1-c76e-3dea-9ab7-aecb6681e88d');
 
         $repository = new StubAuthorsRepository();
 
@@ -27,7 +27,7 @@ final class StubAuthorsRepositoryTest extends TestCase
     public function itShouldNutWhenUserIdNotExist(): void
     {
         // Given
-        $authorId = AuthorIdMother::create(100);
+        $authorId = AuthorIdMother::random();
 
         $repository = new StubAuthorsRepository();
 

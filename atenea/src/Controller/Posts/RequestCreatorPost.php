@@ -28,8 +28,7 @@ final class RequestCreatorPost
     /** @phpstan-ignore-next-line */
     private $content;
     #[Assert\NotBlank]
-    #[Assert\Type(
-        type: 'integer',
+    #[Assert\Uuid(
         message: 'The value {{ value }} is not a valid {{ type }}.'
     )]
     /** @phpstan-ignore-next-line */

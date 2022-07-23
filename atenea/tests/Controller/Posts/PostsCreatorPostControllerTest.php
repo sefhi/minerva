@@ -6,6 +6,7 @@ use App\Tests\Atenea\Authors\Domain\AuthorMother;
 use Atenea\Authors\Domain\AuthorRepository;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Tests\Shared\Domain\MotherCreator;
+use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
 use JsonException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -91,7 +92,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
         return json_encode([
             'title' => MotherCreator::random()->text(50),
             'content' => MotherCreator::random()->paragraph(2),
-            'authorId' => 1,
+            'authorId' => AuthorIdMother::random()->value(),
         ], JSON_THROW_ON_ERROR);
     }
 
