@@ -91,3 +91,7 @@ create-database:
 #migrations
 migrate-force:
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction
+
+#fixtures
+fixtures:
+	$(SYMFONY) doctrine:fixtures:load --no-interaction

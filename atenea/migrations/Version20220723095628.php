@@ -32,7 +32,7 @@ final class Version20220723095628 extends AbstractMigration
         );
         $this->addSql(
             'CREATE TABLE post (
-                              id INT AUTO_INCREMENT NOT NULL, 
+                              id VARCHAR(36) NOT NULL, 
                               title VARCHAR(255) NOT NULL, 
                               content VARCHAR(255) NOT NULL, 
                               author_id VARCHAR(36) NOT NULL, 
