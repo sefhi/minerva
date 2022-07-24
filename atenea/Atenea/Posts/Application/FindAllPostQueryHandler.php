@@ -9,9 +9,6 @@ use Atenea\Posts\Domain\PostRepository;
 
 final class FindAllPostQueryHandler
 {
-    /**
-     * @param PostRepository $repository
-     */
     public function __construct(private readonly PostRepository $repository)
     {
     }

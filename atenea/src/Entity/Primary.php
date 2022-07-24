@@ -7,22 +7,16 @@ namespace App\Entity;
 final class Primary
 {
     public function __construct(
-        private  string $id,
-        private  string $name
+        private string $id,
+        private string $name
     ) {
     }
 
-    /**
-     * @param string $id
-     */
     public function setId(string $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @param string $name
-     */
     public function setName(string $name): void
     {
         $this->name = $name;

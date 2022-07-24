@@ -8,7 +8,6 @@ use Atenea\Shared\Domain\ValueObject\AuthorId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-
 final class AuthorIdType extends StringType
 {
     public function getName(): string

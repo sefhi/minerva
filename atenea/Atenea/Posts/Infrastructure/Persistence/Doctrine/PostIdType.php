@@ -6,7 +6,6 @@ namespace Atenea\Posts\Infrastructure\Persistence\Doctrine;
 
 use Atenea\Posts\Domain\PostId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\IntegerType;
 use Doctrine\DBAL\Types\StringType;
 
 final class PostIdType extends StringType

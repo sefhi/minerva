@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Atenea\Tests\Posts\Domain;
 
-use App\Tests\Atenea\Authors\Domain\AuthorMother;
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostAuthor;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostTitle;
-use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
 
 final class PostMother
 {

@@ -28,9 +28,6 @@ final class CreatorPostCommand
         );
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;

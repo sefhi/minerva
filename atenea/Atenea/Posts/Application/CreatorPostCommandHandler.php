@@ -17,10 +17,6 @@ use Atenea\Shared\Domain\ValueObject\AuthorId;
 
 final class CreatorPostCommandHandler
 {
-    /**
-     * @param PostRepository $repository
-     * @param AuthorFinder   $authorFinder
-     */
     public function __construct(private readonly PostRepository $repository, private readonly AuthorFinder $authorFinder)
     {
     }
