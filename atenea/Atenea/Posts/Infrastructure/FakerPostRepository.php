@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Infrastructure;
 
+use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\Post;
-use Atenea\Posts\Domain\PostAuthor;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
@@ -52,7 +52,7 @@ final class FakerPostRepository implements PostRepository
                 new PostId($this->faker->uuid()),
                 new PostTitle($this->faker->realText(50)),
                 new PostContent($this->faker->paragraph(random_int(1, 3))),
-                PostAuthor::create(
+                Author::create(
                     new AuthorId($this->faker->uuid()),
                     new Name($this->faker->name()),
                     new Username($this->faker->userName()),
