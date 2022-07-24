@@ -34,13 +34,7 @@ final class CreatorPostCommandHandler
             new PostId($command->getId()),
             new PostTitle($command->getTitle()),
             new PostContent($command->getContent()),
-            PostAuthor::create(
-                $author->getId(),
-                $author->getName(),
-                $author->getUsername(),
-                $author->getWebsite(),
-                $author->getEmail()
-            )
+            $author
         );
 
         return $this->repository->save($postCreatorDto);
@@ -51,14 +45,6 @@ final class CreatorPostCommandHandler
      */
     private function finderAuthor(AuthorId $authorId): Author
     {
-        $author = ($this->authorFinder)($authorId);
-
-        return Author::create(
-            $author->getId(),
-            $author->getName(),
-            $author->getUsername(),
-            $author->getWebsite(),
-            $author->getEmail(),
-        );
+        return ($this->authorFinder)($authorId);
     }
 }

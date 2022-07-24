@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Domain\Dto;
 
-use Atenea\Posts\Domain\PostAuthor;
+use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostTitle;
@@ -15,7 +15,7 @@ final class PostCreatorDto
         private readonly PostId $id,
         private readonly PostTitle $title,
         private readonly PostContent $content,
-        private readonly PostAuthor $author
+        private readonly Author $author
     ) {
     }
 
@@ -23,7 +23,7 @@ final class PostCreatorDto
         PostId $id,
         PostTitle $title,
         PostContent $content,
-        PostAuthor $author
+        Author $author
     ): self {
         return new self(
             $id,
@@ -48,7 +48,7 @@ final class PostCreatorDto
         return $this->content;
     }
 
-    public function getAuthor(): PostAuthor
+    public function getAuthor(): Author
     {
         return $this->author;
     }
