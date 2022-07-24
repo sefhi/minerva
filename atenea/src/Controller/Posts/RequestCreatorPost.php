@@ -9,6 +9,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class RequestCreatorPost
 {
+    /** @phpstan-ignore-next-line */
+    #[Assert\NotBlank]
+    #[Assert\Uuid(
+        message: 'The value {{ value }} is not a valid {{ type }}.'
+    )]
+    private $id;
+
     #[Assert\NotBlank]
     #[Assert\Length(
         min: 5,
@@ -35,22 +42,24 @@ final class RequestCreatorPost
     private $authorId;
 
     /** @phpstan-ignore-next-line */
-    private function __construct($title, $content, $authorId)
+    private function __construct($id, $title, $content, $authorId)
     {
+        $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->authorId = $authorId;
     }
 
     /** @phpstan-ignore-next-line */
-    public static function fromPrimitive($title, $content, $authorId): self
+    public static function fromPrimitive($id, $title, $content, $authorId): self
     {
-        return new self($title, $content, $authorId);
+        return new self($id, $title, $content, $authorId);
     }
 
     public function mapToCommand(): CreatorPostCommand
     {
         return CreatorPostCommand::fromPrimitive(
+            $this->id,
             $this->title,
             $this->content,
             $this->authorId

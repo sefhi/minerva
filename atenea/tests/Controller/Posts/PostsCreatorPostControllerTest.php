@@ -5,6 +5,7 @@ namespace App\Tests\Controller\Posts;
 use App\Tests\Atenea\Authors\Domain\AuthorMother;
 use Atenea\Authors\Domain\AuthorRepository;
 use Atenea\Posts\Domain\PostRepository;
+use Atenea\Tests\Posts\Domain\PostIdMother;
 use Atenea\Tests\Shared\Domain\MotherCreator;
 use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
 use JsonException;
@@ -90,6 +91,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
     private function requestJson(): string
     {
         return json_encode([
+            'id' => PostIdMother::random()->value(),
             'title' => MotherCreator::random()->text(50),
             'content' => MotherCreator::random()->paragraph(2),
             'authorId' => AuthorIdMother::random()->value(),
@@ -99,6 +101,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
     private function requestJsonErrorValidate(): string
     {
         return json_encode([
+            'id' => PostIdMother::random()->value(),
             'title' => MotherCreator::random()->text(500),
             'content' => MotherCreator::random()->text(20000),
             'authorId' => random_int(1, 10),

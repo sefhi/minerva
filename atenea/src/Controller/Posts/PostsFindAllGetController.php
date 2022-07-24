@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts;
 
+use App\Entity\Primary;
+use App\Entity\Secondary;
+use Atenea\Tests\Shared\Domain\MotherCreator;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Atenea\Posts\Application\FindAllPostQueryHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +23,7 @@ final class PostsFindAllGetController extends AbstractController
     }
 
     #[Route('/posts/all', name: 'posts_find_all', methods: ['GET'])]
-    public function __invoke(): JsonResponse
+    public function __invoke(EntityManagerInterface $entityManager): JsonResponse
     {
         try {
             $result = ($this->queryHandler)();

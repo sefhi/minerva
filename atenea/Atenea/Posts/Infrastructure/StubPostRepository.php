@@ -8,12 +8,17 @@ use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\Post;
+use Atenea\Posts\Domain\PostAuthor;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Shared\Domain\ValueObject\AuthorId;
+use Atenea\Shared\Domain\ValueObject\Email;
+use Atenea\Shared\Domain\ValueObject\Name;
+use Atenea\Shared\Domain\ValueObject\Username;
+use Atenea\Shared\Domain\ValueObject\Website;
 use Atenea\Tests\Shared\Domain\MotherCreator;
 use JsonException;
 use function Lambdish\Phunctional\map;
@@ -42,10 +47,10 @@ final class StubPostRepository implements PostRepository
 
         return map(function (array $post) {
             return Post::create(
+                new PostId($post['id']),
                 new PostTitle($post['title']),
                 new PostContent($post['body']),
-                new AuthorId($post['userId']),
-                new PostId($post['id'])
+                $this->getAuthor(new AuthorId($post['userId'])),
             );
         }, $resultPost);
     }
@@ -56,10 +61,10 @@ final class StubPostRepository implements PostRepository
     public function save(PostCreatorDto $dto): bool
     {
         Post::create(
+            $dto->getId(),
             $dto->getTitle(),
             $dto->getContent(),
-            $dto->getAuthor()->getId(),
-            new PostId(MotherCreator::random()->numberBetween()),
+            $dto->getAuthor(),
         );
 
         return true;
@@ -68,8 +73,16 @@ final class StubPostRepository implements PostRepository
     /**
      * @throws AuthorNotFoundException
      */
-    private function getAuthor(AuthorId $id): Author
+    private function getAuthor(AuthorId $id): PostAuthor
     {
-        return ($this->authorFinder)($id);
+        $author = ($this->authorFinder)($id);
+
+        return PostAuthor::create(
+            $author->getId(),
+            new Name($author->getName()->value()),
+            new Username($author->getUsername()->value()),
+            new Website($author->getWebsite()->value()),
+            new Email($author->getEmail()->value()),
+        );
     }
 }

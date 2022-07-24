@@ -7,22 +7,33 @@ namespace Atenea\Posts\Application;
 final class CreatorPostCommand
 {
     private function __construct(
-        private string $title,
-        private string $content,
-        private string $authorId
+        private readonly string $id,
+        private readonly string $title,
+        private readonly string $content,
+        private readonly string $authorId
     ) {
     }
 
     public static function fromPrimitive(
+        string $id,
         string $title,
         string $content,
         string $authorId
     ): self {
         return new self(
+            $id,
             $title,
             $content,
             $authorId
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getTitle(): string

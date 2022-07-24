@@ -18,7 +18,7 @@ final class DoctrinePostRepository extends DoctrineRepository implements PostRep
 
     public function save(PostCreatorDto $dto): bool
     {
-        $post = Post::create($dto->getTitle(), $dto->getContent(), $dto->getAuthor()->getId());
+        $post = Post::create($dto->getId(), $dto->getTitle(), $dto->getContent(), $dto->getAuthor());
         $this->persist($post);
 
         return true;

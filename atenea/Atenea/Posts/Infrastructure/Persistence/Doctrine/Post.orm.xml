@@ -6,11 +6,16 @@
         <indexes>
             <index name="post_author_id_fk" columns="author_id"/>
         </indexes>
-        <id name="id" type="post_id" column="id">
-            <generator strategy="IDENTITY"/>
-        </id>
+        <id name="id" type="post_id" length="36" column="id" />
         <embedded name="title" class="Atenea\Posts\Domain\PostTitle" use-column-prefix="false"/>
         <embedded name="content" class="Atenea\Posts\Domain\PostContent" use-column-prefix="false"/>
-        <embedded name="authorId" class="Atenea\Shared\Domain\ValueObject\AuthorId" use-column-prefix="false" />
+        <many-to-one field="author" target-entity="Atenea\Posts\Domain\PostAuthor" fetch="EAGER">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-columns>
+                <join-column name="author_id"/>
+            </join-columns>
+        </many-to-one>
     </entity>
 </doctrine-mapping>

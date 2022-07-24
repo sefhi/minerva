@@ -7,7 +7,9 @@ namespace Atenea\Posts\Application;
 use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
+use Atenea\Posts\Domain\PostAuthor;
 use Atenea\Posts\Domain\PostContent;
+use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
@@ -33,9 +35,16 @@ final class CreatorPostCommandHandler
         $author = $this->finderAuthor($authorId);
 
         $postCreatorDto = PostCreatorDto::create(
+            new PostId($command->getId()),
             new PostTitle($command->getTitle()),
             new PostContent($command->getContent()),
-            $author
+            PostAuthor::create(
+                $author->getId(),
+                $author->getName(),
+                $author->getUsername(),
+                $author->getWebsite(),
+                $author->getEmail()
+            )
         );
 
         return $this->repository->save($postCreatorDto);

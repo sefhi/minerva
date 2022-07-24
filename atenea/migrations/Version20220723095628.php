@@ -33,7 +33,7 @@ final class Version20220723095628 extends AbstractMigration
                               id INT AUTO_INCREMENT NOT NULL, 
                               title VARCHAR(255) NOT NULL, 
                               content VARCHAR(255) NOT NULL, 
-                              author_id VARCHAR(255) NOT NULL, 
+                              author_id VARCHAR(36) NOT NULL, 
                               INDEX post_author_id_fk (author_id), 
                               PRIMARY KEY(id),
                               FOREIGN KEY (author_id) REFERENCES author(id)
