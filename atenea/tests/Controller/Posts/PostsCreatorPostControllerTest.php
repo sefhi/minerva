@@ -104,7 +104,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
             'id' => PostIdMother::random()->value(),
             'title' => MotherCreator::random()->text(500),
             'content' => MotherCreator::random()->text(20000),
-            'authorId' => random_int(1, 10),
+            'authorId' => AuthorIdMother::random()->value(),
         ], JSON_THROW_ON_ERROR);
     }
 }
