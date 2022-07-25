@@ -2,8 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\AuthorFactory;
-use App\Factory\PostFactory;
 use App\Story\PostStory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;

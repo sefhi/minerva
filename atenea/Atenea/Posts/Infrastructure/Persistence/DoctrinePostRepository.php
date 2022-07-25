@@ -11,6 +11,9 @@ use Atenea\Shared\Infrastructure\Persistence\DoctrineRepository;
 
 final class DoctrinePostRepository extends DoctrineRepository implements PostRepository
 {
+    /**
+     * @return array<int, Post>
+     */
     public function findAll(): array
     {
         return $this->getRepository(Post::class)->findAll();

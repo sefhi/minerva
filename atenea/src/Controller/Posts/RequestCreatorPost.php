@@ -9,12 +9,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class RequestCreatorPost
 {
-    /** @phpstan-ignore-next-line */
     #[Assert\NotBlank]
     #[Assert\Uuid(
         message: 'The value {{ value }} is not a valid {{ type }}.'
     )]
-    private $id;
+    private string $id;
 
     #[Assert\NotBlank]
     #[Assert\Length(
@@ -23,8 +22,8 @@ final class RequestCreatorPost
         minMessage: 'title must be at least {{ limit }} characters long',
         maxMessage: 'title cannot be longer than {{ limit }} characters',
     )]
-    /** @phpstan-ignore-next-line */
-    private $title;
+    private string $title;
+
     #[Assert\NotBlank]
     #[Assert\Length(
         min: 5,
@@ -32,17 +31,15 @@ final class RequestCreatorPost
         minMessage: 'content must be at least {{ limit }} characters long',
         maxMessage: 'content cannot be longer than {{ limit }} characters',
     )]
-    /** @phpstan-ignore-next-line */
-    private $content;
+    private string $content;
+
     #[Assert\NotBlank]
     #[Assert\Uuid(
         message: 'The value {{ value }} is not a valid {{ type }}.'
     )]
-    /** @phpstan-ignore-next-line */
-    private $authorId;
+    private string $authorId;
 
-    /** @phpstan-ignore-next-line */
-    private function __construct($id, $title, $content, $authorId)
+    private function __construct(string $id, string $title, string $content, string $authorId)
     {
         $this->id = $id;
         $this->title = $title;
@@ -50,8 +47,7 @@ final class RequestCreatorPost
         $this->authorId = $authorId;
     }
 
-    /** @phpstan-ignore-next-line */
-    public static function fromPrimitive($id, $title, $content, $authorId): self
+    public static function fromPrimitive(string $id, string $title, string $content, string $authorId): self
     {
         return new self($id, $title, $content, $authorId);
     }

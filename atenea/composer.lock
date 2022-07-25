@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0600f71b4c386c579b36278dd81d0c7b",
+    "content-hash": "f4c868d0324fb5e4ee7ee73dec62a7d2",
     "packages": [
         {
             "name": "brick/math",
@@ -6482,6 +6482,77 @@
                 }
             ],
             "time": "2022-07-20T09:57:31+00:00"
+        },
+        {
+            "name": "phpstan/phpstan-symfony",
+            "version": "1.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan-symfony.git",
+                "reference": "28fe677ec3ad43eb4c0946c502535365e3040ecf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/28fe677ec3ad43eb4c0946c502535365e3040ecf",
+                "reference": "28fe677ec3ad43eb4c0946c502535365e3040ecf",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "php": "^7.2 || ^8.0",
+                "phpstan/phpstan": "^1.8.2"
+            },
+            "conflict": {
+                "symfony/framework-bundle": "<3.0"
+            },
+            "require-dev": {
+                "nikic/php-parser": "^4.13.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "psr/container": "1.0 || 1.1.1",
+                "symfony/config": "^4.2 || ^5.0",
+                "symfony/console": "^4.0 || ^5.0",
+                "symfony/dependency-injection": "^4.0 || ^5.0",
+                "symfony/form": "^4.0 || ^5.0",
+                "symfony/framework-bundle": "^4.4 || ^5.0",
+                "symfony/http-foundation": "^5.1",
+                "symfony/messenger": "^4.2 || ^5.0",
+                "symfony/polyfill-php80": "^1.24",
+                "symfony/serializer": "^4.0 || ^5.0"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon",
+                        "rules.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukáš Unger",
+                    "email": "looky.msc@gmail.com",
+                    "homepage": "https://lookyman.net"
+                }
+            ],
+            "description": "Symfony Framework extensions and rules for PHPStan",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan-symfony/issues",
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.8"
+            },
+            "time": "2022-07-20T12:02:52+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

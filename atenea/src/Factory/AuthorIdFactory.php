@@ -25,7 +25,6 @@ use Zenstruck\Foundry\Proxy;
  */
 final class AuthorIdFactory extends ModelFactory
 {
-
     protected function getDefaults(): array
     {
         return [
