@@ -35,6 +35,16 @@ jobs:
           cd atenea
           make cs
 
+      - name: Migrations
+        run: |-
+          cd atenea
+          make migration-force
+
+      - name: Fixtures
+        run: |-
+          cd atenea
+          make fixtures
+
       - name: ✅ Run the tests
         run: |-
           cd atenea
