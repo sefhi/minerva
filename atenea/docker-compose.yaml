@@ -17,17 +17,17 @@ services:
     networks:
       - minerva-network
       - net-minerva-mysql
-  api-swagger-minerva:
-    container_name: api-swagger-minerva
-    image: swaggerapi/swagger-ui
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./api_documentation.yaml:/api_documentation.yaml
-    environment:
-      SWAGGER_JSON: /api_documentation.yaml
-    networks:
-      - minerva-network
+#  api-swagger-minerva:
+#    container_name: api-swagger-minerva
+#    image: swaggerapi/swagger-ui
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ./api_documentation.yaml:/api_documentation.yaml
+#    environment:
+#      SWAGGER_JSON: /api_documentation.yaml
+#    networks:
+#      - minerva-network
 volumes:
   data-minerva:
 

@@ -20,17 +20,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: 🐳 Start all the environment
-        run: |- 
-          cd atenea
-          make start-atenea
+      - name: 🐳 Start all the environment Mysql
+        run: make start-mysql
 
-      - name: Install Deps
+      - name: 🐳 Start all the environment Atenea
+        run: |-
+          cd atenea
+          make start
+
+      - name: Install deps Atenea
         run: |-
           cd atenea
           make deps
 
-      - name: 🔦 Lint
+      - name: 🔦 Lint Atenea
         run: |-
           cd atenea
           make cs
