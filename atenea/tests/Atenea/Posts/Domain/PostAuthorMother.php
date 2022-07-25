@@ -2,42 +2,41 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Atenea\Authors\Domain;
+namespace Atenea\Tests\Posts\Domain;
 
-use Atenea\Authors\Domain\Author;
 use Atenea\Shared\Domain\ValueObject\AuthorId;
 use Atenea\Shared\Domain\ValueObject\Email;
 use Atenea\Shared\Domain\ValueObject\Name;
 use Atenea\Shared\Domain\ValueObject\Username;
 use Atenea\Shared\Domain\ValueObject\Website;
 use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
+use Atenea\Posts\Domain\PostAuthor;
 use Atenea\Tests\Shared\Domain\ValueObject\EmailMother;
 use Atenea\Tests\Shared\Domain\ValueObject\NameMother;
 use Atenea\Tests\Shared\Domain\ValueObject\UsernameMother;
 use Atenea\Tests\Shared\Domain\ValueObject\WebsiteMother;
 
-final class AuthorMother
+final class PostAuthorMother
 {
     public static function create(
         ?AuthorId $id = null,
         ?Name $name = null,
         ?Username $username = null,
-        ?Website $web = null,
-        ?Email $email = null
-    ): Author {
-        return Author::create(
+        ?Website $website = null,
+        ?Email $email = null,
+    ): PostAuthor {
+        return PostAuthor::create(
             $id ?? AuthorIdMother::random(),
             $name ?? NameMother::random(),
             $username ?? UsernameMother::random(),
-            $web ?? WebsiteMother::random(),
+            $website ?? WebsiteMother::random(),
             $email ?? EmailMother::random(),
         );
     }
 
-    public static function fromId(
-        AuthorId $id = null,
-    ): Author {
-        return Author::create(
+    public static function fromId(AuthorId $id): PostAuthor
+    {
+        return self::create(
             $id,
             NameMother::random(),
             UsernameMother::random(),
@@ -46,7 +45,7 @@ final class AuthorMother
         );
     }
 
-    public static function random(): Author
+    public static function random(): PostAuthor
     {
         return self::create(
             AuthorIdMother::random(),

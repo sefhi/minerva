@@ -10,7 +10,7 @@ use ReturnTypeWillChange;
 final class PostAuthorResponse implements JsonSerializable
 {
     private function __construct(
-        private int $id,
+        private string $id,
         private string $name,
         private string $username,
         private string $website,
@@ -19,7 +19,7 @@ final class PostAuthorResponse implements JsonSerializable
     }
 
     public static function create(
-        int $id,
+        string $id,
         string $name,
         string $username,
         string $website,
@@ -34,7 +34,7 @@ final class PostAuthorResponse implements JsonSerializable
         );
     }
 
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }

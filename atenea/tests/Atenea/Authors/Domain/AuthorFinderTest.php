@@ -10,9 +10,11 @@ use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Zenstruck\Foundry\Test\Factories;
 
 final class AuthorFinderTest extends TestCase
 {
+    use Factories;
     private MockObject $repository;
 
     protected function setUp(): void

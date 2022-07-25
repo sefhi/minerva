@@ -44,6 +44,7 @@ final class PostsCreatorPostController extends AbstractController
             );
 
             $requestCreatorPost = RequestCreatorPost::fromPrimitive(
+                $data['id'],
                 $data['title'],
                 $data['content'],
                 $data['authorId']

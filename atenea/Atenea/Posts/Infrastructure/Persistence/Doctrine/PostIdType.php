@@ -6,9 +6,9 @@ namespace Atenea\Posts\Infrastructure\Persistence\Doctrine;
 
 use Atenea\Posts\Domain\PostId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\IntegerType;
+use Doctrine\DBAL\Types\StringType;
 
-final class PostIdType extends IntegerType
+final class PostIdType extends StringType
 {
     public function getName(): string
     {
@@ -20,7 +20,7 @@ final class PostIdType extends IntegerType
         return new PostId($value);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): int
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
     {
         /* @var PostId $value */
         return $value->value();

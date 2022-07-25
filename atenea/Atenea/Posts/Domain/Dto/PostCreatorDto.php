@@ -6,11 +6,13 @@ namespace Atenea\Posts\Domain\Dto;
 
 use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\PostContent;
+use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostTitle;
 
 final class PostCreatorDto
 {
     private function __construct(
+        private readonly PostId $id,
         private readonly PostTitle $title,
         private readonly PostContent $content,
         private readonly Author $author
@@ -18,15 +20,22 @@ final class PostCreatorDto
     }
 
     public static function create(
+        PostId $id,
         PostTitle $title,
         PostContent $content,
         Author $author
     ): self {
         return new self(
+            $id,
             $title,
             $content,
             $author
         );
+    }
+
+    public function getId(): PostId
+    {
+        return $this->id;
     }
 
     public function getTitle(): PostTitle

@@ -1,0 +1,9 @@
+includes:
+	- vendor/phpstan/phpstan-symfony/extension.neon
+parameters:
+	excludePaths:
+		- tests
+	level: max
+	paths: ['src', 'Atenea']
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false

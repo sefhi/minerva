@@ -52,7 +52,7 @@ composer composer-install ci composer-update composer-require cr composer-dump c
 			--no-ansi
 
 # 🐳 Docker Compose
-start:
+start: create_env_file
 	@echo "🚀 Deploy!!!"
 	$(DOCKER_COMPOSE) up -d
 start-atenea: create_env_file
@@ -91,3 +91,7 @@ create-database:
 #migrations
 migrate-force:
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction
+
+#fixtures
+fixtures:
+	$(SYMFONY) doctrine:fixtures:load --no-interaction

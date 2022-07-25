@@ -9,12 +9,15 @@ use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Posts\Application\CreatorPostCommandHandler;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Zenstruck\Foundry\Test\Factories;
 
 final class CreatorPostCommandHandlerTest extends TestCase
 {
+    use Factories;
+
     private MockObject $repositoryMock;
     private MockObject $authorFinderMock;
 

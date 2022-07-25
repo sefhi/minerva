@@ -11,6 +11,9 @@ use Atenea\Shared\Infrastructure\Persistence\DoctrineRepository;
 
 final class DoctrinePostRepository extends DoctrineRepository implements PostRepository
 {
+    /**
+     * @return array<int, Post>
+     */
     public function findAll(): array
     {
         return $this->getRepository(Post::class)->findAll();
@@ -18,7 +21,7 @@ final class DoctrinePostRepository extends DoctrineRepository implements PostRep
 
     public function save(PostCreatorDto $dto): bool
     {
-        $post = Post::create($dto->getTitle(), $dto->getContent(), $dto->getAuthor()->getId());
+        $post = Post::create($dto->getId(), $dto->getTitle(), $dto->getContent(), $dto->getAuthor());
         $this->persist($post);
 
         return true;

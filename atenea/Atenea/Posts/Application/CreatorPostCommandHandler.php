@@ -8,17 +8,14 @@ use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\Author;
 use Atenea\Posts\Domain\Dto\PostCreatorDto;
 use Atenea\Posts\Domain\PostContent;
+use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 
 final class CreatorPostCommandHandler
 {
-    /**
-     * @param PostRepository $repository
-     * @param AuthorFinder   $authorFinder
-     */
     public function __construct(private readonly PostRepository $repository, private readonly AuthorFinder $authorFinder)
     {
     }
@@ -33,6 +30,7 @@ final class CreatorPostCommandHandler
         $author = $this->finderAuthor($authorId);
 
         $postCreatorDto = PostCreatorDto::create(
+            new PostId($command->getId()),
             new PostTitle($command->getTitle()),
             new PostContent($command->getContent()),
             $author
@@ -46,14 +44,6 @@ final class CreatorPostCommandHandler
      */
     private function finderAuthor(AuthorId $authorId): Author
     {
-        $author = ($this->authorFinder)($authorId);
-
-        return Author::create(
-            $author->getId(),
-            $author->getName(),
-            $author->getUsername(),
-            $author->getWebsite(),
-            $author->getEmail(),
-        );
+        return ($this->authorFinder)($authorId);
     }
 }

@@ -20,23 +20,33 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Services Docker Compose
-        run: docker-compose up
+      - name: 🐳 Start all the environment Mysql
+        run: make start-mysql
 
-      - name: 🐳 Start all the environment
-        run: |- 
+      - name: 🐳 Start all the environment Atenea
+        run: |-
           cd atenea
-          make start-atenea
+          make start
 
-      - name: Install Deps
+      - name: Install deps Atenea
         run: |-
           cd atenea
           make deps
 
-      - name: 🔦 Lint
+      - name: 🔦 Lint Atenea
         run: |-
           cd atenea
           make cs
+
+      - name: Migrations
+        run: |-
+          cd atenea
+          make migrate-force
+
+      - name: Fixtures
+        run: |-
+          cd atenea
+          make fixtures
 
       - name: ✅ Run the tests
         run: |-

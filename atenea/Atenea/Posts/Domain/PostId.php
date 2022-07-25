@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Domain;
 
-use Atenea\Shared\Domain\ValueObject\Primitive\IntValueObject;
+use Atenea\Shared\Domain\ValueObject\Uuid;
 
-final class PostId extends IntValueObject
+final class PostId extends Uuid
 {
-    public function __toString(): string
-    {
-        return (string) $this->value();
-    }
 }

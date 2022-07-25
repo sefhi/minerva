@@ -12,6 +12,8 @@
          stopOnError="true"
          stopOnFailure="true"
          stopOnRisky="true"
+         convertNoticesToExceptions="false"
+         convertWarningsToExceptions="false"
 >
     <php>
         <env name="APP_ENV" value="test" force="true" />
@@ -20,6 +22,7 @@
         <env name="SHELL_VERBOSITY" value="-1" />
         <env name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <env name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
         <server name="KERNEL_CLASS" value="App\Kernel" />
     </php>
 

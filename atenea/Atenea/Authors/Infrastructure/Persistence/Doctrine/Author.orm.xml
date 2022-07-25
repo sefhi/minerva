@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="Atenea\Authors\Domain\Author" table="author">
-    <id name="id" type="author_id" column="id">
-      <generator strategy="IDENTITY"/>
-    </id>
+    <id name="id" type="author_id" column="id" length="36" />
 
     <embedded name="name" class="Atenea\Shared\Domain\ValueObject\Name" use-column-prefix="false" />
     <embedded name="username" class="Atenea\Shared\Domain\ValueObject\Username" use-column-prefix="false" />

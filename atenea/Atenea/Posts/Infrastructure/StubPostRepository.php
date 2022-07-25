@@ -13,9 +13,9 @@ use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Posts\Domain\PostTitle;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
-use Atenea\Shared\Domain\ValueObject\Author\AuthorId;
-use Atenea\Tests\Shared\Domain\MotherCreator;
+use Atenea\Shared\Domain\ValueObject\AuthorId;
 use JsonException;
+
 use function Lambdish\Phunctional\map;
 
 final class StubPostRepository implements PostRepository
@@ -42,10 +42,10 @@ final class StubPostRepository implements PostRepository
 
         return map(function (array $post) {
             return Post::create(
+                new PostId($post['id']),
                 new PostTitle($post['title']),
                 new PostContent($post['body']),
-                new AuthorId($post['userId']),
-                new PostId($post['id'])
+                $this->getAuthor(new AuthorId($post['userId'])),
             );
         }, $resultPost);
     }
@@ -56,10 +56,10 @@ final class StubPostRepository implements PostRepository
     public function save(PostCreatorDto $dto): bool
     {
         Post::create(
+            $dto->getId(),
             $dto->getTitle(),
             $dto->getContent(),
-            $dto->getAuthor()->getId(),
-            new PostId(MotherCreator::random()->numberBetween()),
+            $dto->getAuthor(),
         );
 
         return true;
