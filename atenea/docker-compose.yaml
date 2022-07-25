@@ -36,4 +36,3 @@ networks:
     name: minerva-network
   net-minerva-mysql:
     name: net-minerva-mysql
-    external: true
