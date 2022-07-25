@@ -52,7 +52,7 @@ composer composer-install ci composer-update composer-require cr composer-dump c
 			--no-ansi
 
 # 🐳 Docker Compose
-start:
+start: create_env_file
 	@echo "🚀 Deploy!!!"
 	$(DOCKER_COMPOSE) up -d
 start-atenea: create_env_file
