@@ -41,7 +41,7 @@ jobs:
       - name: Migrations
         run: |-
           cd atenea
-          make migration-force
+          make migrate-force
 
       - name: Fixtures
         run: |-
