@@ -20,9 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Services Docker Compose
-        run: docker-compose up
-
       - name: 🐳 Start all the environment
         run: |- 
           cd atenea
