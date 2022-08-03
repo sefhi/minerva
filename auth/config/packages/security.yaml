@@ -18,7 +18,6 @@ security:
             pattern: ^/auth
             security: true
             stateless: true
-            oauth2: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
