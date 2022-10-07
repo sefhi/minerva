@@ -28,7 +28,7 @@ generate-public-key:
 # 🐘 Composer
 composer-install ci: ACTION=install
 
-composer-update: ACTION=update $(module)
+composer-update cu: ACTION=update $(module)
 
 composer-require cr: ACTION=require $(module)
 
