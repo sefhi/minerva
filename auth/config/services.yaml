@@ -20,13 +20,5 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Controller\:
-        resource: '../src/Controller'
-        tags: [ 'controller.service_arguments' ]
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
-
-    ### Type-hinted
-#    Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface: '@Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory'
-#    Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface: '@Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory'

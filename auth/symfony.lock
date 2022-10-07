@@ -14,7 +14,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "2.4",
-            "ref": "ddddd8249dd55bbda16fa7a45bb7499ef6f8e90e"
+            "ref": "da713d006953b90d1c085c1be480ecdd6c4a95e0"
         },
         "files": [
             "config/packages/doctrine.yaml",
@@ -28,7 +28,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "3.1",
-            "ref": "ee609429c9ee23e22d6fa5728211768f51ed2818"
+            "ref": "1d01ec03c6ecbd67c3375c5478c9a423ae5d6a33"
         },
         "files": [
             "config/packages/doctrine_migrations.yaml",
@@ -48,7 +48,7 @@
         ]
     },
     "symfony/console": {
-        "version": "6.0",
+        "version": "6.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -65,14 +65,14 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "1.0",
-            "ref": "c0eeb50665f0f77226616b6038a9b06c03752d8e"
+            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b172"
         },
         "files": [
             ".env"
         ]
     },
     "symfony/framework-bundle": {
-        "version": "6.0",
+        "version": "6.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -91,7 +91,7 @@
         ]
     },
     "symfony/maker-bundle": {
-        "version": "1.43",
+        "version": "1.47",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -100,12 +100,12 @@
         }
     },
     "symfony/routing": {
-        "version": "6.0",
+        "version": "6.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "6.0",
-            "ref": "eb3b377a4dc07006c4bdb2c773652cc9434f5246"
+            "version": "6.1",
+            "ref": "a44010c0d06989bd4f154aa07d2542d47caf5b83"
         },
         "files": [
             "config/packages/routing.yaml",
@@ -113,7 +113,7 @@
         ]
     },
     "symfony/security-bundle": {
-        "version": "6.0",
+        "version": "6.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
