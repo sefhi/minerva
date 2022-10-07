@@ -37,7 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Auth\\": "src/"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {

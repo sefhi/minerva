@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Controller;
+namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

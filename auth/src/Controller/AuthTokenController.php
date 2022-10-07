@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Controller\Auth;
+namespace App\Controller;
 
 use League\OAuth2\Server\AuthorizationServer;
 use Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface;
@@ -16,8 +16,9 @@ final class AuthTokenController extends AbstractController
 
 
     public function __construct(
-        private HttpFoundationFactoryInterface $httpFoundationFactory,
-        private HttpMessageFactoryInterface $httpMessageFactory
+//        private readonly HttpFoundationFactoryInterface $httpFoundationFactory,
+//        private readonly HttpMessageFactoryInterface $httpMessageFactory
+            private readonly AuthorizationServer $server
     )
     {
     }
@@ -28,7 +29,7 @@ final class AuthTokenController extends AbstractController
         $encryptionKey = getenv('ENCRYPTION_KEY');
         $privateKeyPath = getenv('PRIVATE_KEY');
 
-//        $this->server->respondToAccessTokenRequest();
+        $this->server->respondToAccessTokenRequest();
         return $this->json('Hola');
     }
 }
