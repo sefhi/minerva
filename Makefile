@@ -22,7 +22,7 @@ current:
 start:
 	@docker-compose up -d
 	@cd $(CURRENT-DIR)/atenea && make start
-#	@cd $(CURRENT-DIR)/auth && make start
+	@cd $(CURRENT-DIR)/auth && make start
 #	@cd $(CURRENT-DIR)/frontend && make start
 	reset
 start-mysql:
@@ -30,5 +30,7 @@ start-mysql:
 start-auth:
 	@cd $(CURRENT-DIR)/auth && make start
 stop:
-	@cd $(CURRENT-DIR)/backend && make stop
+	@docker-compose stop
+	@cd $(CURRENT-DIR)/atenea && make stop
+	@cd $(CURRENT-DIR)/auth && make stop
 	@cd $(CURRENT-DIR)/frontend && make stop
