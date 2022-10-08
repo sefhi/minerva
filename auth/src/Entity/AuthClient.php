@@ -5,21 +5,22 @@ namespace App\Entity;
 use App\Repository\AuthClientRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 use Ramsey\Uuid\UuidInterface;
 
 #[ORM\Entity(repositoryClass: AuthClientRepository::class)]
-class AuthClient
+class AuthClient implements JsonSerializable
 {
     #[ORM\Id, ORM\Column(type: 'uuid', unique: true)]
     private UuidInterface $id;
 
-    #[ORM\Column(length: 32)]
+    #[ORM\Column(length: 32, unique: true)]
     private string $identifier;
 
     #[ORM\Column(length: 128)]
     private string $name;
 
-    #[ORM\Column(length: 128)]
+    #[ORM\Column(length: 128, unique: true)]
     private string $secret;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -32,7 +33,15 @@ class AuthClient
     private ?string $scopes = null;
 
     #[ORM\Column]
-    private bool $active;
+    private bool $active = true;
+
+    /**
+     * @param UuidInterface $id
+     */
+    public function setId(UuidInterface $id): void
+    {
+        $this->id = $id;
+    }
 
     public function getId(): UuidInterface
     {
@@ -121,5 +130,10 @@ class AuthClient
         $this->active = $active;
 
         return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return get_object_vars($this);
     }
 }
