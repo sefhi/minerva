@@ -13,9 +13,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class TokenController extends AbstractController
+final class CreateClientController extends AbstractController
 {
-
     public function __construct(private readonly AuthClientRepository $authClientRepository)
     {
     }
@@ -23,10 +22,16 @@ final class TokenController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/auth/token')]
+    #[Route('/auth/client', methods: ['POST'])]
     public function __invoke(): JsonResponse
     {
-        
-        return $this->json('token', Response::HTTP_OK);
+        $client = new AuthClient();
+        $client->setId(Uuid::uuid4());
+        $client->setName('Pepito');
+        $client->setIdentifier( hash('md5', random_bytes(16)));
+        $client->setSecret( hash('sha512', random_bytes(32)));
+
+        $this->authClientRepository->save($client, true);
+        return $this->json($client, Response::HTTP_OK);
     }
 }
