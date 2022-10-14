@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\AuthClient;
+use App\Entity\AuthToken;
+use App\Repository\AuthClientRepository;
 use Exception;
+use League\OAuth2\Server\Exception\OAuthServerException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class TokenController extends AbstractController
 {
 
-    public function __construct()
+    public function __construct(private AuthClientRepository $authClientRepository)
     {
     }
 
@@ -28,7 +31,9 @@ final class TokenController extends AbstractController
         //1º validar request client
         $client = $this->validateClient($request);
         //2º validar user si grandType es password
-        $user = $this->validateUser($request, $client);
+//        $user = $this->validateUser($request, $client);
+        //3º access token
+        $this->accessToken();
 
         return $this->json('token', Response::HTTP_OK);
     }
@@ -68,6 +73,8 @@ final class TokenController extends AbstractController
 
             return [$username, $password];
         }
+
+        throw OAuthServerException::unsupportedGrantType();
     }
 
     private function getClientCredentials(Request $request): array
@@ -76,6 +83,16 @@ final class TokenController extends AbstractController
         $secret = $request->get('secret');
 
         return [$clientId, $secret];
+    }
+
+    private function accessToken()
+    {
+
+        //Busco el client
+        $this->authClientRepository->findBy(['identifier' => $request->get('client_id')]);
+        $uniqueIdentifier = \bin2hex(\random_bytes(40));
+        $authToken = new AuthToken();
+        $authToken->setClientId();
     }
 
 }

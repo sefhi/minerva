@@ -64,3 +64,20 @@ clear:
 
 bash:
 	$(DOCKER_COMPOSE) exec -it $(CONTAINER) /bin/bash
+
+# 📦 Database
+create-database:
+	$(SYMFONY) doctrine:database:create --if-not-exists
+	@echo "🎊 Database created!"
+
+#doctrine:migrations:migrate
+d-m-m:
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction
+
+#make:migration
+m-m:
+	$(SYMFONY) make:migration
+
+#fixtures
+fixtures:
+	$(SYMFONY) doctrine:fixtures:load --no-interaction
