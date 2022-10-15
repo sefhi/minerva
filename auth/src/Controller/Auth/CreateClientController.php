@@ -9,9 +9,12 @@ use App\Repository\AuthClientRepository;
 use Auth\Clients\Domain\Client;
 use Auth\Clients\Domain\ClientCredentialsParam;
 use Auth\Clients\Domain\ClientFindRepository;
+use Auth\Clients\Domain\ClientGrants;
 use Auth\Clients\Domain\ClientIdentifier;
 use Auth\Clients\Domain\ClientName;
+use Auth\Clients\Domain\ClientRedirectUris;
 use Auth\Clients\Domain\ClientSaveRepository;
+use Auth\Clients\Domain\ClientScopes;
 use Auth\Clients\Domain\ClientSecret;
 use Exception;
 use Ramsey\Uuid\Uuid;
@@ -40,9 +43,12 @@ final class CreateClientController extends AbstractController
             Uuid::uuid4(),
             new ClientCredentialsParam(
                 new ClientIdentifier(hash('md5', random_bytes(16))),
-                new ClientName('Pepito9'),
+                new ClientName('Pepito10'),
                 new ClientSecret(hash('sha512', random_bytes(32))),
-            )
+            ),
+            new ClientRedirectUris(['sdasd']),
+            new ClientGrants(['adad']),
+            new ClientScopes(['adad']),
         );
 
 
