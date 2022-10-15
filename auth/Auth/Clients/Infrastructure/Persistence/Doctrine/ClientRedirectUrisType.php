@@ -16,10 +16,4 @@ final class ClientRedirectUrisType extends JsonType
     {
         return self::NAME;
     }
-
-    protected function convertDatabaseValues(array $values): array
-    {
-        return array_map(static fn(string $value) => new ClientRedirectUris($value), $values);
-    }
-
 }
