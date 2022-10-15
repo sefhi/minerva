@@ -15,6 +15,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+            Auth:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Auth/Clients/Infrastructure/Persistence/Doctrine'
+                prefix: 'Auth\Clients\Domain'
+                alias: 'Auth\Clients\Domain'
 
 when@test:
     doctrine:

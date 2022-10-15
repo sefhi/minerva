@@ -5,14 +5,11 @@
     <entity name="Auth\Clients\Domain\Client" table="auth_client">
         <id name="id" type="uuid" length="36" column="id" />
 
-<!--        Falta Emmbedable del parameter object que engloba estos tres atributos-->
-        <embedded name="identifier" class="Auth\Clients\Domain\ClientIdentifier" use-column-prefix="false"/>
-        <embedded name="name" class="Auth\Clients\Domain\ClientName" use-column-prefix="false"/>
-        <embedded name="secret" class="Auth\Clients\Domain\ClientSecret" use-column-prefix="false"/>
+        <embedded name="credentials" class="Auth\Clients\Domain\ClientCredentialsParam" use-column-prefix="false"/>
 
-<!--        ***** CUSTOM TYPES ***** -->
-<!--        <field name="grants" type="oauth2_grant" nullable="true"/>-->
-<!--        <field name="redirectUris" type="oauth2_redirect_uri" nullable="true"/>-->
-<!--        <field name="scopes" type="oauth2_scope" nullable="true"/>-->
+        <field name="grants" type="oauth2_grant" nullable="true"/>
+        <field name="redirectUris" type="oauth2_redirect_uri" nullable="true"/>
+        <field name="scopes" type="oauth2_scope" nullable="true"/>
+        <field name="active" type="boolean"/>
     </entity>
 </doctrine-mapping>
