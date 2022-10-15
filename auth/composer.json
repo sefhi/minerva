@@ -40,12 +40,14 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "Auth\\": "Auth/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Auth\\Tests\\": "tests/"
+            "Auth\\Tests\\": "tests/Auth",
+            "Tests\\": "tests/src"
         }
     },
     "replace": {

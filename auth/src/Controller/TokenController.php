@@ -85,7 +85,7 @@ final class TokenController extends AbstractController
         return [$clientId, $secret];
     }
 
-    private function accessToken()
+    private function accessToken(Request $request)
     {
 
         //Busco el client

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Auth;
 
 use App\Entity\AuthClient;
 use App\Repository\AuthClientRepository;
