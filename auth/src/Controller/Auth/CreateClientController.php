@@ -8,6 +8,7 @@ use App\Entity\AuthClient;
 use App\Repository\AuthClientRepository;
 use Auth\Clients\Domain\Client;
 use Auth\Clients\Domain\ClientCredentialsParam;
+use Auth\Clients\Domain\ClientFindRepository;
 use Auth\Clients\Domain\ClientIdentifier;
 use Auth\Clients\Domain\ClientName;
 use Auth\Clients\Domain\ClientSaveRepository;
@@ -22,7 +23,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class CreateClientController extends AbstractController
 {
-    public function __construct(private readonly ClientSaveRepository $repository)
+    public function __construct(
+        private readonly ClientSaveRepository $saveRepository,
+        private readonly ClientFindRepository $findRepository,
+    )
     {
     }
 
@@ -36,13 +40,16 @@ final class CreateClientController extends AbstractController
             Uuid::uuid4(),
             new ClientCredentialsParam(
                 new ClientIdentifier(hash('md5', random_bytes(16))),
-                new ClientName('Pepito'),
+                new ClientName('Pepito9'),
                 new ClientSecret(hash('sha512', random_bytes(32))),
             )
         );
 
 
-        $this->repository->save($client);
+        $this->saveRepository->save($client);
+
+        $client = $this->findRepository->findByIdentifier($client->getCredentials()->getIdentifier());
+
         return $this->json($client, Response::HTTP_OK);
     }
 }

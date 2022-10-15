@@ -9,4 +9,6 @@ use Ramsey\Uuid\UuidInterface;
 interface ClientFindRepository
 {
     public function find(UuidInterface $id): Client;
+
+    public function findByIdentifier(ClientIdentifier $identifier): Client;
 }

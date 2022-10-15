@@ -7,9 +7,9 @@
 
         <embedded name="credentials" class="Auth\Clients\Domain\ClientCredentialsParam" use-column-prefix="false"/>
 
-        <field name="grants" type="oauth2_grant" nullable="true"/>
-        <field name="redirectUris" type="oauth2_redirect_uri" nullable="true"/>
-        <field name="scopes" type="oauth2_scope" nullable="true"/>
+        <field name="grants" type="auth_grant" nullable="true"/>
+        <field name="redirectUris" type="auth_redirect_uris" nullable="true"/>
+        <field name="scopes" type="auth_scopes" nullable="true"/>
         <field name="active" type="boolean"/>
     </entity>
 </doctrine-mapping>

@@ -4,7 +4,7 @@ doctrine:
         types:
             auth_grant: Auth\Clients\Infrastructure\Persistence\Doctrine\ClientGrantType
             auth_redirect_uris: Auth\Clients\Infrastructure\Persistence\Doctrine\ClientRedirectUrisType
-            auth_scopes_uris: Auth\Clients\Infrastructure\Persistence\Doctrine\ClientScopesType
+            auth_scopes: Auth\Clients\Infrastructure\Persistence\Doctrine\ClientScopesType
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '13'
