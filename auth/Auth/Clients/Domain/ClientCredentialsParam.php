@@ -10,7 +10,7 @@ final class ClientCredentialsParam
     public function __construct(
         private ClientIdentifier $identifier,
         private ClientName $name,
-        private ClientSecret $secret
+        private ClientSecret $secret,
     )
     {
     }

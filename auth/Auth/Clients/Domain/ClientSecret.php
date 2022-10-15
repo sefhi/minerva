@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain;
 
-final class ClientSecret
+use Auth\Shared\Domain\ValueObject\StringValueObject;
+
+final class ClientSecret extends StringValueObject
 {
 
 }
