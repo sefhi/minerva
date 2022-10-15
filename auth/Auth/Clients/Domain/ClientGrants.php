@@ -7,4 +7,17 @@ namespace Auth\Clients\Domain;
 final class ClientGrants
 {
 
+    public function __construct(private array $values)
+    {
+    }
+
+    /**
+     * @return array
+     */
+    public function getValues(): array
+    {
+        return $this->values;
+    }
+
+
 }
