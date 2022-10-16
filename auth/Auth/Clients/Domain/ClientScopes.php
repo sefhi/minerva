@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Domain\ValueObjects;
+namespace Auth\Clients\Domain;
 
 use Auth\Shared\Domain\ValueObject\ArrayValues;
 

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain;
 
-use Auth\Clients\Domain\ValueObjects\ClientGrants;
-use Auth\Clients\Domain\ValueObjects\ClientRedirectUris;
-use Auth\Clients\Domain\ValueObjects\ClientScopes;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
