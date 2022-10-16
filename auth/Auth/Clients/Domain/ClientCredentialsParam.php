@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain;
 
+use Auth\Clients\Domain\ValueObjects\ClientIdentifier;
+use Auth\Clients\Domain\ValueObjects\ClientName;
+use Auth\Clients\Domain\ValueObjects\ClientSecret;
 use Exception;
 
 final class ClientCredentialsParam

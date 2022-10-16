@@ -6,7 +6,7 @@ namespace Auth\Clients\Infrastructure\Persistence;
 
 use Auth\Clients\Domain\Client;
 use Auth\Clients\Domain\ClientFindRepository;
-use Auth\Clients\Domain\ClientIdentifier;
+use Auth\Clients\Domain\ValueObjects\ClientIdentifier;
 use Auth\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use Ramsey\Uuid\UuidInterface;
 
