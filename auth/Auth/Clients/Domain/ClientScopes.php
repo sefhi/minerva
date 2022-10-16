@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain;
 
-final class ClientScopes
+use Auth\Shared\Domain\ValueObject\ArrayValues;
+
+final class ClientScopes implements ArrayValues
 {
     public function __construct(private array $values)
     {

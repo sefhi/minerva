@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain;
 
+use Auth\Shared\Domain\ValueObject\ArrayValues;
 use InvalidArgumentException;
 
-final class ClientGrants
+final class ClientGrants implements ArrayValues
 {
 
-    public function __construct(private array $values)
+    public function __construct(private readonly array $values)
     {
         $this->ensureIsValidGrant($this->values);
     }
 
     /**
-     * @return array
+     * @inheritDoc
      */
     public function getValues(): array
     {

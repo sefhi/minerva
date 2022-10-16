@@ -5,17 +5,31 @@ declare(strict_types=1);
 namespace Auth\Clients\Application\Create;
 
 use Auth\Clients\Domain\Client;
+use Auth\Clients\Domain\ClientCredentialsParam;
 use Auth\Clients\Domain\ClientSaveRepository;
+use Exception;
 
 final class CreateClientCommandHandler
 {
 
-    public function __construct(private ClientSaveRepository $repository)
+    public function __construct(private readonly ClientSaveRepository $repository)
     {
     }
 
-    public function __invoke(CreateClientCommand $command)
+    /**
+     * @throws Exception
+     */
+    public function __invoke(CreateClientCommand $command) : Client
     {
-//        $this->repository->save();
+        $client = Client::create(
+            ClientCredentialsParam::createByName($command->getName()),
+            $command->getRedirectUris(),
+            $command->getGrants(),
+            $command->getScopes(),
+        );
+
+        $this->repository->save($client);
+
+        return $client;
     }
 }

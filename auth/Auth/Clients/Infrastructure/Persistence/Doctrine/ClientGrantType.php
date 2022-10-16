@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Infrastructure\Persistence\Doctrine;
 
-use Doctrine\DBAL\Types\JsonType;
+use Auth\Shared\Infrastructure\Persistence\Doctrine\Dbal\Type\AbstractJsonType;
 
-final class ClientGrantType extends JsonType
+final class ClientGrantType extends AbstractJsonType
 {
 
     private const NAME = 'auth_grant';

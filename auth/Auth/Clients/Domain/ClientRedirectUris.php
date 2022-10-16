@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain;
 
+use Auth\Shared\Domain\ValueObject\ArrayValues;
 use InvalidArgumentException;
 
-final class ClientRedirectUris
+final class ClientRedirectUris implements ArrayValues
 {
     public function __construct(private array $values)
     {
