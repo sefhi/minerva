@@ -41,6 +41,7 @@ start: create_env_file generate-private-key generate-public-key
 	@echo "🚀 Deploy!!!"
 	@$(DOCKER_COMPOSE) up -d
 	make deps
+	make d-m-m
 stop:
 	$(DOCKER_COMPOSE) stop
 down:

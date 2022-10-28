@@ -28,7 +28,7 @@ class AuthToken
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?AuthClient $clientId = null;
+    private ?AuthClient $client = null;
 
     public function getId(): ?int
     {
@@ -83,14 +83,14 @@ class AuthToken
         return $this;
     }
 
-    public function getClientId(): ?AuthClient
+    public function getClient(): ?AuthClient
     {
-        return $this->clientId;
+        return $this->client;
     }
 
-    public function setClientId(?AuthClient $clientId): self
+    public function setClient(?AuthClient $client): self
     {
-        $this->clientId = $clientId;
+        $this->client = $client;
 
         return $this;
     }

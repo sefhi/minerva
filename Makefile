@@ -9,11 +9,11 @@ build: start-mysql install-services
 
 install-services:
 	make install-apps
-install-apps: install-atenea
+install-apps: install-atenea install-auth
 install-atenea:
 	@cd $(CURRENT-DIR)/atenea && make
-#install-blog:
-#	@cd $(CURRENT-DIR)/frontend && make
+install-auth:
+	@cd $(CURRENT-DIR)/auth && make
 
 current:
 	@echo $(CURRENT-DIR)

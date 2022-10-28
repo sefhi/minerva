@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Auth\Clients\Domain;
 
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
+use League\Bundle\OAuth2ServerBundle\Model\AbstractClient;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -14,7 +15,7 @@ final class Client extends AggregateRoot
         private readonly UuidInterface $id,
         private ClientCredentialsParam $credentials,
         private ?ClientRedirectUris $redirectUris = null,
-        private ?ClientGrants $grants = null,
+        private ?array $grants = null,
         private ?ClientScopes $scopes = null,
         private bool $active = true,
     ) {
@@ -52,7 +53,7 @@ final class Client extends AggregateRoot
         return $this->redirectUris;
     }
 
-    public function getGrants(): ?ClientGrants
+    public function getGrants(): ?array
     {
         return $this->grants;
     }
@@ -65,6 +66,21 @@ final class Client extends AggregateRoot
     public function isActive(): bool
     {
         return $this->active;
+    }
+
+    public function isGrantSupported(Client $client, ?string $grant): bool
+    {
+        if (null === $grant) {
+            return true;
+        }
+
+        $grants = $client->getGrants();
+
+        if (empty($grants)) {
+            return true;
+        }
+
+        return in_array($grant, $client->getGrants(), true);
     }
 
 }
