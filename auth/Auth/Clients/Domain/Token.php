@@ -14,7 +14,7 @@ final class Token extends AggregateRoot
     private function __construct(
         private UuidInterface $id,
         private Client $client,
-        private DateTimeImmutable $expiry,
+        private readonly DateTimeImmutable $expiry,
         private bool $revoked,
         private ?TokenScope $scopes = null,
         private ?string $user = null,

@@ -24,7 +24,8 @@
         "symfony/psr-http-message-bridge": "^2.1",
         "symfony/runtime": "^6.0",
         "symfony/security-bundle": "^6.0",
-        "symfony/yaml": "^6.0"
+        "symfony/yaml": "^6.0",
+        "ext-openssl": "*"
     },
     "config": {
         "allow-plugins": {
