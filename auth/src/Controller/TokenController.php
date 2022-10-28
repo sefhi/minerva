@@ -12,8 +12,11 @@ use Auth\Clients\Domain\ClientFindRepository;
 use Auth\Clients\Domain\ClientIdentifier;
 use Auth\Clients\Domain\ClientSecret;
 use Auth\Clients\Domain\Grant;
+use Auth\Clients\Domain\Token;
+use Auth\Clients\Domain\TokenSaveRepository;
 use Exception;
 use League\OAuth2\Server\Exception\OAuthServerException;
+use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +28,7 @@ final class TokenController extends AbstractController
 
     public function __construct(
         private ClientFindRepository $findClientRepository,
+        private TokenSaveRepository $tokenSaveRepository,
     )
     {
     }
@@ -50,12 +54,21 @@ final class TokenController extends AbstractController
         [$clientId, $secret] = $this->getClientCredentials($request);
         $grantType = $request->get('grant_type');
 
+        $identifier = new ClientIdentifier($clientId);
+        $client = $this->findClientRepository->findByIdentifier($identifier);
         if($this->findClientRepository->validateClient(
-            new ClientIdentifier($clientId),
+            $identifier,
             new ClientSecret($secret),
             Grant::from($grantType))
         ) {
+            $token = Token::create(
+                Uuid::uuid4(),
+                $client,
+                new \DateTimeImmutable(),
+                false,
+            );
 
+            $this->tokenSaveRepository->save($token);
         }
 
         return [$clientId, $secret];

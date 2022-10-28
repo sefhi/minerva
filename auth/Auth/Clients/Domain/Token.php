@@ -4,21 +4,39 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain;
 
+use Auth\Shared\Domain\Aggregate\AggregateRoot;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
-final class Token
+final class Token extends AggregateRoot
 {
 
-    public function __construct(
+    private function __construct(
         private UuidInterface $id,
         private Client $client,
         private DateTimeImmutable $expiry,
-        private TokenScope $scopes,
         private bool $revoked,
+        private ?TokenScope $scopes = null,
         private ?string $user = null,
-    )
-    {
+    ) {
+    }
+
+    public static function create(
+        UuidInterface $id,
+        Client $client,
+        DateTimeImmutable $expiry,
+        bool $revoked,
+        ?TokenScope $scopes = null,
+        ?string $user = null,
+    ): self {
+        return new self(
+            $id,
+            $client,
+            $expiry,
+            $revoked,
+            $scopes,
+            $user
+        );
     }
 
     /**

@@ -30,19 +30,15 @@ final class DoctrineClientFindRepository extends DoctrineRepository implements C
         /** @var Client $client */
         $client = $this->findByIdentifier($identifier);
 
-        if (null === $client) {
+
+        if (null === $client ||
+            !$client->isActive() ||
+            !$client->isGrantSupported($client, $grant->value)
+        ) {
             return false;
         }
 
-        if (!$client->isActive()) {
-            return false;
-        }
-
-        if (!$client->isGrantSupported($client, $grant->value)) {
-            return false;
-        }
-
-        if (hash_equals((string)$client->getCredentials()->getSecret(), (string)$secret)) {
+        if ((string)$client->getCredentials()->getSecret() === (string)$secret) {
             return true;
         }
 
