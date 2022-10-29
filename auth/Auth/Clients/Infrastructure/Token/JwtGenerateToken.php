@@ -10,6 +10,7 @@ use Auth\Clients\Domain\AccessToken\GenerateToken;
 use Auth\Clients\Domain\AccessToken\TokeType;
 use Auth\Clients\Domain\Bearer\TokenBearer;
 use Auth\Clients\Domain\Token;
+use Auth\Clients\Domain\Token\TokenFindRepository;
 use DateTimeImmutable;
 use DateTimeZone;
 use Lcobucci\Clock\SystemClock;
@@ -38,7 +39,7 @@ final class JwtGenerateToken implements GenerateToken
     private Configuration $configuration;
 
 
-    public function __construct(private TokenFindRepository $tokenFindRepository)
+    public function __construct(private readonly TokenFindRepository $tokenFindRepository)
     {
 
     }
@@ -105,7 +106,6 @@ final class JwtGenerateToken implements GenerateToken
 
         $claims = $token->claims();
 
-        //TOdo implement pattern repository tokenFind
         return $this->tokenFindRepository->findOrFail(Uuid::fromString($claims->get('jti')));
     }
 }
