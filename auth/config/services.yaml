@@ -26,3 +26,5 @@ services:
         resource: '../Auth/'
         autowire: true
         autoconfigure: true
+
+    Auth\Clients\Infrastructure\Symfony\Security\BearerTokenAuthenticator: ~
