@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Auth;
 
+use App\Controller\Auth\Dto\AccessTokenDto;
 use App\Entity\AuthToken;
-use Auth\Clients\Domain\AccessToken\CryptKey;
+use Auth\Clients\Application\GenerateToken\GenerateTokenCommand;
+use Auth\Clients\Application\GenerateToken\GenerateTokenCommandHandler;
 use Auth\Clients\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Clients\Domain\AccessToken\GenerateToken;
 use Auth\Clients\Domain\ClientFindRepository;
@@ -23,13 +25,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class TokenController extends AbstractController
+final class GenerateTokenController extends AbstractController
 {
 
     public function __construct(
-        private ClientFindRepository $findClientRepository,
-        private TokenSaveRepository $tokenSaveRepository,
-        private GenerateToken $generateToken,
+        private GenerateTokenCommandHandler $commandHandler
     )
     {
     }
@@ -41,13 +41,17 @@ final class TokenController extends AbstractController
     public function __invoke(Request $request): JsonResponse
     {
         //1º validar request client
-        $client = $this->validateClient($request);
-        //2º validar user si grandType es password
-//        $user = $this->validateUser($request, $client);
-        //3º access token
-//        $this->accessToken();
+        [$clientId, $secret, $grantType] = $this->getClientCredentials($request);
 
-        return $this->json('token', Response::HTTP_OK);
+        $accessToken = ($this->commandHandler)(GenerateTokenCommand::create(
+            ClientIdentifier::fromString($clientId),
+            ClientSecret::fromString($secret),
+            Grant::from($grantType),
+            getenv('OAUTH_PRIVATE_KEY'),
+            getenv('OAUTH_PUBLIC_KEY'),
+        ));
+
+        return $this->json(AccessTokenDto::fromDomain($accessToken), Response::HTTP_OK);
     }
 
     private function validateClient(Request $request): array
@@ -118,8 +122,9 @@ final class TokenController extends AbstractController
     {
         $clientId = $request->get('client_id');
         $secret = $request->get('secret');
+        $grantType = $request->get('grant_type');
 
-        return [$clientId, $secret];
+        return [$clientId, $secret, $grantType];
     }
 
     private function accessToken(Request $request)

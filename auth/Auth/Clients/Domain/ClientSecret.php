@@ -12,4 +12,9 @@ final class ClientSecret extends StringValueObject
     {
         return $this->value();
     }
+
+    public static function fromString(string $value) : self
+    {
+        return new self($value);
+    }
 }

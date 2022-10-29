@@ -29,4 +29,9 @@ final class TokenBearer extends StringValueObject
             );
         }
     }
+
+    public static function fromString(string $value): self
+    {
+        return new self($value);
+    }
 }

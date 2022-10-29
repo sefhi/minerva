@@ -10,6 +10,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        token:
+            pattern: ^/api/token
+            security: false
         api:
             pattern: ^/api/test
             security: true

@@ -9,4 +9,8 @@ use Auth\Shared\Domain\ValueObject\StringValueObject;
 final class ClientIdentifier extends StringValueObject
 {
 
+    public static function fromString(string $value): self
+    {
+        return new self($value);
+    }
 }

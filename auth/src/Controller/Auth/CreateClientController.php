@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Auth;
 
-use Auth\Clients\Application\Create\CreateClientCommand;
-use Auth\Clients\Application\Create\CreateClientCommandHandler;
+use Auth\Clients\Application\CreateClient\CreateClientCommand;
+use Auth\Clients\Application\CreateClient\CreateClientCommandHandler;
 use Auth\Clients\Domain\ClientGrants;
 use Auth\Clients\Domain\ClientName;
 use Exception;
