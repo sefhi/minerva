@@ -9,7 +9,8 @@ league_oauth2_server:
         available: ['email']
         default: ['email']
     persistence:
-        doctrine: null
+        doctrine:
+            entity_manager:       default
 
 when@test:
     league_oauth2_server:
