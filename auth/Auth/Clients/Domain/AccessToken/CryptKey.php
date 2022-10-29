@@ -24,35 +24,22 @@ final class CryptKey
 
     private const FILE_PREFIX = 'file://';
 
-    /**
-     * @var string Key contents
-     */
-    protected string $keyContents;
-
-    /**
-     * @var string
-     */
-    protected string $keyPath;
-
-    /**
-     * @var null|string
-     */
-    protected ?string $passPhrase;
 
     /**
      * @param string $keyPath
-     * @param string|null $passPhrase
+     * @param string $passPhrase
      * @param bool $keyPermissionsCheck
      */
-    public function __construct(string $keyPath, string $passPhrase = null, bool $keyPermissionsCheck = true)
-    {
-        $this->passPhrase = $passPhrase;
-
+    private function __construct(
+        private string $keyPath,
+        private readonly string $passPhrase = '',
+        private bool $keyPermissionsCheck = true
+    ) {
         if (!str_starts_with($keyPath, self::FILE_PREFIX) && $this->isValidKey($keyPath, $this->passPhrase ?? '')) {
             $this->keyContents = $keyPath;
             $this->keyPath = '';
             // There's no file, so no need for permission check.
-            $keyPermissionsCheck = false;
+            $this->keyPermissionsCheck = false;
         } elseif (is_file($keyPath)) {
             if (!str_starts_with($keyPath, self::FILE_PREFIX)) {
                 $keyPath = self::FILE_PREFIX . $keyPath;
@@ -70,7 +57,7 @@ final class CryptKey
             throw new LogicException('Unable to read key from file ' . $keyPath);
         }
 
-        if ($keyPermissionsCheck === true) {
+        if ($this->keyPermissionsCheck === true) {
             // Verify the permissions of the key
             $keyPathPerms = decoct(fileperms($this->keyPath) & 0777);
             if (in_array($keyPathPerms, ['400', '440', '600', '640', '660'], true) === false) {
@@ -84,6 +71,14 @@ final class CryptKey
                 );
             }
         }
+    }
+
+    public static function create(
+        string $keyPath,
+        string $passPhrase = '',
+        bool $keyPermissionsCheck = true
+    ): self {
+        return new self($keyPath, $passPhrase, $keyPermissionsCheck);
     }
 
     /**
@@ -113,9 +108,9 @@ final class CryptKey
         $details = openssl_pkey_get_details($pkey);
 
         return $details !== false && in_array(
-            $details['type'] ?? -1,
-            [OPENSSL_KEYTYPE_RSA, OPENSSL_KEYTYPE_EC],
-            true
+                $details['type'] ?? -1,
+                [OPENSSL_KEYTYPE_RSA, OPENSSL_KEYTYPE_EC],
+                true
             );
     }
 

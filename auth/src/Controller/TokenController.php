@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\AuthClient;
 use App\Entity\AuthToken;
-use App\Repository\AuthClientRepository;
-use App\Repository\AuthTokenRepository;
+use Auth\Clients\Domain\AccessToken\CryptKey;
+use Auth\Clients\Domain\AccessToken\GenerateToken;
 use Auth\Clients\Domain\ClientFindRepository;
 use Auth\Clients\Domain\ClientIdentifier;
 use Auth\Clients\Domain\ClientSecret;
@@ -29,6 +28,7 @@ final class TokenController extends AbstractController
     public function __construct(
         private ClientFindRepository $findClientRepository,
         private TokenSaveRepository $tokenSaveRepository,
+        private GenerateToken $generateToken,
     )
     {
     }
@@ -69,6 +69,11 @@ final class TokenController extends AbstractController
             );
 
             $this->tokenSaveRepository->save($token);
+
+            $accessToken = $this->generateToken->generate(
+                CryptKey::create(getenv('OAUTH_PRIVATE_KEY')),
+                $token
+            );
         }
 
         return [$clientId, $secret];

@@ -16,7 +16,7 @@ final class Token extends AggregateRoot
         private Client $client,
         private readonly DateTimeImmutable $expiry,
         private bool $revoked,
-        private ?TokenScope $scopes = null,
+        private array $scopes = [],
         private ?string $user = null,
     ) {
     }
@@ -26,7 +26,7 @@ final class Token extends AggregateRoot
         Client $client,
         DateTimeImmutable $expiry,
         bool $revoked,
-        ?TokenScope $scopes = null,
+        array $scopes = [],
         ?string $user = null,
     ): self {
         return new self(
@@ -64,9 +64,9 @@ final class Token extends AggregateRoot
     }
 
     /**
-     * @return TokenScope
+     * @return array
      */
-    public function getScopes(): TokenScope
+    public function getScopes(): array
     {
         return $this->scopes;
     }

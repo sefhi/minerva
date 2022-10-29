@@ -23,8 +23,10 @@ create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi
 generate-private-key:
 	@if [ ! -f .docker/config/private.key ]; then openssl genrsa -out .docker/config/private.key 2048; fi
+	$(EXEC) chmod 660 .docker/config/private.key
 generate-public-key:
 	@if [ ! -f .docker/config/public.key ]; then openssl rsa -in .docker/config/private.key -pubout -out .docker/config/public.key; fi
+	$(EXEC) chmod 660 .docker/config/public.key
 # 🐘 Composer
 composer-install ci: ACTION=install
 
