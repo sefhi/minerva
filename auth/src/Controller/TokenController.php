@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\AuthToken;
 use Auth\Clients\Domain\AccessToken\CryptKey;
+use Auth\Clients\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Clients\Domain\AccessToken\GenerateToken;
 use Auth\Clients\Domain\ClientFindRepository;
 use Auth\Clients\Domain\ClientIdentifier;
@@ -61,17 +62,19 @@ final class TokenController extends AbstractController
             new ClientSecret($secret),
             Grant::from($grantType))
         ) {
+            $date = new \DateTimeImmutable();
+            $expiredAt = $date->add(new \DateInterval('PT2H'));
             $token = Token::create(
                 Uuid::uuid4(),
                 $client,
-                new \DateTimeImmutable(),
+                $expiredAt,
                 false,
             );
 
             $this->tokenSaveRepository->save($token);
 
             $accessToken = $this->generateToken->generate(
-                CryptKey::create(getenv('OAUTH_PRIVATE_KEY')),
+                CryptKeyPrivate::create(getenv('OAUTH_PRIVATE_KEY')),
                 $token
             );
         }

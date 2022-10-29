@@ -19,7 +19,7 @@ use function sprintf;
 use function str_starts_with;
 use function trigger_error;
 
-final class CryptKey
+abstract class CryptKey
 {
 
     private const FILE_PREFIX = 'file://';
@@ -30,7 +30,7 @@ final class CryptKey
      * @param string $passPhrase
      * @param bool $keyPermissionsCheck
      */
-    private function __construct(
+    protected function __construct(
         private string $keyPath,
         private readonly string $passPhrase = '',
         private bool $keyPermissionsCheck = true
@@ -73,13 +73,11 @@ final class CryptKey
         }
     }
 
-    public static function create(
+    abstract public static function create(
         string $keyPath,
         string $passPhrase = '',
         bool $keyPermissionsCheck = true
-    ): self {
-        return new self($keyPath, $passPhrase, $keyPermissionsCheck);
-    }
+    ): self;
 
     /**
      * Get key contents

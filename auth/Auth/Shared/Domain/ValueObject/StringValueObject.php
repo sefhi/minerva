@@ -14,4 +14,9 @@ abstract class StringValueObject
     {
         return $this->value;
     }
+
+    public function __toString(): string
+    {
+        return $this->value;
+    }
 }
