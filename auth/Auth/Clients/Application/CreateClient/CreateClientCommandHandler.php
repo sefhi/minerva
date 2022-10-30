@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Application\CreateClient;
 
-use Auth\Clients\Domain\Client;
-use Auth\Clients\Domain\ClientCredentialsParam;
-use Auth\Clients\Domain\ClientSaveRepository;
+use Auth\Clients\Domain\Client\Client;
+use Auth\Clients\Domain\Client\ClientCredentialsParam;
+use Auth\Clients\Domain\Client\ClientSaveRepository;
 use Exception;
 
 final class CreateClientCommandHandler

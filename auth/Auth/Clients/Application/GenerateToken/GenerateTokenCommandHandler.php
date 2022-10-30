@@ -7,9 +7,9 @@ namespace Auth\Clients\Application\GenerateToken;
 use Auth\Clients\Domain\AccessToken\AccessToken;
 use Auth\Clients\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Clients\Domain\AccessToken\GenerateToken;
-use Auth\Clients\Domain\ClientFindRepository;
-use Auth\Clients\Domain\Token;
-use Auth\Clients\Domain\TokenSaveRepository;
+use Auth\Clients\Domain\Client\ClientFindRepository;
+use Auth\Clients\Domain\Token\Token;
+use Auth\Clients\Domain\Token\TokenSaveRepository;
 use Ramsey\Uuid\Uuid;
 
 final class GenerateTokenCommandHandler

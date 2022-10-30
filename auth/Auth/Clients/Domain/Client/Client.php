@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Domain;
+namespace Auth\Clients\Domain\Client;
 
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
-use League\Bundle\OAuth2ServerBundle\Model\AbstractClient;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain\Token;
 
-use Auth\Clients\Domain\Token;
 use Ramsey\Uuid\UuidInterface;
 
 interface TokenFindRepository

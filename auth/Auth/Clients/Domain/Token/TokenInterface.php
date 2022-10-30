@@ -1,7 +1,8 @@
 <?php
 
-namespace Auth\Clients\Domain;
+namespace Auth\Clients\Domain\Token;
 
+use Auth\Clients\Domain\Client\Client;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 

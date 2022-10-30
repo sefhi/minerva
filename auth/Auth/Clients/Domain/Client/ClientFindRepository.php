@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Domain;
+namespace Auth\Clients\Domain\Client;
 
 use Ramsey\Uuid\UuidInterface;
 

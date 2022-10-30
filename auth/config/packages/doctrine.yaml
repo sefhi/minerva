@@ -22,7 +22,7 @@ doctrine:
             Auth:
                 type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/Auth/Clients/Infrastructure/Persistence/Doctrine'
+                dir: '%kernel.project_dir%/Auth/Clients/Infrastructure/Persistence/Doctrine/Mapping'
                 prefix: 'Auth\Clients\Domain'
                 alias: 'Auth\Clients\Domain'
 

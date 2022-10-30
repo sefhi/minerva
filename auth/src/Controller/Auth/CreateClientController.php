@@ -6,8 +6,8 @@ namespace App\Controller\Auth;
 
 use Auth\Clients\Application\CreateClient\CreateClientCommand;
 use Auth\Clients\Application\CreateClient\CreateClientCommandHandler;
-use Auth\Clients\Domain\ClientGrants;
-use Auth\Clients\Domain\ClientName;
+use Auth\Clients\Domain\Client\ClientGrants;
+use Auth\Clients\Domain\Client\ClientName;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

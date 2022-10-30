@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Infrastructure\Persistence;
 
-use Auth\Clients\Domain\Client;
-use Auth\Clients\Domain\ClientFindRepository;
-use Auth\Clients\Domain\ClientIdentifier;
-use Auth\Clients\Domain\ClientSecret;
-use Auth\Clients\Domain\Grant;
+use Auth\Clients\Domain\Client\Client;
+use Auth\Clients\Domain\Client\ClientFindRepository;
+use Auth\Clients\Domain\Client\ClientIdentifier;
+use Auth\Clients\Domain\Client\ClientSecret;
+use Auth\Clients\Domain\Client\Grant;
 use Auth\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use Ramsey\Uuid\UuidInterface;
 

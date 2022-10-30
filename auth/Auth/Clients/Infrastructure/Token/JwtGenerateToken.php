@@ -9,7 +9,7 @@ use Auth\Clients\Domain\AccessToken\CryptKey;
 use Auth\Clients\Domain\AccessToken\GenerateToken;
 use Auth\Clients\Domain\AccessToken\TokeType;
 use Auth\Clients\Domain\Bearer\TokenBearer;
-use Auth\Clients\Domain\Token;
+use Auth\Clients\Domain\Token\Token;
 use Auth\Clients\Domain\Token\TokenFindRepository;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -23,7 +23,6 @@ use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use League\OAuth2\Server\Exception\OAuthServerException;
-
 use Ramsey\Uuid\Uuid;
 
 use function class_exists;

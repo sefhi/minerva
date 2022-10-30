@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Infrastructure\Persistence;
 
-use Auth\Clients\Domain\Client;
-use Auth\Clients\Domain\ClientSaveRepository;
+use Auth\Clients\Domain\Client\Client;
+use Auth\Clients\Domain\Client\ClientSaveRepository;
 use Auth\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
 final class DoctrineClientSaveRepository extends DoctrineRepository implements ClientSaveRepository

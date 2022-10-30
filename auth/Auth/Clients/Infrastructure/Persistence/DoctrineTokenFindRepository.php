@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Infrastructure\Persistence\Doctrine;
+namespace Auth\Clients\Infrastructure\Persistence;
 
-use Auth\Clients\Domain\Token;
+use Auth\Clients\Domain\Token\Token;
 use Auth\Clients\Domain\Token\TokenFindRepository;
 use Auth\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use Exception;

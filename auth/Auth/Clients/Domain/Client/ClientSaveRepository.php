@@ -1,6 +1,6 @@
 <?php
 
-namespace Auth\Clients\Domain;
+namespace Auth\Clients\Domain\Client;
 
 interface ClientSaveRepository
 {

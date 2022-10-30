@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Domain;
+namespace Auth\Clients\Domain\Client;
 
 use Auth\Shared\Domain\ValueObject\StringValueObject;
 
-final class ClientName extends StringValueObject
+final class ClientIdentifier extends StringValueObject
 {
 
     public static function fromString(string $value): self

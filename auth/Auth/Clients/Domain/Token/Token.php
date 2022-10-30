@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Domain;
+namespace Auth\Clients\Domain\Token;
 
+use Auth\Clients\Domain\Client\Client;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;

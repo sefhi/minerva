@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Application\CreateClient;
 
-use Auth\Clients\Domain\ClientGrants;
-use Auth\Clients\Domain\ClientName;
-use Auth\Clients\Domain\ClientRedirectUris;
-use Auth\Clients\Domain\ClientScopes;
+use Auth\Clients\Domain\Client\ClientGrants;
+use Auth\Clients\Domain\Client\ClientName;
+use Auth\Clients\Domain\Client\ClientRedirectUris;
+use Auth\Clients\Domain\Client\ClientScopes;
 
 final class CreateClientCommand
 {

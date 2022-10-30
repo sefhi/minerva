@@ -3,7 +3,7 @@
 namespace Auth\Clients\Domain\AccessToken;
 
 use Auth\Clients\Domain\Bearer\TokenBearer;
-use Auth\Clients\Domain\Token;
+use Auth\Clients\Domain\Token\Token;
 
 interface GenerateToken
 {

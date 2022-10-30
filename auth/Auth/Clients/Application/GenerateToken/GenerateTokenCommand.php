@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Application\GenerateToken;
 
-use Auth\Clients\Domain\ClientIdentifier;
-use Auth\Clients\Domain\ClientSecret;
-use Auth\Clients\Domain\Grant;
+use Auth\Clients\Domain\Client\ClientIdentifier;
+use Auth\Clients\Domain\Client\ClientSecret;
+use Auth\Clients\Domain\Client\Grant;
 
 final class GenerateTokenCommand
 {
