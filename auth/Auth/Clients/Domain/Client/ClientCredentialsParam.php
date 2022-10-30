@@ -10,9 +10,9 @@ final class ClientCredentialsParam
 {
 
     private function __construct(
-        private ClientIdentifier $identifier,
-        private ClientName $name,
-        private ClientSecret $secret,
+        private readonly ClientIdentifier $identifier,
+        private readonly ClientName $name,
+        private readonly ClientSecret $secret,
     ) {
     }
 
@@ -35,9 +35,9 @@ final class ClientCredentialsParam
         ClientName $name,
     ): self {
         return new self(
-            new ClientIdentifier(hash('md5', random_bytes(16))),
+            ClientIdentifier::generate(),
             $name,
-            new ClientSecret(hash('sha512', random_bytes(32))),
+            ClientSecret::generate(),
         );
     }
 
