@@ -32,7 +32,7 @@ final class CreateClientController extends AbstractController
 
         $command = CreateClientCommand::create(
             new ClientName($request['name']),
-            new ClientGrants($request['grant'])
+            $request['grant']
         );
         $client = ($this->commandHandler)($command);
 

@@ -23,7 +23,7 @@ class AbstractJsonType extends JsonType
         }
 
         try {
-            return json_encode($value->getValues(), JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
+            return json_encode($value, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
         } catch (JsonException $e) {
             throw ConversionException::conversionFailedSerialization($value, 'json', $e->getMessage(), $e);
         }

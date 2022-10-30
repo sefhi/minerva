@@ -13,17 +13,17 @@ final class CreateClientCommand
 {
 
     private function __construct(
-        private ClientName $name,
-        private ClientGrants $grants,
-        private ?ClientRedirectUris $redirectUris = null,
-        private ?ClientScopes $scopes = null,
-        private bool $active = true,
+        private readonly ClientName $name,
+        private readonly array $grants,
+        private readonly ?ClientRedirectUris $redirectUris = null,
+        private readonly ?ClientScopes $scopes = null,
+        private readonly bool $active = true,
     ) {
     }
 
     public static function create(
         ClientName $name,
-        ClientGrants $grants,
+        array $grants,
         ?ClientRedirectUris $redirectUris = null,
         ?ClientScopes $scopes = null,
         bool $active = true,
@@ -36,7 +36,7 @@ final class CreateClientCommand
         return $this->name;
     }
 
-    public function getGrants(): ClientGrants
+    public function getGrants(): array
     {
         return $this->grants;
     }

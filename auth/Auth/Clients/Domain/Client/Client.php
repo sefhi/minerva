@@ -12,18 +12,18 @@ final class Client extends AggregateRoot
 {
     private function __construct(
         private readonly UuidInterface $id,
-        private ClientCredentialsParam $credentials,
-        private ?ClientRedirectUris $redirectUris = null,
-        private ?array $grants = null,
-        private ?ClientScopes $scopes = null,
-        private bool $active = true,
+        private readonly ClientCredentialsParam $credentials,
+        private readonly ?ClientRedirectUris $redirectUris = null,
+        private readonly ?array $grants = null,
+        private readonly ?ClientScopes $scopes = null,
+        private readonly bool $active = true,
     ) {
     }
 
     public static function create(
         ClientCredentialsParam $credentials,
         ?ClientRedirectUris $redirectUris = null,
-        ?ClientGrants $grants = null,
+        ?array $grants = null,
         ?ClientScopes $scopes = null,
         bool $active = true,
     ): self {

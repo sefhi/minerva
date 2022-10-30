@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Infrastructure\Persistence\Doctrine;
+namespace Auth\Clients\Infrastructure\Persistence\Doctrine\Mapping;
 
 use Doctrine\DBAL\Types\JsonType;
 

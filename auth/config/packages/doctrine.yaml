@@ -2,10 +2,10 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
         types:
-            auth_grant: Auth\Clients\Infrastructure\Persistence\Doctrine\ClientGrantType
-            auth_redirect_uris: Auth\Clients\Infrastructure\Persistence\Doctrine\ClientRedirectUrisType
-            auth_scopes: Auth\Clients\Infrastructure\Persistence\Doctrine\ClientScopesType
-            token_scopes: Auth\Clients\Infrastructure\Persistence\Doctrine\TokenScopesType
+            auth_grant: Auth\Clients\Infrastructure\Persistence\Doctrine\Mapping\ClientGrantType
+            auth_redirect_uris: Auth\Clients\Infrastructure\Persistence\Doctrine\Mapping\ClientRedirectUrisType
+            auth_scopes: Auth\Clients\Infrastructure\Persistence\Doctrine\Mapping\ClientScopesType
+            token_scopes: Auth\Clients\Infrastructure\Persistence\Doctrine\Mapping\TokenScopesType
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '13'
@@ -19,12 +19,18 @@ doctrine:
 #                dir: '%kernel.project_dir%/src/Entity'
 #                prefix: 'App\Entity'
 #                alias: App
-            Auth:
+            AuthClient:
                 type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/Auth/Clients/Infrastructure/Persistence/Doctrine/Mapping'
-                prefix: 'Auth\Clients\Domain'
-                alias: 'Auth\Clients\Domain'
+                dir: '%kernel.project_dir%/Auth/Clients/Infrastructure/Persistence/Doctrine/Mapping/Client'
+                prefix: 'Auth\Clients\Domain\Client'
+                alias: 'Auth\Clients\Domain\Client'
+            AuthToken:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Auth/Clients/Infrastructure/Persistence/Doctrine/Mapping/Token'
+                prefix: 'Auth\Clients\Domain\Token'
+                alias: 'Auth\Clients\Domain\Token'
 
 when@test:
     doctrine:
