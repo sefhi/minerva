@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Auth;
 
+use App\Controller\Auth\Dto\CredentialsDto;
 use Auth\Clients\Application\CreateClient\CreateClientCommand;
 use Auth\Clients\Application\CreateClient\CreateClientCommandHandler;
 use Auth\Clients\Domain\Client\ClientGrants;
@@ -36,6 +37,6 @@ final class CreateClientController extends AbstractController
         );
         $client = ($this->commandHandler)($command);
 
-        return $this->json($client, Response::HTTP_OK);
+        return $this->json(CredentialsDto::fromClientCredentials($client->getCredentials()), Response::HTTP_OK);
     }
 }

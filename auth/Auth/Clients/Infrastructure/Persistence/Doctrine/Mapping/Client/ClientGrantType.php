@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Infrastructure\Persistence\Doctrine\Mapping;
+namespace Auth\Clients\Infrastructure\Persistence\Doctrine\Mapping\Client;
 
 use Auth\Shared\Infrastructure\Persistence\Doctrine\Dbal\Type\AbstractJsonType;
 
