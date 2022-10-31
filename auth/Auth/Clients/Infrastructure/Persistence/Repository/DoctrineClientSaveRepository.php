@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Infrastructure\Persistence;
+namespace Auth\Clients\Infrastructure\Persistence\Repository;
 
 use Auth\Clients\Domain\Client\Client;
 use Auth\Clients\Domain\Client\ClientSaveRepository;

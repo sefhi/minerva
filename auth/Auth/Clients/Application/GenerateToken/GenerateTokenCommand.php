@@ -16,6 +16,8 @@ final class GenerateTokenCommand
         private readonly Grant $grant,
         private readonly string $privateKey,
         private readonly string $publicKey,
+        private readonly ?string $username = null,
+        private readonly ?string $password = null,
     ) {
     }
 
@@ -25,6 +27,8 @@ final class GenerateTokenCommand
         Grant $grant,
         string $privateKey,
         string $publicKey,
+        ?string $username = null,
+        ?string $password = null,
     ): self {
         return new self(
             $clientIdentifier,
@@ -32,7 +36,25 @@ final class GenerateTokenCommand
             $grant,
             $privateKey,
             $publicKey,
+            $username,
+            $password
         );
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
     }
 
     /**

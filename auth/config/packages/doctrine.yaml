@@ -31,6 +31,12 @@ doctrine:
                 dir: '%kernel.project_dir%/Auth/Clients/Infrastructure/Persistence/Doctrine/Mapping/Token'
                 prefix: 'Auth\Clients\Domain\Token'
                 alias: 'Auth\Clients\Domain\Token'
+            AuthUser:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Auth/Clients/Infrastructure/Persistence/Doctrine/Mapping/User'
+                prefix: 'Auth\Clients\Domain\User'
+                alias: 'Auth\Clients\Domain\User'
 
 when@test:
     doctrine:

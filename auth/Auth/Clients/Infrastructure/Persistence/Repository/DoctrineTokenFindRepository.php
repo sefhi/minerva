@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Infrastructure\Persistence;
+namespace Auth\Clients\Infrastructure\Persistence\Repository;
 
 use Auth\Clients\Domain\Token\Token;
 use Auth\Clients\Domain\Token\TokenFindRepository;
