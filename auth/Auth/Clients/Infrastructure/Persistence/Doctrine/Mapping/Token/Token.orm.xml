@@ -6,9 +6,13 @@
         <id name="id" type="uuid" length="36" column="id" />
 
         <field name="expiry" type="date_immutable"/>
-        <field name="user" length="36" nullable="true"/>
         <field name="scopes" type="auth_scopes" nullable="true"/>
         <field name="revoked" type="boolean"/>
+        <many-to-one field="user" target-entity="Auth\Clients\Domain\User\User" fetch="EAGER">
+            <join-columns>
+                <join-column name="user_id"/>
+            </join-columns>
+        </many-to-one>
         <many-to-one field="client" target-entity="Auth\Clients\Domain\Client\Client" fetch="EAGER">
             <join-columns>
                 <join-column name="client_id"/>

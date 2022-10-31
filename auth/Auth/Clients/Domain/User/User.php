@@ -9,14 +9,30 @@ use Ramsey\Uuid\UuidInterface;
 final class User
 {
 
-    public function __construct(
+    private function __construct(
         private readonly UuidInterface $id,
-        private readonly string $username,
+        private readonly string $email,
         private readonly string $password,
         private readonly array $roles,
         private readonly bool $active,
-    )
-    {
+    ) {
+    }
+
+    public static function create(
+        UuidInterface $id,
+        string $email,
+        string $password,
+        array $roles,
+        bool $active,
+    ): self {
+        //TODO encriptar password en valueOBject pasandole instancia de un hasher
+        return new self(
+            $id,
+            $email,
+            $password,
+            $roles,
+            $active,
+        );
     }
 
     /**
@@ -30,9 +46,9 @@ final class User
     /**
      * @return string
      */
-    public function getUsername(): string
+    public function getEmail(): string
     {
-        return $this->username;
+        return $this->email;
     }
 
     /**
