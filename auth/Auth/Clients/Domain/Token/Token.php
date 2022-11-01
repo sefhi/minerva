@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Auth\Clients\Domain\Token;
 
 use Auth\Clients\Domain\Client\Client;
+use Auth\Clients\Domain\User\User;
+use Auth\Clients\Domain\User\UserInterface;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
@@ -13,12 +15,12 @@ final class Token extends AggregateRoot
 {
 
     private function __construct(
-        private UuidInterface $id,
-        private Client $client,
+        private readonly UuidInterface $id,
+        private readonly Client $client,
         private readonly DateTimeImmutable $expiry,
-        private bool $revoked,
-        private array $scopes = [],
-        private ?string $user = null,
+        private readonly bool $revoked,
+        private readonly array $scopes = [],
+        private readonly ?User $user = null,
     ) {
     }
 
@@ -28,7 +30,25 @@ final class Token extends AggregateRoot
         DateTimeImmutable $expiry,
         bool $revoked,
         array $scopes = [],
-        ?string $user = null,
+        ?User $user = null,
+    ): self {
+        return new self(
+            $id,
+            $client,
+            $expiry,
+            $revoked,
+            $scopes,
+            $user
+        );
+    }
+
+    public static function createWithUser(
+        UuidInterface $id,
+        Client $client,
+        DateTimeImmutable $expiry,
+        User $user,
+        bool $revoked,
+        array $scopes = [],
     ): self {
         return new self(
             $id,
@@ -81,9 +101,9 @@ final class Token extends AggregateRoot
     }
 
     /**
-     * @return string|null
+     * @return UserInterface|null
      */
-    public function getUser(): ?string
+    public function getUser(): ?UserInterface
     {
         return $this->user;
     }

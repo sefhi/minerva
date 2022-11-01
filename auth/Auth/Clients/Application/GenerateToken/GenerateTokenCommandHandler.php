@@ -8,9 +8,14 @@ use Auth\Clients\Domain\AccessToken\AccessToken;
 use Auth\Clients\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Clients\Domain\AccessToken\GenerateToken;
 use Auth\Clients\Domain\Client\ClientFindRepository;
+use Auth\Clients\Domain\Client\Grant;
 use Auth\Clients\Domain\Token\Token;
 use Auth\Clients\Domain\Token\TokenSaveRepository;
+use Auth\Clients\Domain\User\User;
+use Auth\Clients\Domain\User\UserFindRepository;
+use Auth\Clients\Domain\User\UserInterface;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 final class GenerateTokenCommandHandler
 {
@@ -19,6 +24,9 @@ final class GenerateTokenCommandHandler
         private readonly ClientFindRepository $clientFindRepository,
         private readonly TokenSaveRepository $tokenSaveRepository,
         private readonly GenerateToken $generateToken,
+        private readonly UserFindRepository $userFindRepository,
+        //TODO quitar y refactorizar esto
+        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
     ) {
     }
 
@@ -43,14 +51,40 @@ final class GenerateTokenCommandHandler
         //TODO
         $date = new \DateTimeImmutable();
         $expiredAt = $date->add(new \DateInterval('PT2H'));
-        $token = Token::create(
-            Uuid::uuid4(),
-            $client,
-            $expiredAt,
-            false
-        );
 
-        $this->tokenSaveRepository->save($token);
+        if( Grant::PASSWORD === $command->getGrant() ) {
+
+            $user = $this->userFindRepository->findOneByEmailOrFail($command->getUsername());
+
+            $isValidPassword = $this->passwordHasherFactory
+                ->getPasswordHasher(UserInterface::class)
+                ->verify($user->getPassword()->value(), $command->getPassword());
+
+            if(!$isValidPassword) {
+                throw new \RuntimeException('user credentials not valid');
+            }
+
+            $token = Token::createWithUser(
+                Uuid::uuid4(),
+                $client,
+                $expiredAt,
+                $user,
+                false
+            );
+
+            $this->tokenSaveRepository->save($token);
+
+        } else {
+            $token = Token::create(
+                Uuid::uuid4(),
+                $client,
+                $expiredAt,
+                false
+            );
+
+            $this->tokenSaveRepository->save($token);
+        }
+
 
         return $this->generateToken->generate(
             CryptKeyPrivate::create($command->getPrivateKey()),

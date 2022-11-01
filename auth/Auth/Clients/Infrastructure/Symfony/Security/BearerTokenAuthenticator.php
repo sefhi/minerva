@@ -51,7 +51,7 @@ final class BearerTokenAuthenticator extends AbstractAuthenticator
             CryptKeyPublic::create(getenv('OAUTH_PUBLIC_KEY')),
             new TokenBearer($request->headers->get('Authorization')),
         );
-        $userIdentifier = $token->getUser() ?? '';
+        $userIdentifier = $token->getUser()?->getUserIdentifier() ?? '';
         $userLoaderCallback = function (string $userIdentifier): UserInterface {
             if ('' === $userIdentifier) {
                 return new NullUser();

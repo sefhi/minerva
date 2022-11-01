@@ -40,7 +40,6 @@ final class JwtGenerateToken implements GenerateToken
 
     public function __construct(private readonly TokenFindRepository $tokenFindRepository)
     {
-
     }
 
     public function generate(CryptKey $privateKey, Token $token): AccessToken
@@ -70,7 +69,7 @@ final class JwtGenerateToken implements GenerateToken
             ->issuedAt(new DateTimeImmutable())
             ->canOnlyBeUsedAfter(new DateTimeImmutable())
             ->expiresAt($token->getExpiry())
-            ->relatedTo((string)$token->getUser())
+            ->relatedTo((string)$token->getUser()?->getId())
             ->withClaim('scopes', $token->getScopes())
             ->getToken($this->configuration->signer(), $this->configuration->signingKey());
     }
