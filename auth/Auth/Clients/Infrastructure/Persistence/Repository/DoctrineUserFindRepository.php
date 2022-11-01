@@ -14,14 +14,25 @@ final class DoctrineUserFindRepository extends DoctrineRepository implements Use
 
     public function find(UuidInterface $id): ?User
     {
-        // TODO: Implement find() method.
+        return $this->repository(User::class)->find($id);
     }
 
     public function findOneByEmailOrFail(string $email): User
     {
         $userFound = $this->repository(User::class)->findOneBy(['email' => $email]);
 
-        if(null === $userFound) {
+        if (null === $userFound) {
+            throw new \RuntimeException('User not found');
+        }
+
+        return $userFound;
+    }
+
+    public function findOrFail(UuidInterface $id): User
+    {
+        $userFound = $this->find($id);
+
+        if (null === $userFound) {
             throw new \RuntimeException('User not found');
         }
 

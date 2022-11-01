@@ -6,6 +6,8 @@ security:
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         users_in_memory: { memory: null }
+        oauth_provider:
+            id: Auth\Clients\Infrastructure\Symfony\Security\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -17,6 +19,7 @@ security:
             pattern: ^/api/test
             security: true
             stateless: true
+            provider: oauth_provider
             custom_authenticator:
                 - Auth\Clients\Infrastructure\Symfony\Security\BearerTokenAuthenticator
         main:

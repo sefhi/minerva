@@ -28,3 +28,5 @@ services:
         autoconfigure: true
 
     Auth\Clients\Infrastructure\Symfony\Security\BearerTokenAuthenticator: ~
+
+    Symfony\Component\Security\Core\User\UserProviderInterface: '@Auth\Clients\Infrastructure\Symfony\Security\UserProvider'

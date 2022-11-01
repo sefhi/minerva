@@ -76,7 +76,6 @@ final class User extends AggregateRoot implements UserInterface
 
     public function eraseCredentials() : void
     {
-        throw new \RuntimeException();
     }
 
     public function getUserIdentifier(): string
