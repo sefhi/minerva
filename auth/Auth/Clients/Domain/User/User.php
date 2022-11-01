@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Auth\Clients\Domain\User;
 
+use Auth\Shared\Domain\Aggregate\AggregateRoot;
 use Ramsey\Uuid\UuidInterface;
 
-final class User
+final class User extends AggregateRoot
 {
 
     private function __construct(
         private readonly UuidInterface $id,
         private readonly string $email,
-        private readonly string $password,
+        private readonly Password $password,
         private readonly array $roles,
         private readonly bool $active,
     ) {
@@ -21,17 +22,15 @@ final class User
     public static function create(
         UuidInterface $id,
         string $email,
-        string $password,
+        Password $plainPassword,
         array $roles,
-        bool $active,
     ): self {
-        //TODO encriptar password en valueOBject pasandole instancia de un hasher
         return new self(
             $id,
             $email,
-            $password,
+            $plainPassword,
             $roles,
-            $active,
+            true,
         );
     }
 
@@ -52,9 +51,9 @@ final class User
     }
 
     /**
-     * @return string
+     * @return Password
      */
-    public function getPassword(): string
+    public function getPassword(): Password
     {
         return $this->password;
     }

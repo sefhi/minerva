@@ -9,6 +9,6 @@
         <field name="email" length="150"/>
         <field name="roles" type="json" />
         <field name="active" type="boolean"/>
-
+        <embedded name="password" class="Auth\Clients\Domain\User\Password" use-column-prefix="false"/>
     </entity>
 </doctrine-mapping>
