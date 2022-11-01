@@ -7,7 +7,7 @@ namespace Auth\Clients\Domain\User;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
 use Ramsey\Uuid\UuidInterface;
 
-final class User extends AggregateRoot
+final class User extends AggregateRoot implements UserInterface
 {
 
     private function __construct(
@@ -74,4 +74,13 @@ final class User extends AggregateRoot
         return $this->active;
     }
 
+    public function eraseCredentials() : void
+    {
+        throw new \RuntimeException();
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getId()->toString();
+    }
 }
