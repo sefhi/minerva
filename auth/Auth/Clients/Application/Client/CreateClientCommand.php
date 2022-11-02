@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Application\CreateClient;
+namespace Auth\Clients\Application\Client;
 
 use Auth\Clients\Domain\Client\ClientGrants;
 use Auth\Clients\Domain\Client\ClientName;

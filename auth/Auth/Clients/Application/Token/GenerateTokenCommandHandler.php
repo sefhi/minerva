@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auth\Clients\Application\GenerateToken;
+namespace Auth\Clients\Application\Token;
 
 use Auth\Clients\Domain\AccessToken\AccessToken;
 use Auth\Clients\Domain\AccessToken\CryptKeyPrivate;

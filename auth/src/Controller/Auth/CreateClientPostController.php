@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Auth;
 
 use App\Controller\Auth\Dto\CredentialsDto;
-use Auth\Clients\Application\CreateClient\CreateClientCommand;
-use Auth\Clients\Application\CreateClient\CreateClientCommandHandler;
+use Auth\Clients\Application\Client\CreateClientCommand;
+use Auth\Clients\Application\Client\CreateClientCommandHandler;
 use Auth\Clients\Domain\Client\ClientGrants;
 use Auth\Clients\Domain\Client\ClientName;
 use Exception;

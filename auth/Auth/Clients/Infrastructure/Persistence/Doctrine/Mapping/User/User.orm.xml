@@ -5,7 +5,7 @@
     <entity name="Auth\Clients\Domain\User\User" table="auth_user">
         <id name="id" type="uuid" length="36" column="id" />
 
-        <field name="email" length="150"/>
+        <field name="email" length="150" unique="true"/>
         <field name="roles" type="json" />
         <field name="active" type="boolean"/>
         <embedded name="password" class="Auth\Clients\Domain\User\Password" use-column-prefix="false"/>

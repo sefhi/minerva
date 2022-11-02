@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Auth;
 
 use App\Controller\Auth\Dto\AccessTokenDto;
-use Auth\Clients\Application\GenerateToken\GenerateTokenCommand;
-use Auth\Clients\Application\GenerateToken\GenerateTokenCommandHandler;
+use Auth\Clients\Application\Token\GenerateTokenCommand;
+use Auth\Clients\Application\Token\GenerateTokenCommandHandler;
 use Auth\Clients\Domain\Client\ClientIdentifier;
 use Auth\Clients\Domain\Client\ClientSecret;
 use Auth\Clients\Domain\Client\Grant;
