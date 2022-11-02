@@ -6,11 +6,12 @@ namespace Auth\Clients\Infrastructure\Symfony\Security;
 
 use Auth\Clients\Domain\User\User;
 use Auth\Clients\Domain\User\UserFindRepository;
+use Auth\Clients\Infrastructure\Symfony\Security\User\SecurityUser;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-final class UserProvider implements UserProviderInterface
+final class SecurityUserProvider implements UserProviderInterface
 {
 
 
@@ -29,6 +30,8 @@ final class UserProvider implements UserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        return $this->userFindRepository->findOrFail(Uuid::fromString($identifier));
+        $user = $this->userFindRepository->findOrFail(Uuid::fromString($identifier));
+
+        return SecurityUser::fromDomain($user);
     }
 }

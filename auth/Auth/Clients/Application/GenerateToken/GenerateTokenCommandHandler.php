@@ -11,7 +11,6 @@ use Auth\Clients\Domain\Client\ClientFindRepository;
 use Auth\Clients\Domain\Client\Grant;
 use Auth\Clients\Domain\Token\Token;
 use Auth\Clients\Domain\Token\TokenSaveRepository;
-use Auth\Clients\Domain\User\User;
 use Auth\Clients\Domain\User\UserFindRepository;
 use Auth\Clients\Domain\User\UserInterface;
 use Ramsey\Uuid\Uuid;

@@ -103,7 +103,7 @@ final class Token extends AggregateRoot
     /**
      * @return UserInterface|null
      */
-    public function getUser(): ?UserInterface
+    public function getUser(): ?User
     {
         return $this->user;
     }
