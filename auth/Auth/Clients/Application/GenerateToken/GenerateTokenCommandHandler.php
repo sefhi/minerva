@@ -11,10 +11,9 @@ use Auth\Clients\Domain\Client\ClientFindRepository;
 use Auth\Clients\Domain\Client\Grant;
 use Auth\Clients\Domain\Token\Token;
 use Auth\Clients\Domain\Token\TokenSaveRepository;
+use Auth\Clients\Domain\User\PasswordHasher;
 use Auth\Clients\Domain\User\UserFindRepository;
-use Auth\Clients\Domain\User\UserInterface;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 final class GenerateTokenCommandHandler
 {
@@ -25,7 +24,7 @@ final class GenerateTokenCommandHandler
         private readonly GenerateToken $generateToken,
         private readonly UserFindRepository $userFindRepository,
         //TODO quitar y refactorizar esto
-        private readonly PasswordHasherFactoryInterface $passwordHasherFactory,
+        private readonly PasswordHasher $passwordHasher,
     ) {
     }
 
@@ -55,9 +54,8 @@ final class GenerateTokenCommandHandler
 
             $user = $this->userFindRepository->findOneByEmailOrFail($command->getUsername());
 
-            $isValidPassword = $this->passwordHasherFactory
-                ->getPasswordHasher(UserInterface::class)
-                ->verify($user->getPassword()->value(), $command->getPassword());
+            $isValidPassword = $this->passwordHasher
+                ->verify($user->getPassword(), $command->getPassword());
 
             if(!$isValidPassword) {
                 throw new \RuntimeException('user credentials not valid');
