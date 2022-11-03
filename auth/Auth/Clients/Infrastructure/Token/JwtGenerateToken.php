@@ -11,6 +11,7 @@ use Auth\Clients\Domain\AccessToken\TokeType;
 use Auth\Clients\Domain\Bearer\TokenBearer;
 use Auth\Clients\Domain\Token\Token;
 use Auth\Clients\Domain\Token\TokenFindRepository;
+use Auth\Shared\Domain\Exception\OperationForbiddenException;
 use DateTimeImmutable;
 use DateTimeZone;
 use Lcobucci\Clock\SystemClock;
@@ -22,7 +23,6 @@ use Lcobucci\JWT\Validation\Constraint\LooseValidAt;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
-use League\OAuth2\Server\Exception\OAuthServerException;
 use Ramsey\Uuid\Uuid;
 
 use function class_exists;
@@ -102,7 +102,7 @@ final class JwtGenerateToken implements GenerateToken
             $constraints = $this->configuration->validationConstraints();
             $this->configuration->validator()->assert($token, ...$constraints);
         } catch (RequiredConstraintsViolated $exception) {
-            throw OAuthServerException::accessDenied('Access token could not be verified');
+            throw OperationForbiddenException::accessDenied('Access token could not be verified');
         }
 
         $claims = $token->claims();

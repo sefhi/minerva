@@ -30,7 +30,7 @@ final class DoctrineTokenFindRepository extends DoctrineRepository implements To
         $token = $this->find($id);
 
         if (null === $token) {
-            NotFoundException::entityWithId(Token::class, $id);
+            throw NotFoundException::entityWithId(Token::class, $id);
         }
 
         return $token;

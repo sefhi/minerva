@@ -11,14 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineUserSaveRepository extends DoctrineRepository implements UserSaveRepository
 {
-
-    public function __construct(
-        private readonly EntityManagerInterface $entityManager,
-    )
-    {
-        parent::__construct($this->entityManager);
-    }
-
     public function save(User $user): void
     {
         $this->persist($user);

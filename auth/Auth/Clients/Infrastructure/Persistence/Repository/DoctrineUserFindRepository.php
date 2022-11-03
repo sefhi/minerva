@@ -23,7 +23,7 @@ final class DoctrineUserFindRepository extends DoctrineRepository implements Use
         $userFound = $this->repository(User::class)->findOneBy(['email' => $email]);
 
         if (null === $userFound) {
-            NotFoundException::entityWithEmail(User::class, $email);
+            throw NotFoundException::entityWithEmail(User::class, $email);
         }
 
         return $userFound;
@@ -34,7 +34,7 @@ final class DoctrineUserFindRepository extends DoctrineRepository implements Use
         $userFound = $this->find($id);
 
         if (null === $userFound) {
-            NotFoundException::entityWithId(User::class, $id);
+            throw NotFoundException::entityWithId(User::class, $id);
         }
 
         return $userFound;
