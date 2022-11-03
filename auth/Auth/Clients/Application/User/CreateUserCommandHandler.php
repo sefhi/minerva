@@ -30,7 +30,7 @@ final class CreateUserCommandHandler
         $user = User::create(
             Uuid::uuid4(),
             $command->getEmail(),
-            $this->passwordHasher->hash($command->plainPassword()),
+            $this->passwordHasher->hash($command->getPlainPassword()),
             []
         );
 
