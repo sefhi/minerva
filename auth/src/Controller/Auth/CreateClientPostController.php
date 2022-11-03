@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Auth;
 
 use App\Controller\Auth\Dto\CredentialsDto;
-use Auth\Clients\Application\Client\CreateClientCommand;
-use Auth\Clients\Application\Client\CreateClientCommandHandler;
-use Auth\Clients\Domain\Client\ClientGrants;
-use Auth\Clients\Domain\Client\ClientName;
+use Auth\Application\Client\CreateClientCommand;
+use Auth\Application\Client\CreateClientCommandHandler;
+use Auth\Domain\Client\ClientName;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

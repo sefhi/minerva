@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Auth\Clients\Domain\User\Password;
-use Auth\Clients\Domain\User\User;
-use Auth\Clients\Domain\User\UserInterface;
-use Auth\Clients\Domain\User\UserSaveRepository;
+use Auth\Domain\User\Password;
+use Auth\Domain\User\User;
+use Auth\Domain\User\UserInterface;
+use Auth\Domain\User\UserSaveRepository;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;

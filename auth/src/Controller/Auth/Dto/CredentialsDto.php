@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Auth\Dto;
 
-use Auth\Clients\Domain\Client\ClientCredentialsParam;
+use Auth\Domain\Client\ClientCredentialsParam;
 use JsonSerializable;
 
 final class CredentialsDto implements JsonSerializable

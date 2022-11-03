@@ -7,7 +7,7 @@ security:
     providers:
         users_in_memory: { memory: null }
         oauth_provider:
-            id: security.user.provider
+            id: Auth\Infrastructure\Symfony\Security\SecurityUserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -21,7 +21,7 @@ security:
             stateless: true
             provider: oauth_provider
             custom_authenticator:
-                - Auth\Clients\Infrastructure\Symfony\Security\BearerTokenAuthenticator
+                - Auth\Infrastructure\Symfony\Security\BearerTokenAuthenticator
         main:
             lazy: true
             provider: users_in_memory

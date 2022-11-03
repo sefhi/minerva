@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Auth\Domain\User\User" table="auth_user">
+        <id name="id" type="uuid" length="36" column="id" />
+
+        <field name="email" length="150" unique="true"/>
+        <field name="roles" type="json" />
+        <field name="active" type="boolean"/>
+        <embedded name="password" class="Auth\Domain\User\Password" use-column-prefix="false"/>
+    </entity>
+</doctrine-mapping>

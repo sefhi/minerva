@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Controller\Auth;
 
 use App\Controller\Auth\Dto\AccessTokenDto;
-use Auth\Clients\Application\Token\GenerateTokenCommand;
-use Auth\Clients\Application\Token\GenerateTokenCommandHandler;
-use Auth\Clients\Domain\Client\ClientIdentifier;
-use Auth\Clients\Domain\Client\ClientSecret;
-use Auth\Clients\Domain\Client\Grant;
+use Auth\Application\Token\GenerateTokenCommand;
+use Auth\Application\Token\GenerateTokenCommandHandler;
+use Auth\Domain\Client\ClientIdentifier;
+use Auth\Domain\Client\ClientSecret;
+use Auth\Domain\Client\Grant;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

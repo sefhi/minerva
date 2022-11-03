@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Auth\Dto;
 
-use Auth\Clients\Domain\AccessToken\AccessToken;
+use Auth\Domain\AccessToken\AccessToken;
 use JsonSerializable;
 
 final class AccessTokenDto implements JsonSerializable
