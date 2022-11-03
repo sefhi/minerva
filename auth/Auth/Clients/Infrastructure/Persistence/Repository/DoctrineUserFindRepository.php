@@ -6,6 +6,7 @@ namespace Auth\Clients\Infrastructure\Persistence\Repository;
 
 use Auth\Clients\Domain\User\User;
 use Auth\Clients\Domain\User\UserFindRepository;
+use Auth\Shared\Domain\Exception\NotFoundException;
 use Auth\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use Ramsey\Uuid\UuidInterface;
 
@@ -22,7 +23,7 @@ final class DoctrineUserFindRepository extends DoctrineRepository implements Use
         $userFound = $this->repository(User::class)->findOneBy(['email' => $email]);
 
         if (null === $userFound) {
-            throw new \RuntimeException('User not found');
+            NotFoundException::entityWithEmail(User::class, $email);
         }
 
         return $userFound;
@@ -33,7 +34,7 @@ final class DoctrineUserFindRepository extends DoctrineRepository implements Use
         $userFound = $this->find($id);
 
         if (null === $userFound) {
-            throw new \RuntimeException('User not found');
+            NotFoundException::entityWithId(User::class, $id);
         }
 
         return $userFound;

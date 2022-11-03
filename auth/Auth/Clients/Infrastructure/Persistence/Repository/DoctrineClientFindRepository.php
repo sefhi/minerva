@@ -15,9 +15,9 @@ use Ramsey\Uuid\UuidInterface;
 final class DoctrineClientFindRepository extends DoctrineRepository implements ClientFindRepository
 {
 
-    public function find(UuidInterface $id): Client
+    public function find(UuidInterface $id): ?Client
     {
-        // TODO: Implement find() method.
+        return $this->repository(Client::class)->find($id);
     }
 
     public function findByIdentifier(ClientIdentifier $identifier): ?Client

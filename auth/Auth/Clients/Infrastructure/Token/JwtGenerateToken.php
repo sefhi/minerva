@@ -74,6 +74,9 @@ final class JwtGenerateToken implements GenerateToken
             ->getToken($this->configuration->signer(), $this->configuration->signingKey());
     }
 
+    /**
+     * @throws OAuthServerException
+     */
     public function generateTokenByBearer(CryptKey $publicKey, TokenBearer $tokenBearer): Token
     {
         $this->configuration = Configuration::forSymmetricSigner(

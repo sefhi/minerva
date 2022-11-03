@@ -20,4 +20,15 @@ final class NotFoundException extends DomainException
             )
         );
     }
+
+    public static function entityWithEmail(string $entityClass, string $email): self
+    {
+        return new self(
+            sprintf(
+                'An instance of %s with email %s was not found.',
+                $entityClass,
+                $email
+            )
+        );
+    }
 }
