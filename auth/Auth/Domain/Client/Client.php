@@ -21,6 +21,7 @@ final class Client extends AggregateRoot
     }
 
     public static function create(
+        UuidInterface $id,
         ClientCredentialsParam $credentials,
         ?ClientRedirectUris $redirectUris = null,
         ?array $grants = null,
@@ -28,7 +29,7 @@ final class Client extends AggregateRoot
         bool $active = true,
     ): self {
         return new self(
-            Uuid::uuid4(),
+            $id,
             $credentials,
             $redirectUris,
             $grants,

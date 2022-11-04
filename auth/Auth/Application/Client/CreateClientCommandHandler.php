@@ -8,6 +8,7 @@ use Auth\Domain\Client\Client;
 use Auth\Domain\Client\ClientCredentialsParam;
 use Auth\Domain\Client\ClientSaveRepository;
 use Exception;
+use Ramsey\Uuid\Uuid;
 
 final class CreateClientCommandHandler
 {
@@ -22,6 +23,7 @@ final class CreateClientCommandHandler
     public function __invoke(CreateClientCommand $command) : Client
     {
         $client = Client::create(
+            Uuid::uuid4(),
             ClientCredentialsParam::createByName($command->getName()),
             $command->getRedirectUris(),
             $command->getGrants(),
