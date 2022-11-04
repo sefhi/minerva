@@ -47,8 +47,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Auth\\Tests\\": "tests/Auth",
-            "Tests\\": "tests/src"
+            "Tests\\": "tests/"
         }
     },
     "replace": {
@@ -81,7 +80,12 @@
         }
     },
     "require-dev": {
+        "fakerphp/faker": "^1.20",
+        "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-latest",
-        "symfony/maker-bundle": "^1.43"
+        "symfony/browser-kit": "^6.0 | ^6.1",
+        "symfony/css-selector": "^6.0 | ^6.1",
+        "symfony/maker-bundle": "^1.43",
+        "symfony/phpunit-bridge": "^6.1"
     }
 }

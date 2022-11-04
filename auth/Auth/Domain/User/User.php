@@ -12,7 +12,7 @@ final class User extends AggregateRoot implements UserInterface
 
     private function __construct(
         private readonly UuidInterface $id,
-        private readonly string $email,
+        private readonly Email $email,
         private readonly Password $password,
         private readonly array $roles,
         private readonly bool $active,
@@ -21,7 +21,7 @@ final class User extends AggregateRoot implements UserInterface
 
     public static function create(
         UuidInterface $id,
-        string $email,
+        Email $email,
         Password $plainPassword,
         array $roles,
     ): self {
@@ -43,9 +43,9 @@ final class User extends AggregateRoot implements UserInterface
     }
 
     /**
-     * @return string
+     * @return Email
      */
-    public function getEmail(): string
+    public function getEmail(): Email
     {
         return $this->email;
     }

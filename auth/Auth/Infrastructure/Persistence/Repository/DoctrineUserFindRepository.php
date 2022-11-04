@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Auth\Infrastructure\Persistence\Repository;
 
+use Auth\Domain\User\Email;
 use Auth\Domain\User\User;
 use Auth\Domain\User\UserFindRepository;
 use Auth\Shared\Domain\Exception\NotFoundException;
@@ -18,7 +19,7 @@ final class DoctrineUserFindRepository extends DoctrineRepository implements Use
         return $this->repository(User::class)->find($id);
     }
 
-    public function findOneByEmailOrFail(string $email): User
+    public function findOneByEmailOrFail(Email $email): User
     {
         $userFound = $this->repository(User::class)->findOneBy(['email' => $email]);
 

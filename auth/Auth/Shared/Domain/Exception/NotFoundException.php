@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Auth\Shared\Domain\Exception;
 
+use Auth\Domain\User\Email;
 use DomainException;
 use Ramsey\Uuid\UuidInterface;
-use Throwable;
 
 final class NotFoundException extends DomainException
 {
@@ -21,7 +21,7 @@ final class NotFoundException extends DomainException
         );
     }
 
-    public static function entityWithEmail(string $entityClass, string $email): self
+    public static function entityWithEmail(string $entityClass, Email $email): self
     {
         return new self(
             sprintf(
