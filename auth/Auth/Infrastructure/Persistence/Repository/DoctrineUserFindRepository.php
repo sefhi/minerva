@@ -21,7 +21,7 @@ final class DoctrineUserFindRepository extends DoctrineRepository implements Use
 
     public function findOneByEmailOrFail(Email $email): User
     {
-        $userFound = $this->repository(User::class)->findOneBy(['email' => $email]);
+        $userFound = $this->repository(User::class)->findOneBy(['email.value' => $email->value()]);
 
         if (null === $userFound) {
             throw NotFoundException::entityWithEmail(User::class, $email);

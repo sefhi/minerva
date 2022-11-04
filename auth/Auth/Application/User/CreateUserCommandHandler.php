@@ -21,7 +21,7 @@ final class CreateUserCommandHandler
     {
     }
 
-    public function __invoke(CreateUserCommand $command): void
+    public function __invoke(CreateUserCommand $command): User
     {
 
         $this->userFindRepository->findOneByEmailOrFail($command->getEmail());
@@ -34,5 +34,7 @@ final class CreateUserCommandHandler
         );
 
         $this->userSaveRepository->save($user);
+
+        return $user;
     }
 }

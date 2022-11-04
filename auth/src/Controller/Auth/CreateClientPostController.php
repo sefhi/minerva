@@ -25,7 +25,7 @@ final class CreateClientPostController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/auth/client', methods: ['POST'])]
+    #[Route('/auth/client', name: 'auth_client', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
         $request = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);

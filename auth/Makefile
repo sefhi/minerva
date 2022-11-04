@@ -59,6 +59,9 @@ rebuild:
 	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
 	make start
 
+test:
+	docker exec -it $(CONTAINER) bin/phpunit -v
+
 # 🦝 Apache
 reload:
 	$(EXEC) /bin/bash service apache2 restart || true
@@ -76,9 +79,12 @@ create-database:
 	@echo "🎊 Database created!"
 
 #doctrine:migrations:migrate
-d-m-m:
+d-m-m/dev:
+doctrine/migrate/dev:
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction
-
+d-m-m/test:
+doctrine/migrate/test:
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction --env=test
 #make:migration
 m-m:
 	$(SYMFONY) make:migration
