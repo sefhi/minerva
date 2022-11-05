@@ -6,7 +6,7 @@ namespace Auth\Shared\Domain\Exception;
 
 use DomainException;
 
-final class OperationForbiddenException extends DomainException
+class OperationForbiddenException extends DomainException
 {
 
 }

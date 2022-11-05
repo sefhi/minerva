@@ -8,11 +8,13 @@ use Auth\Domain\AccessToken\AccessToken;
 use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\ClientFindRepository;
+use Auth\Domain\Client\Exception\ClientNotFoundException;
 use Auth\Domain\Client\Grant;
 use Auth\Domain\Token\Token;
 use Auth\Domain\Token\TokenSaveRepository;
 use Auth\Domain\User\PasswordHasher;
 use Auth\Domain\User\UserFindRepository;
+use Auth\Shared\Domain\Exception\NotFoundException;
 use Ramsey\Uuid\Uuid;
 
 final class GenerateTokenCommandHandler
@@ -33,18 +35,11 @@ final class GenerateTokenCommandHandler
         $client = $this->clientFindRepository->findByIdentifier($command->getClientIdentifier());
 
         if (null === $client) {
-            //TODO exception
-            throw new \RuntimeException('Client not found');
+            throw ClientNotFoundException::withClientIdentifier($command->getClientIdentifier());
         }
 
-        if (!$this->clientFindRepository->validateClient(
-            $command->getClientIdentifier(),
-            $command->getClientSecret(),
-            $command->getGrant()
-        )) {
-            //TODO exception
-            throw new \RuntimeException('Client is not valid');
-        }
+        $client->ensureIsActive();
+        $client->ensureGrantSupported($command->getGrant());
 
         //TODO
         $date = new \DateTimeImmutable();

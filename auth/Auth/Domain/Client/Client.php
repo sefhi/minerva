@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Auth\Domain\Client;
 
+use Auth\Domain\Client\Exception\ClientOperationDeniedException;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -48,6 +49,11 @@ final class Client extends AggregateRoot
         return $this->credentials;
     }
 
+    public function getIdentifier(): ClientIdentifier
+    {
+        return $this->getCredentials()->getIdentifier();
+    }
+
     public function getRedirectUris(): ?ClientRedirectUris
     {
         return $this->redirectUris;
@@ -68,19 +74,34 @@ final class Client extends AggregateRoot
         return $this->active;
     }
 
-    public function isGrantSupported(Client $client, ?string $grant): bool
+    public function ensureIsActive(): bool
     {
-        if (null === $grant) {
-            return true;
+        if (!$this->isActive()) {
+            throw ClientOperationDeniedException::inactive($this->getIdentifier());
         }
 
-        $grants = $client->getGrants();
+        return true;
+    }
+
+    public function ensureGrantSupported(Grant $grant): bool
+    {
+
+        if (!$this->isGrantSupported($grant)) {
+            throw ClientOperationDeniedException::grantNotSupported($this->getIdentifier(), $grant);
+        }
+
+        return true;
+    }
+
+    public function isGrantSupported(Grant $grant): bool
+    {
+        $grants = $this->getGrants();
 
         if (empty($grants)) {
-            return true;
+            return false;
         }
 
-        return in_array($grant, $client->getGrants(), true);
+        return in_array($grant->value, $grants, true);
     }
 
 }

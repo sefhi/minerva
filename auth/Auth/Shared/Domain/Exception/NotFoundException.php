@@ -8,7 +8,7 @@ use Auth\Domain\User\Email;
 use DomainException;
 use Ramsey\Uuid\UuidInterface;
 
-final class NotFoundException extends DomainException
+class NotFoundException extends DomainException
 {
     public static function entityWithId(string $entityClass, UuidInterface $id): self
     {
