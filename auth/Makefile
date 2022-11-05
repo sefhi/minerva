@@ -43,7 +43,8 @@ start: create_env_file
 	@echo "🚀 Deploy!!!"
 	@$(DOCKER_COMPOSE) up -d
 	make deps
-	make d-m-m
+	make create/database
+	make doctrine/migrate
 	make generate-private-key
 	make generate-public-key
 stop:
@@ -74,16 +75,15 @@ bash:
 	$(DOCKER_COMPOSE) exec -it $(CONTAINER) /bin/bash
 
 # 📦 Database
-create-database:
-	$(SYMFONY) doctrine:database:create --if-not-exists
+create/database:
+	$(SYMFONY) doctrine:database:create --if-not-exists --env=dev
+	$(SYMFONY) doctrine:database:create --if-not-exists --env=test
 	@echo "🎊 Database created!"
 
 #doctrine:migrations:migrate
-d-m-m/dev:
-doctrine/migrate/dev:
-	$(SYMFONY) doctrine:migrations:migrate --no-interaction
-d-m-m/test:
-doctrine/migrate/test:
+d-m-m:
+doctrine/migrate:
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction --env=dev
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction --env=test
 #make:migration
 m-m:
