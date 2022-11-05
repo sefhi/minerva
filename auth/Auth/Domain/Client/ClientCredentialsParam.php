@@ -9,7 +9,7 @@ use Exception;
 final class ClientCredentialsParam
 {
 
-    private function __construct(
+    public function __construct(
         private readonly ClientIdentifier $identifier,
         private readonly ClientName $name,
         private readonly ClientSecret $secret,
