@@ -18,8 +18,8 @@ final class SecurityUser implements UserInterface
     private function __construct(User $user)
     {
         $this->id = $user->getUserIdentifier();
-        $this->username = $user->getEmail();
-        $this->password = $user->getPassword()->value();
+        $this->username = (string)$user->getEmail();
+        $this->password = (string)$user->getPassword();
         $this->roles = $user->getRoles();
     }
 

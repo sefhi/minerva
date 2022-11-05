@@ -37,6 +37,12 @@ doctrine:
                 dir: '%kernel.project_dir%/Auth/Infrastructure/Persistence/Doctrine/Mapping/User'
                 prefix: 'Auth\Domain\User'
                 alias: 'Auth\Domain\User'
+            AuthRefreshToken:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Auth/Infrastructure/Persistence/Doctrine/Mapping/RefreshToken'
+                prefix: 'Auth\Domain\RefreshToken'
+                alias: 'Auth\Domain\RefreshToken'
 
 when@test:
     doctrine:
