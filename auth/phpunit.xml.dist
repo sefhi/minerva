@@ -31,6 +31,7 @@
     <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">src</directory>
+            <directory suffix=".php">Auth</directory>
         </include>
     </coverage>
 
