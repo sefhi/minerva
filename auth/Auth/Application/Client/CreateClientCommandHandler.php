@@ -22,6 +22,7 @@ final class CreateClientCommandHandler
      */
     public function __invoke(CreateClientCommand $command) : Client
     {
+        //TODO hay que validar los grant type
         $client = Client::create(
             Uuid::uuid4(),
             ClientCredentialsParam::createByName($command->getName()),

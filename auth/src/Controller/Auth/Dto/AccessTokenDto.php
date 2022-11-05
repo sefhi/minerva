@@ -13,7 +13,7 @@ final class AccessTokenDto implements JsonSerializable
     private function __construct(
         private readonly string $tokeType,
         private readonly int $expiresIn,
-        private readonly string $token,
+        private readonly string $accessToken,
     ) {
     }
 
@@ -44,14 +44,18 @@ final class AccessTokenDto implements JsonSerializable
     /**
      * @return string
      */
-    public function getToken(): string
+    public function getAccessToken(): string
     {
-        return $this->token;
+        return $this->accessToken;
     }
 
 
     public function jsonSerialize(): array
     {
-        return get_object_vars($this);
+        return [
+            'access_token' => $this->getAccessToken(),
+            'token_type' => $this->getTokeType(),
+            'expires_in' => $this->getExpiresIn()
+        ];
     }
 }

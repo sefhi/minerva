@@ -50,7 +50,7 @@ final class GenerateTokenPostController extends AbstractController
     private function getClientCredentials(Request $request): array
     {
         $clientId = $request->get('client_id');
-        $secret = $request->get('secret');
+        $secret = $request->get('client_secret');
         $grantType = $request->get('grant_type');
         $username = $request->get('username');
         $password = $request->get('password');
