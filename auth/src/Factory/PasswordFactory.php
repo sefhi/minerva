@@ -28,10 +28,12 @@ use Zenstruck\Foundry\Proxy;
 final class PasswordFactory extends ModelFactory
 {
 
+    public const PASSWORD = 'qwerty69';
+
     protected function getDefaults(): array
     {
         return [
-            'value' => 'qwerty69',
+            'value' => self::PASSWORD,
         ];
     }
 

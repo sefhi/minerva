@@ -42,7 +42,7 @@ final class JwtGenerateToken implements GenerateToken
     {
     }
 
-    public function generate(CryptKey $privateKey, Token $token): AccessToken
+    public function generateAccessToken(CryptKey $privateKey, Token $token): AccessToken
     {
         $this->configuration = Configuration::forAsymmetricSigner(
             new Sha256(),

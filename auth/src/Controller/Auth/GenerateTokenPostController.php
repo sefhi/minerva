@@ -10,6 +10,8 @@ use Auth\Application\Token\GenerateTokenCommandHandler;
 use Auth\Domain\Client\ClientIdentifier;
 use Auth\Domain\Client\ClientSecret;
 use Auth\Domain\Client\Grant;
+use Auth\Domain\User\Email;
+use Auth\Domain\User\Password;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,8 +42,8 @@ final class GenerateTokenPostController extends AbstractController
             Grant::from($grantType),
             getenv('OAUTH_PRIVATE_KEY'),
             getenv('OAUTH_PUBLIC_KEY'),
-            $username,
-            $password
+            null === $username ? $username : Email::fromString($username),
+            null === $password ? $password : Password::fromString($password)
         ));
 
         return $this->json(AccessTokenDto::fromDomain($accessToken), Response::HTTP_OK);

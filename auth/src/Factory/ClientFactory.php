@@ -48,6 +48,16 @@ final class ClientFactory extends ModelFactory
         );
     }
 
+    public function withGrantPassword(): self
+    {
+        return $this->addState(
+            [
+                'grants' => ['password'],
+                'active' => true,
+            ]
+        );
+    }
+
     protected function initialize(): self
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization

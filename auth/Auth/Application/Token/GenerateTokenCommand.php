@@ -7,6 +7,8 @@ namespace Auth\Application\Token;
 use Auth\Domain\Client\ClientIdentifier;
 use Auth\Domain\Client\ClientSecret;
 use Auth\Domain\Client\Grant;
+use Auth\Domain\User\Email;
+use Auth\Domain\User\Password;
 
 final class GenerateTokenCommand
 {
@@ -16,8 +18,8 @@ final class GenerateTokenCommand
         private readonly Grant $grant,
         private readonly string $privateKey,
         private readonly string $publicKey,
-        private readonly ?string $username = null,
-        private readonly ?string $password = null,
+        private readonly ?Email $email = null,
+        private readonly ?Password $password = null,
     ) {
     }
 
@@ -27,8 +29,8 @@ final class GenerateTokenCommand
         Grant $grant,
         string $privateKey,
         string $publicKey,
-        ?string $username = null,
-        ?string $password = null,
+        ?Email $email = null,
+        ?Password $password = null,
     ): self {
         return new self(
             $clientIdentifier,
@@ -36,23 +38,23 @@ final class GenerateTokenCommand
             $grant,
             $privateKey,
             $publicKey,
-            $username,
+            $email,
             $password
         );
     }
 
     /**
-     * @return string|null
+     * @return Email|null
      */
-    public function getUsername(): ?string
+    public function getEmail(): ?Email
     {
-        return $this->username;
+        return $this->email;
     }
 
     /**
-     * @return string|null
+     * @return Password|null
      */
-    public function getPassword(): ?string
+    public function getPassword(): ?Password
     {
         return $this->password;
     }
