@@ -2,7 +2,9 @@
 
 namespace App\Factory;
 
+use Auth\Domain\User\PasswordHasher;
 use Auth\Domain\User\User;
+use Ramsey\Uuid\Uuid;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -26,29 +28,29 @@ use Zenstruck\Foundry\Proxy;
  */
 final class UserFactory extends ModelFactory
 {
-    public function __construct()
+
+    public function __construct(private readonly PasswordHasher $passwordHasher)
     {
         parent::__construct();
-
-        // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
     }
 
     protected function getDefaults(): array
     {
         return [
-            // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
+            'id' => Uuid::uuid4(),
             'roles' => [],
-            'active' => self::faker()->boolean(),
-            'email.value' => self::faker()->text(),
-            'password.value' => self::faker()->text(),
+            'active' => true,
+            'email' => EmailFactory::createOne(),
+            'password' => PasswordFactory::createOne(),
         ];
     }
 
     protected function initialize(): self
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-        return $this
-            // ->afterInstantiate(function(User $user): void {})
+        return $this->afterInstantiate(function(User $user): void {
+           $user->withPasswordEncrypted($this->passwordHasher->hash($user->getPassword()));
+        })
         ;
     }
 

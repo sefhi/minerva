@@ -24,7 +24,7 @@ final class CreateUserCommandHandler
     public function __invoke(CreateUserCommand $command): User
     {
 
-        $this->userFindRepository->findOneByEmailOrFail($command->getEmail());
+        $this->userFindRepository->existUserByEmail($command->getEmail());
 
         $user = User::create(
             Uuid::uuid4(),

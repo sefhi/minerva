@@ -7,6 +7,8 @@ namespace Auth\Infrastructure\Persistence\Repository;
 use Auth\Domain\User\Email;
 use Auth\Domain\User\User;
 use Auth\Domain\User\UserFindRepository;
+use Auth\Shared\Domain\Exception\EntityFoundException;
+use Auth\Shared\Domain\Exception\InvalidDataException;
 use Auth\Shared\Domain\Exception\NotFoundException;
 use Auth\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use Ramsey\Uuid\UuidInterface;
@@ -28,6 +30,15 @@ final class DoctrineUserFindRepository extends DoctrineRepository implements Use
         }
 
         return $userFound;
+    }
+
+    public function existUserByEmail(Email $email): void
+    {
+        $userFound = $this->repository(User::class)->findOneBy(['email.value' => $email->value()]);
+
+        if ($userFound instanceof User) {
+            throw EntityFoundException::entityWithEmail(User::class, $email);
+        }
     }
 
     public function findOrFail(UuidInterface $id): User

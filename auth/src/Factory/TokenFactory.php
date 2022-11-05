@@ -3,6 +3,9 @@
 namespace App\Factory;
 
 use Auth\Domain\Token\Token;
+use DateInterval;
+use DateTimeImmutable;
+use Ramsey\Uuid\Uuid;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -26,19 +29,16 @@ use Zenstruck\Foundry\Proxy;
  */
 final class TokenFactory extends ModelFactory
 {
-    public function __construct()
-    {
-        parent::__construct();
-
-        // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
-    }
-
     protected function getDefaults(): array
     {
+        $expiry = new DateTimeImmutable();
+
         return [
-            // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'expiry' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'revoked' => self::faker()->boolean(),
+            'id' => Uuid::uuid4(),
+            'client' => ClientFactory::createOne(),
+            'user' => UserFactory::createOne(),
+            'expiry' => $expiry->add(new DateInterval('PT2H')),
+            'revoked' => false,
         ];
     }
 

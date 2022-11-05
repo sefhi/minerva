@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\ClientFactory;
+use App\Factory\TokenFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -10,7 +10,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        ClientFactory::createOne();
+        TokenFactory::createOne();
 
         $manager->flush();
     }

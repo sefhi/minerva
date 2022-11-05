@@ -31,7 +31,7 @@ final class ClientFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'id' => Uuid::fromString(self::faker()->uuid()),
+            'id' => Uuid::uuid4(),
             'active' => self::faker()->boolean(),
             'credentials' => ClientCredentialsParamFactory::createOne(),
             'grants' => ['client_credential', 'password']

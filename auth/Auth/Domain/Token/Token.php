@@ -14,7 +14,7 @@ use Ramsey\Uuid\UuidInterface;
 final class Token extends AggregateRoot
 {
 
-    private function __construct(
+    public function __construct(
         private readonly UuidInterface $id,
         private readonly Client $client,
         private readonly DateTimeImmutable $expiry,

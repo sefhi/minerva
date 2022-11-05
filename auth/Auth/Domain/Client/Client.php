@@ -11,7 +11,7 @@ use Ramsey\Uuid\UuidInterface;
 final class Client extends AggregateRoot
 {
     public function __construct(
-        private readonly UuidInterface $id,
+        private UuidInterface $id,
         private readonly ClientCredentialsParam $credentials,
         private readonly ?ClientRedirectUris $redirectUris = null,
         private readonly ?array $grants = null,

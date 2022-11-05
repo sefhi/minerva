@@ -10,10 +10,10 @@ use Ramsey\Uuid\UuidInterface;
 final class User extends AggregateRoot implements UserInterface
 {
 
-    private function __construct(
-        private readonly UuidInterface $id,
+    public function __construct(
+        private UuidInterface $id,
         private readonly Email $email,
-        private readonly Password $password,
+        private Password $password,
         private readonly array $roles,
         private readonly bool $active,
     ) {
@@ -32,6 +32,12 @@ final class User extends AggregateRoot implements UserInterface
             $roles,
             true,
         );
+    }
+
+    public function withPasswordEncrypted(Password $passwordEncrypted): self
+    {
+        $this->password = $passwordEncrypted;
+        return $this;
     }
 
     /**

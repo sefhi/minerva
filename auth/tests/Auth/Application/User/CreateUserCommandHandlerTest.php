@@ -40,9 +40,8 @@ class CreateUserCommandHandlerTest extends TestCase
         // WHEN
         $this->userFindRepositoryMock
             ->expects(self::once())
-            ->method('findOneByEmailOrFail')
-            ->with($user->getEmail())
-            ->willReturn($user);
+            ->method('existUserByEmail')
+            ->with($user->getEmail());
 
         $this->passwordHasherMock
             ->expects(self::once())
