@@ -29,7 +29,7 @@ final class GenerateTokenPostController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/auth/token')]
+    #[Route('/auth/token', name: 'auth_token', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
         [$clientId, $secret, $grantType, $username, $password] = $this->getClientCredentials($request);

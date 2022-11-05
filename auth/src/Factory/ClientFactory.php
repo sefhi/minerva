@@ -34,16 +34,25 @@ final class ClientFactory extends ModelFactory
             'id' => Uuid::uuid4(),
             'active' => self::faker()->boolean(),
             'credentials' => ClientCredentialsParamFactory::createOne(),
-            'grants' => ['client_credential', 'password']
+            'grants' => ['client_credentials', 'password']
         ];
+    }
+
+    public function withGrantClientCredentials(): self
+    {
+        return $this->addState(
+            [
+                'grants' => ['client_credentials'],
+                'active' => true,
+            ]
+        );
     }
 
     protected function initialize(): self
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-        return $this
-            // ->afterInstantiate(function(Client $client): void {})
-        ;
+        return $this// ->afterInstantiate(function(Client $client): void {})
+            ;
     }
 
     protected static function getClass(): string

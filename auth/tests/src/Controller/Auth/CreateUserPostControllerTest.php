@@ -9,16 +9,8 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Tests\Auth\Shared\Domain\MotherFactory;
 
-class CreateUserPostControllerTest extends WebTestCase
+class CreateUserPostControllerTest extends AbstractWebTestCase
 {
-    private KernelBrowser $client;
-
-    protected function setUp(): void
-    {
-        $this->client = self::createClient();
-    }
-
-
     /** @test */
     public function itShouldCreateUser(): void
     {
