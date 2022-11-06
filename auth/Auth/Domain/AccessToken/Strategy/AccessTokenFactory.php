@@ -41,10 +41,16 @@ final class AccessTokenFactory
                 $this->generateToken,
                 $this->userFindRepository,
                 $this->passwordHasher,
+                $this->refreshTokenSaveRepository
+            ),
+            Grant::REFRESH_TOKEN => new RefreshAccessToken(
+                $this->tokenSaveRepository,
+                $this->generateToken,
+                $this->userFindRepository,
+                $this->passwordHasher,
                 $this->refreshTokenFindRepository,
                 $this->refreshTokenSaveRepository
             ),
-            Grant::REFRESH_TOKEN => new RefreshAccessToken(),
             default => throw new Exception('Unknown Grant Type'),
         };
     }

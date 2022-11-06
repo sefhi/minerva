@@ -26,7 +26,6 @@ final class PasswordAccessToken implements AccessTokenMethod
         private readonly GenerateToken $generateToken,
         private readonly UserFindRepository $userFindRepository,
         private readonly PasswordHasher $passwordHasher,
-        private readonly RefreshTokenFindRepository $refreshTokenFindRepository,
         private readonly RefreshTokenSaveRepository $refreshTokenSaveRepository,
     )
     {

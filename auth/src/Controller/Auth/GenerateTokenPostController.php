@@ -34,7 +34,7 @@ final class GenerateTokenPostController extends AbstractController
     #[Route('/auth/token', name: 'auth_token', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
-        [$clientId, $secret, $grantType, $username, $password] = $this->getClientCredentials($request);
+        [$clientId, $secret, $grantType, $username, $password, $refreshToken] = $this->getClientCredentials($request);
 
         $accessToken = ($this->commandHandler)(GenerateTokenCommand::create(
             ClientIdentifier::fromString($clientId),
@@ -43,7 +43,8 @@ final class GenerateTokenPostController extends AbstractController
             getenv('OAUTH_PRIVATE_KEY'),
             getenv('OAUTH_PUBLIC_KEY'),
             null === $username ? $username : Email::fromString($username),
-            null === $password ? $password : Password::fromString($password)
+            null === $password ? $password : Password::fromString($password),
+            $refreshToken
         ));
 
         return $this->json(AccessTokenDto::fromDomain($accessToken), Response::HTTP_OK);
@@ -56,8 +57,9 @@ final class GenerateTokenPostController extends AbstractController
         $grantType = $request->get('grant_type');
         $username = $request->get('username');
         $password = $request->get('password');
+        $refreshToken = $request->get('refresh_token');
 
-        return [$clientId, $secret, $grantType, $username, $password];
+        return [$clientId, $secret, $grantType, $username, $password, $refreshToken];
     }
 
 }

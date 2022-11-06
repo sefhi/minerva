@@ -18,7 +18,7 @@ final class Token extends AggregateRoot
         private readonly UuidInterface $id,
         private readonly Client $client,
         private readonly DateTimeImmutable $expiry,
-        private readonly bool $revoked,
+        private bool $revoked,
         private readonly array $scopes = [],
         private readonly ?User $user = null,
     ) {
@@ -106,6 +106,13 @@ final class Token extends AggregateRoot
     public function getUser(): ?User
     {
         return $this->user;
+    }
+
+    public function revoke(): self {
+
+        $this->revoked = true;
+
+        return $this;
     }
 
 }

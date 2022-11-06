@@ -20,6 +20,7 @@ final class GenerateTokenCommand
         private readonly string $publicKey,
         private readonly ?Email $email = null,
         private readonly ?Password $password = null,
+        private readonly ?string $refreshToken = null,
     ) {
     }
 
@@ -31,6 +32,7 @@ final class GenerateTokenCommand
         string $publicKey,
         ?Email $email = null,
         ?Password $password = null,
+        ?string $refreshToken = null,
     ): self {
         return new self(
             $clientIdentifier,
@@ -39,9 +41,19 @@ final class GenerateTokenCommand
             $privateKey,
             $publicKey,
             $email,
-            $password
+            $password,
+            $refreshToken
         );
     }
+
+    /**
+     * @return string|null
+     */
+    public function getRefreshToken(): ?string
+    {
+        return $this->refreshToken;
+    }
+
 
     /**
      * @return Email|null

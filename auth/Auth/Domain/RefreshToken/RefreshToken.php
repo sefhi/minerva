@@ -16,7 +16,7 @@ final class RefreshToken extends AggregateRoot
         private UuidInterface $id,
         private readonly Token $token,
         private readonly DateTimeImmutable $expiry,
-        private readonly bool $revoked,
+        private bool $revoked,
     ) {
     }
 
@@ -61,6 +61,17 @@ final class RefreshToken extends AggregateRoot
     {
         return $this->revoked;
     }
+
+    /**
+     * @return RefreshToken
+     */
+    public function revoke(): self
+    {
+        $this->revoked = true;
+
+        return $this;
+    }
+
 
     public function __toString(): string
     {
