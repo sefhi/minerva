@@ -2,7 +2,9 @@
 
 namespace App\Factory;
 
+use Auth\Domain\Client\Client;
 use Auth\Domain\Token\Token;
+use Auth\Domain\User\User;
 use DateInterval;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
@@ -42,6 +44,15 @@ final class TokenFactory extends ModelFactory
         ];
     }
 
+    public function withUser(User $user) : self
+    {
+        return $this->addState(
+            [
+                'client' => ClientFactory::new()->withGrantRefreshToken(),
+                'user' => $user,
+            ]
+        );
+    }
     protected function initialize(): self
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization

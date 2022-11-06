@@ -15,7 +15,7 @@ final class RefreshToken extends AggregateRoot
     public function __construct(
         private UuidInterface $id,
         private readonly Token $token,
-        private readonly DateTimeImmutable $expiry,
+        private DateTimeImmutable $expiry,
         private bool $revoked,
     ) {
     }

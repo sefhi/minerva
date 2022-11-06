@@ -58,6 +58,16 @@ final class ClientFactory extends ModelFactory
         );
     }
 
+    public function withGrantRefreshToken(): self
+    {
+        return $this->addState(
+            [
+                'grants' => ['password', 'refresh_token'],
+                'active' => true,
+            ]
+        );
+    }
+
     protected function initialize(): self
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization

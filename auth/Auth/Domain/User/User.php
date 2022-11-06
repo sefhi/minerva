@@ -7,7 +7,7 @@ namespace Auth\Domain\User;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
 use Ramsey\Uuid\UuidInterface;
 
-final class User extends AggregateRoot implements UserInterface
+class User extends AggregateRoot implements UserInterface
 {
 
     public function __construct(
