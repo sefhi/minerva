@@ -13,7 +13,7 @@ final class AccessToken
         private readonly TokeType $tokeType,
         private readonly DateTimeImmutable $expiresIn,
         private readonly string $token,
-        private readonly ?RefreshToken $refreshToken = null,
+        private readonly ?string $refreshToken = null,
     ) {
     }
 
@@ -21,7 +21,20 @@ final class AccessToken
         TokeType $tokeType,
         DateTimeImmutable $expiresIn,
         string $token,
-        ?RefreshToken $refreshToken = null,
+    ): self {
+        return new self(
+            $tokeType,
+            $expiresIn,
+            $token,
+            null
+        );
+    }
+
+    public static function createWithRefreshToken(
+        TokeType $tokeType,
+        DateTimeImmutable $expiresIn,
+        string $token,
+        string $refreshToken,
     ): self {
         return new self(
             $tokeType,
@@ -34,7 +47,7 @@ final class AccessToken
     /**
      * @return RefreshToken|null
      */
-    public function getRefreshToken(): ?RefreshToken
+    public function getRefreshToken(): ?string
     {
         return $this->refreshToken;
     }

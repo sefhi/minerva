@@ -8,11 +8,13 @@ use Auth\Domain\Client\Client;
 use Auth\Domain\User\User;
 use Auth\Domain\User\UserInterface;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
+use DateInterval;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 final class Token extends AggregateRoot
 {
+    public const TTL = 'PT2H';
 
     public function __construct(
         private UuidInterface $id,
@@ -27,11 +29,12 @@ final class Token extends AggregateRoot
     public static function create(
         UuidInterface $id,
         Client $client,
-        DateTimeImmutable $expiry,
         bool $revoked,
         array $scopes = [],
         ?User $user = null,
     ): self {
+        $expiry = new DateTimeImmutable();
+        $expiry = $expiry->add(new DateInterval(self::TTL));
         return new self(
             $id,
             $client,
@@ -45,11 +48,12 @@ final class Token extends AggregateRoot
     public static function createWithUser(
         UuidInterface $id,
         Client $client,
-        DateTimeImmutable $expiry,
         User $user,
         bool $revoked,
         array $scopes = [],
     ): self {
+        $expiry = new DateTimeImmutable();
+        $expiry = $expiry->add(new DateInterval(self::TTL));
         return new self(
             $id,
             $client,
@@ -59,6 +63,15 @@ final class Token extends AggregateRoot
             $user
         );
     }
+
+    /**
+     * @param DateTimeImmutable $expiry
+     */
+    public function setExpiry(DateTimeImmutable $expiry): void
+    {
+        $this->expiry = $expiry->add(new DateInterval(self::TTL));
+    }
+
 
     /**
      * @return UuidInterface

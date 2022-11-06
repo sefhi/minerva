@@ -18,7 +18,6 @@ class TokenMother
     public static function create(
         UuidInterface $id,
         Client $client,
-        DateTimeImmutable $expiry,
         bool $revoked,
         array $scopes = [],
         ?User $user = null,
@@ -26,7 +25,6 @@ class TokenMother
         return Token::create(
             $id,
             $client,
-            $expiry,
             $revoked,
             $scopes,
             $user
@@ -44,7 +42,6 @@ class TokenMother
         return Token::createWithUser(
             $id,
             $client,
-            $expiry,
             $user,
             $revoked,
             $scopes,
@@ -56,7 +53,6 @@ class TokenMother
         return self::create(
             UuidMother::random(),
             ClientMother::random(),
-            DateTimeImmutable::createFromMutable(MotherFactory::random()->dateTime()),
             MotherFactory::random()->randomElement([true, false]),
             [],
         );
@@ -67,7 +63,6 @@ class TokenMother
         return self::create(
             UuidMother::random(),
             ClientMother::random(),
-            DateTimeImmutable::createFromMutable(MotherFactory::random()->dateTime()),
             MotherFactory::random()->randomElement([true, false]),
             [],
             UserMother::random()

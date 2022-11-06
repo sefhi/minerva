@@ -20,8 +20,8 @@ final class AccessTokenDto implements JsonSerializable
 
     public static function fromDomain(AccessToken $accessToken) : self {
 
-        if ($accessToken->getRefreshToken()) {
-            $refreshToken = (string)$accessToken->getRefreshToken();
+        if (null !== $accessToken->getRefreshToken()) {
+            $refreshToken = $accessToken->getRefreshToken();
         }
 
         return new self(

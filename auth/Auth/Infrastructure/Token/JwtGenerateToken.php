@@ -51,9 +51,21 @@ final class JwtGenerateToken implements GenerateToken
             InMemory::plainText('empty', 'empty'),
         );
 
-        $jwtToken = $this->convertToJWT($token);
+        $jwtToken = $this->convertTokenToJWT($token);
 
-        return AccessToken::create(TokeType::from('bearer'), $token->getExpiry(), $jwtToken->toString(), $refreshToken);
+        if (null !== $refreshToken) {
+
+            $jwtRefreshToken = $this->convertRefreshTokenToJWT($refreshToken);
+
+            return AccessToken::createWithRefreshToken(
+                TokeType::from('bearer'),
+                $token->getExpiry(),
+                $jwtToken->toString(),
+                $jwtRefreshToken->toString()
+            );
+        }
+
+        return AccessToken::create(TokeType::from('bearer'), $token->getExpiry(), $jwtToken->toString());
     }
 
     /**
@@ -62,16 +74,35 @@ final class JwtGenerateToken implements GenerateToken
      * @param Token $token
      * @return JwtToken
      */
-    private function convertToJWT(Token $token): JwtToken
+    private function convertTokenToJWT(Token $token): JwtToken
     {
         return $this->configuration->builder()
-            ->permittedFor($token->getClient()->getCredentials()->getIdentifier()->value())
-            ->identifiedBy($token->getId()->toString())
+            ->permittedFor((string)$token->getClient()->getCredentials()->getIdentifier())
+            ->identifiedBy((string)$token->getId())
             ->issuedAt(new DateTimeImmutable())
             ->canOnlyBeUsedAfter(new DateTimeImmutable())
             ->expiresAt($token->getExpiry())
             ->relatedTo((string)$token->getUser()?->getId())
             ->withClaim('scopes', $token->getScopes())
+            ->getToken($this->configuration->signer(), $this->configuration->signingKey());
+    }
+
+    /**
+     * Generate a JWT from the access token
+     *
+     * @param RefreshToken $refreshToken
+     * @return JwtToken
+     */
+    private function convertRefreshTokenToJWT(RefreshToken $refreshToken): JwtToken
+    {
+        return $this->configuration->builder()
+            ->permittedFor((string)$refreshToken->getToken()->getClient()->getIdentifier())
+            ->identifiedBy((string)$refreshToken->getId())
+            ->issuedAt(new DateTimeImmutable())
+            ->canOnlyBeUsedAfter(new DateTimeImmutable())
+            ->expiresAt($refreshToken->getExpiry())
+            ->relatedTo((string)$refreshToken->getToken()->getUser()?->getId())
+            ->withClaim('scopes', $refreshToken->getToken()->getScopes())
             ->getToken($this->configuration->signer(), $this->configuration->signingKey());
     }
 

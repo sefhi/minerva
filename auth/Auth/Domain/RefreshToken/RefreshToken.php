@@ -6,11 +6,14 @@ namespace Auth\Domain\RefreshToken;
 
 use Auth\Domain\Token\Token;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
+use DateInterval;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 final class RefreshToken extends AggregateRoot
 {
+
+    public const TTL = 'P1M';
 
     public function __construct(
         private UuidInterface $id,
@@ -23,9 +26,10 @@ final class RefreshToken extends AggregateRoot
     public static function create(
         UuidInterface $id,
         Token $token,
-        DateTimeImmutable $expiry,
         bool $revoked,
     ): self {
+        $expiry = new DateTimeImmutable();
+        $expiry = $expiry->add(new DateInterval(self::TTL));
         return new self($id, $token, $expiry, $revoked);
     }
 

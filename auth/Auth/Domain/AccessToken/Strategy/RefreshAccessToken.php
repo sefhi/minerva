@@ -34,6 +34,11 @@ final class RefreshAccessToken implements AccessTokenMethod
 
     public function generateAccessToken(GenerateTokenCommand $command, Client $client): AccessToken
     {
+
+        if (null === $command->getRefreshToken()) {
+            throw new \RuntimeException('Refreshtoken is required');
+        }
+
         $refreshToken = $command->getRefreshToken();
         //TODO validamos el refresh_token encrypt/decrypt
 
@@ -60,13 +65,10 @@ final class RefreshAccessToken implements AccessTokenMethod
         /**
          * TODO TOKEN
          */
-        $date = new \DateTimeImmutable();
-        $expiredAt = $date->add(new \DateInterval('PT2H'));
 
         $token = Token::createWithUser(
             Uuid::uuid4(),
             $client,
-            $expiredAt,
             $user,
             false
         );
@@ -77,13 +79,10 @@ final class RefreshAccessToken implements AccessTokenMethod
         /**
          * TODO REFRESH TOKEN
          */
-        $dateRefresh = new \DateTimeImmutable();
-        $refreshExpiredAt = $dateRefresh->add(new \DateInterval('P1M'));
 
         $refreshToken = RefreshToken::create(
             Uuid::uuid4(),
             $token,
-            $refreshExpiredAt,
             false,
         );
 

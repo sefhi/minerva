@@ -25,13 +25,9 @@ final class ClientCredentialsAccessToken implements AccessTokenMethod
 
     public function generateAccessToken(GenerateTokenCommand $command, Client $client): AccessToken
     {
-        $date = new \DateTimeImmutable();
-        $expiredAt = $date->add(new \DateInterval('PT2H'));
-
         $token = Token::create(
             Uuid::uuid4(),
             $client,
-            $expiredAt,
             false
         );
 

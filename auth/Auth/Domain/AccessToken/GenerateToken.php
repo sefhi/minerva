@@ -15,4 +15,6 @@ interface GenerateToken
     ): AccessToken;
 
     public function generateTokenByBearer(CryptKeyPublic $publicKey, TokenBearer $tokenBearer): Token;
+
+//    public function generateRefreshToken()
 }
