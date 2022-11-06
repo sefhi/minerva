@@ -39,7 +39,8 @@ final class ClientCredentialsAccessToken implements AccessTokenMethod
 
         return $this->generateToken->generateAccessToken(
             CryptKeyPrivate::create($command->getPrivateKey()),
-            $token
+            $token,
+            null
         );
     }
 }

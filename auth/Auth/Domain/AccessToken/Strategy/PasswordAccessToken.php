@@ -9,6 +9,9 @@ use Auth\Domain\AccessToken\AccessToken;
 use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Client;
+use Auth\Domain\RefreshToken\RefreshToken;
+use Auth\Domain\RefreshToken\RefreshTokenFindRepository;
+use Auth\Domain\RefreshToken\RefreshTokenSaveRepository;
 use Auth\Domain\Token\Token;
 use Auth\Domain\Token\TokenSaveRepository;
 use Auth\Domain\User\PasswordHasher;
@@ -23,6 +26,8 @@ final class PasswordAccessToken implements AccessTokenMethod
         private readonly GenerateToken $generateToken,
         private readonly UserFindRepository $userFindRepository,
         private readonly PasswordHasher $passwordHasher,
+        private readonly RefreshTokenFindRepository $refreshTokenFindRepository,
+        private readonly RefreshTokenSaveRepository $refreshTokenSaveRepository,
     )
     {
     }
@@ -38,6 +43,9 @@ final class PasswordAccessToken implements AccessTokenMethod
             throw new \RuntimeException('user credentials not valid');
         }
 
+        /**
+         * TODO TOKEN
+         */
         $date = new \DateTimeImmutable();
         $expiredAt = $date->add(new \DateInterval('PT2H'));
 
@@ -51,9 +59,25 @@ final class PasswordAccessToken implements AccessTokenMethod
 
         $this->tokenSaveRepository->save($token);
 
+        /**
+         * TODO REFRESH TOKEN
+         */
+        $dateRefresh = new \DateTimeImmutable();
+        $refreshExpiredAt = $dateRefresh->add(new \DateInterval('P1M'));
+
+        $refreshToken = RefreshToken::create(
+            Uuid::uuid4(),
+            $token,
+            $refreshExpiredAt,
+            false,
+        );
+
+        $this->refreshTokenSaveRepository->save($refreshToken);
+
         return $this->generateToken->generateAccessToken(
             CryptKeyPrivate::create($command->getPrivateKey()),
-            $token
+            $token,
+            $refreshToken
         );
     }
 }

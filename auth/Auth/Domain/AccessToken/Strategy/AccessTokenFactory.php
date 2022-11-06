@@ -6,6 +6,8 @@ namespace Auth\Domain\AccessToken\Strategy;
 
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Grant;
+use Auth\Domain\RefreshToken\RefreshTokenFindRepository;
+use Auth\Domain\RefreshToken\RefreshTokenSaveRepository;
 use Auth\Domain\Token\TokenSaveRepository;
 use Auth\Domain\User\PasswordHasher;
 use Auth\Domain\User\UserFindRepository;
@@ -19,6 +21,8 @@ final class AccessTokenFactory
         private readonly PasswordHasher $passwordHasher,
         private readonly TokenSaveRepository $tokenSaveRepository,
         private readonly GenerateToken $generateToken,
+        private readonly RefreshTokenFindRepository $refreshTokenFindRepository,
+        private readonly RefreshTokenSaveRepository $refreshTokenSaveRepository,
     ) {
     }
 
@@ -27,20 +31,21 @@ final class AccessTokenFactory
      */
     public function getAccessTokenMethod(Grant $grant): AccessTokenMethod
     {
-        switch ($grant) {
-            case Grant::CLIENT_CREDENTIALS:
-                return new ClientCredentialsAccessToken($this->tokenSaveRepository, $this->generateToken);
-            case Grant::PASSWORD:
-                return new PasswordAccessToken(
-                    $this->tokenSaveRepository,
-                    $this->generateToken,
-                    $this->userFindRepository,
-                    $this->passwordHasher
-                );
-            case Grant::REFRESH_TOKEN:
-                throw new Exception('To be implemented');
-            default:
-                throw new Exception('Unknown Grant Type');
-        }
+        return match ($grant) {
+            Grant::CLIENT_CREDENTIALS => new ClientCredentialsAccessToken(
+                $this->tokenSaveRepository,
+                $this->generateToken
+            ),
+            Grant::PASSWORD => new PasswordAccessToken(
+                $this->tokenSaveRepository,
+                $this->generateToken,
+                $this->userFindRepository,
+                $this->passwordHasher,
+                $this->refreshTokenFindRepository,
+                $this->refreshTokenSaveRepository
+            ),
+            Grant::REFRESH_TOKEN => new RefreshAccessToken(),
+            default => throw new Exception('Unknown Grant Type'),
+        };
     }
 }

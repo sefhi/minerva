@@ -10,6 +10,7 @@ use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\AccessToken\TokeType;
 use Auth\Domain\Bearer\TokenBearer;
 use Auth\Domain\Exception\OAuthServerException;
+use Auth\Domain\RefreshToken\RefreshToken;
 use Auth\Domain\Token\Token;
 use Auth\Domain\Token\TokenFindRepository;
 use DateTimeImmutable;
@@ -42,7 +43,7 @@ final class JwtGenerateToken implements GenerateToken
     {
     }
 
-    public function generateAccessToken(CryptKey $privateKey, Token $token): AccessToken
+    public function generateAccessToken(CryptKey $privateKey, Token $token, ?RefreshToken $refreshToken): AccessToken
     {
         $this->configuration = Configuration::forAsymmetricSigner(
             new Sha256(),
@@ -52,7 +53,7 @@ final class JwtGenerateToken implements GenerateToken
 
         $jwtToken = $this->convertToJWT($token);
 
-        return AccessToken::create(TokeType::from('bearer'), $token->getExpiry(), $jwtToken->toString());
+        return AccessToken::create(TokeType::from('bearer'), $token->getExpiry(), $jwtToken->toString(), $refreshToken);
     }
 
     /**
