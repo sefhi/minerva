@@ -14,6 +14,7 @@ abstract class AbstractWebTestCase extends WebTestCase
     protected function setUp(): void
     {
         $this->client = self::createClient();
+        $this->container = self::getContainer();
     }
 
 }

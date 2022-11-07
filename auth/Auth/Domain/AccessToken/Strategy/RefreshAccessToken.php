@@ -16,6 +16,7 @@ use Auth\Domain\Token\Token;
 use Auth\Domain\Token\TokenSaveRepository;
 use Auth\Domain\User\PasswordHasher;
 use Auth\Domain\User\UserFindRepository;
+use Auth\Shared\Domain\Exception\InvalidDataException;
 use Ramsey\Uuid\Uuid;
 
 final class RefreshAccessToken implements AccessTokenMethod
@@ -36,7 +37,7 @@ final class RefreshAccessToken implements AccessTokenMethod
     {
 
         if (null === $command->getRefreshToken()) {
-            throw new \RuntimeException('Refreshtoken is required');
+            throw InvalidDataException::parameterRequired('refresh_token');
         }
 
         $refreshToken = $command->getRefreshToken();
@@ -58,7 +59,7 @@ final class RefreshAccessToken implements AccessTokenMethod
         $isValidPassword = $this->passwordHasher
             ->verify($user->getPassword(), $command->getPassword());
 
-        if(!$isValidPassword) {
+        if (!$isValidPassword) {
             throw new \RuntimeException('user credentials not valid');
         }
 

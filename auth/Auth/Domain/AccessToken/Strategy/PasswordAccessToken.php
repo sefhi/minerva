@@ -68,7 +68,7 @@ final class PasswordAccessToken implements AccessTokenMethod
         $this->refreshTokenSaveRepository->save($refreshToken);
 
         return $this->generateToken->generateAccessToken(
-            CryptKeyPrivate::create($command->getPrivateKey()),
+            CryptKeyPrivate::create($command->getPrivateKey()), //TODO Esto tiene que ser algo propio de infra
             $token,
             $refreshToken
         );

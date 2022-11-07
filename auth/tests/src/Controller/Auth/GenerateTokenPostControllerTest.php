@@ -7,12 +7,13 @@ use App\Factory\PasswordFactory;
 use App\Factory\RefreshTokenFactory;
 use App\Factory\TokenFactory;
 use App\Factory\UserFactory;
+use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Grant;
-use Auth\Domain\RefreshToken\RefreshToken;
+use Auth\Infrastructure\Token\JwtGenerateToken;
+use Tests\Auth\Domain\AccessToken\AccessTokenMother;
 
 class GenerateTokenPostControllerTest extends AbstractWebTestCase
 {
-
     /** @test */
     public function itShouldGenerateTokenWithClientCredentials(): void
     {
@@ -75,6 +76,8 @@ class GenerateTokenPostControllerTest extends AbstractWebTestCase
         $user  = UserFactory::createOne();
         $token = TokenFactory::new()->withUser($user->object())->create();
         $refreshToken = RefreshTokenFactory::new()->withToken($token->object())->create();
+        $generateToken = $this->container->get(GenerateToken::class);
+        $accessToken = AccessTokenMother::createWithRefreshToken($token->object(), $refreshToken->object(), $generateToken);
 
         $router = $this->client->getContainer()->get('router');
         $server = ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
@@ -84,7 +87,7 @@ class GenerateTokenPostControllerTest extends AbstractWebTestCase
             'grant_type' => Grant::REFRESH_TOKEN->value,
             'username' => $user->getEmail()->value(),
             'password' => PasswordFactory::PASSWORD,
-            'refresh_token' => (string)$refreshToken->getId()
+            'refresh_token' => $accessToken->getRefreshToken()
         ];
 
         // WHEN

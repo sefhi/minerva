@@ -74,7 +74,7 @@ final class AccessTokenDto implements JsonSerializable
             'expires_in' => $this->getExpiresIn(),
         ];
 
-        if($this->getRefreshToken()) {
+        if ($this->getRefreshToken()) {
             $result['refresh_token'] = $this->getRefreshToken();
         }
 

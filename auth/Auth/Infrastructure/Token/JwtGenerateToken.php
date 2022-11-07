@@ -53,19 +53,19 @@ final class JwtGenerateToken implements GenerateToken
 
         $jwtToken = $this->convertTokenToJWT($token);
 
-        if (null !== $refreshToken) {
-
-            $jwtRefreshToken = $this->convertRefreshTokenToJWT($refreshToken);
-
-            return AccessToken::createWithRefreshToken(
-                TokeType::from('bearer'),
-                $token->getExpiry(),
-                $jwtToken->toString(),
-                $jwtRefreshToken->toString()
-            );
+        if (null === $refreshToken) {
+            return AccessToken::create(TokeType::from('bearer'), $token->getExpiry(), $jwtToken->toString());
         }
 
-        return AccessToken::create(TokeType::from('bearer'), $token->getExpiry(), $jwtToken->toString());
+        $jwtRefreshToken = $this->convertRefreshTokenToJWT($refreshToken);
+
+        return AccessToken::createWithRefreshToken(
+            TokeType::from('bearer'),
+            $token->getExpiry(),
+            $jwtToken->toString(),
+            $jwtRefreshToken->toString()
+        );
+
     }
 
     /**
