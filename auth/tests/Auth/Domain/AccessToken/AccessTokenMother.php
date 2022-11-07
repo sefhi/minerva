@@ -29,9 +29,7 @@ final class AccessTokenMother
         RefreshToken $refreshToken,
         GenerateToken $generateToken
     ): AccessToken {
-        //TODO cripkey tiene que estar  inyectadonse desde infra
-        $key = CryptKeyPrivate::create(getenv('OAUTH_PRIVATE_KEY'));
-        return $generateToken->generateAccessToken($key, $token, $refreshToken);
+        return $generateToken->generateAccessToken($token, $refreshToken);
     }
 
 

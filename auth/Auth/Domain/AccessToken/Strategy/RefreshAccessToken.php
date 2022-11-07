@@ -41,7 +41,6 @@ final class RefreshAccessToken implements AccessTokenMethod
         }
 
         $refreshToken = $command->getRefreshToken();
-        //TODO validamos el refresh_token encrypt/decrypt
 
         $refreshToken = $this->refreshTokenFindRepository->findOrFail(Uuid::fromString($refreshToken));
         $token = $refreshToken->getToken();
@@ -90,7 +89,6 @@ final class RefreshAccessToken implements AccessTokenMethod
         $this->refreshTokenSaveRepository->save($refreshToken);
 
         return $this->generateToken->generateAccessToken(
-            CryptKeyPrivate::create($command->getPrivateKey()),
             $token,
             $refreshToken
         );

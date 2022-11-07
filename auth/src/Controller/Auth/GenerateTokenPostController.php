@@ -40,8 +40,6 @@ final class GenerateTokenPostController extends AbstractController
             ClientIdentifier::fromString($clientId),
             ClientSecret::fromString($secret),
             Grant::from($grantType),
-            getenv('OAUTH_PRIVATE_KEY'),
-            getenv('OAUTH_PUBLIC_KEY'),
             null === $username ? $username : Email::fromString($username),
             null === $password ? $password : Password::fromString($password),
             $refreshToken

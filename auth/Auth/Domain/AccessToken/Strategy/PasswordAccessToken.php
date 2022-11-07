@@ -10,7 +10,6 @@ use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Client;
 use Auth\Domain\RefreshToken\RefreshToken;
-use Auth\Domain\RefreshToken\RefreshTokenFindRepository;
 use Auth\Domain\RefreshToken\RefreshTokenSaveRepository;
 use Auth\Domain\Token\Token;
 use Auth\Domain\Token\TokenSaveRepository;
@@ -68,7 +67,6 @@ final class PasswordAccessToken implements AccessTokenMethod
         $this->refreshTokenSaveRepository->save($refreshToken);
 
         return $this->generateToken->generateAccessToken(
-            CryptKeyPrivate::create($command->getPrivateKey()), //TODO Esto tiene que ser algo propio de infra
             $token,
             $refreshToken
         );

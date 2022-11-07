@@ -8,13 +8,12 @@ use Auth\Domain\Token\Token;
 
 interface GenerateToken
 {
-    public function generateAccessToken(
-        CryptKeyPrivate $privateKey,
-        Token $token,
-        ?RefreshToken $refreshToken
-    ): AccessToken;
+    public function generateAccessToken(Token $token, ?RefreshToken $refreshToken): AccessToken;
 
-    public function generateTokenByBearer(CryptKeyPublic $publicKey, TokenBearer $tokenBearer): Token;
+    public function generateTokenByBearer(TokenBearer $tokenBearer): Token;
 
-//    public function generateRefreshToken()
+    public function generateTokenFromJwtToken(string $jwtToken): Token;
+
+    public function generateRefreshTokenFromJwtToken(string $jwtToken): RefreshToken;
+
 }

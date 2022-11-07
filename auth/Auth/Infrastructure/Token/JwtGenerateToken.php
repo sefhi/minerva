@@ -6,6 +6,8 @@ namespace Auth\Infrastructure\Token;
 
 use Auth\Domain\AccessToken\AccessToken;
 use Auth\Domain\AccessToken\CryptKey;
+use Auth\Domain\AccessToken\CryptKeyPrivate;
+use Auth\Domain\AccessToken\CryptKeyPublic;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\AccessToken\TokeType;
 use Auth\Domain\Bearer\TokenBearer;
@@ -26,6 +28,8 @@ use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use Ramsey\Uuid\Uuid;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 use function class_exists;
 use function date_default_timezone_get;
 
@@ -37,17 +41,25 @@ final class JwtGenerateToken implements GenerateToken
      * @var Configuration
      */
     private Configuration $configuration;
+    private string $privateKey;
+    private string $publicKey;
 
 
-    public function __construct(private readonly TokenFindRepository $tokenFindRepository)
+    public function __construct(
+        private readonly TokenFindRepository $tokenFindRepository,
+        private readonly ParameterBagInterface $parameterBag
+    )
     {
+        $this->privateKey = $this->parameterBag->get('private_key');
+        $this->publicKey = $this->parameterBag->get('public_key');
     }
 
-    public function generateAccessToken(CryptKey $privateKey, Token $token, ?RefreshToken $refreshToken): AccessToken
+    public function generateAccessToken(Token $token, ?RefreshToken $refreshToken): AccessToken
     {
+        $privateKeyNew = CryptKeyPrivate::create($this->privateKey);
         $this->configuration = Configuration::forAsymmetricSigner(
             new Sha256(),
-            InMemory::plainText($privateKey->getKeyContents(), $privateKey->getPassPhrase()),
+            InMemory::plainText($privateKeyNew->getKeyContents(), $privateKeyNew->getPassPhrase()),
             InMemory::plainText('empty', 'empty'),
         );
 
@@ -109,8 +121,9 @@ final class JwtGenerateToken implements GenerateToken
     /**
      * @throws OAuthServerException
      */
-    public function generateTokenByBearer(CryptKey $publicKey, TokenBearer $tokenBearer): Token
+    public function generateTokenByBearer(TokenBearer $tokenBearer): Token
     {
+        $publicKeyNew = CryptKeyPublic::create($this->publicKey);
         $this->configuration = Configuration::forSymmetricSigner(
             new Sha256(),
             InMemory::plainText('empty', 'empty')
@@ -122,7 +135,7 @@ final class JwtGenerateToken implements GenerateToken
                 : new LooseValidAt(new SystemClock(new DateTimeZone(date_default_timezone_get()))),
             new SignedWith(
                 new Sha256(),
-                InMemory::plainText($publicKey->getKeyContents(), $publicKey->getPassPhrase() ?? '')
+                InMemory::plainText($publicKeyNew->getKeyContents(), $publicKeyNew->getPassPhrase() ?? '')
             )
         );
 
@@ -146,5 +159,15 @@ final class JwtGenerateToken implements GenerateToken
         }
 
         return $this->tokenFindRepository->findOrFail(Uuid::fromString($claims->get('jti')));
+    }
+
+    public function generateTokenFromJwtToken(string $jwtToken): Token
+    {
+        // TODO: Implement generateTokenFromJwtToken() method.
+    }
+
+    public function generateRefreshTokenFromJwtToken(string $jwtToken): RefreshToken
+    {
+        // TODO: Implement generateRefreshTokenFromJwtToken() method.
     }
 }

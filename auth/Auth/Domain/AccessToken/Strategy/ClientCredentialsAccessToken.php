@@ -6,7 +6,6 @@ namespace Auth\Domain\AccessToken\Strategy;
 
 use Auth\Application\Token\GenerateTokenCommand;
 use Auth\Domain\AccessToken\AccessToken;
-use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Client;
 use Auth\Domain\Token\Token;
@@ -34,7 +33,6 @@ final class ClientCredentialsAccessToken implements AccessTokenMethod
         $this->tokenSaveRepository->save($token);
 
         return $this->generateToken->generateAccessToken(
-            CryptKeyPrivate::create($command->getPrivateKey()),
             $token,
             null
         );

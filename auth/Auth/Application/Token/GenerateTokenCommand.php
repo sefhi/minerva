@@ -16,8 +16,6 @@ final class GenerateTokenCommand
         private readonly ClientIdentifier $clientIdentifier,
         private readonly ClientSecret $clientSecret,
         private readonly Grant $grant,
-        private readonly string $privateKey,
-        private readonly string $publicKey,
         private readonly ?Email $email = null,
         private readonly ?Password $password = null,
         private readonly ?string $refreshToken = null,
@@ -28,8 +26,6 @@ final class GenerateTokenCommand
         ClientIdentifier $clientIdentifier,
         ClientSecret $clientSecret,
         Grant $grant,
-        string $privateKey,
-        string $publicKey,
         ?Email $email = null,
         ?Password $password = null,
         ?string $refreshToken = null,
@@ -38,8 +34,6 @@ final class GenerateTokenCommand
             $clientIdentifier,
             $clientSecret,
             $grant,
-            $privateKey,
-            $publicKey,
             $email,
             $password,
             $refreshToken
@@ -94,22 +88,5 @@ final class GenerateTokenCommand
     {
         return $this->grant;
     }
-
-    /**
-     * @return string
-     */
-    public function getPrivateKey(): string
-    {
-        return $this->privateKey;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPublicKey(): string
-    {
-        return $this->publicKey;
-    }
-
 
 }
