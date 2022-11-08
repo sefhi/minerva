@@ -21,7 +21,6 @@ final class AccessTokenFactory
         private readonly PasswordHasher $passwordHasher,
         private readonly TokenSaveRepository $tokenSaveRepository,
         private readonly GenerateToken $generateToken,
-        private readonly RefreshTokenFindRepository $refreshTokenFindRepository,
         private readonly RefreshTokenSaveRepository $refreshTokenSaveRepository,
     ) {
     }
@@ -48,7 +47,6 @@ final class AccessTokenFactory
                 $this->generateToken,
                 $this->userFindRepository,
                 $this->passwordHasher,
-                $this->refreshTokenFindRepository,
                 $this->refreshTokenSaveRepository
             ),
             default => throw new Exception('Unknown Grant Type'),

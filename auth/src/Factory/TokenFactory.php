@@ -39,7 +39,7 @@ final class TokenFactory extends ModelFactory
             'id' => Uuid::uuid4(),
             'client' => ClientFactory::createOne(),
             'user' => UserFactory::createOne(),
-            'expiry' => $expiry->add(new DateInterval('PT2H')),
+            'expiry' => $expiry->add(new DateInterval(Token::TTL)),
             'revoked' => false,
         ];
     }

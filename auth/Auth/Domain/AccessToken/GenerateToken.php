@@ -12,8 +12,8 @@ interface GenerateToken
 
     public function generateTokenByBearer(TokenBearer $tokenBearer): Token;
 
-    public function generateTokenFromJwtToken(string $jwtToken): Token;
+    public function generateTokenFromJwtToken(string $token): Token;
 
-    public function generateRefreshTokenFromJwtToken(string $jwtToken): RefreshToken;
+    public function generateRefreshTokenFromJwtToken(string $token): RefreshToken;
 
 }

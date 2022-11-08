@@ -13,6 +13,7 @@ use Auth\Domain\AccessToken\TokeType;
 use Auth\Domain\Bearer\TokenBearer;
 use Auth\Domain\Exception\OAuthServerException;
 use Auth\Domain\RefreshToken\RefreshToken;
+use Auth\Domain\RefreshToken\RefreshTokenFindRepository;
 use Auth\Domain\Token\Token;
 use Auth\Domain\Token\TokenFindRepository;
 use DateTimeImmutable;
@@ -47,6 +48,7 @@ final class JwtGenerateToken implements GenerateToken
 
     public function __construct(
         private readonly TokenFindRepository $tokenFindRepository,
+        private readonly RefreshTokenFindRepository $refreshTokenFindRepository,
         private readonly ParameterBagInterface $parameterBag
     )
     {
@@ -123,6 +125,66 @@ final class JwtGenerateToken implements GenerateToken
      */
     public function generateTokenByBearer(TokenBearer $tokenBearer): Token
     {
+        $jwtToken = $this->getJwtToken($tokenBearer->value());
+
+        $this->assertConstraintsJwtToken($jwtToken);
+
+        $claims = $jwtToken->claims();
+
+        $tokenDomainFound = $this->tokenFindRepository->findOrFail(Uuid::fromString($claims->get('jti')));
+
+        if ($tokenDomainFound->isRevoked()) {
+            throw OAuthServerException::accessDenied('Bearer Access token has been revoked');
+        }
+
+        return $this->tokenFindRepository->findOrFail(Uuid::fromString($claims->get('jti')));
+    }
+
+
+    /**
+     * @throws OAuthServerException
+     */
+    public function generateTokenFromJwtToken(string $token): Token
+    {
+        $jwtToken = $this->getJwtToken($token);
+
+        $claims = $jwtToken->claims();
+
+        $tokenDomainFound = $this->tokenFindRepository->findOrFail(Uuid::fromString($claims->get('jti')));
+
+        if ($tokenDomainFound->isRevoked()) {
+            throw OAuthServerException::accessDenied('Access token has been revoked');
+        }
+
+        return $tokenDomainFound;
+    }
+
+    /**
+     * @throws OAuthServerException
+     */
+    public function generateRefreshTokenFromJwtToken(string $token): RefreshToken
+    {
+        $jwtToken = $this->getJwtToken($token);
+
+        $claims = $jwtToken->claims();
+
+        $refreshTokenDomainFound = $this->refreshTokenFindRepository
+            ->findOrFail(Uuid::fromString($claims->get('jti')));
+
+        if ($refreshTokenDomainFound->isRevoked()) {
+            throw OAuthServerException::accessDenied('Refresh Access token has been revoked');
+        }
+
+        return $refreshTokenDomainFound;
+    }
+
+    /**
+     * @param string $token
+     * @return JwtToken
+     * @throws OAuthServerException
+     */
+    private function getJwtToken(string $token): JwtToken
+    {
         $publicKeyNew = CryptKeyPublic::create($this->publicKey);
         $this->configuration = Configuration::forSymmetricSigner(
             new Sha256(),
@@ -140,34 +202,26 @@ final class JwtGenerateToken implements GenerateToken
         );
 
         // Attempt to parse the JWT
-        $token = $this->configuration->parser()->parse($tokenBearer->value());
+        $jwtToken = $this->configuration->parser()->parse($token);
 
+        $this->assertConstraintsJwtToken($jwtToken);
+
+        return $jwtToken;
+    }
+
+    /**
+     * @param JwtToken $jwtToken
+     * @return void
+     * @throws OAuthServerException
+     */
+    private function assertConstraintsJwtToken(JwtToken $jwtToken): void
+    {
         try {
             // Attempt to validate the JWT
             $constraints = $this->configuration->validationConstraints();
-            $this->configuration->validator()->assert($token, ...$constraints);
-        } catch (RequiredConstraintsViolated) {
+            $this->configuration->validator()->assert($jwtToken, ...$constraints);
+        } catch (RequiredConstraintsViolated $e) {
             throw OAuthServerException::accessDenied('Access token could not be verified');
         }
-
-        $claims = $token->claims();
-
-        $tokenDomainFound = $this->tokenFindRepository->findOrFail(Uuid::fromString($claims->get('jti')));
-
-        if ($tokenDomainFound->isRevoked()) {
-            throw OAuthServerException::accessDenied('Access token has been revoked');
-        }
-
-        return $this->tokenFindRepository->findOrFail(Uuid::fromString($claims->get('jti')));
-    }
-
-    public function generateTokenFromJwtToken(string $jwtToken): Token
-    {
-        // TODO: Implement generateTokenFromJwtToken() method.
-    }
-
-    public function generateRefreshTokenFromJwtToken(string $jwtToken): RefreshToken
-    {
-        // TODO: Implement generateRefreshTokenFromJwtToken() method.
     }
 }

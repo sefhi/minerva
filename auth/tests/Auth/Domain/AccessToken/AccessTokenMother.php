@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Auth\Domain\AccessToken;
 
 use Auth\Domain\AccessToken\AccessToken;
-use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\AccessToken\TokeType;
 use Auth\Domain\RefreshToken\RefreshToken;

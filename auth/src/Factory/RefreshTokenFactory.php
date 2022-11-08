@@ -4,6 +4,8 @@ namespace App\Factory;
 
 use Auth\Domain\RefreshToken\RefreshToken;
 use Auth\Domain\Token\Token;
+use DateInterval;
+use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -31,10 +33,12 @@ final class RefreshTokenFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
+        $expiry = new DateTimeImmutable();
+
         return [
             'id' => Uuid::uuid4(),
             'token' => TokenFactory::createOne(),
-            'expiry' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'expiry' => $expiry->add(new DateInterval(RefreshToken::TTL)),
             'revoked' => false,
         ];
     }

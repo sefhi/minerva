@@ -10,7 +10,6 @@ use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Client;
 use Auth\Domain\RefreshToken\RefreshToken;
-use Auth\Domain\RefreshToken\RefreshTokenFindRepository;
 use Auth\Domain\RefreshToken\RefreshTokenSaveRepository;
 use Auth\Domain\Token\Token;
 use Auth\Domain\Token\TokenSaveRepository;
@@ -27,7 +26,6 @@ final class RefreshAccessToken implements AccessTokenMethod
         private readonly GenerateToken $generateToken,
         private readonly UserFindRepository $userFindRepository,
         private readonly PasswordHasher $passwordHasher,
-        private readonly RefreshTokenFindRepository $refreshTokenFindRepository,
         private readonly RefreshTokenSaveRepository $refreshTokenSaveRepository,
     )
     {
@@ -40,17 +38,18 @@ final class RefreshAccessToken implements AccessTokenMethod
             throw InvalidDataException::parameterRequired('refresh_token');
         }
 
-        $refreshToken = $command->getRefreshToken();
+        $token = $command->getRefreshToken();
 
-        $refreshToken = $this->refreshTokenFindRepository->findOrFail(Uuid::fromString($refreshToken));
-        $token = $refreshToken->getToken();
+        $refreshTokenDomain = $this->generateToken->generateRefreshTokenFromJwtToken($token);
+
+        $tokenDomain = $refreshTokenDomain->getToken();
 
         //Expire old tokens
-        $refreshToken->revoke();
-        $token->revoke();
+        $refreshTokenDomain->revoke();
+        $tokenDomain->revoke();
 
-        $this->refreshTokenSaveRepository->save($refreshToken);
-        $this->tokenSaveRepository->save($token);
+        $this->refreshTokenSaveRepository->save($refreshTokenDomain);
+        $this->tokenSaveRepository->save($tokenDomain);
 
         //Generate new tokens
         $user = $this->userFindRepository->findOneByEmailOrFail($command->getEmail());
@@ -66,31 +65,31 @@ final class RefreshAccessToken implements AccessTokenMethod
          * TODO TOKEN
          */
 
-        $token = Token::createWithUser(
+        $tokenDomain = Token::createWithUser(
             Uuid::uuid4(),
             $client,
             $user,
             false
         );
 
-        $this->tokenSaveRepository->save($token);
+        $this->tokenSaveRepository->save($tokenDomain);
 
 
         /**
          * TODO REFRESH TOKEN
          */
 
-        $refreshToken = RefreshToken::create(
+        $refreshTokenDomain = RefreshToken::create(
             Uuid::uuid4(),
-            $token,
+            $tokenDomain,
             false,
         );
 
-        $this->refreshTokenSaveRepository->save($refreshToken);
+        $this->refreshTokenSaveRepository->save($refreshTokenDomain);
 
         return $this->generateToken->generateAccessToken(
-            $token,
-            $refreshToken
+            $tokenDomain,
+            $refreshTokenDomain
         );
     }
 }
