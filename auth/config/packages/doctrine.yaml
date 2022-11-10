@@ -6,6 +6,7 @@ doctrine:
             auth_redirect_uris: Auth\Infrastructure\Persistence\Doctrine\Mapping\Client\ClientRedirectUrisType
             auth_scopes: Auth\Infrastructure\Persistence\Doctrine\Mapping\Client\ClientScopesType
             token_scopes: Auth\Infrastructure\Persistence\Doctrine\Mapping\Token\TokenScopesType
+            role_type: Auth\Infrastructure\Persistence\Doctrine\Mapping\User\RoleType
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '13'

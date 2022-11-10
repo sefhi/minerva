@@ -9,6 +9,7 @@ use Auth\Application\User\CreateUserCommand;
 use Auth\Application\User\CreateUserCommandHandler;
 use Auth\Domain\User\Email;
 use Auth\Domain\User\Password;
+use Auth\Domain\User\Role;
 use JsonException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

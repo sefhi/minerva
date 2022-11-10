@@ -30,7 +30,7 @@ final class CreateUserCommandHandler
             Uuid::uuid4(),
             $command->getEmail(),
             $this->passwordHasher->hash($command->getPlainPassword()),
-            []
+            $command->getRoles()
         );
 
         $this->userSaveRepository->save($user);

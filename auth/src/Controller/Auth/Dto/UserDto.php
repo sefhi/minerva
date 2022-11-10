@@ -67,7 +67,7 @@ final class UserDto implements JsonSerializable
         return [
             'id' => $this->getId(),
             'email' => $this->getEmail(),
-            'roles' => $this->getRoles()
+            'roles' => array_map(static fn($rol) => $rol->value(), $this->getRoles())
         ];
     }
 }

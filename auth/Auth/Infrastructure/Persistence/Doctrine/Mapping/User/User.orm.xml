@@ -6,7 +6,7 @@
         <id name="id" type="uuid" length="36" column="id" />
 
         <embedded name="email" class="Auth\Domain\User\Email" use-column-prefix="false" />
-        <field name="roles" type="json" />
+        <field name="roles" type="role_type" />
         <field name="active" type="boolean"/>
         <embedded name="password" class="Auth\Domain\User\Password" use-column-prefix="false"/>
     </entity>
