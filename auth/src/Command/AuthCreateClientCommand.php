@@ -2,9 +2,12 @@
 
 namespace App\Command;
 
+use Auth\Application\Client\CreateClientCommand;
 use Auth\Application\Client\CreateClientCommandHandler;
 use Auth\Domain\Client\ClientIdentifier;
+use Auth\Domain\Client\ClientName;
 use Auth\Domain\Client\ClientSecret;
+use Auth\Domain\Client\Grant;
 use Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -30,6 +33,7 @@ class AuthCreateClientCommand extends Command
     {
         $this
             ->setDescription('Creates a new OAuth2 client')
+            ->setHelp('This command allows you to create a client')
             ->addOption(
                 'redirect-uri',
                 null,
@@ -42,7 +46,7 @@ class AuthCreateClientCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
                 'Sets allowed grant type for client. Use this option multiple times to set multiple grant types.',
-                []
+                Grant::cases()
             )
             ->addOption(
                 'scope',
@@ -51,20 +55,11 @@ class AuthCreateClientCommand extends Command
                 'Sets allowed scope for client. Use this option multiple times to set multiple scopes.',
                 []
             )
-            ->addArgument(
+            ->addOption(
                 'name',
-                InputArgument::REQUIRED,
+                null,
+                InputOption::VALUE_REQUIRED,
                 'The client name'
-            )
-            ->addArgument(
-                'identifier',
-                InputArgument::OPTIONAL,
-                'The client identifier'
-            )
-            ->addArgument(
-                'secret',
-                InputArgument::OPTIONAL,
-                'The client secret'
             )
         ;
     }
@@ -78,34 +73,32 @@ class AuthCreateClientCommand extends Command
 
         try {
 
-            $name = $input->getArgument('name');
-            $identifier = $input->getArgument('identifier') ?? (string)ClientIdentifier::generate();
-            $secret = $input->getArgument('secret') ?? (string)ClientSecret::generate();
-            /** @var list<string> $redirectUriStrings */
-            $redirectUriStrings = $input->getOption('redirect-uri');
+            $name = $input->getOption('name');
             /** @var list<string> $grantStrings */
-            $grantStrings = $input->getOption('grant-type');
-            /** @var list<string> $scopeStrings */
-            $scopeStrings = $input->getOption('scope');
+            $grantStrings = $input->getOption('grant-type') ?? [Grant::CLIENT_CREDENTIALS];
+
+
+            $command = CreateClientCommand::create(
+                ClientName::fromString($name),
+                $grantStrings,
+            );
+
+            $result = ($this->commandHandler)($command);
+
+            $io->success('New OAuth2 client created successfully.');
+
+            $headers = ['Identifier', 'Secret'];
+            $rows = [
+                [(string)$result->getIdentifier(), (string)$result->getCredentials()->getSecret()],
+            ];
+            $io->table($headers, $rows);
+
+            return Command::SUCCESS;
 
         } catch (\InvalidArgumentException $exception) {
             $io->error($exception->getMessage());
 
             return 1;
         }
-
-        $arg1 = $input->getArgument('arg1');
-
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
-        }
-
-        if ($input->getOption('option1')) {
-            // ...
-        }
-
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
-
-        return Command::SUCCESS;
     }
 }
