@@ -9,7 +9,6 @@ use App\Factory\TokenFactory;
 use App\Factory\UserFactory;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Grant;
-use Auth\Infrastructure\Token\JwtGenerateToken;
 use Tests\Auth\Domain\AccessToken\AccessTokenMother;
 
 class GenerateTokenPostControllerTest extends AbstractWebTestCase

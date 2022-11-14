@@ -17,7 +17,7 @@ final class RoleType extends JsonType
     /**
      * {@inheritdoc}
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if ($value === null) {
             return null;
@@ -39,7 +39,7 @@ final class RoleType extends JsonType
     /**
      * {@inheritdoc}
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         if ($value === null || $value === '') {
             return null;

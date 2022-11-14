@@ -24,7 +24,7 @@ class CreateClientPostControllerTest extends WebTestCase
     {
         $payload = [
             'name' => MotherFactory::random()->company(),
-            'grant' => ['password', 'client_credential']
+            'grant' => ['password', 'client_credentials']
         ];
 
         $router = $this->client->getContainer()->get('router');

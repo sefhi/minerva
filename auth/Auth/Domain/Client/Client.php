@@ -101,7 +101,7 @@ final class Client extends AggregateRoot
             return false;
         }
 
-        return in_array($grant->value, $grants, true);
+        return in_array($grant, $grants, true);
     }
 
 }

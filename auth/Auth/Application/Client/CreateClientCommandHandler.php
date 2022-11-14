@@ -7,6 +7,7 @@ namespace Auth\Application\Client;
 use Auth\Domain\Client\Client;
 use Auth\Domain\Client\ClientCredentialsParam;
 use Auth\Domain\Client\ClientSaveRepository;
+use Auth\Domain\Client\Grant;
 use Exception;
 use Ramsey\Uuid\Uuid;
 
@@ -27,7 +28,7 @@ final class CreateClientCommandHandler
             Uuid::uuid4(),
             ClientCredentialsParam::createByName($command->getName()),
             $command->getRedirectUris(),
-            $command->getGrants(),
+            array_map(static fn($grant) => Grant::from($grant) ,$command->getGrants()),
             $command->getScopes(),
         );
 

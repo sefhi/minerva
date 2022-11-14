@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use Auth\Domain\Client\Client;
+use Auth\Domain\Client\Grant;
 use Ramsey\Uuid\Uuid;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -34,7 +35,7 @@ final class ClientFactory extends ModelFactory
             'id' => Uuid::uuid4(),
             'active' => self::faker()->boolean(),
             'credentials' => ClientCredentialsParamFactory::createOne(),
-            'grants' => ['client_credentials', 'password']
+            'grants' => [Grant::from('client_credentials'), Grant::from('password')]
         ];
     }
 
@@ -42,7 +43,7 @@ final class ClientFactory extends ModelFactory
     {
         return $this->addState(
             [
-                'grants' => ['client_credentials'],
+                'grants' => [Grant::from('client_credentials')],
                 'active' => true,
             ]
         );
@@ -52,7 +53,7 @@ final class ClientFactory extends ModelFactory
     {
         return $this->addState(
             [
-                'grants' => ['password'],
+                'grants' => [Grant::from('password')],
                 'active' => true,
             ]
         );
@@ -62,7 +63,7 @@ final class ClientFactory extends ModelFactory
     {
         return $this->addState(
             [
-                'grants' => ['password', 'refresh_token'],
+                'grants' => [Grant::from('password'), Grant::from('refresh_token')],
                 'active' => true,
             ]
         );
