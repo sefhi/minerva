@@ -9,20 +9,20 @@ use Zenstruck\Foundry\Proxy;
 /**
  * @extends ModelFactory<AuthorizationCode>
  *
- * @method static AuthorizationCode|Proxy createOne(array $attributes = [])
+ * @method static AuthorizationCode|Proxy     createOne(array $attributes = [])
  * @method static AuthorizationCode[]|Proxy[] createMany(int $number, array|callable $attributes = [])
  * @method static AuthorizationCode[]|Proxy[] createSequence(array|callable $sequence)
- * @method static AuthorizationCode|Proxy find(object|array|mixed $criteria)
- * @method static AuthorizationCode|Proxy findOrCreate(array $attributes)
- * @method static AuthorizationCode|Proxy first(string $sortedField = 'id')
- * @method static AuthorizationCode|Proxy last(string $sortedField = 'id')
- * @method static AuthorizationCode|Proxy random(array $attributes = [])
- * @method static AuthorizationCode|Proxy randomOrCreate(array $attributes = [])
+ * @method static AuthorizationCode|Proxy     find(object|array|mixed $criteria)
+ * @method static AuthorizationCode|Proxy     findOrCreate(array $attributes)
+ * @method static AuthorizationCode|Proxy     first(string $sortedField = 'id')
+ * @method static AuthorizationCode|Proxy     last(string $sortedField = 'id')
+ * @method static AuthorizationCode|Proxy     random(array $attributes = [])
+ * @method static AuthorizationCode|Proxy     randomOrCreate(array $attributes = [])
  * @method static AuthorizationCode[]|Proxy[] all()
  * @method static AuthorizationCode[]|Proxy[] findBy(array $attributes)
  * @method static AuthorizationCode[]|Proxy[] randomSet(int $number, array $attributes = [])
  * @method static AuthorizationCode[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method AuthorizationCode|Proxy create(array|callable $attributes = [])
+ * @method        AuthorizationCode|Proxy     create(array|callable $attributes = [])
  */
 final class AuthorizationCodeFactory extends ModelFactory
 {

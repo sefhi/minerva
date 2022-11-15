@@ -10,7 +10,6 @@ use Auth\Domain\Client\ClientScopes;
 
 final class CreateClientCommand
 {
-
     private function __construct(
         private readonly ClientName $name,
         private readonly array $grants,

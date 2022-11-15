@@ -6,7 +6,6 @@ namespace Auth\Domain\Client;
 
 use Auth\Domain\Client\Exception\ClientOperationDeniedException;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
-use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 final class Client extends AggregateRoot
@@ -85,7 +84,6 @@ final class Client extends AggregateRoot
 
     public function ensureGrantSupported(Grant $grant): bool
     {
-
         if (!$this->isGrantSupported($grant)) {
             throw ClientOperationDeniedException::grantNotSupported($this->getIdentifier(), $grant);
         }
@@ -103,5 +101,4 @@ final class Client extends AggregateRoot
 
         return in_array($grant, $grants, true);
     }
-
 }

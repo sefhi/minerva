@@ -3,32 +3,31 @@
 namespace App\Factory;
 
 use Auth\Domain\Client\ClientSecret;
-use Exception;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
 /**
  * @extends ModelFactory<ClientSecret>
  *
- * @method static ClientSecret|Proxy createOne(array $attributes = [])
+ * @method static ClientSecret|Proxy     createOne(array $attributes = [])
  * @method static ClientSecret[]|Proxy[] createMany(int $number, array|callable $attributes = [])
  * @method static ClientSecret[]|Proxy[] createSequence(array|callable $sequence)
- * @method static ClientSecret|Proxy find(object|array|mixed $criteria)
- * @method static ClientSecret|Proxy findOrCreate(array $attributes)
- * @method static ClientSecret|Proxy first(string $sortedField = 'id')
- * @method static ClientSecret|Proxy last(string $sortedField = 'id')
- * @method static ClientSecret|Proxy random(array $attributes = [])
- * @method static ClientSecret|Proxy randomOrCreate(array $attributes = [])
+ * @method static ClientSecret|Proxy     find(object|array|mixed $criteria)
+ * @method static ClientSecret|Proxy     findOrCreate(array $attributes)
+ * @method static ClientSecret|Proxy     first(string $sortedField = 'id')
+ * @method static ClientSecret|Proxy     last(string $sortedField = 'id')
+ * @method static ClientSecret|Proxy     random(array $attributes = [])
+ * @method static ClientSecret|Proxy     randomOrCreate(array $attributes = [])
  * @method static ClientSecret[]|Proxy[] all()
  * @method static ClientSecret[]|Proxy[] findBy(array $attributes)
  * @method static ClientSecret[]|Proxy[] randomSet(int $number, array $attributes = [])
  * @method static ClientSecret[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method ClientSecret|Proxy create(array|callable $attributes = [])
+ * @method        ClientSecret|Proxy     create(array|callable $attributes = [])
  */
 final class ClientSecretFactory extends ModelFactory
 {
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     protected function getDefaults(): array
     {

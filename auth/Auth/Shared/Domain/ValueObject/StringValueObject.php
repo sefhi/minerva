@@ -10,7 +10,7 @@ abstract class StringValueObject
     {
     }
 
-    abstract public static function fromString(string $value) : self;
+    abstract public static function fromString(string $value): self;
 
     public function value(): string
     {

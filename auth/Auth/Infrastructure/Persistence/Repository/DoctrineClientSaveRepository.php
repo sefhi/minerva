@@ -10,7 +10,6 @@ use Auth\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
 final class DoctrineClientSaveRepository extends DoctrineRepository implements ClientSaveRepository
 {
-
     public function save(Client $client): void
     {
         $this->persist($client);

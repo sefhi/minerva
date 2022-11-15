@@ -11,7 +11,7 @@ class PasswordMother
     {
         return new Password($value);
     }
-    
+
     public static function plainPassword(): Password
     {
         return self::create(MotherFactory::random()->password());

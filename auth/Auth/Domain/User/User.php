@@ -9,7 +9,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class User extends AggregateRoot implements UserInterface
 {
-
     public function __construct(
         private UuidInterface $id,
         private readonly Email $email,
@@ -37,50 +36,36 @@ class User extends AggregateRoot implements UserInterface
     public function withPasswordEncrypted(Password $passwordEncrypted): self
     {
         $this->password = $passwordEncrypted;
+
         return $this;
     }
 
-    /**
-     * @return UuidInterface
-     */
     public function getId(): UuidInterface
     {
         return $this->id;
     }
 
-    /**
-     * @return Email
-     */
     public function getEmail(): Email
     {
         return $this->email;
     }
 
-    /**
-     * @return Password
-     */
     public function getPassword(): Password
     {
         return $this->password;
     }
 
-    /**
-     * @return array
-     */
     public function getRoles(): array
     {
         return $this->roles;
     }
 
-    /**
-     * @return bool
-     */
     public function isActive(): bool
     {
         return $this->active;
     }
 
-    public function eraseCredentials() : void
+    public function eraseCredentials(): void
     {
     }
 

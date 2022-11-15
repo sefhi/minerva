@@ -6,7 +6,6 @@ namespace Auth\Domain\AccessToken\Strategy;
 
 use Auth\Application\Token\GenerateTokenCommand;
 use Auth\Domain\AccessToken\AccessToken;
-use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Client;
 use Auth\Domain\RefreshToken\RefreshToken;
@@ -19,15 +18,13 @@ use Ramsey\Uuid\Uuid;
 
 final class PasswordAccessToken implements AccessTokenMethod
 {
-
     public function __construct(
         private readonly TokenSaveRepository $tokenSaveRepository,
         private readonly GenerateToken $generateToken,
         private readonly UserFindRepository $userFindRepository,
         private readonly PasswordHasher $passwordHasher,
         private readonly RefreshTokenSaveRepository $refreshTokenSaveRepository,
-    )
-    {
+    ) {
     }
 
     public function generateAccessToken(GenerateTokenCommand $command, Client $client): AccessToken
@@ -37,14 +34,13 @@ final class PasswordAccessToken implements AccessTokenMethod
         $isValidPassword = $this->passwordHasher
             ->verify($user->getPassword(), $command->getPassword());
 
-        if(!$isValidPassword) {
+        if (!$isValidPassword) {
             throw new \RuntimeException('user credentials not valid');
         }
 
         /**
-         * TODO TOKEN
+         * TODO TOKEN.
          */
-
         $token = Token::createWithUser(
             Uuid::uuid4(),
             $client,
@@ -55,9 +51,8 @@ final class PasswordAccessToken implements AccessTokenMethod
         $this->tokenSaveRepository->save($token);
 
         /**
-         * TODO REFRESH TOKEN
+         * TODO REFRESH TOKEN.
          */
-
         $refreshToken = RefreshToken::create(
             Uuid::uuid4(),
             $token,

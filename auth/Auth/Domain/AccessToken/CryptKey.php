@@ -4,65 +4,43 @@ declare(strict_types=1);
 
 namespace Auth\Domain\AccessToken;
 
-use LogicException;
-
-use function decoct;
-use function file_get_contents;
-use function fileperms;
-use function in_array;
-use function is_file;
-use function is_readable;
-use function openssl_pkey_get_details;
-use function openssl_pkey_get_private;
-use function openssl_pkey_get_public;
-use function sprintf;
-use function str_starts_with;
-use function trigger_error;
-
 abstract class CryptKey
 {
-
     private const FILE_PREFIX = 'file://';
 
-
-    /**
-     * @param string $keyPath
-     * @param string $passPhrase
-     * @param bool $keyPermissionsCheck
-     */
     protected function __construct(
         private string $keyPath,
         private readonly string $passPhrase = '',
         private bool $keyPermissionsCheck = true
     ) {
-        if (!str_starts_with($keyPath, self::FILE_PREFIX) && $this->isValidKey($keyPath, $this->passPhrase ?? '')) {
+        if (!\str_starts_with($keyPath, self::FILE_PREFIX) && $this->isValidKey($keyPath, $this->passPhrase ?? '')) {
             $this->keyContents = $keyPath;
             $this->keyPath = '';
             // There's no file, so no need for permission check.
             $this->keyPermissionsCheck = false;
-        } elseif (is_file($keyPath)) {
-            if (!str_starts_with($keyPath, self::FILE_PREFIX)) {
-                $keyPath = self::FILE_PREFIX . $keyPath;
+        } elseif (\is_file($keyPath)) {
+            if (!\str_starts_with($keyPath, self::FILE_PREFIX)) {
+                $keyPath = self::FILE_PREFIX.$keyPath;
             }
 
-            if (!is_readable($keyPath)) {
-                throw new LogicException(sprintf('Key path "%s" does not exist or is not readable', $keyPath));
+            if (!\is_readable($keyPath)) {
+                throw new \LogicException(\sprintf('Key path "%s" does not exist or is not readable', $keyPath));
             }
-            $this->keyContents = file_get_contents($keyPath);
+            $this->keyContents = \file_get_contents($keyPath);
             $this->keyPath = $keyPath;
             if (!$this->isValidKey($this->keyContents, $this->passPhrase ?? '')) {
-                throw new LogicException('Unable to read key from file ' . $keyPath);
+                throw new \LogicException('Unable to read key from file '.$keyPath);
             }
         } else {
-            throw new LogicException('Unable to read key from file ' . $keyPath);
+            throw new \LogicException('Unable to read key from file '.$keyPath);
         }
 
-        if ($this->keyPermissionsCheck === true) {
+        if (true === $this->keyPermissionsCheck) {
             // Verify the permissions of the key
-            $keyPathPerms = decoct(fileperms($this->keyPath) & 0777);
-            if (in_array($keyPathPerms, ['400', '440', '600', '640', '660'], true) === false) {
-                trigger_error(
-                    sprintf(
+            $keyPathPerms = \decoct(\fileperms($this->keyPath) & 0777);
+            if (false === \in_array($keyPathPerms, ['400', '440', '600', '640', '660'], true)) {
+                \trigger_error(
+                    \sprintf(
                         'Key file "%s" permissions are not correct, recommend changing to 600 or 660 instead of %s',
                         $this->keyPath,
                         $keyPathPerms
@@ -80,7 +58,7 @@ abstract class CryptKey
     ): self;
 
     /**
-     * Get key contents
+     * Get key contents.
      *
      * @return string Key contents
      */
@@ -91,31 +69,24 @@ abstract class CryptKey
 
     /**
      * Validate key contents.
-     *
-     * @param string $contents
-     * @param string $passPhrase
-     *
-     * @return bool
      */
     private function isValidKey(string $contents, string $passPhrase): bool
     {
-        $pkey = openssl_pkey_get_private($contents, $passPhrase) ?: openssl_pkey_get_public($contents);
-        if ($pkey === false) {
+        $pkey = \openssl_pkey_get_private($contents, $passPhrase) ?: \openssl_pkey_get_public($contents);
+        if (false === $pkey) {
             return false;
         }
-        $details = openssl_pkey_get_details($pkey);
+        $details = \openssl_pkey_get_details($pkey);
 
-        return $details !== false && in_array(
-                $details['type'] ?? -1,
-                [OPENSSL_KEYTYPE_RSA, OPENSSL_KEYTYPE_EC],
-                true
-            );
+        return false !== $details && \in_array(
+            $details['type'] ?? -1,
+            [OPENSSL_KEYTYPE_RSA, OPENSSL_KEYTYPE_EC],
+            true
+        );
     }
 
     /**
      * Retrieve key path.
-     *
-     * @return string
      */
     public function getKeyPath(): string
     {
@@ -124,8 +95,6 @@ abstract class CryptKey
 
     /**
      * Retrieve key pass phrase.
-     *
-     * @return null|string
      */
     public function getPassPhrase(): ?string
     {

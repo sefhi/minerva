@@ -8,7 +8,6 @@ use App\Controller\Auth\Dto\CredentialsDto;
 use Auth\Application\Client\CreateClientCommand;
 use Auth\Application\Client\CreateClientCommandHandler;
 use Auth\Domain\Client\ClientName;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +22,7 @@ final class CreateClientPostController extends AbstractController
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     #[Route('/auth/client', name: 'auth_client', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse

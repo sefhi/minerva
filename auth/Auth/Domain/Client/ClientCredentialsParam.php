@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Auth\Domain\Client;
 
-use Exception;
-
 final class ClientCredentialsParam
 {
-
     public function __construct(
         private readonly ClientIdentifier $identifier,
         private readonly ClientName $name,
@@ -29,7 +26,7 @@ final class ClientCredentialsParam
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public static function createByName(
         ClientName $name,
@@ -41,29 +38,18 @@ final class ClientCredentialsParam
         );
     }
 
-    /**
-     * @return ClientIdentifier
-     */
     public function getIdentifier(): ClientIdentifier
     {
         return $this->identifier;
     }
 
-    /**
-     * @return ClientName
-     */
     public function getName(): ClientName
     {
         return $this->name;
     }
 
-    /**
-     * @return ClientSecret
-     */
     public function getSecret(): ClientSecret
     {
         return $this->secret;
     }
-
-
 }

@@ -6,5 +6,4 @@ namespace Auth\Application\Token;
 
 final class KeyVault
 {
-
 }

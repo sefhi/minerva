@@ -12,7 +12,6 @@ use Auth\Domain\Client\ClientSecret;
 use Auth\Domain\Client\Grant;
 use Auth\Domain\User\Email;
 use Auth\Domain\User\Password;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,15 +20,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class GenerateTokenPostController extends AbstractController
 {
-
     public function __construct(
         private readonly GenerateTokenCommandHandler $commandHandler
-    )
-    {
+    ) {
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     #[Route('/auth/token', name: 'auth_token', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
@@ -59,5 +56,4 @@ final class GenerateTokenPostController extends AbstractController
 
         return [$clientId, $secret, $grantType, $username, $password, $refreshToken];
     }
-
 }

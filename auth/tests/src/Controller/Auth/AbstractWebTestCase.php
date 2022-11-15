@@ -16,5 +16,4 @@ abstract class AbstractWebTestCase extends WebTestCase
         $this->client = self::createClient();
         $this->container = self::getContainer();
     }
-
 }

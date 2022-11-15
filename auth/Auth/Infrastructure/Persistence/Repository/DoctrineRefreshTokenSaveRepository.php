@@ -9,7 +9,6 @@ use Auth\Domain\RefreshToken\RefreshTokenSaveRepository;
 
 final class DoctrineRefreshTokenSaveRepository implements RefreshTokenSaveRepository
 {
-
     public function save(RefreshToken $refreshToken): void
     {
         // TODO: Implement save() method.

@@ -15,5 +15,4 @@ interface GenerateToken
     public function generateTokenFromJwtToken(string $token): Token;
 
     public function generateRefreshTokenFromJwtToken(string $token): RefreshToken;
-
 }

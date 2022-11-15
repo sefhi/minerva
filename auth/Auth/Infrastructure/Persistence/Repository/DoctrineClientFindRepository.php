@@ -14,7 +14,6 @@ use Ramsey\Uuid\UuidInterface;
 
 final class DoctrineClientFindRepository extends DoctrineRepository implements ClientFindRepository
 {
-
     public function find(UuidInterface $id): ?Client
     {
         return $this->repository(Client::class)->find($id);
@@ -30,7 +29,6 @@ final class DoctrineClientFindRepository extends DoctrineRepository implements C
         /** @var Client $client */
         $client = $this->findByIdentifier($identifier);
 
-
         if (null === $client ||
             !$client->isActive() ||
             !$client->isGrantSupported($client, $grant->value)
@@ -38,7 +36,7 @@ final class DoctrineClientFindRepository extends DoctrineRepository implements C
             return false;
         }
 
-        if ((string)$client->getCredentials()->getSecret() === (string)$secret) {
+        if ((string) $client->getCredentials()->getSecret() === (string) $secret) {
             return true;
         }
 

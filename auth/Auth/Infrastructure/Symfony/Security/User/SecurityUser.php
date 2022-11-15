@@ -9,7 +9,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class SecurityUser implements UserInterface
 {
-
     private string $id;
     private string $username;
     private string $password;
@@ -18,8 +17,8 @@ final class SecurityUser implements UserInterface
     private function __construct(User $user)
     {
         $this->id = $user->getUserIdentifier();
-        $this->username = (string)$user->getEmail();
-        $this->password = (string)$user->getPassword();
+        $this->username = (string) $user->getEmail();
+        $this->password = (string) $user->getPassword();
         $this->roles = $user->getRoles();
     }
 
@@ -28,17 +27,11 @@ final class SecurityUser implements UserInterface
         return new self($user);
     }
 
-    /**
-     * @return string
-     */
     public function getUsername(): string
     {
         return $this->username;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;

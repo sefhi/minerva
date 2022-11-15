@@ -92,3 +92,12 @@ m-m:
 #fixtures
 fixtures:
 	$(SYMFONY) doctrine:fixtures:load --no-interaction
+
+#Linter
+cs:
+	$(EXEC_PHP) ./vendor/bin/php-cs-fixer fix --diff
+	@echo "Coding Standar Fixer Executed ✅"
+
+cs-prev:
+	$(EXEC_PHP) ./vendor/bin/php-cs-fixer fix --dry-run --diff
+	@echo "Coding Standar Fixer Executed ✅"

@@ -6,19 +6,16 @@ namespace Auth\Domain\RefreshToken;
 
 use Auth\Domain\Token\Token;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
-use DateInterval;
-use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 final class RefreshToken extends AggregateRoot
 {
-
     public const TTL = 'P1M';
 
     public function __construct(
         private UuidInterface $id,
         private readonly Token $token,
-        private DateTimeImmutable $expiry,
+        private \DateTimeImmutable $expiry,
         private bool $revoked,
     ) {
     }
@@ -28,54 +25,38 @@ final class RefreshToken extends AggregateRoot
         Token $token,
         bool $revoked,
     ): self {
-        $expiry = new DateTimeImmutable();
-        $expiry = $expiry->add(new DateInterval(self::TTL));
+        $expiry = new \DateTimeImmutable();
+        $expiry = $expiry->add(new \DateInterval(self::TTL));
+
         return new self($id, $token, $expiry, $revoked);
     }
 
-    /**
-     * @return Token
-     */
     public function getToken(): Token
     {
         return $this->token;
     }
 
-
-    /**
-     * @return UuidInterface
-     */
     public function getId(): UuidInterface
     {
         return $this->id;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
-    public function getExpiry(): DateTimeImmutable
+    public function getExpiry(): \DateTimeImmutable
     {
         return $this->expiry;
     }
 
-    /**
-     * @return bool
-     */
     public function isRevoked(): bool
     {
         return $this->revoked;
     }
 
-    /**
-     * @return RefreshToken
-     */
     public function revoke(): self
     {
         $this->revoked = true;
 
         return $this;
     }
-
 
     public function __toString(): string
     {

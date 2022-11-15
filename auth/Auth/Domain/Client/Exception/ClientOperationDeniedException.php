@@ -11,7 +11,8 @@ use Auth\Shared\Domain\Exception\OperationForbiddenException;
 
 final class ClientOperationDeniedException extends OperationForbiddenException
 {
-    public static function inactive(ClientIdentifier $identifier) : self {
+    public static function inactive(ClientIdentifier $identifier): self
+    {
         return new self(
             sprintf(
                 '%s with identifier %s not is active',
@@ -21,7 +22,8 @@ final class ClientOperationDeniedException extends OperationForbiddenException
         );
     }
 
-    public static function grantNotSupported(ClientIdentifier $identifier, Grant $grant) : self {
+    public static function grantNotSupported(ClientIdentifier $identifier, Grant $grant): self
+    {
         return new self(
             sprintf(
                 '%s with identifier %s not support this grant %s',

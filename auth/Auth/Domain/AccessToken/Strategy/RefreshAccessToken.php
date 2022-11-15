@@ -6,7 +6,6 @@ namespace Auth\Domain\AccessToken\Strategy;
 
 use Auth\Application\Token\GenerateTokenCommand;
 use Auth\Domain\AccessToken\AccessToken;
-use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Client;
 use Auth\Domain\RefreshToken\RefreshToken;
@@ -20,20 +19,17 @@ use Ramsey\Uuid\Uuid;
 
 final class RefreshAccessToken implements AccessTokenMethod
 {
-
     public function __construct(
         private readonly TokenSaveRepository $tokenSaveRepository,
         private readonly GenerateToken $generateToken,
         private readonly UserFindRepository $userFindRepository,
         private readonly PasswordHasher $passwordHasher,
         private readonly RefreshTokenSaveRepository $refreshTokenSaveRepository,
-    )
-    {
+    ) {
     }
 
     public function generateAccessToken(GenerateTokenCommand $command, Client $client): AccessToken
     {
-
         if (null === $command->getRefreshToken()) {
             throw InvalidDataException::parameterRequired('refresh_token');
         }
@@ -44,14 +40,14 @@ final class RefreshAccessToken implements AccessTokenMethod
 
         $tokenDomain = $refreshTokenDomain->getToken();
 
-        //Expire old tokens
+        // Expire old tokens
         $refreshTokenDomain->revoke();
         $tokenDomain->revoke();
 
         $this->refreshTokenSaveRepository->save($refreshTokenDomain);
         $this->tokenSaveRepository->save($tokenDomain);
 
-        //Generate new tokens
+        // Generate new tokens
         $user = $this->userFindRepository->findOneByEmailOrFail($command->getEmail());
 
         $isValidPassword = $this->passwordHasher
@@ -62,9 +58,8 @@ final class RefreshAccessToken implements AccessTokenMethod
         }
 
         /**
-         * TODO TOKEN
+         * TODO TOKEN.
          */
-
         $tokenDomain = Token::createWithUser(
             Uuid::uuid4(),
             $client,
@@ -74,11 +69,9 @@ final class RefreshAccessToken implements AccessTokenMethod
 
         $this->tokenSaveRepository->save($tokenDomain);
 
-
         /**
-         * TODO REFRESH TOKEN
+         * TODO REFRESH TOKEN.
          */
-
         $refreshTokenDomain = RefreshToken::create(
             Uuid::uuid4(),
             $tokenDomain,

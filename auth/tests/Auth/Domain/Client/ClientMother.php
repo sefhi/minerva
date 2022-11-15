@@ -8,8 +8,6 @@ use Auth\Domain\Client\Client;
 use Auth\Domain\Client\ClientCredentialsParam;
 use Auth\Domain\Client\ClientRedirectUris;
 use Auth\Domain\Client\ClientScopes;
-use Exception;
-use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Tests\Auth\Shared\Domain\MotherFactory;
 use Tests\Auth\Shared\Domain\UuidMother;
@@ -35,7 +33,7 @@ final class ClientMother
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public static function random(): Client
     {

@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Auth\Shared\Domain\Exception;
 
 use Auth\Domain\User\Email;
-use DomainException;
 
-final class EntityFoundException extends DomainException
+final class EntityFoundException extends \DomainException
 {
     public static function entityWithEmail(string $entityClass, Email $email): self
     {

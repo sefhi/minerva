@@ -6,16 +6,13 @@ namespace Auth\Domain\AccessToken\Strategy;
 
 use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\Client\Grant;
-use Auth\Domain\RefreshToken\RefreshTokenFindRepository;
 use Auth\Domain\RefreshToken\RefreshTokenSaveRepository;
 use Auth\Domain\Token\TokenSaveRepository;
 use Auth\Domain\User\PasswordHasher;
 use Auth\Domain\User\UserFindRepository;
-use Exception;
 
 final class AccessTokenFactory
 {
-
     public function __construct(
         private readonly UserFindRepository $userFindRepository,
         private readonly PasswordHasher $passwordHasher,
@@ -26,7 +23,7 @@ final class AccessTokenFactory
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function getAccessTokenMethod(Grant $grant): AccessTokenMethod
     {
@@ -49,7 +46,7 @@ final class AccessTokenFactory
                 $this->passwordHasher,
                 $this->refreshTokenSaveRepository
             ),
-            default => throw new Exception('Unknown Grant Type'),
+            default => throw new \Exception('Unknown Grant Type'),
         };
     }
 }

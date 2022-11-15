@@ -25,7 +25,6 @@ class CreateUserCommandHandlerTest extends TestCase
         $this->passwordHasherMock = $this->createMock(PasswordHasher::class);
     }
 
-
     /** @test */
     public function itShouldSaveAnUser(): void
     {

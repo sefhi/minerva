@@ -12,18 +12,15 @@ use Ramsey\Uuid\Uuid;
 
 final class CreateUserCommandHandler
 {
-
     public function __construct(
         private readonly UserFindRepository $userFindRepository,
         private readonly UserSaveRepository $userSaveRepository,
         private readonly PasswordHasher $passwordHasher
-    )
-    {
+    ) {
     }
 
     public function __invoke(CreateUserCommand $command): User
     {
-
         $this->userFindRepository->existUserByEmail($command->getEmail());
 
         $user = User::create(

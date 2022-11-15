@@ -8,5 +8,4 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 final class SymfonyToken extends AbstractToken
 {
-
 }

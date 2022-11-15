@@ -10,7 +10,6 @@ use Auth\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
 final class DoctrineTokenSaveRepository extends DoctrineRepository implements TokenSaveRepository
 {
-
     public function save(Token $token): void
     {
         $this->persist($token);

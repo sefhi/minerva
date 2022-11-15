@@ -14,12 +14,10 @@ use Ramsey\Uuid\Uuid;
 
 final class ClientCredentialsAccessToken implements AccessTokenMethod
 {
-
     public function __construct(
         private readonly TokenSaveRepository $tokenSaveRepository,
         private readonly GenerateToken $generateToken,
-    )
-    {
+    ) {
     }
 
     public function generateAccessToken(GenerateTokenCommand $command, Client $client): AccessToken

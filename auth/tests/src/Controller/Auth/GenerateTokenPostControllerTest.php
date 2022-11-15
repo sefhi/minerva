@@ -21,8 +21,8 @@ class GenerateTokenPostControllerTest extends AbstractWebTestCase
         $router = $this->client->getContainer()->get('router');
         $server = ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
         $parameters = [
-            'client_id' => (string)$client->getCredentials()->getIdentifier(),
-            'client_secret' => (string)$client->getCredentials()->getSecret(),
+            'client_id' => (string) $client->getCredentials()->getIdentifier(),
+            'client_secret' => (string) $client->getCredentials()->getSecret(),
             'grant_type' => Grant::CLIENT_CREDENTIALS->value,
         ];
 
@@ -48,8 +48,8 @@ class GenerateTokenPostControllerTest extends AbstractWebTestCase
         $router = $this->client->getContainer()->get('router');
         $server = ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
         $parameters = [
-            'client_id' => (string)$client->getCredentials()->getIdentifier(),
-            'client_secret' => (string)$client->getCredentials()->getSecret(),
+            'client_id' => (string) $client->getCredentials()->getIdentifier(),
+            'client_secret' => (string) $client->getCredentials()->getSecret(),
             'grant_type' => Grant::PASSWORD->value,
             'username' => $user->getEmail()->value(),
             'password' => PasswordFactory::PASSWORD,
@@ -72,7 +72,7 @@ class GenerateTokenPostControllerTest extends AbstractWebTestCase
     public function itShouldGenerateTokenWithRefreshToken(): void
     {
         // GIVEN
-        $user  = UserFactory::createOne();
+        $user = UserFactory::createOne();
         $token = TokenFactory::new()->withUser($user->object())->create();
         $refreshToken = RefreshTokenFactory::new()->withToken($token->object())->create();
         $generateToken = $this->container->get(GenerateToken::class);
@@ -81,12 +81,12 @@ class GenerateTokenPostControllerTest extends AbstractWebTestCase
         $router = $this->client->getContainer()->get('router');
         $server = ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
         $parameters = [
-            'client_id' => (string)$token->getClient()->getCredentials()->getIdentifier(),
-            'client_secret' => (string)$token->getClient()->getCredentials()->getSecret(),
+            'client_id' => (string) $token->getClient()->getCredentials()->getIdentifier(),
+            'client_secret' => (string) $token->getClient()->getCredentials()->getSecret(),
             'grant_type' => Grant::REFRESH_TOKEN->value,
             'username' => $user->getEmail()->value(),
             'password' => PasswordFactory::PASSWORD,
-            'refresh_token' => $accessToken->getRefreshToken()
+            'refresh_token' => $accessToken->getRefreshToken(),
         ];
 
         // WHEN

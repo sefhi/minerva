@@ -8,7 +8,6 @@ use Doctrine\DBAL\Types\JsonType;
 
 final class ClientRedirectUrisType extends JsonType
 {
-
     private const NAME = 'auth_redirect_uris';
 
     public function getName(): string

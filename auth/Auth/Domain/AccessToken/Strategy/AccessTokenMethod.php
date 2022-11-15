@@ -8,5 +8,5 @@ use Auth\Domain\Client\Client;
 
 interface AccessTokenMethod
 {
-    public function generateAccessToken(GenerateTokenCommand $command, Client $client) : AccessToken;
+    public function generateAccessToken(GenerateTokenCommand $command, Client $client): AccessToken;
 }

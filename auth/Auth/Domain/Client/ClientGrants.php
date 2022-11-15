@@ -5,18 +5,16 @@ declare(strict_types=1);
 namespace Auth\Domain\Client;
 
 use Auth\Shared\Domain\ValueObject\ArrayValues;
-use InvalidArgumentException;
 
 final class ClientGrants implements ArrayValues
 {
-
     public function __construct(private readonly array $values)
     {
         $this->ensureIsValidGrant($this->values);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getValues(): array
     {
@@ -28,11 +26,8 @@ final class ClientGrants implements ArrayValues
         foreach ($values as $value) {
             if (is_null(Grant::tryFrom($value))) {
                 $valuesAllowed = implode(', ', array_column(Grant::cases(), 'value'));
-                throw new InvalidArgumentException(
-                    sprintf('The grant <%s> is not one of the allowed values (%s)', $value, $valuesAllowed)
-                );
+                throw new \InvalidArgumentException(sprintf('The grant <%s> is not one of the allowed values (%s)', $value, $valuesAllowed));
             }
         }
     }
-
 }

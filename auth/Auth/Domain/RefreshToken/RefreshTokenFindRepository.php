@@ -8,7 +8,7 @@ use Ramsey\Uuid\UuidInterface;
 
 interface RefreshTokenFindRepository
 {
-    public function find(UuidInterface $id) : ?RefreshToken;
+    public function find(UuidInterface $id): ?RefreshToken;
 
-    public function findOrFail(UuidInterface $id) : RefreshToken;
+    public function findOrFail(UuidInterface $id): RefreshToken;
 }

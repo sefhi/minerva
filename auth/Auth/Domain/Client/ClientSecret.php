@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Auth\Domain\Client;
 
 use Auth\Shared\Domain\ValueObject\StringValueObject;
-use Exception;
 
 final class ClientSecret extends StringValueObject
 {
@@ -20,7 +19,7 @@ final class ClientSecret extends StringValueObject
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public static function generate(): self
     {

@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Auth\Dto;
 
 use Auth\Domain\AccessToken\AccessToken;
-use JsonSerializable;
 
-final class AccessTokenDto implements JsonSerializable
+final class AccessTokenDto implements \JsonSerializable
 {
-
     private function __construct(
         private readonly string $tokeType,
         private readonly int $expiresIn,
@@ -18,8 +16,8 @@ final class AccessTokenDto implements JsonSerializable
     ) {
     }
 
-    public static function fromDomain(AccessToken $accessToken) : self {
-
+    public static function fromDomain(AccessToken $accessToken): self
+    {
         if (null !== $accessToken->getRefreshToken()) {
             $refreshToken = $accessToken->getRefreshToken();
         }
@@ -32,39 +30,25 @@ final class AccessTokenDto implements JsonSerializable
         );
     }
 
-    /**
-     * @return string|null
-     */
     public function getRefreshToken(): ?string
     {
         return $this->refreshToken;
     }
 
-
-    /**
-     * @return string
-     */
     public function getTokeType(): string
     {
         return $this->tokeType;
     }
 
-    /**
-     * @return int
-     */
     public function getExpiresIn(): int
     {
         return $this->expiresIn;
     }
 
-    /**
-     * @return string
-     */
     public function getAccessToken(): string
     {
         return $this->accessToken;
     }
-
 
     public function jsonSerialize(): array
     {

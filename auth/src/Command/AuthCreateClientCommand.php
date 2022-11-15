@@ -4,14 +4,10 @@ namespace App\Command;
 
 use Auth\Application\Client\CreateClientCommand;
 use Auth\Application\Client\CreateClientCommandHandler;
-use Auth\Domain\Client\ClientIdentifier;
 use Auth\Domain\Client\ClientName;
-use Auth\Domain\Client\ClientSecret;
 use Auth\Domain\Client\Grant;
-use Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,7 +19,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class AuthCreateClientCommand extends Command
 {
-
     public function __construct(private readonly CreateClientCommandHandler $commandHandler)
     {
         parent::__construct();
@@ -65,18 +60,16 @@ class AuthCreateClientCommand extends Command
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
         try {
-
             $name = $input->getOption('name');
             /** @var list<string> $grantStrings */
             $grantStrings = $input->getOption('grant-type') ?? [Grant::CLIENT_CREDENTIALS];
-
 
             $command = CreateClientCommand::create(
                 ClientName::fromString($name),
@@ -89,12 +82,11 @@ class AuthCreateClientCommand extends Command
 
             $headers = ['Identifier', 'Secret'];
             $rows = [
-                [(string)$result->getIdentifier(), (string)$result->getCredentials()->getSecret()],
+                [(string) $result->getIdentifier(), (string) $result->getCredentials()->getSecret()],
             ];
             $io->table($headers, $rows);
 
             return Command::SUCCESS;
-
         } catch (\InvalidArgumentException $exception) {
             $io->error($exception->getMessage());
 

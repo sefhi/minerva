@@ -12,7 +12,6 @@ use Ramsey\Uuid\UuidInterface;
 
 final class DoctrineRefreshTokenFindRepository extends DoctrineRepository implements RefreshTokenFindRepository
 {
-
     public function find(UuidInterface $id): ?RefreshToken
     {
         return $this->repository(RefreshToken::class)->find($id);

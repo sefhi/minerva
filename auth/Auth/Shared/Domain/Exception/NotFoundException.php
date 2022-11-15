@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Auth\Shared\Domain\Exception;
 
 use Auth\Domain\User\Email;
-use DomainException;
 use Ramsey\Uuid\UuidInterface;
 
-class NotFoundException extends DomainException
+class NotFoundException extends \DomainException
 {
     public static function entityWithId(string $entityClass, UuidInterface $id): self
     {

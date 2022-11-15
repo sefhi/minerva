@@ -8,8 +8,6 @@ use Auth\Domain\Client\Client;
 use Auth\Domain\User\User;
 use Auth\Domain\User\UserInterface;
 use Auth\Shared\Domain\Aggregate\AggregateRoot;
-use DateInterval;
-use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 final class Token extends AggregateRoot
@@ -19,7 +17,7 @@ final class Token extends AggregateRoot
     public function __construct(
         private UuidInterface $id,
         private readonly Client $client,
-        private DateTimeImmutable $expiry,
+        private \DateTimeImmutable $expiry,
         private bool $revoked,
         private readonly array $scopes = [],
         private readonly ?User $user = null,
@@ -33,8 +31,9 @@ final class Token extends AggregateRoot
         array $scopes = [],
         ?User $user = null,
     ): self {
-        $expiry = new DateTimeImmutable();
-        $expiry = $expiry->add(new DateInterval(self::TTL));
+        $expiry = new \DateTimeImmutable();
+        $expiry = $expiry->add(new \DateInterval(self::TTL));
+
         return new self(
             $id,
             $client,
@@ -52,8 +51,9 @@ final class Token extends AggregateRoot
         bool $revoked,
         array $scopes = [],
     ): self {
-        $expiry = new DateTimeImmutable();
-        $expiry = $expiry->add(new DateInterval(self::TTL));
+        $expiry = new \DateTimeImmutable();
+        $expiry = $expiry->add(new \DateInterval(self::TTL));
+
         return new self(
             $id,
             $client,
@@ -64,50 +64,31 @@ final class Token extends AggregateRoot
         );
     }
 
-    /**
-     * @param DateTimeImmutable $expiry
-     */
-    public function setExpiry(DateTimeImmutable $expiry): void
+    public function setExpiry(\DateTimeImmutable $expiry): void
     {
-        $this->expiry = $expiry->add(new DateInterval(self::TTL));
+        $this->expiry = $expiry->add(new \DateInterval(self::TTL));
     }
 
-
-    /**
-     * @return UuidInterface
-     */
     public function getId(): UuidInterface
     {
         return $this->id;
     }
 
-    /**
-     * @return Client
-     */
     public function getClient(): Client
     {
         return $this->client;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
-    public function getExpiry(): DateTimeImmutable
+    public function getExpiry(): \DateTimeImmutable
     {
         return $this->expiry;
     }
 
-    /**
-     * @return array
-     */
     public function getScopes(): array
     {
         return $this->scopes;
     }
 
-    /**
-     * @return bool
-     */
     public function isRevoked(): bool
     {
         return $this->revoked;
@@ -121,11 +102,10 @@ final class Token extends AggregateRoot
         return $this->user;
     }
 
-    public function revoke(): self {
-
+    public function revoke(): self
+    {
         $this->revoked = true;
 
         return $this;
     }
-
 }

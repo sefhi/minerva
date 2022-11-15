@@ -6,5 +6,4 @@ namespace Auth\Domain\Bearer;
 
 interface ValidatorBearer
 {
-
 }

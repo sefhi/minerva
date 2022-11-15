@@ -40,53 +40,33 @@ final class GenerateTokenCommand
         );
     }
 
-    /**
-     * @return string|null
-     */
     public function getRefreshToken(): ?string
     {
         return $this->refreshToken;
     }
 
-
-    /**
-     * @return Email|null
-     */
     public function getEmail(): ?Email
     {
         return $this->email;
     }
 
-    /**
-     * @return Password|null
-     */
     public function getPassword(): ?Password
     {
         return $this->password;
     }
 
-    /**
-     * @return ClientIdentifier
-     */
     public function getClientIdentifier(): ClientIdentifier
     {
         return $this->clientIdentifier;
     }
 
-    /**
-     * @return ClientSecret
-     */
     public function getClientSecret(): ClientSecret
     {
         return $this->clientSecret;
     }
 
-    /**
-     * @return Grant
-     */
     public function getGrant(): Grant
     {
         return $this->grant;
     }
-
 }

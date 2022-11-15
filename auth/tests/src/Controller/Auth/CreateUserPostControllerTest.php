@@ -2,11 +2,7 @@
 
 namespace Tests\src\Controller\Auth;
 
-use App\Controller\Auth\CreateUserPostController;
 use App\Factory\UserFactory;
-use PHPUnit\Framework\TestCase;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Tests\Auth\Shared\Domain\MotherFactory;
 
 class CreateUserPostControllerTest extends AbstractWebTestCase
@@ -17,13 +13,13 @@ class CreateUserPostControllerTest extends AbstractWebTestCase
         $user = UserFactory::createOne();
         $payload = [
             'email' => MotherFactory::random()->email(),
-            'password' => MotherFactory::random()->password()
+            'password' => MotherFactory::random()->password(),
         ];
 
         $router = $this->client->getContainer()->get('router');
         $server = ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
 
-        //When
+        // When
         $this->client->request(
             'POST',
             $router->generate('auth_user'),
@@ -35,7 +31,7 @@ class CreateUserPostControllerTest extends AbstractWebTestCase
 
         $response = $this->client->getResponse();
 
-        //Then
+        // Then
         self::assertResponseIsSuccessful();
     }
 }

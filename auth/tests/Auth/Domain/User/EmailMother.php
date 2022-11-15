@@ -13,7 +13,7 @@ final class EmailMother
     {
         return Email::fromString($value);
     }
-    
+
     public static function random(): Email
     {
         return self::create(MotherFactory::random()->email());

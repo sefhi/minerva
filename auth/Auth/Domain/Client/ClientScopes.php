@@ -12,9 +12,6 @@ final class ClientScopes implements ArrayValues
     {
     }
 
-    /**
-     * @return array
-     */
     public function getValues(): array
     {
         return $this->values;

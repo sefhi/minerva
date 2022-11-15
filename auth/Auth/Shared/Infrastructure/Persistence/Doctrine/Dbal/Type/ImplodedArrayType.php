@@ -7,7 +7,6 @@ namespace Auth\Shared\Infrastructure\Persistence\Doctrine\Dbal\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\TextType;
 
-
 abstract class ImplodedArrayType extends TextType
 {
     /**
@@ -83,10 +82,5 @@ abstract class ImplodedArrayType extends TextType
         throw new \InvalidArgumentException(sprintf('The value of \'%s\' type cannot be imploded.', \gettype($value)));
     }
 
-    /**
-     * @param array $values
-     *
-     * @return array
-     */
     abstract protected function convertDatabaseValues(array $values): array;
 }

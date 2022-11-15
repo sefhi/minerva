@@ -8,27 +8,25 @@ use Auth\Domain\Client\Client;
 use Auth\Domain\Client\ClientCredentialsParam;
 use Auth\Domain\Client\ClientSaveRepository;
 use Auth\Domain\Client\Grant;
-use Exception;
 use Ramsey\Uuid\Uuid;
 
 final class CreateClientCommandHandler
 {
-
     public function __construct(private readonly ClientSaveRepository $repository)
     {
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
-    public function __invoke(CreateClientCommand $command) : Client
+    public function __invoke(CreateClientCommand $command): Client
     {
-        //TODO hay que validar los grant type
+        // TODO hay que validar los grant type
         $client = Client::create(
             Uuid::uuid4(),
             ClientCredentialsParam::createByName($command->getName()),
             $command->getRedirectUris(),
-            array_map(static fn($grant) => Grant::from($grant) ,$command->getGrants()),
+            array_map(static fn ($grant) => Grant::from($grant), $command->getGrants()),
             $command->getScopes(),
         );
 

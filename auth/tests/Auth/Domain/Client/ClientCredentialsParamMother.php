@@ -8,7 +8,6 @@ use Auth\Domain\Client\ClientCredentialsParam;
 use Auth\Domain\Client\ClientIdentifier;
 use Auth\Domain\Client\ClientName;
 use Auth\Domain\Client\ClientSecret;
-use Exception;
 use Tests\Auth\Shared\Domain\MotherFactory;
 
 final class ClientCredentialsParamMother
@@ -26,7 +25,7 @@ final class ClientCredentialsParamMother
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public static function random(): ClientCredentialsParam
     {

@@ -5,8 +5,6 @@ namespace Tests\Auth\Domain\Token;
 use Auth\Domain\Client\Client;
 use Auth\Domain\Token\Token;
 use Auth\Domain\User\User;
-use DateTimeImmutable;
-use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Tests\Auth\Domain\Client\ClientMother;
 use Tests\Auth\Domain\User\UserMother;
@@ -34,7 +32,7 @@ class TokenMother
     public static function createWithUser(
         UuidInterface $id,
         Client $client,
-        DateTimeImmutable $expiry,
+        \DateTimeImmutable $expiry,
         bool $revoked,
         User $user,
         array $scopes = [],

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Auth\Infrastructure\Token;
 
 use Auth\Domain\AccessToken\AccessToken;
-use Auth\Domain\AccessToken\CryptKey;
 use Auth\Domain\AccessToken\CryptKeyPrivate;
 use Auth\Domain\AccessToken\CryptKeyPublic;
 use Auth\Domain\AccessToken\GenerateToken;
@@ -16,8 +15,6 @@ use Auth\Domain\RefreshToken\RefreshToken;
 use Auth\Domain\RefreshToken\RefreshTokenFindRepository;
 use Auth\Domain\Token\Token;
 use Auth\Domain\Token\TokenFindRepository;
-use DateTimeImmutable;
-use DateTimeZone;
 use Lcobucci\Clock\SystemClock;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Key\InMemory;
@@ -28,30 +25,19 @@ use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use Ramsey\Uuid\Uuid;
-
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-
-use function class_exists;
-use function date_default_timezone_get;
 
 final class JwtGenerateToken implements GenerateToken
 {
-
-
-    /**
-     * @var Configuration
-     */
     private Configuration $configuration;
     private string $privateKey;
     private string $publicKey;
-
 
     public function __construct(
         private readonly TokenFindRepository $tokenFindRepository,
         private readonly RefreshTokenFindRepository $refreshTokenFindRepository,
         private readonly ParameterBagInterface $parameterBag
-    )
-    {
+    ) {
         $this->privateKey = $this->parameterBag->get('private_key');
         $this->publicKey = $this->parameterBag->get('public_key');
     }
@@ -79,43 +65,36 @@ final class JwtGenerateToken implements GenerateToken
             $jwtToken->toString(),
             $jwtRefreshToken->toString()
         );
-
     }
 
     /**
-     * Generate a JWT from the access token
-     *
-     * @param Token $token
-     * @return JwtToken
+     * Generate a JWT from the access token.
      */
     private function convertTokenToJWT(Token $token): JwtToken
     {
         return $this->configuration->builder()
-            ->permittedFor((string)$token->getClient()->getCredentials()->getIdentifier())
-            ->identifiedBy((string)$token->getId())
-            ->issuedAt(new DateTimeImmutable())
-            ->canOnlyBeUsedAfter(new DateTimeImmutable())
+            ->permittedFor((string) $token->getClient()->getCredentials()->getIdentifier())
+            ->identifiedBy((string) $token->getId())
+            ->issuedAt(new \DateTimeImmutable())
+            ->canOnlyBeUsedAfter(new \DateTimeImmutable())
             ->expiresAt($token->getExpiry())
-            ->relatedTo((string)$token->getUser()?->getId())
+            ->relatedTo((string) $token->getUser()?->getId())
             ->withClaim('scopes', $token->getScopes())
             ->getToken($this->configuration->signer(), $this->configuration->signingKey());
     }
 
     /**
-     * Generate a JWT from the access token
-     *
-     * @param RefreshToken $refreshToken
-     * @return JwtToken
+     * Generate a JWT from the access token.
      */
     private function convertRefreshTokenToJWT(RefreshToken $refreshToken): JwtToken
     {
         return $this->configuration->builder()
-            ->permittedFor((string)$refreshToken->getToken()->getClient()->getIdentifier())
-            ->identifiedBy((string)$refreshToken->getId())
-            ->issuedAt(new DateTimeImmutable())
-            ->canOnlyBeUsedAfter(new DateTimeImmutable())
+            ->permittedFor((string) $refreshToken->getToken()->getClient()->getIdentifier())
+            ->identifiedBy((string) $refreshToken->getId())
+            ->issuedAt(new \DateTimeImmutable())
+            ->canOnlyBeUsedAfter(new \DateTimeImmutable())
             ->expiresAt($refreshToken->getExpiry())
-            ->relatedTo((string)$refreshToken->getToken()->getUser()?->getId())
+            ->relatedTo((string) $refreshToken->getToken()->getUser()?->getId())
             ->withClaim('scopes', $refreshToken->getToken()->getScopes())
             ->getToken($this->configuration->signer(), $this->configuration->signingKey());
     }
@@ -139,7 +118,6 @@ final class JwtGenerateToken implements GenerateToken
 
         return $this->tokenFindRepository->findOrFail(Uuid::fromString($claims->get('jti')));
     }
-
 
     /**
      * @throws OAuthServerException
@@ -179,8 +157,6 @@ final class JwtGenerateToken implements GenerateToken
     }
 
     /**
-     * @param string $token
-     * @return JwtToken
      * @throws OAuthServerException
      */
     private function getJwtToken(string $token): JwtToken
@@ -192,9 +168,9 @@ final class JwtGenerateToken implements GenerateToken
         );
 
         $this->configuration->setValidationConstraints(
-            class_exists(StrictValidAt::class)
-                ? new StrictValidAt(new SystemClock(new DateTimeZone(date_default_timezone_get())))
-                : new LooseValidAt(new SystemClock(new DateTimeZone(date_default_timezone_get()))),
+            \class_exists(StrictValidAt::class)
+                ? new StrictValidAt(new SystemClock(new \DateTimeZone(\date_default_timezone_get())))
+                : new LooseValidAt(new SystemClock(new \DateTimeZone(\date_default_timezone_get()))),
             new SignedWith(
                 new Sha256(),
                 InMemory::plainText($publicKeyNew->getKeyContents(), $publicKeyNew->getPassPhrase() ?? '')
@@ -210,8 +186,6 @@ final class JwtGenerateToken implements GenerateToken
     }
 
     /**
-     * @param JwtToken $jwtToken
-     * @return void
      * @throws OAuthServerException
      */
     private function assertConstraintsJwtToken(JwtToken $jwtToken): void

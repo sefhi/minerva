@@ -9,7 +9,6 @@ use Auth\Domain\User\Password;
 
 final class CreateUserCommand
 {
-
     private function __construct(
         private readonly Email $email,
         private readonly Password $plainPassword,
@@ -29,28 +28,18 @@ final class CreateUserCommand
         );
     }
 
-    /**
-     * @return Email
-     */
     public function getEmail(): Email
     {
         return $this->email;
     }
 
-    /**
-     * @return Password
-     */
     public function getPlainPassword(): Password
     {
         return $this->plainPassword;
     }
 
-    /**
-     * @return array
-     */
     public function getRoles(): array
     {
         return $this->roles;
     }
-
 }

@@ -12,9 +12,8 @@ use Ramsey\Uuid\UuidInterface;
 
 final class DoctrineTokenFindRepository extends DoctrineRepository implements TokenFindRepository
 {
-
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function find(UuidInterface $id): ?Token
     {
@@ -22,7 +21,7 @@ final class DoctrineTokenFindRepository extends DoctrineRepository implements To
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function findOrFail(UuidInterface $id): Token
     {

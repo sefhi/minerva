@@ -9,14 +9,12 @@ use Auth\Domain\AccessToken\GenerateToken;
 use Auth\Domain\AccessToken\TokeType;
 use Auth\Domain\RefreshToken\RefreshToken;
 use Auth\Domain\Token\Token;
-use DateTimeImmutable;
 
 final class AccessTokenMother
 {
-
     public static function create(
         TokeType $tokeType,
-        DateTimeImmutable $expiresIn,
+        \DateTimeImmutable $expiresIn,
         string $token,
         ?string $refreshToken = null,
     ): AccessToken {
@@ -30,6 +28,4 @@ final class AccessTokenMother
     ): AccessToken {
         return $generateToken->generateAccessToken($token, $refreshToken);
     }
-
-
 }

@@ -2,7 +2,6 @@
 
 namespace Tests\src\Controller\Auth;
 
-use JsonException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Tests\Auth\Shared\Domain\MotherFactory;
@@ -16,21 +15,20 @@ class CreateClientPostControllerTest extends WebTestCase
         $this->client = self::createClient();
     }
 
-
     /** @test
-     * @throws JsonException
+     * @throws \JsonException
      */
     public function itShouldCreateClient(): void
     {
         $payload = [
             'name' => MotherFactory::random()->company(),
-            'grant' => ['password', 'client_credentials']
+            'grant' => ['password', 'client_credentials'],
         ];
 
         $router = $this->client->getContainer()->get('router');
         $server = ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
 
-        //When
+        // When
         $this->client->request(
             'POST',
             $router->generate('auth_client'),
@@ -42,7 +40,7 @@ class CreateClientPostControllerTest extends WebTestCase
 
         $response = $this->client->getResponse();
 
-        //Then
+        // Then
         self::assertResponseIsSuccessful();
     }
 }

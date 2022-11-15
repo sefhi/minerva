@@ -6,7 +6,6 @@ namespace Auth\Domain\AccessToken;
 
 final class CryptKeyPrivate extends CryptKey
 {
-
     public static function create(
         string $keyPath,
         string $passPhrase = '',

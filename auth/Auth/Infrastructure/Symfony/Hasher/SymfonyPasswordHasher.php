@@ -11,9 +11,7 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 final class SymfonyPasswordHasher implements PasswordHasher
 {
-
-
-    public function __construct(private readonly PasswordHasherFactoryInterface $passwordHasherFactory,)
+    public function __construct(private readonly PasswordHasherFactoryInterface $passwordHasherFactory)
     {
     }
 
@@ -21,13 +19,13 @@ final class SymfonyPasswordHasher implements PasswordHasher
     {
         return Password::fromString($this->passwordHasherFactory
             ->getPasswordHasher(UserInterface::class)
-            ->hash((string)$plainPassword));
+            ->hash((string) $plainPassword));
     }
 
     public function verify(Password $hashedPassword, Password $plainPassword): bool
     {
         return $this->passwordHasherFactory
             ->getPasswordHasher(UserInterface::class)
-            ->verify($hashedPassword->value(),$plainPassword->value());
+            ->verify($hashedPassword->value(), $plainPassword->value());
     }
 }

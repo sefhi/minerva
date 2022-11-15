@@ -4,8 +4,6 @@ namespace Tests\Auth\Domain\User;
 
 use Auth\Domain\User\Email;
 use Auth\Domain\User\Password;
-use Tests\Auth\Domain\User\PasswordMother;
-
 use Auth\Domain\User\User;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
