@@ -1,7 +1,7 @@
 # VARIABLES
 DOCKER_COMPOSE = docker compose
 CONTAINER      = minerva-auth
-EXEC           = docker exec -ti --user=root $(CONTAINER)
+EXEC           = docker exec -t --user=root $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
 COMPOSER       = $(EXEC) composer
@@ -16,6 +16,10 @@ deploy: build
 build: create_env_file rebuild
 
 deps: composer-install
+	make create/database
+	make doctrine/migrate
+	make generate-private-key
+	make generate-public-key
 
 update-deps: composer-update
 
@@ -61,7 +65,7 @@ rebuild:
 	make start
 
 test:
-	docker exec -it $(CONTAINER) bin/phpunit -v
+	docker exec -t $(CONTAINER) bin/phpunit -v
 
 # 🦝 Apache
 reload:
