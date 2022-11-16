@@ -16,6 +16,7 @@ jobs:
     environment: dev
     runs-on: ubuntu-latest
     env:
+      APP_ENV: dev
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       OAUTH_PRIVATE_KEY: ${{ secrets.OAUTH_PRIVATE_KEY }}
       OAUTH_PUBLIC_KEY: ${{ secrets.OAUTH_PUBLIC_KEY }}
