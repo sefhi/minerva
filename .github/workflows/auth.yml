@@ -16,14 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       Greeting: Hello
-#      DATABASE_URL=${{ env.DATABASE_URL }}
+      DATABASE_URL: ${{ env.DATABASE_URL }}
 #      OAUTH_PRIVATE_KEY=${{ env.OAUTH_PRIVATE_KEY }}
 #      OAUTH_PUBLIC_KEY=${{ env.OAUTH_PUBLIC_KEY }}
 #      OAUTH_ENCRYPTION_KEY=${{ env.OAUTH_ENCRYPTION_KEY }}
 #      APP_SECRET=${{ env.APP_SECRET }}
     steps:
       - name: "Probando"
-        run: echo "$Greeting"
+        run: echo "$Greeting $DATABASE_URL"
 #      - uses: actions/checkout@v2
 
 #      - name: 🐳 Start all the environment Mysql
