@@ -16,27 +16,29 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL=${{ env.DATABASE_URL }}
-      OAUTH_PRIVATE_KEY=${{ env.OAUTH_PRIVATE_KEY }}
-      OAUTH_PUBLIC_KEY=${{ env.OAUTH_PUBLIC_KEY }}
-      OAUTH_ENCRYPTION_KEY=${{ env.OAUTH_ENCRYPTION_KEY }}
-      APP_SECRET=${{ env.APP_SECRET }}
+#      OAUTH_PRIVATE_KEY=${{ env.OAUTH_PRIVATE_KEY }}
+#      OAUTH_PUBLIC_KEY=${{ env.OAUTH_PUBLIC_KEY }}
+#      OAUTH_ENCRYPTION_KEY=${{ env.OAUTH_ENCRYPTION_KEY }}
+#      APP_SECRET=${{ env.APP_SECRET }}
     steps:
-      - uses: actions/checkout@v2
+      - name: "Probando"
+        run: echo "$DATABASE_URL"
+#      - uses: actions/checkout@v2
 
-      - name: 🐳 Start all the environment Mysql
-        run: make start-mysql
-
-      - name: 🐳 Start all the environment Auth
-        run: |-
-          cd auth
-          make start
-
-      - name: 🔦 Lint Auth
-        run: |-
-          cd auth
-          make cs
-
-      - name: ✅ Run the tests
-        run: |-
-          cd auth
-          make test
+#      - name: 🐳 Start all the environment Mysql
+#        run: make start-mysql
+#
+#      - name: 🐳 Start all the environment Auth
+#        run: |-
+#          cd auth
+#          make start
+#
+#      - name: 🔦 Lint Auth
+#        run: |-
+#          cd auth
+#          make cs
+#
+#      - name: ✅ Run the tests
+#        run: |-
+#          cd auth
+#          make test
