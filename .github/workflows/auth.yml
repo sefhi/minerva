@@ -14,7 +14,12 @@ on:
 jobs:
   build-auth:
     runs-on: ubuntu-latest
-
+    env:
+      DATABASE_URL=${{ env.DATABASE_URL }}
+      OAUTH_PRIVATE_KEY=${{ env.OAUTH_PRIVATE_KEY }}
+      OAUTH_PUBLIC_KEY=${{ env.OAUTH_PUBLIC_KEY }}
+      OAUTH_ENCRYPTION_KEY=${{ env.OAUTH_ENCRYPTION_KEY }}
+      APP_SECRET=${{ env.APP_SECRET }}
     steps:
       - uses: actions/checkout@v2
 
