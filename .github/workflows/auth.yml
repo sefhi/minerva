@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       Greeting: Hello
-      DATABASE_URL: ${{ secret.DATABASE_URL }}
+      DATABASE_URL: '${{ secret.DATABASE_URL }}'
 #      OAUTH_PRIVATE_KEY=${{ env.OAUTH_PRIVATE_KEY }}
 #      OAUTH_PUBLIC_KEY=${{ env.OAUTH_PUBLIC_KEY }}
 #      OAUTH_ENCRYPTION_KEY=${{ env.OAUTH_ENCRYPTION_KEY }}
