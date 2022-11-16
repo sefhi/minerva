@@ -21,6 +21,9 @@ deps: composer-install
 
 update-deps: composer-update
 
+generate-key:
+	@sh .docker/genrsa.sh
+
 create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi
 # 🐘 Composer
