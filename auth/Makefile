@@ -21,6 +21,10 @@ deps: composer-install
 
 update-deps: composer-update
 
+view-key:
+	docker-compose up -d
+	$(EXEC) ls -la /var/www/html/.docker/config/
+	$(EXEC) cat /var/www/html/.docker/config/private.key
 generate-key:
 	@sh .docker/genrsa.sh
 

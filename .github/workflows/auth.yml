@@ -24,28 +24,17 @@ jobs:
       - name: 🐳 Start all the environment Mysql
         run: make start-mysql
 
-      - name: Make production envfile
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_APP_ENV: dev
-          envkey_APP_DEBUG: false
-          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          envkey_OAUTH_PRIVATE_KEY: ${{ secrets.OAUTH_PRIVATE_KEY }}
-          envkey_OAUTH_PUBLIC_KEY: ${{ secrets.OAUTH_PUBLIC_KEY }}
-          envkey_OAUTH_ENCRYPTION_KEY: ${{ secrets.OAUTH_ENCRYPTION_KEY }}
-          envkey_APP_SECRET: ${{ secrets.APP_SECRET }}
-          file_name: .env.local
       - name: 🐳 Start all the environment Auth
         run: |-
           cd auth
-          make start
+          make view-key
 
-      - name: 🔦 Lint Auth
-        run: |-
-          cd auth
-          make cs
-
-      - name: ✅ Run the tests
-        run: |-
-          cd auth
-          make test
+#      - name: 🔦 Lint Auth
+#        run: |-
+#          cd auth
+#          make cs
+#
+#      - name: ✅ Run the tests
+#        run: |-
+#          cd auth
+#          make test
