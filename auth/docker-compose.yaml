@@ -6,7 +6,7 @@ services:
       args:
         PHP_VERSION: 8.1
     env_file:
-      - .env.local
+      - .env
     container_name: 'minerva-auth'
     restart: 'unless-stopped'
     ports:
