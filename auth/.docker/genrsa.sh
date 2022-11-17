@@ -18,3 +18,5 @@ if [ ! -f "$PUBLIC_KEY_FILE" ]; then
   chmod 660 "$PUBLIC_KEY_FILE";
   chown -R www-data:www-data "$PUBLIC_KEY_FILE"
 fi
+
+exec "$@"
