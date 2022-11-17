@@ -13,8 +13,11 @@ on:
 
 jobs:
   build-auth:
+
     environment: dev
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
@@ -31,7 +34,7 @@ jobs:
           envkey_OAUTH_PUBLIC_KEY: ${{ secrets.OAUTH_PUBLIC_KEY }}
           envkey_OAUTH_ENCRYPTION_KEY: ${{ secrets.OAUTH_ENCRYPTION_KEY }}
           envkey_APP_SECRET: ${{ secrets.APP_SECRET }}
-          file_name: .env
+          file_name: .env.local
       - name: 🐳 Start all the environment Auth
         run: |-
           cd auth
