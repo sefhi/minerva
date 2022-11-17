@@ -22,7 +22,6 @@ deps: composer-install
 update-deps: composer-update
 
 view-key:
-	docker-compose up -d
 	$(EXEC) ls -la /var/www/html/.docker/config/
 	$(EXEC) cat /var/www/html/.docker/config/private.key
 generate-key:
@@ -45,9 +44,9 @@ composer composer-install ci composer-update composer-require cr: create_env_fil
 start: create_env_file
 	@echo "🚀 Deploy!!!"
 	@$(DOCKER_COMPOSE) up -d
-	make deps
-	make create/database
-	make doctrine/migrate
+#	make deps
+#	make create/database
+#	make doctrine/migrate
 stop:
 	$(DOCKER_COMPOSE) stop
 down:

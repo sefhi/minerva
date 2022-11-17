@@ -27,6 +27,11 @@ jobs:
       - name: 🐳 Start all the environment Auth
         run: |-
           cd auth
+          make start
+
+      - name: 🐳 Start all the environment Auth
+        run: |-
+          cd auth
           make view-key
 
 #      - name: 🔦 Lint Auth
