@@ -35,4 +35,4 @@ RUN chmod +x /root/genrsa.sh
 EXPOSE 80
 
 # Run application
-ENTRYPOINT [ "/root/genrsa.sh" , "apache2-foreground" ]
+CMD [ "/root/genrsa.sh" , "apache2-foreground" ]
