@@ -43,7 +43,7 @@ composer composer-install ci composer-update composer-require cr: create_env_fil
 # 🐳 Docker Compose
 start: create_env_file
 	@echo "🚀 Deploy!!!"
-	@$(DOCKER_COMPOSE) up -d
+	@$(DOCKER_COMPOSE) up
 #	make deps
 #	make create/database
 #	make doctrine/migrate
