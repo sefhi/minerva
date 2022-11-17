@@ -29,17 +29,12 @@ jobs:
           cd auth
           make start
 
-      - name: 🐳 Start all the environment Auth
+      - name: 🔦 Lint Auth
         run: |-
           cd auth
-          make view-key
+          make cs
 
-#      - name: 🔦 Lint Auth
-#        run: |-
-#          cd auth
-#          make cs
-#
-#      - name: ✅ Run the tests
-#        run: |-
-#          cd auth
-#          make test
+      - name: ✅ Run the tests
+        run: |-
+          cd auth
+          make test
