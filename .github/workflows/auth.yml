@@ -1,0 +1,40 @@
+name: CI-Auth
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - "auth/**"
+  pull_request:
+    branches: [ master ]
+    paths:
+      - "auth/**"
+
+jobs:
+  build-auth:
+
+    environment: dev
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: 🐳 Start all the environment Mysql
+        run: make start-mysql
+
+      - name: 🐳 Start all the environment Auth
+        run: |-
+          cd auth
+          make start
+
+      - name: 🔦 Lint Auth
+        run: |-
+          cd auth
+          make cs
+
+      - name: ✅ Run the tests
+        run: |-
+          cd auth
+          make test

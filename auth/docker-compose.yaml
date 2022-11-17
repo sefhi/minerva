@@ -6,7 +6,7 @@ services:
       args:
         PHP_VERSION: 8.1
     env_file:
-      - .env.local
+      - .env
     container_name: 'minerva-auth'
     restart: 'unless-stopped'
     ports:
@@ -15,8 +15,6 @@ services:
       - ./:/var/www/html
       - ${PWD}/.docker/config/webserver/php.ini:/usr/local/etc/php/php.ini
       - ${PWD}/.docker/config/webserver/vhosts:/etc/apache2/sites-enabled
-      - ${PWD}/.docker/config/private.key:/var/www/html/.docker/config/private.key
-      - ${PWD}/.docker/config/public.key:/var/www/html/.docker/config/public.key
     environment:
       XDEBUG_CONFIG: "client_host=host.docker.internal"
     networks:

@@ -1,5 +1,5 @@
 [![CI-Atenea](https://github.com/sefhirot69/minerva/actions/workflows/atenea.yml/badge.svg)](https://github.com/sefhirot69/minerva/actions/workflows/atenea.yml)
-
+[![CI-Auth](https://github.com/sefhirot69/minerva/actions/workflows/auth.yml/badge.svg)](https://github.com/sefhirot69/minerva/actions/workflows/auth.yml)
 --------------------------------------
 
 ## 🚀 Instalación

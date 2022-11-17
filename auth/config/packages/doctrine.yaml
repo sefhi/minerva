@@ -1,7 +1,12 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-
+        types:
+            auth_grant: Auth\Infrastructure\Persistence\Doctrine\Mapping\Client\ClientGrantType
+            auth_redirect_uris: Auth\Infrastructure\Persistence\Doctrine\Mapping\Client\ClientRedirectUrisType
+            auth_scopes: Auth\Infrastructure\Persistence\Doctrine\Mapping\Client\ClientScopesType
+            token_scopes: Auth\Infrastructure\Persistence\Doctrine\Mapping\Token\TokenScopesType
+            role_type: Auth\Infrastructure\Persistence\Doctrine\Mapping\User\RoleType
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '13'
@@ -10,11 +15,35 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+#            App:
+#                is_bundle: false
+#                dir: '%kernel.project_dir%/src/Entity'
+#                prefix: 'App\Entity'
+#                alias: App
+            AuthClient:
+                type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/Auth/Infrastructure/Persistence/Doctrine/Mapping/Client'
+                prefix: 'Auth\Domain\Client'
+                alias: 'Auth\Domain\Client'
+            AuthToken:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Auth/Infrastructure/Persistence/Doctrine/Mapping/Token'
+                prefix: 'Auth\Domain\Token'
+                alias: 'Auth\Domain\Token'
+            AuthUser:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Auth/Infrastructure/Persistence/Doctrine/Mapping/User'
+                prefix: 'Auth\Domain\User'
+                alias: 'Auth\Domain\User'
+            AuthRefreshToken:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/Auth/Infrastructure/Persistence/Doctrine/Mapping/RefreshToken'
+                prefix: 'Auth\Domain\RefreshToken'
+                alias: 'Auth\Domain\RefreshToken'
 
 when@test:
     doctrine:
