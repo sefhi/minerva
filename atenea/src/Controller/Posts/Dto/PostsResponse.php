@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atenea\Posts\Application;
+namespace App\Controller\Posts\Dto;
 
 use JsonSerializable;
 use ReturnTypeWillChange;
