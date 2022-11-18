@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Atenea\Posts\Application;
 
+use App\Controller\Posts\Dto\PostAuthorResponse;
+use App\Controller\Posts\Dto\PostResponse;
+use App\Controller\Posts\Dto\PostsResponse;
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostRepository;
 

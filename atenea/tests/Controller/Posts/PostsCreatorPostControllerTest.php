@@ -34,7 +34,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
         $router = $this->client->getContainer()->get('router');
         $server = ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'];
 
-        $this->postRepositoryMock->expects(self::once())->method('save')->willReturn(true);
+        $this->postRepositoryMock->expects(self::once())->method('save');
         $this->authorRepositoryMock->expects(self::once())->method('find')->willReturn(AuthorMother::random());
 
         self::getContainer()->set(PostRepository::class, $this->postRepositoryMock);

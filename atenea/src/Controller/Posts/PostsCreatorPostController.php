@@ -56,14 +56,9 @@ final class PostsCreatorPostController extends AbstractController
                 return $this->handleErrors($errors);
             }
 
-            $hasCreated = ($this->commandHandler)($requestCreatorPost->mapToCommand());
+            ($this->commandHandler)($requestCreatorPost->mapToCommand());
 
-            if ($hasCreated) {
-                return $this->json('', Response::HTTP_CREATED);
-            }
-
-            $response = ['error' => 'resource has not been created'];
-            $statusCode = Response::HTTP_CONFLICT;
+            return $this->json('', Response::HTTP_CREATED);
         } catch (InvalidArgumentException|AuthorNotFoundException $exception) {
             $response = ['error' => $exception->getMessage()];
             $statusCode = $exception->getCode();

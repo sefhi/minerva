@@ -6,7 +6,7 @@ namespace Atenea\Posts\Application;
 
 use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\Author;
-use Atenea\Posts\Domain\Dto\PostCreatorDto;
+use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostContent;
 use Atenea\Posts\Domain\PostId;
 use Atenea\Posts\Domain\PostRepository;
@@ -16,27 +16,29 @@ use Atenea\Shared\Domain\ValueObject\AuthorId;
 
 final class CreatorPostCommandHandler
 {
-    public function __construct(private readonly PostRepository $repository, private readonly AuthorFinder $authorFinder)
-    {
+    public function __construct(
+        private readonly PostRepository $repository,
+        private readonly AuthorFinder $authorFinder
+    ) {
     }
 
     /**
      * @throws AuthorNotFoundException
      */
-    public function __invoke(CreatorPostCommand $command): bool
+    public function __invoke(CreatorPostCommand $command): void
     {
         $authorId = new AuthorId($command->getAuthorId());
 
         $author = $this->finderAuthor($authorId);
 
-        $postCreatorDto = PostCreatorDto::create(
+        $post = Post::create(
             new PostId($command->getId()),
             new PostTitle($command->getTitle()),
             new PostContent($command->getContent()),
             $author
         );
 
-        return $this->repository->save($postCreatorDto);
+        $this->repository->save($post);
     }
 
     /**
