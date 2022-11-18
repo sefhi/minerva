@@ -6,12 +6,10 @@ on:
     branches: [ master ]
     paths:
       - "atenea/**"
-      - ".github/workflows/build-atenea.yml"
   pull_request:
     branches: [ master ]
     paths:
       - "atenea/**"
-      - ".github/workflows/build-atenea.yml"
 
 jobs:
   build-atenea:
