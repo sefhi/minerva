@@ -28,7 +28,7 @@ final class CreatorPostCommandHandlerTest extends TestCase
     }
 
     /** @test */
-    public function itShouldCreatePostAndReturnTrue(): void
+    public function itShouldCreatePost(): void
     {
         // GIVEN
         $command = CreatorPostCommandMother::random();
@@ -37,8 +37,7 @@ final class CreatorPostCommandHandlerTest extends TestCase
 
         $this->repositoryMock
             ->expects(self::once())
-            ->method('save')
-            ->willReturn(true);
+            ->method('save');
 
         $this->authorFinderMock
             ->expects(self::once())
@@ -49,14 +48,12 @@ final class CreatorPostCommandHandlerTest extends TestCase
         $commandHandler = new CreatorPostCommandHandler($this->repositoryMock, $this->authorFinderMock);
 
         // WHEN
-        $result = $commandHandler($command);
+        $commandHandler($command);
 
-        // THEN
-        self::assertTrue($result);
     }
 
     /** @test */
-    public function itShouldNotCreatePostAndReturnFalse(): void
+    public function itShouldNotCreatePost(): void
     {
         // GIVEN
         $command = CreatorPostCommandMother::random();

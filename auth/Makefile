@@ -58,7 +58,7 @@ rebuild:
 	make start
 
 test:
-	docker exec -t $(CONTAINER) bin/phpunit -v
+	docker exec -t $(CONTAINER) ./vendor/bin/phpunit -v
 
 # 🦝 Apache
 reload:

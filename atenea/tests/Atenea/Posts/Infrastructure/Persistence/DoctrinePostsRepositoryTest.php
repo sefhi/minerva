@@ -59,7 +59,7 @@ final class DoctrinePostsRepositoryTest extends TestCase
     public function itShouldSavePost(): void
     {
         // GIVEN
-        $postCreatorDtoMother = PostCreatorDtoMother::random();
+        $post = PostMother::random();
 
         // WHEN
         $this->entityManagerMock
@@ -71,8 +71,6 @@ final class DoctrinePostsRepositoryTest extends TestCase
 
         // THEN
         $doctrinePostsRepository = new DoctrinePostRepository($this->entityManagerMock);
-        $result = $doctrinePostsRepository->save($postCreatorDtoMother);
-
-        self::assertTrue($result);
+        $doctrinePostsRepository->save($post);
     }
 }
