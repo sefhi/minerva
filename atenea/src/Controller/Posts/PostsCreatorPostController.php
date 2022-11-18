@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts;
 
+use Atenea\Posts\Application\Create\CreatorPostCommandHandler;
+use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Exception;
 use InvalidArgumentException;
 use JsonException;
-use Atenea\Posts\Application\CreatorPostCommandHandler;
-use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Stringable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

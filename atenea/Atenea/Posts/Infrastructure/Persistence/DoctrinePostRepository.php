@@ -6,6 +6,8 @@ namespace Atenea\Posts\Infrastructure\Persistence;
 
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Domain\PostRepository;
+use Atenea\Shared\Domain\Criteria\Criteria;
+use Atenea\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter;
 use Atenea\Shared\Infrastructure\Persistence\DoctrineRepository;
 
 final class DoctrinePostRepository extends DoctrineRepository implements PostRepository
@@ -21,5 +23,12 @@ final class DoctrinePostRepository extends DoctrineRepository implements PostRep
     public function save(Post $post): void
     {
         $this->persist($post);
+    }
+
+    public function matching(Criteria $criteria): array
+    {
+        $doctrineCriteria = DoctrineCriteriaConverter::convert($criteria);
+
+        return $this->getRepository(Post::class)->matching($doctrineCriteria)->toArray();
     }
 }

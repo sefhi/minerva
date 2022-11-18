@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atenea\Posts\Application;
+namespace Atenea\Posts\Application\Create;
 
 use Atenea\Authors\Application\AuthorFinder;
 use Atenea\Authors\Domain\Author;

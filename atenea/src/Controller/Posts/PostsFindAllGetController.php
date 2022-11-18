@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts;
 
+use Atenea\Posts\Application\SearchAll\FindAllPostQueryHandler;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
-use Atenea\Posts\Application\FindAllPostQueryHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +25,7 @@ final class PostsFindAllGetController extends AbstractController
             $result = ($this->queryHandler)();
 
             return $this->json(['data' => $result->getPosts()], Response::HTTP_OK);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return $this->json(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atenea\Posts\Application;
+namespace Atenea\Posts\Application\Create;
 
 final class CreatorPostCommand
 {

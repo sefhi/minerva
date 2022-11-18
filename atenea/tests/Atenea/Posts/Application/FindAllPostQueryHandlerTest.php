@@ -3,7 +3,7 @@
 namespace Atenea\Tests\Posts\Application;
 
 use App\Controller\Posts\Dto\PostResponse;
-use Atenea\Posts\Application\FindAllPostQueryHandler;
+use Atenea\Posts\Application\SearchAll\FindAllPostQueryHandler;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Tests\Posts\Domain\PostMother;
 use PHPUnit\Framework\MockObject\MockObject;
