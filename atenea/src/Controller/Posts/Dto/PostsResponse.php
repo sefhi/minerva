@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts\Dto;
 
-use JsonSerializable;
 use ReturnTypeWillChange;
 
-final class PostsResponse implements JsonSerializable
+final class PostsResponse implements \JsonSerializable
 {
     /**
      * @var array<PostResponse>
@@ -24,8 +23,6 @@ final class PostsResponse implements JsonSerializable
 
     /**
      * @param array<PostResponse> $posts
-     *
-     * @return PostsResponse
      */
     public static function create(array $posts): self
     {
@@ -40,7 +37,7 @@ final class PostsResponse implements JsonSerializable
         return $this->posts;
     }
 
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
  public function jsonSerialize(): array
  {
      return get_object_vars($this);

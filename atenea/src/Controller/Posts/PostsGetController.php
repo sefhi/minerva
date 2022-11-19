@@ -15,8 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use function Lambdish\Phunctional\map;
-
 final class PostsGetController extends AbstractController
 {
     public function __construct(private readonly SearchPostsByCriteriaQueryHandler $queryHandler)
@@ -32,7 +30,13 @@ final class PostsGetController extends AbstractController
         $offset = $request->get('offset');
         $filters = $request->query->all('filters');
 
-        $query = SearchPostsByCriteriaQuery::create($filters, $orderBy, $order, $limit, $offset);
+        $query = SearchPostsByCriteriaQuery::create(
+            $filters,
+            null === $orderBy ? null : (string) $orderBy,
+            null === $order ? null : (string) $order,
+            null === $limit ? null : (int) $limit,
+            null === $offset ? null : (int) $offset,
+        );
 
         $result = ($this->queryHandler)($query);
 

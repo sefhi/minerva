@@ -4,7 +4,6 @@ namespace Atenea\Tests\Posts\Infrastructure\Persistence;
 
 use Atenea\Posts\Domain\Post;
 use Atenea\Posts\Infrastructure\Persistence\DoctrinePostRepository;
-use Atenea\Tests\Posts\Domain\Dto\PostCreatorDtoMother;
 use Atenea\Tests\Posts\Domain\PostMother;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;

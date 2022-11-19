@@ -3,7 +3,6 @@
 namespace Atenea\Tests\Shared\Domain\ValueObject;
 
 use Atenea\Tests\Shared\Domain\MotherCreator;
-use InvalidArgumentException;
 use Atenea\Shared\Domain\ValueObject\Username;
 use PHPUnit\Framework\TestCase;
 
@@ -11,6 +10,7 @@ class UsernameTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider providersUsernameValid
      */
     public function itShouldCreateUsername(string $value): void
@@ -21,11 +21,12 @@ class UsernameTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider providersUsernamesLengthInvalid
      */
     public function itShouldThrowAnExceptionWhenUsernameIsNotValidLength(string $value): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectErrorMessage(
             sprintf('%s must have a length between %s and %s character.', Username::class, 2, 70)
         );

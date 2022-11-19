@@ -3,7 +3,6 @@
 namespace Atenea\Tests\Shared\Domain\ValueObject;
 
 use Atenea\Tests\Shared\Domain\MotherCreator;
-use InvalidArgumentException;
 use Atenea\Shared\Domain\ValueObject\Name;
 use PHPUnit\Framework\TestCase;
 
@@ -11,6 +10,7 @@ class NameTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider providerNamesValid
      */
     public function itShouldCreateName(string $value): void
@@ -21,11 +21,12 @@ class NameTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider providerNamesLengthInvalid
      */
     public function itShouldThrowAndExceptionWhenNameLengthIsNotValid(string $value): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectErrorMessage(Name::class.' must have a length between 3 and 50 character.');
 
         new Name($value);
@@ -33,11 +34,12 @@ class NameTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider providerNamesInValid
      */
     public function itShouldThrowAndExceptionWhenNameIsNotValid(string $value): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectErrorMessage($value.' is not valid in '.Name::class);
 
         new Name($value);

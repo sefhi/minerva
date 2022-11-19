@@ -49,7 +49,6 @@ final class CreatorPostCommandHandlerTest extends TestCase
 
         // WHEN
         $commandHandler($command);
-
     }
 
     /** @test */

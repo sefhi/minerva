@@ -10,6 +10,7 @@ class WebsiteTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider providersWebSiteValid
      */
     public function itShouldCreateWebSite(string $value): void

@@ -8,7 +8,6 @@ use Atenea\Posts\Domain\PostRepository;
 use Atenea\Tests\Posts\Domain\PostIdMother;
 use Atenea\Tests\Shared\Domain\MotherCreator;
 use Atenea\Tests\Shared\Domain\ValueObject\Author\AuthorIdMother;
-use JsonException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -27,7 +26,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
     }
 
     /** @test
-     * @throws JsonException
+     * @throws \JsonException
      */
     public function shouldCreatePostWithEmptyContentAndReturnStatusCode201(): void
     {
@@ -58,7 +57,7 @@ class PostsCreatorPostControllerTest extends WebTestCase
     }
 
     /** @test
-     * @throws JsonException
+     * @throws \JsonException
      */
     public function itShouldReturnErrorValidateFieldsAndReturnStatusCode400(): void
     {

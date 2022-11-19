@@ -6,10 +6,6 @@ namespace App\Controller\Posts;
 
 use Atenea\Posts\Application\Create\CreatorPostCommandHandler;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
-use Exception;
-use InvalidArgumentException;
-use JsonException;
-use Stringable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +29,7 @@ final class PostsCreatorPostController extends AbstractController
             $json = $request->getContent();
 
             if (!$json) {
-                throw new InvalidArgumentException('invalid json', Response::HTTP_NOT_ACCEPTABLE);
+                throw new \InvalidArgumentException('invalid json', Response::HTTP_NOT_ACCEPTABLE);
             }
 
             $data = json_decode(
@@ -59,10 +55,10 @@ final class PostsCreatorPostController extends AbstractController
             ($this->commandHandler)($requestCreatorPost->mapToCommand());
 
             return $this->json('', Response::HTTP_CREATED);
-        } catch (InvalidArgumentException|AuthorNotFoundException $exception) {
+        } catch (\InvalidArgumentException|AuthorNotFoundException $exception) {
             $response = ['error' => $exception->getMessage()];
             $statusCode = $exception->getCode();
-        } catch (Exception|JsonException $exception) {
+        } catch (\Exception|\JsonException $exception) {
             $response = ['error' => $exception->getMessage()];
             $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
         }
@@ -83,7 +79,7 @@ final class PostsCreatorPostController extends AbstractController
     }
 
     /**
-     * @return array<int, array{message: string|Stringable, field: string}>
+     * @return array<int, array{message: string|\Stringable, field: string}>
      */
     private function getFormattedErrors(ConstraintViolationListInterface $errors): array
     {

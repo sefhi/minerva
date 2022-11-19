@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Atenea\Shared\Domain\Criteria;
 
 use Atenea\Shared\Domain\Collection;
+
 use function Lambdish\Phunctional\reduce;
 
 final class Filters extends Collection

@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Atenea\Shared\Domain\ValueObject;
 
-use InvalidArgumentException;
-use Stringable;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
-class Uuid implements Stringable
+class Uuid implements \Stringable
 {
     public function __construct(protected string $value)
     {
@@ -38,7 +36,7 @@ class Uuid implements Stringable
     private function ensureIsValidUuid(string $id): void
     {
         if (!RamseyUuid::isValid($id)) {
-            throw new InvalidArgumentException(sprintf('<%s> does not allow the value <%s>.', static::class, $id));
+            throw new \InvalidArgumentException(sprintf('<%s> does not allow the value <%s>.', static::class, $id));
         }
     }
 }
