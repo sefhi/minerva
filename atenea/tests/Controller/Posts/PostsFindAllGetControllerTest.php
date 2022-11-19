@@ -2,21 +2,17 @@
 
 namespace App\Tests\Controller\Posts;
 
-use Atenea\Posts\Domain\PostRepository;
-use Atenea\Tests\Posts\Domain\PostMother;
-use PHPUnit\Framework\MockObject\MockObject;
+use App\Factory\PostFactory;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class PostsFindAllGetControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
-    private MockObject|PostRepository $postRepositoryMock;
 
     protected function setUp(): void
     {
         $this->client = self::createClient();
-        $this->postRepositoryMock = $this->createMock(PostRepository::class);
     }
 
     /** @test
@@ -24,10 +20,7 @@ class PostsFindAllGetControllerTest extends WebTestCase
      */
     public function whenCallEndpointPostAllShouldReturnAllPost(): void
     {
-        $this->postRepositoryMock->expects(self::once())->method('findAll')->willReturn(PostMother::array());
-
-        self::getContainer()->set(PostRepository::class, $this->postRepositoryMock);
-
+        PostFactory::createMany(5);
         $this->client->request(
             'GET',
             '/posts/all'
@@ -36,6 +29,7 @@ class PostsFindAllGetControllerTest extends WebTestCase
         // When
         $response = $this->client->getResponse();
         $result = json_decode($response->getContent(), true);
+
         // Then
         self::assertResponseIsSuccessful();
         self::assertJson($response->getContent());

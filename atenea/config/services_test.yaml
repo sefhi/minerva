@@ -27,8 +27,3 @@ services:
         resource: '../Atenea/'
         autowire: true
         autoconfigure: true
-
-    Atenea\Posts\Domain\PostRepository:
-        public: true
-    Atenea\Authors\Domain\AuthorRepository:
-        public: true
