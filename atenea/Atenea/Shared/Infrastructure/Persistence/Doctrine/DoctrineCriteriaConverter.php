@@ -26,9 +26,7 @@ final class DoctrineCriteriaConverter
         array $criteriaToDoctrineFields = [],
         array $hydrators = []
     ): DoctrineCriteria {
-        $converter = new self($criteria, $criteriaToDoctrineFields, $hydrators);
-
-        return $converter->convertToDoctrineCriteria();
+        return (new self($criteria, $criteriaToDoctrineFields, $hydrators))->convertToDoctrineCriteria();
     }
 
     private function convertToDoctrineCriteria(): DoctrineCriteria

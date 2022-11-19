@@ -27,7 +27,11 @@ final class DoctrinePostRepository extends DoctrineRepository implements PostRep
 
     public function matching(Criteria $criteria): array
     {
-        $doctrineCriteria = DoctrineCriteriaConverter::convert($criteria);
+        $criteriaToDoctrine = [
+            'title' => 'title.value'
+        ];
+
+        $doctrineCriteria = DoctrineCriteriaConverter::convert($criteria, $criteriaToDoctrine);
 
         return $this->getRepository(Post::class)->matching($doctrineCriteria)->toArray();
     }
