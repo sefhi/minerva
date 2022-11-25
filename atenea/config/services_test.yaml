@@ -27,3 +27,7 @@ services:
         resource: '../Atenea/'
         autowire: true
         autoconfigure: true
+
+    Atenea\Shared\Infrastructure\Symfony\Listener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onException }

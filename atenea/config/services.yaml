@@ -31,3 +31,7 @@ services:
     ##Type-Hinted Abstraction
     Atenea\Posts\Domain\PostRepository: '@Atenea\Posts\Infrastructure\Persistence\DoctrinePostRepository'
     Atenea\Authors\Domain\AuthorRepository: '@Atenea\Authors\Infrastructure\Persistence\DoctrineAuthorRepository'
+
+    Atenea\Shared\Infrastructure\Symfony\Listener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onException}
