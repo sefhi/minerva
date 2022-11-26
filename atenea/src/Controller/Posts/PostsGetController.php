@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use function Lambdish\Phunctional\map;
+
 final class PostsGetController extends AbstractController
 {
     public function __construct(private readonly SearchPostsByCriteriaQueryHandler $queryHandler)
@@ -41,7 +43,7 @@ final class PostsGetController extends AbstractController
         $result = ($this->queryHandler)($query);
 
         return new JsonResponse(
-            array_map(
+            map(
                 static fn (Post $post) => PostResponse::create(
                     (string) $post->getId(),
                     (string) $post->getTitle(),
