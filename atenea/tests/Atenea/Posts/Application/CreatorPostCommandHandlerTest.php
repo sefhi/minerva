@@ -6,7 +6,7 @@ namespace Atenea\Tests\Posts\Application;
 
 use App\Tests\Atenea\Authors\Domain\AuthorMother;
 use Atenea\Authors\Application\AuthorFinder;
-use Atenea\Posts\Application\CreatorPostCommandHandler;
+use Atenea\Posts\Application\Create\CreatorPostCommandHandler;
 use Atenea\Posts\Domain\PostRepository;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
 use Atenea\Shared\Domain\ValueObject\AuthorId;
@@ -49,7 +49,6 @@ final class CreatorPostCommandHandlerTest extends TestCase
 
         // WHEN
         $commandHandler($command);
-
     }
 
     /** @test */

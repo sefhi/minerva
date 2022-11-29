@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Atenea\Shared\Domain\Exceptions;
 
-use Exception;
-
-class AuthorNotFoundException extends Exception
+class AuthorNotFoundException extends \Exception
 {
     protected $code = 404;
     protected $message = 'Author not found by id %s';

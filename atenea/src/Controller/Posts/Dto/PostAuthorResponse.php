@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts\Dto;
 
-use JsonSerializable;
 use ReturnTypeWillChange;
 
-final class PostAuthorResponse implements JsonSerializable
+final class PostAuthorResponse implements \JsonSerializable
 {
     private function __construct(
         private string $id,
@@ -59,7 +58,7 @@ final class PostAuthorResponse implements JsonSerializable
         return $this->email;
     }
 
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize(): array
     {
         return get_object_vars($this);

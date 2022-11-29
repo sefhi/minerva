@@ -3,7 +3,6 @@
 namespace Atenea\Tests\Shared\Domain\ValueObject;
 
 use Atenea\Tests\Shared\Domain\MotherCreator;
-use InvalidArgumentException;
 use Atenea\Shared\Domain\ValueObject\Email;
 use PHPUnit\Framework\TestCase;
 
@@ -11,6 +10,7 @@ class EmailTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider providersEmailValid
      */
     public function itShouldCreateEmail(string $value): void
@@ -21,11 +21,12 @@ class EmailTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider providersEmailInvalid
      */
     public function itShouldThrowAnExceptionWhenEmailIsNotValid(string $value): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectErrorMessage(sprintf('Email %s is not valid in %s', $value, Email::class));
 
         new Email($value);

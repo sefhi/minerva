@@ -28,7 +28,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    Atenea\Posts\Domain\PostRepository:
-        public: true
-    Atenea\Authors\Domain\AuthorRepository:
-        public: true
+    Atenea\Shared\Infrastructure\Symfony\Listener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onException }

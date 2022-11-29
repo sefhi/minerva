@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Atenea\Tests\Posts\Application;
 
+use Atenea\Posts\Application\Create\CreatorPostCommand;
 use Atenea\Tests\Shared\Domain\MotherCreator;
-use Atenea\Posts\Application\CreatorPostCommand;
 
 final class CreatorPostCommandMother
 {

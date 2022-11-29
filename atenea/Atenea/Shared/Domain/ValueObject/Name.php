@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Atenea\Shared\Domain\ValueObject;
 
-use InvalidArgumentException;
 use Atenea\Shared\Domain\ValueObject\Primitive\StringValueObject;
 
 class Name extends StringValueObject
@@ -19,7 +18,7 @@ class Name extends StringValueObject
     public function checkValidName(): bool
     {
         if (!preg_match('/^([A-Za-z .\'ñáéíóúÑÁÉÍÓÚ]{2,60})$/u', $this->value)) {
-            throw new InvalidArgumentException(sprintf('%s is not valid in %s', $this->value, __CLASS__), 400);
+            throw new \InvalidArgumentException(sprintf('%s is not valid in %s', $this->value, __CLASS__), 400);
         }
 
         return true;

@@ -3,7 +3,7 @@ includes:
 parameters:
 	excludePaths:
 		- tests
-	level: max
+	level: 8
 	paths: ['src', 'Atenea']
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false

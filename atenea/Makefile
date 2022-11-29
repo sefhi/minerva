@@ -85,12 +85,15 @@ terminal:
 
 # 📦 Database
 create-database:
-	$(SYMFONY) doctrine:database:create --if-not-exists
+	$(SYMFONY) doctrine:database:create --if-not-exists --env=dev
+	$(SYMFONY) doctrine:database:create --if-not-exists --env=test
 	@echo "🎊 Database created!"
 
 #migrations
+d-m-m:
 migrate-force:
-	$(SYMFONY) doctrine:migrations:migrate --no-interaction
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction --env=dev
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction --env=test
 
 #fixtures
 fixtures:

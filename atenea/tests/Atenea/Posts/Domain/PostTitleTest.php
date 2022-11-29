@@ -3,7 +3,6 @@
 namespace Atenea\Tests\Posts\Domain;
 
 use Atenea\Tests\Shared\Domain\MotherCreator;
-use InvalidArgumentException;
 use Atenea\Posts\Domain\PostTitle;
 use PHPUnit\Framework\TestCase;
 
@@ -11,6 +10,7 @@ class PostTitleTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider providersTitleValid
      */
     public function itShouldCreateTitle(string $value): void
@@ -21,11 +21,12 @@ class PostTitleTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider providersTitleLengthInvalid
      */
     public function itShouldThrowAnExceptionWhenTitleHaveInvalidLength(string $value): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectErrorMessage(
             sprintf('%s must have a length between %s and %s character.', PostTitle::class, 5, 100)
         );

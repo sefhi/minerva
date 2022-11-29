@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atenea\Posts\Application;
+namespace Atenea\Posts\Application\SearchAll;
 
 use App\Controller\Posts\Dto\PostAuthorResponse;
 use App\Controller\Posts\Dto\PostResponse;

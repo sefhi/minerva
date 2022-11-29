@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Posts;
 
-use Exception;
-use InvalidArgumentException;
-use JsonException;
-use Atenea\Posts\Application\CreatorPostCommandHandler;
+use App\Tests\Controller\BaseController;
+use Atenea\Posts\Application\Create\CreatorPostCommandHandler;
 use Atenea\Shared\Domain\Exceptions\AuthorNotFoundException;
-use Stringable;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Atenea\Shared\Infrastructure\Exceptions\ExceptionsHttpStatusCodeMapping;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,56 +15,52 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class PostsCreatorPostController extends AbstractController
+final class PostsCreatorPostController extends BaseController
 {
     public function __construct(
         private readonly CreatorPostCommandHandler $commandHandler,
         private readonly ValidatorInterface $validator,
+        private readonly ExceptionsHttpStatusCodeMapping $exceptionMapping,
     ) {
+        parent::__construct($this->exceptionMapping);
     }
 
+    /**
+     * @throws AuthorNotFoundException
+     * @throws \JsonException
+     */
     #[Route('/posts', name: 'post_creator', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
-        try {
-            $json = $request->getContent();
+        $json = $request->getContent();
 
-            if (!$json) {
-                throw new InvalidArgumentException('invalid json', Response::HTTP_NOT_ACCEPTABLE);
-            }
-
-            $data = json_decode(
-                $json,
-                true,
-                512,
-                JSON_THROW_ON_ERROR
-            );
-
-            $requestCreatorPost = RequestCreatorPost::fromPrimitive(
-                $data['id'],
-                $data['title'],
-                $data['content'],
-                $data['authorId']
-            );
-
-            $errors = $this->validator->validate($requestCreatorPost);
-
-            if (count($errors)) {
-                return $this->handleErrors($errors);
-            }
-
-            ($this->commandHandler)($requestCreatorPost->mapToCommand());
-
-            return $this->json('', Response::HTTP_CREATED);
-        } catch (InvalidArgumentException|AuthorNotFoundException $exception) {
-            $response = ['error' => $exception->getMessage()];
-            $statusCode = $exception->getCode();
-        } catch (Exception|JsonException $exception) {
-            $response = ['error' => $exception->getMessage()];
-            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+        if (!$json) {
+            throw new \InvalidArgumentException('invalid json', Response::HTTP_NOT_ACCEPTABLE);
         }
 
-        return $this->json($response, $statusCode);
+        $data = json_decode(
+            $json,
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+        $requestCreatorPost = RequestCreatorPost::fromPrimitive(
+            $data['id'],
+            $data['title'],
+            $data['content'],
+            $data['authorId']
+        );
+
+        $errors = $this->validator->validate($requestCreatorPost);
+
+        if (count($errors)) {
+            return $this->handleErrors($errors);
+        }
+
+        ($this->commandHandler)($requestCreatorPost->mapToCommand());
+
+        return $this->json('', Response::HTTP_CREATED);
     }
 
     private function handleErrors(ConstraintViolationListInterface $errors): JsonResponse
@@ -83,7 +76,7 @@ final class PostsCreatorPostController extends AbstractController
     }
 
     /**
-     * @return array<int, array{message: string|Stringable, field: string}>
+     * @return array<int, array{message: string|\Stringable, field: string}>
      */
     private function getFormattedErrors(ConstraintViolationListInterface $errors): array
     {
@@ -94,5 +87,12 @@ final class PostsCreatorPostController extends AbstractController
         }
 
         return $formattedErrors;
+    }
+
+    public function exceptions(): array
+    {
+        return [
+            AuthorNotFoundException::class => Response::HTTP_NOT_FOUND,
+        ];
     }
 }
